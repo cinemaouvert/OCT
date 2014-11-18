@@ -67,7 +67,8 @@ HEADERS  += \
     View/MainWindow.h \
     View/SubtitlePane.h \
     View/VideoPane.h \
-    View/VideoPlayer.h
+    View/VideoPlayer.h \
+    configOCT.h
 
 FORMS    += \
     mainwindow.ui
