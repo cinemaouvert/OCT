@@ -17,6 +17,7 @@ namespace Model
 	class Information;
 	// class Serializable;
 	class Project;
+    class File;
 }
 
 namespace Model
@@ -29,8 +30,12 @@ namespace Model
             bool m_createMagnet;
             QList<Model::Attachment*> *m_attachments;
             QList<Model::Information*> *m_informations;
+            QList<Model::File*> *m_fileList;
         public:
             Project();
+            virtual ~Project();
+            Project & operator=(const Project &project);
+            Project(Project const &project);
             void getFiles();
             void load();
             void save();
