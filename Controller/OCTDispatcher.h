@@ -15,6 +15,7 @@ using namespace std;
 // #include "Controller/TreatmentThread.h"
 // #include "Controller/Transcoder.h"
 #include "Model/Project.h"
+#include "View/MainWindow.h"
 // #include "View/MainWindow.h"
 
 namespace Controller
@@ -40,7 +41,10 @@ namespace Controller
 {
 	class OCTDispatcher
 	{
-        private: Model::Project *m_currentProject;
+        private:
+            Model::Project *m_currentProject;
+            View::MainWindow *m_mainWindow;
+
 		public: Controller::StreamLoader* m_streamLoader;
 		public: Controller::Updater* m_updater;
 		public: Controller::Merger* m_merger;

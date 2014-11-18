@@ -9,3 +9,10 @@ void Model::Parameter::setValue(QString value) {
 Model::Parameter::Parameter() {
 }
 
+ostream& Model::Parameter::operator >> (ostream& o){
+    throw "Not yet implemented";
+}
+
+istream& Model::Parameter::operator << (istream& o){
+    throw "Not yet implemented";
+}

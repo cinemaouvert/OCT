@@ -27,6 +27,8 @@ namespace Model
             bool hasToBeTranscoded();
             QString generateCommandLine();
             Model::Stream* getOldStream();
+            virtual ostream& operator >> (ostream& o);
+            virtual istream& operator << (istream& o);
 	};
 }
 

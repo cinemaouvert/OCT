@@ -6,9 +6,10 @@
 #include "../View/MainWindow.h"
 #include "ui_mainwindow.h"
 
-View::MainWindow::MainWindow(QWidget *parent) :
+View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispatcher) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    dispatcher(theDispatcher)
 {
     ui->setupUi(this);
 }

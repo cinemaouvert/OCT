@@ -19,9 +19,11 @@ namespace Model
 	class Subtitle: public Model::Stream
 	{
 
-		public: Subtitle(QString UID);
-
-        public: Subtitle(Model::Subtitle& copy);
+        public:
+            Subtitle(QString UID);
+            Subtitle(Model::Subtitle& copy);
+            virtual ostream& operator >> (ostream& o);
+            virtual istream& operator << (istream& o);
 	};
 }
 

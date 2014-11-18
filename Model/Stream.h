@@ -24,10 +24,10 @@ namespace Model
 	{
         protected:
             QString m_uID;
-            QMap<QString,Parameter> m_parameters;
+            QMap<QString,Parameter> *m_parameters;
         public:
-            virtual void setParameter(QString name, QString value) = 0;
-            virtual QString getUID() = 0;
+            virtual void setParameter(QString name, QString value);
+            virtual QString getUID();
 	};
 }
 

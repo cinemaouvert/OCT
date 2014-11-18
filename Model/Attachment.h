@@ -6,10 +6,12 @@ using namespace std;
 
 #include <QString>
 #include "Model/Serializable.h"
+#include "Model/Serializable.h"
+
 
 namespace Model
 {
-	// class Serializable;
+    class Serializable;
 	class Attachment;
 }
 
@@ -18,7 +20,10 @@ namespace Model
 	class Attachment: public Model::Serializable
 	{
 
-		public: Attachment(QString filepath);
+        public:
+            Attachment(QString filepath);
+            virtual ostream& operator >> (ostream& o);
+            virtual istream& operator << (istream& o);
 	};
 }
 

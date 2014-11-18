@@ -7,10 +7,11 @@ using namespace std;
 #include <QString>
 #include "Model/Stream.h"
 
+
 namespace Model
 {
 	// class Stream;
-	class Audio;
+    class Audio;
 }
 
 namespace Model
@@ -18,9 +19,11 @@ namespace Model
 	class Audio: public Model::Stream
 	{
 
-		public: Audio(QString UID);
-
-        public: Audio(Model::Audio& copy);
+        public:
+            Audio(QString UID);
+            Audio(Model::Audio& copy);
+            virtual ostream& operator >> (ostream& o);
+            virtual istream& operator << (istream& o);
 	};
 }
 
