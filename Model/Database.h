@@ -17,9 +17,12 @@ namespace Model
 		private: QString m_userKey;
         private: QString m_depot;
 
-		public: Database();
+        public:
+            Database();
+            int sendRequest(QString request);
+            virtual ostream& operator >> (ostream& o);
+            virtual istream& operator << (istream& o);
 
-		public: int sendRequest(QString request);
 	};
 }
 
