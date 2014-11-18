@@ -26,7 +26,7 @@ namespace Model
             Data(QString QString);
             bool hasToBeTranscoded();
             QString generateCommandLine();
-            inline Model::Stream* getOldStream(){return m_oldStream;};
+            Model::Stream* getOldStream();
 	};
 }
 

@@ -17,6 +17,6 @@ QString Model::Data::generateCommandLine() {
 }
 
 Model::Stream* Model::Data::getOldStream() {
-	throw "Not yet implemented";
+    return m_oldStream;
 }
 
