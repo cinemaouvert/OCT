@@ -12,13 +12,44 @@ using namespace std;
 #include "Model/Project.h"
 #include "View/MainWindow.h"
 
-Controller::OCTDispatcher::OCTDispatcher() : m_currentProject(NULL), m_mainWindow(NULL),settings(NULL) {
+Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
+                                            m_mainWindow(NULL) ,
+                                            m_settings(NULL) ,
+                                            m_streamLoader(NULL) ,
+                                            m_updater(NULL) ,
+                                            m_merger(NULL) ,
+                                            m_exporter(NULL) ,
+                                            m_projects(NULL) ,
+                                            m_treatmentThread(NULL) ,
+                                            m_transcoder(NULL)  {
+    //Init Projects
+    m_projects = new QList<Model::Project*>();
+    //Creation of the Project
     m_currentProject = new Model::Project();
+    m_projects->push_back(m_currentProject);
+    //Creation of the view
     m_mainWindow = new View::MainWindow(0,this);
     m_mainWindow->show();
-
-    settings = new QSettings("CinemaOuvert", "OpenCinemaTranscoder");
+    //Creations of the settings
+    m_settings = new QSettings("CinemaOuvert", "OpenCinemaTranscoder");
     initSettings();
+    //Creation of the controllers
+    m_streamLoader = new StreamLoader();
+    m_updater= new Updater();
+    m_merger= new Merger();
+    m_exporter= new Exporter();
+    m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
+    m_transcoder= new Transcoder();
+
+
+
+    /****** TRY YOUR WORK IN HERE **********/
+
+
+
+
+
+    /***************************************/
 }
 
 void Controller::OCTDispatcher::addFile(QString filePath) {
@@ -59,7 +90,7 @@ void Controller::OCTDispatcher::checkForUpdate() {
 
 void Controller::OCTDispatcher::initSetting(const QString &key, const QVariant &value)
 {
-    if(!settings->contains(key)){
+    if(!m_settings->contains(key)){
         addSetting(key,value);
     }
 }
@@ -73,12 +104,12 @@ void Controller::OCTDispatcher::initSettings()
 
 void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &value)
 {
-    settings->setValue(key, value);
+    m_settings->setValue(key, value);
 }
 
 QVariant Controller::OCTDispatcher::getSetting(QString key)
 {
-    return settings->value(key);
+    return m_settings->value(key);
 }
 
 

@@ -16,9 +16,11 @@ namespace Controller
 {
 	class Updater
 	{
-		public: Controller::OCTDispatcher* m_updater;
+        public:
+            Updater(){};
+            Controller::OCTDispatcher* m_updater;
+            void PUT_OPP_S_UPDATER();
 
-		public: void PUT_OPP_S_UPDATER();
 	};
 }
 

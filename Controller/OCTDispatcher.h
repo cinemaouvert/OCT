@@ -43,39 +43,28 @@ namespace Controller
 	class OCTDispatcher
 	{
         private:
-            Model::Project *m_currentProject;
-            View::MainWindow *m_mainWindow;
-            QSettings *settings;
+            Model::Project              *m_currentProject;
+            View::MainWindow            *m_mainWindow;
+            QSettings                   *m_settings;
+            Controller::StreamLoader    *m_streamLoader;
+            Controller::Updater         *m_updater;
+            Controller::Merger          *m_merger;
+            Controller::Exporter        *m_exporter;
+            QList<Model::Project*>      *m_projects;
+            Controller::TreatmentThread *m_treatmentThread;
+            Controller::Transcoder      *m_transcoder;
 
-		public: Controller::StreamLoader* m_streamLoader;
-		public: Controller::Updater* m_updater;
-		public: Controller::Merger* m_merger;
-		public: Controller::Exporter* m_exporter;
-		public: View::MainWindow* m_unnamed_MainWindow_;
-        public: QList<Model::Project*> m_projects;
-		public: Controller::TreatmentThread* m_unnamed_TreatmentThread_;
-		public: Controller::Transcoder* m_transcoder;
-
-		public: OCTDispatcher();
-
-        public: void addFile(QString filePath);
-
-		public: void save();
-
-		public: void load();
-
-		public: void startTreatment();
-
-		public: void pauseTreatment();
-
-		public: void restartTreatment();
-
-		public: void stopTreatment();
-
-		public: void addToQueue();
-
-		public: void checkForUpdate();
-
+        public:
+            OCTDispatcher();
+            void addFile(QString filePath);
+            void save();
+            void load();
+            void startTreatment();
+            void pauseTreatment();
+            void restartTreatment();
+            void stopTreatment();
+            void addToQueue();
+            void checkForUpdate();
             void addSetting(const QString &key, const QVariant &value);
             QVariant getSetting(QString key);
             void initSetting(const QString &key, const QVariant &value);

@@ -29,13 +29,12 @@ namespace Controller
 {
 	class TreatmentThread
 	{
-		public: Controller::Transcoder* m_transcoder;
-		public: Controller::Merger* m_merger;
-		public: Controller::Exporter* m_exporter;
-		public: Controller::OCTDispatcher* m_unnamed_OCTDispatcher_;
-        public: QList<Model::Project*> m_projects;
+        public: Controller::Transcoder      *m_transcoder;
+        public: Controller::Merger          *m_merger;
+        public: Controller::Exporter        *m_exporter;
+        public: QList<Model::Project*>      *m_projects;
 
-        public: TreatmentThread(QList<Model::Project*> projects, Controller::Transcoder transcoder, Controller::Merger merger);
+    public: TreatmentThread(QList<Model::Project*> *projects, Controller::Transcoder *transcoder, Controller::Merger *merger, Controller::Exporter *exporter);
 
 		public: void startTreatment();
 
