@@ -21,10 +21,13 @@ namespace Model
 		private: QString m_additionalCommand;
 
         public:
-            Video(QString UID);
-            Video(Model::Video& copy);
+            Video();
+            Video(QString uid);
+            Video(const Video& copy);
+            Video& operator=(const Video& o);
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
+            virtual ~Video();
 	};
 }
 

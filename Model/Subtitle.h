@@ -20,10 +20,13 @@ namespace Model
 	{
 
         public:
-            Subtitle(QString UID);
-            Subtitle(Model::Subtitle& copy);
+            Subtitle();
+            Subtitle(QString uid);
+            Subtitle(Subtitle& copy);
+            Subtitle& operator=(const Subtitle& o);
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
+            virtual ~Subtitle();
 	};
 }
 

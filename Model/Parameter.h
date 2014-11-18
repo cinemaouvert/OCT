@@ -21,11 +21,22 @@ namespace Model
 		private: QString m_value;
 
         public:
-            void setValue(QString value);
             Parameter();
+            Parameter(QString cmd,QString type,QString desc,QString val);
+            Parameter(Parameter& copy);
+            Parameter& operator=(const Parameter& o);
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
-	};
+            virtual ~Parameter();
+            QString description() const;
+            void setDescription(const QString &description);
+            QString value() const;
+            void setValue(const QString &value);
+            QString type() const;
+            void setType(const QString &type);
+            QString command() const;
+            void setCommand(const QString &command);
+    };
 }
 
 #endif
