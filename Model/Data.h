@@ -18,7 +18,7 @@ namespace Model
 namespace Model
 {
 	class Data: public Model::Serializable
-    {//test commit
+    {
         private :
             Model::Stream* m_newStream;
             Model::Stream* m_oldStream;
