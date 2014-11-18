@@ -8,7 +8,11 @@ namespace configOCT {
 
     const QString URL = "http://cinemaouvert.fr/";
 
-    const QString VERSION = "v0.1-alpha";
+    //va.b.c
+    // a = number for the release
+    // b = number for the minor version
+    // c = number for the small changement
+    const QString VERSION = "v0.0.1";
 
     #if defined(Q_OS_MAC)
         const QString LINK_UPDATE = NAME + "macos/latest/";
