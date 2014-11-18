@@ -15,7 +15,7 @@ namespace Model
 	class Database
 	{
 		private: QString m_userKey;
-		private: QString m_depot;
+        private: QString m_depot;
 
 		public: Database();
 
