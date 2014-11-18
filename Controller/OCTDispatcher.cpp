@@ -12,10 +12,13 @@ using namespace std;
 #include "Model/Project.h"
 #include "View/MainWindow.h"
 
-Controller::OCTDispatcher::OCTDispatcher() : m_currentProject(NULL), m_mainWindow(NULL) {
+Controller::OCTDispatcher::OCTDispatcher() : m_currentProject(NULL), m_mainWindow(NULL),settings(NULL) {
     m_currentProject = new Model::Project();
     m_mainWindow = new View::MainWindow(0,this);
     m_mainWindow->show();
+
+    settings = new QSettings("CinemaOuvert", "OpenCinemaTranscoder");
+    initSettings();
 }
 
 void Controller::OCTDispatcher::addFile(QString filePath) {
@@ -51,6 +54,31 @@ void Controller::OCTDispatcher::addToQueue() {
 }
 
 void Controller::OCTDispatcher::checkForUpdate() {
-	throw "Not yet implemented";
+    throw "Not yet implemented";
 }
+
+void Controller::OCTDispatcher::initSetting(const QString &key, const QVariant &value)
+{
+    if(!settings->contains(key)){
+        addSetting(key,value);
+    }
+}
+
+void Controller::OCTDispatcher::initSettings()
+{
+    initSetting("ffmpeg","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
+    initSetting("mkvToolnix","E:\M2\Projet\Dependances\mkvtoolnix\mkvinfo.exe");
+
+}
+
+void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &value)
+{
+    settings->setValue(key, value);
+}
+
+QVariant Controller::OCTDispatcher::getSetting(QString key)
+{
+    return settings->value(key);
+}
+
 

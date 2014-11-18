@@ -7,6 +7,7 @@ using namespace std;
 
 #include <QString>
 #include <QList>
+#include <QSettings>
 
 // #include "Controller/StreamLoader.h"
 // #include "Controller/Updater.h"
@@ -44,6 +45,7 @@ namespace Controller
         private:
             Model::Project *m_currentProject;
             View::MainWindow *m_mainWindow;
+            QSettings *settings;
 
 		public: Controller::StreamLoader* m_streamLoader;
 		public: Controller::Updater* m_updater;
@@ -73,6 +75,11 @@ namespace Controller
 		public: void addToQueue();
 
 		public: void checkForUpdate();
+
+            void addSetting(const QString &key, const QVariant &value);
+            QVariant getSetting(QString key);
+            void initSetting(const QString &key, const QVariant &value);
+            void initSettings();
 	};
 }
 
