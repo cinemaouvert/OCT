@@ -18,10 +18,16 @@ namespace Model
 namespace Model
 {
 	class Attachment: public Model::Serializable
-	{
+    {
+        QString m_filepath;
 
         public:
+            Attachment();
             Attachment(QString filepath);
+            Attachment(const Attachment& a);
+            Attachment& operator=(const Attachment& a);
+            virtual ~Attachment();
+
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
 	};

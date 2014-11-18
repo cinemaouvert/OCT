@@ -20,13 +20,21 @@ namespace Model
 	class Data: public Model::Serializable
     {
         private :
+            QString m_string;
+
             Model::Stream* m_newStream;
             Model::Stream* m_oldStream;
         public:
-            Data(QString QString);
+            Data();
+            Data(QString string);
+            Data(Data const& d);
+            Data& operator=(Data const& d);
+            virtual ~Data();
+
             bool hasToBeTranscoded();
             QString generateCommandLine();
             Model::Stream* getOldStream();
+
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
 	};

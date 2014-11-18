@@ -17,11 +17,14 @@ namespace Model
 namespace Model
 {
 	class Audio: public Model::Stream
-	{
-
+    {
         public:
+            Audio();
             Audio(QString UID);
-            Audio(Model::Audio& copy);
+            Audio(const Audio& a);
+            Audio& operator=(const Audio& a);
+            virtual ~Audio();
+
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
 	};

@@ -19,6 +19,10 @@ namespace Model
 
         public:
             Database();
+            Database(Database const& db);
+            Database& operator=(Database const& db);
+            virtual ~Database();
+
             int sendRequest(QString request);
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);

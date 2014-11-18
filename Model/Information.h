@@ -15,10 +15,17 @@ namespace Model
 {
     class Information : public Model::Serializable
 	{
-		private: QString m_name;
-		private: QString m_value;
+        private:
+            QString m_name;
+            QString m_value;
 
         public:
+            Information();
+            Information(QString name, QString value);
+            Information(const Information& i);
+            Information& operator=(const Information& i);
+            ~Information();
+
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
 	};

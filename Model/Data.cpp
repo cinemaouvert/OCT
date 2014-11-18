@@ -5,7 +5,27 @@ using namespace std;
 #include "Model/Stream.h"
 #include "Model/Serializable.h"
 
-Model::Data::Data(QString QString) {
+Model::Data::Data() {
+    m_string = "";
+}
+
+Model::Data::Data(QString string) {
+    m_string = string;
+}
+
+Model::Data::Data(const Data& d) {
+    m_string = d.m_string;
+}
+
+Model::Data& Model::Data::operator=(const Data& d) {
+    if ( this != &d ) {
+        m_string = d.m_string;
+    }
+    return *this;
+}
+
+Model::Data::~Data() {
+    m_string = "";
 }
 
 bool Model::Data::hasToBeTranscoded() {

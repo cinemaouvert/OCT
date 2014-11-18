@@ -4,11 +4,26 @@ using namespace std;
 #include "Model/Audio.h"
 #include "Model/Stream.h"
 
-Model::Audio::Audio(QString UID) {
+Model::Audio::Audio() {
+    m_uID = "";
 }
 
-Model::Audio::Audio(Model::Audio& copy) {
+Model::Audio::Audio(QString uID) {
+    m_uID = uID;
 }
+
+Model::Audio::Audio(const Audio& a) {
+    m_uID = a.m_uID;
+}
+
+Model::Audio& Model::Audio::operator=(const Audio& a) {
+    if ( this != &a ) {
+        m_uID = a.m_uID;
+    }
+    return *this;
+}
+
+Model::Audio::~Audio() {}
 
 ostream& Model::Audio::operator >> (ostream& o){
     throw "Not yet implemented";

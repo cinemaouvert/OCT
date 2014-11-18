@@ -26,7 +26,12 @@ namespace Model
             QString m_filePath;
             Model::Data* m___n;
         public:
+            File();
             File(QString filePath, QString info);
+            File(File const& f);
+            File& operator=(File const& f);
+            virtual ~File();
+
             QList<Model::Data*> getDatas();
             QString getName();
             virtual ostream& operator >> (ostream& o);
