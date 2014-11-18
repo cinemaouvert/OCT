@@ -1,9 +1,9 @@
 #include <exception>
 using namespace std;
 
-#include <QString>
 #ifndef __Model__Database_h__
 #define __Model__Database_h__
+#include <QString>
 
 namespace Model
 {

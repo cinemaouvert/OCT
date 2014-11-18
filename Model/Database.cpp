@@ -2,7 +2,6 @@
 using namespace std;
 
 #include "Model/Database.h"
-#include "Controller/Exporter.h"
 
 Model::Database::Database() {
 }
