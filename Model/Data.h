@@ -19,15 +19,14 @@ namespace Model
 {
 	class Data: public Model::Serializable
 	{
-		public: Model::Stream* m__;
-
-		public: Data(QString QString);
-
-		public: bool hasToBeTranscoded();
-
-		public: QString generateCommandLine();
-
-        public: Model::Stream* getOldStream();
+        private :
+            Model::Stream* m_newStream;
+            Model::Stream* m_oldStream;
+        public:
+            Data(QString QString);
+            bool hasToBeTranscoded();
+            QString generateCommandLine();
+            inline Model::Stream* getOldStream(){return m_oldStream;};
 	};
 }
 
