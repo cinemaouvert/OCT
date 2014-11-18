@@ -12,7 +12,10 @@ using namespace std;
 #include "Model/Project.h"
 #include "View/MainWindow.h"
 
-Controller::OCTDispatcher::OCTDispatcher() {
+Controller::OCTDispatcher::OCTDispatcher() : m_currentProject(NULL), m_mainWindow(NULL) {
+    m_currentProject = new Model::Project();
+    m_mainWindow = new View::MainWindow(0,this);
+    m_mainWindow->show();
 }
 
 void Controller::OCTDispatcher::addFile(QString filePath) {

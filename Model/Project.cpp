@@ -5,9 +5,8 @@ using namespace std;
 #include "Model/Project.h"
 #include "Model/Attachment.h"
 #include "Model/Information.h"
-#include "Model/Serializable.h"
 
-Model::Project::Project() {
+Model::Project::Project() :m_attachments (NULL),m_informations(NULL){
 }
 
 void Model::Project::getFiles() {
@@ -40,5 +39,13 @@ bool Model::Project::getCreateMagnet() {
 
 void Model::Project::setCreateMagnet(bool hasToCreateMagnet) {
 	throw "Not yet implemented";
+}
+
+ostream& Model::Project::operator >> (ostream& o){
+    throw "Not yet implemented";
+}
+
+istream& Model::Project::operator << (istream& o){
+    throw "Not yet implemented";
 }
 

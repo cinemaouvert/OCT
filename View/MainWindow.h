@@ -29,10 +29,11 @@ namespace View
         public:
             View::FilePane* m__;
             Controller::OCTDispatcher* m_unnamed_OCTDispatcher_;
-            explicit MainWindow(QWidget *parent = 0);
+            explicit MainWindow(QWidget *parent = 0,Controller::OCTDispatcher *dispatcher = NULL);
             ~MainWindow();
         private:
             Ui::MainWindow *ui;
+            Controller::OCTDispatcher *dispatcher;
 
 	};
 }

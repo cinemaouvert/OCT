@@ -20,9 +20,11 @@ namespace Model
 	{
 		private: QString m_additionalCommand;
 
-		public: Video(QString UID);
-
-        public: Video(Model::Video& copy);
+        public:
+            Video(QString UID);
+            Video(Model::Video& copy);
+            virtual ostream& operator >> (ostream& o);
+            virtual istream& operator << (istream& o);
 	};
 }
 

@@ -7,3 +7,10 @@ using namespace std;
 Model::Attachment::Attachment(QString filepath) {
 }
 
+ostream& Model::Attachment::operator >> (ostream& o){
+    throw "Not yet implemented";
+}
+
+istream& Model::Attachment::operator << (istream& o){
+    throw "Not yet implemented";
+}

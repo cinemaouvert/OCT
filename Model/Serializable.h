@@ -18,7 +18,6 @@ namespace Model
 
         public:
             virtual ostream& operator >> (ostream& o) = 0;
-
             virtual istream& operator << (istream& o) = 0;
     };
 }
