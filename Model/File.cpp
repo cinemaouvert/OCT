@@ -1,3 +1,4 @@
+#include <QDomDocument>
 #include <exception>
 using namespace std;
 
@@ -8,7 +9,41 @@ Model::File::File() {}
 
 Model::File::File(QString filePath, QString info) {
     m_filePath = filePath;
-    // m_name = info; ?
+    m_name = filePath;
+
+    QDomDocument doc;
+    doc.setContent(info);
+    if(!doc.isNull()){
+        QDomElement root = doc.documentElement();
+        if(!root.isNull()){
+            QDomNodeList streams = root.elementsByTagName("stream");
+            for (int i=0;i<streams.count();i++){
+                qDebug() << "------------stream-------------------";
+                QDomNode stream = streams.item(i);
+                QDomNamedNodeMap tab = stream.attributes();
+                qDebug() << "------------attributes-------------------";
+                for(int j=0;j<tab.count();j++)
+                {
+                    QDomNode n = tab.item(j);
+                    qDebug() << n.nodeName() << " : " <<  n.nodeValue();
+                }
+                qDebug() << "------------Dispositoion-------------------";
+                QDomElement e = stream.toElement();
+                QDomNodeList disposition = e.elementsByTagName("disposition");
+                for (int j=0;j<disposition.count();j++){
+                    QDomNode n = tab.item(j);
+                    qDebug() << n.nodeName() << " : " <<  n.nodeValue();
+                }
+                qDebug() << "------------TAG-------------------";
+                QDomNodeList tag = e.elementsByTagName("tag");
+                for (int j=0;j<tag.count();j++){
+                    QDomNode n = tab.item(j);
+                    qDebug() << n.nodeName() << " : " <<  n.nodeValue();
+
+                }
+            }
+        }
+    }
 }
 
 Model::File::File(const File& f) {

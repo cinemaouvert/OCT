@@ -1,6 +1,6 @@
+#include <QProcess>
 #include <exception>
 #include <vector>
-
 
 using namespace std;
 
@@ -12,12 +12,11 @@ using namespace std;
 #include "Controller/TreatmentThread.h"
 #include "Controller/Transcoder.h"
 #include "Model/Project.h"
-#include "Model/Video.h"
 #include "View/MainWindow.h"
+#include "Model/File.h"
+#include "Model/parameters.h"
 
 #include <QDebug>
-
-#include <Model/parameters.h>
 
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
                                             m_mainWindow(NULL) ,
@@ -53,9 +52,19 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /****** TRY YOUR WORK IN HERE **********/
 
+    QString program = "C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe";
+    QStringList arguments;
+        arguments
+             <<"-v"<<"quiet"
+             << "-print_format"<<"xml"
+             <<"-show_streams" <<"C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\test-merge.mkv";
 
+    QProcess myProcess(m_mainWindow);
+    myProcess.start(program, arguments);
+    myProcess.waitForFinished();
+    QString string(myProcess.readAllStandardOutput());
 
-
+    Model::File f("path",string);
 
     /***************************************/
     /*****Thibaud Test *****/
@@ -112,8 +121,7 @@ void Controller::OCTDispatcher::initSetting(const QString &key, const QVariant &
 void Controller::OCTDispatcher::initSettings()
 {
     initSetting("ffmpeg","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
-    initSetting("ffprobe","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
-    initSetting("mkvToolnix","E:\\M2\\Projet\\Dependances\\mkvtoolnix\\mkvinfo.exe");
+    initSetting("mkvToolnix","E:\M2\Projet\Dependances\mkvtoolnix\mkvinfo.exe");
 
 }
 
