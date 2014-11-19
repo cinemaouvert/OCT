@@ -53,7 +53,7 @@ int Model::Database::sendRequest(QByteArray jsonString) {
 
     reply->deleteLater();
 
-    return statusCodeV;
+    return statusCodeV.toInt();
 }
 
 ostream& Model::Database::operator >> (ostream& o){
