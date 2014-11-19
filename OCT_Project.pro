@@ -40,7 +40,8 @@ SOURCES += main.cpp\
     View/MainWindow.cpp \
     View/SubtitlePane.cpp \
     View/VideoPane.cpp \
-    View/VideoPlayer.cpp
+    View/VideoPlayer.cpp \
+    Model/parameters.cpp
 
 HEADERS  += \
     Controller/Exporter.h \
@@ -70,7 +71,8 @@ HEADERS  += \
     View/SubtitlePane.h \
     View/VideoPane.h \
     View/VideoPlayer.h \
-    configOCT.h
+    configOCT.h \
+    Model/parameters.h
 
 FORMS    += \
     mainwindow.ui

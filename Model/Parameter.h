@@ -15,27 +15,30 @@ namespace Model
 {
     class Parameter : public Model::Serializable
 	{
-		private: QString m_command;
-		private: QString m_type;
-		private: QString m_description;
-		private: QString m_value;
+        private:
+            QString m_command;
+            QString m_description;
+            QString m_value;
+            bool m_noSpaceForNext;
 
         public:
             Parameter();
-            Parameter(QString cmd,QString type,QString desc,QString val);
+            Parameter(QString cmd,QString desc,QString val);
             Parameter(Parameter& copy);
             Parameter& operator=(const Parameter& o);
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
             virtual ~Parameter();
-            QString description() const;
-            void setDescription(const QString &description);
-            QString value() const;
+
             void setValue(const QString &value);
-            QString type() const;
-            void setType(const QString &type);
+
+            QString description() const;
+            QString value() const;
             QString command() const;
-            void setCommand(const QString &command);
+            QString commandAndValue() const;
+
+            void SetNoSpaceForNext(bool val = true);
+
     };
 }
 

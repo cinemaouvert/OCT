@@ -1,5 +1,7 @@
 #include <exception>
 #include <vector>
+
+
 using namespace std;
 
 #include "Controller/OCTDispatcher.h"
@@ -10,7 +12,12 @@ using namespace std;
 #include "Controller/TreatmentThread.h"
 #include "Controller/Transcoder.h"
 #include "Model/Project.h"
+#include "Model/Video.h"
 #include "View/MainWindow.h"
+
+#include <QDebug>
+
+#include <Model/parameters.h>
 
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
                                             m_mainWindow(NULL) ,
@@ -50,6 +57,13 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
 
     /***************************************/
+    /*****Thibaud Test *****/
+    Model::Parameters::init();
+    Model::Parameter param = *(Model::Parameters::getVideoParameter("language"));
+    param.setValue("eng");
+    qDebug() << param.commandAndValue();
+
+    /***********************/
 }
 
 void Controller::OCTDispatcher::addFile(QString filePath) {
@@ -98,7 +112,8 @@ void Controller::OCTDispatcher::initSetting(const QString &key, const QVariant &
 void Controller::OCTDispatcher::initSettings()
 {
     initSetting("ffmpeg","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
-    initSetting("mkvToolnix","E:\M2\Projet\Dependances\mkvtoolnix\mkvinfo.exe");
+    initSetting("ffprobe","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
+    initSetting("mkvToolnix","E:\\M2\\Projet\\Dependances\\mkvtoolnix\\mkvinfo.exe");
 
 }
 
