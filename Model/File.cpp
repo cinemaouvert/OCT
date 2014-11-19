@@ -4,6 +4,7 @@ using namespace std;
 
 #include "Model/File.h"
 #include "Model/Data.h"
+#include "Model/parameters.h"
 
 Model::File::File() {}
 
@@ -19,6 +20,8 @@ Model::File::File(QString filePath, QString info) {
             QDomNodeList streams = root.elementsByTagName("stream");
             for (int i=0;i<streams.count();i++){
                 qDebug() << "------------stream-------------------";
+                //new stream // get attribute
+                //Stream *theStream;
                 QDomNode stream = streams.item(i);
                 QDomNamedNodeMap tab = stream.attributes();
                 qDebug() << "------------attributes-------------------";
@@ -26,6 +29,14 @@ Model::File::File(QString filePath, QString info) {
                 {
                     QDomNode n = tab.item(j);
                     qDebug() << n.nodeName() << " : " <<  n.nodeValue();
+                   /* Parameter *tmpParam = Parameters.getVideoParameter(n.nodeName());
+                    if(param != NULL){
+                        Parameter *param = new Parameter(tmpParam);
+                        param->setValue(n.nodeValue());
+                        theStream->setParameter(n.nodeName(),param);
+                    }*/
+
+
                 }
                 qDebug() << "------------Dispositoion-------------------";
                 QDomElement e = stream.toElement();

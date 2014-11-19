@@ -15,6 +15,7 @@ namespace Model
 	class Data;
 	class File;
     class Serializable;
+    class Parameters;
 }
 
 namespace Model
