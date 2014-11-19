@@ -1,5 +1,8 @@
+#include <QProcess>
 #include <exception>
 #include <vector>
+
+#include <Model/File.h>
 using namespace std;
 
 #include "Controller/OCTDispatcher.h"
@@ -11,6 +14,7 @@ using namespace std;
 #include "Controller/Transcoder.h"
 #include "Model/Project.h"
 #include "View/MainWindow.h"
+#include "qdebug.h"
 
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
                                             m_mainWindow(NULL) ,
@@ -45,9 +49,19 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /****** TRY YOUR WORK IN HERE **********/
 
+    QString program = "C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe";
+    QStringList arguments;
+        arguments
+             <<"-v"<<"quiet"
+             << "-print_format"<<"xml"
+             <<"-show_streams" <<"C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\test-merge.mkv";
 
+    QProcess myProcess(m_mainWindow);
+    myProcess.start(program, arguments);
+    myProcess.waitForFinished();
+    QString string(myProcess.readAllStandardOutput());
 
-
+    Model::File f("path",string);
 
     /***************************************/
 }

@@ -9,7 +9,7 @@ using namespace std;
 
 #include "Model/Serializable.h"
 #include "Model/Data.h"
-
+#include "qdebug.h"
 namespace Model
 {
 	class Data;
