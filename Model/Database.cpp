@@ -7,7 +7,7 @@ using namespace std;
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
 #include <QEventLoop>
-#include <QSslConfiguration>
+
 #include "configOCT.h"
 
 Model::Database::Database(QString userKey, QString depot) {
@@ -49,7 +49,10 @@ int Model::Database::sendRequest(QByteArray jsonString) {
     QNetworkReply* reply = networkManager->post(request, jsonString);
     QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
     loop.exec();
-    QVariant statusCodeV = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+    QVariant statusCodeV = -1;
+    if (reply->error() == QNetworkReply::NoError){
+        statusCodeV = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+    }
 
     reply->deleteLater();
 
