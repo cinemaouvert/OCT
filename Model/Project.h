@@ -36,17 +36,29 @@ namespace Model
             virtual ~Project();
             Project & operator=(const Project &project);
             Project(Project const &project);
-            void getFiles();
             void load();
             void save();
-            QString getXML();
-            void setXML(QString filepath);
-            QList<Model::Information*> getInformations();
-            bool getCreateMagnet();
-            void setCreateMagnet(bool hasToCreateMagnet);
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
-	};
+
+            QString name() const;
+            void setName(const QString &name);
+
+            QList<Model::File *> *fileList() const;
+            void addFileList(Model::File *fileList);
+
+            QList<Model::Information *> *informations() const;
+            void addInformations(Model::Information *information);
+
+            bool createMagnet() const;
+            void setCreateMagnet(bool createMagnet);
+
+            QList<Model::Attachment *> *attachments() const;
+            void addAttachment(Model::Attachment *attachment);
+
+            QString xmlFilePath() const;
+            void setXmlFilePath(const QString &xmlFilePath);
+    };
 }
 
 #endif

@@ -4,20 +4,27 @@ using namespace std;
 #include "Model/Video.h"
 #include "Model/Stream.h"
 
+#include <QDebug>
+
 Model::Video::Video(){
-    this->m_parameters = NULL;
+    this->m_parameters = new QMap<QString,Parameter*>();
+
+
+
 }
 
 Model::Video::Video(QString uid){
-    this->m_parameters = NULL;
+    this->m_parameters = new QMap<QString,Parameter*>();
+
+
+
     this->m_uID = uid;
 }
 
 Model::Video::Video(const Model::Video & copy){
     this->m_uID = copy.m_uID;
     this->m_additionalCommand = copy.m_additionalCommand;
-    QMap<QString,Parameter*> *param(copy.m_parameters) ;
-    this->m_parameters = param;
+    this->m_parameters = new QMap<QString,Parameter*>(*(copy.m_parameters));
 }
 
 Model::Video &Model::Video::Video::operator=(const Model::Video &o)

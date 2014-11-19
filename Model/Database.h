@@ -18,12 +18,12 @@ namespace Model
         private: QString m_depot;
 
         public:
-            Database();
+            Database(QString userKey, QString depot);
             Database(Database const& db);
             Database& operator=(Database const& db);
             virtual ~Database();
 
-            int sendRequest(QString request);
+            int sendRequest(QByteArray jsonString);
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
 
