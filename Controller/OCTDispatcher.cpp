@@ -47,7 +47,8 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_exporter= new Exporter();
     m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
     m_transcoder= new Transcoder();
-
+    //Initialisation of the parameters lists
+    Model::Parameters::init();
 
 
     /****** TRY YOUR WORK IN HERE **********/
@@ -58,7 +59,6 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /***************************************/
     /*****Thibaud Test *****/
-    Model::Parameters::init();
     Model::Parameter param = *(Model::Parameters::getVideoParameter("language"));
     param.setValue("eng");
     qDebug() << param.commandAndValue();
