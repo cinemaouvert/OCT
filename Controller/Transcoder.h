@@ -19,13 +19,30 @@ namespace Controller
 {
 	class Transcoder
 	{
-		public: Controller::OCTDispatcher* m_transcoder;
+        public:
+            /**
+             * @brief The associated transcoder controller.
+             */
+            Controller::OCTDispatcher* m_transcoder;
 
-		public: Transcoder();
+            /**
+             * @brief Default constructor.
+             */
+            Transcoder();
 
-		public: QString getInfo(QString filePath);
+            /**
+             * @brief This method retrieves informations from a given file.
+             * @param filePath to the file.
+             * @return
+             */
+            QString getInfo(QString filePath);
 
-		public: QString transcode(QString command);
+            /**
+             * @brief This method transcode from a given command.
+             * @param command
+             * @return
+             */
+            QString transcode(QString command);
 	};
 }
 
