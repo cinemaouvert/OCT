@@ -14,7 +14,6 @@ greaterThan(QT_MAJOR_VERSION, 4):
 TARGET = OCT_Project
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
     Controller/Exporter.cpp \
     Controller/Merger.cpp \
