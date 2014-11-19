@@ -5,6 +5,26 @@ using namespace std;
 #include "Model/Stream.h"
 #include "Model/Serializable.h"
 
+
+Model::Stream *Model::Data::newStream() const
+{
+    return m_newStream;
+}
+
+void Model::Data::setNewStream(Model::Stream *newStream)
+{
+    m_newStream = newStream;
+}
+
+Model::Stream *Model::Data::oldStream() const
+{
+    return m_oldStream;
+}
+
+void Model::Data::setOldStream(Model::Stream *oldStream)
+{
+    m_oldStream = oldStream;
+}
 Model::Data::Data() {
     m_string = "";
 }

@@ -37,7 +37,11 @@ namespace Model
 
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
-	};
+            Model::Stream *newStream() const;
+            void setNewStream(Model::Stream *newStream);
+            Model::Stream *oldStream() const;
+            void setOldStream(Model::Stream *oldStream);
+    };
 }
 
 #endif
