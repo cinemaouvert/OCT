@@ -79,12 +79,12 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /****** TRY YOUR WORK IN HERE **********/
 
-    QString program = "C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe";
+    QString program = getSetting("ffprobe").toString();
     QStringList arguments;
         arguments
              <<"-v"<<"quiet"
              << "-print_format"<<"xml"
-             <<"-show_streams" <<"C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\test-merge.mkv";
+             <<"-show_streams" <<"E:\\M2\\Projet\\Test mkvtoolnix\\test.mkv";
 
     QProcess myProcess(m_mainWindow);
     myProcess.start(program, arguments);
@@ -97,7 +97,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     /*****Thibaud Test *****/
     Model::Parameter param = *(Model::Parameters::getVideoParameter("language"));
     param.setValue("eng");
-    qDebug() << param.commandAndValue();
+    qDebug() << param.commandAndValue().arg("0");
 
     /***********************/
 }
@@ -148,6 +148,7 @@ void Controller::OCTDispatcher::initSetting(const QString &key, const QVariant &
 void Controller::OCTDispatcher::initSettings()
 {
     initSetting("ffmpeg","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
+    initSetting("ffprobe","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
     initSetting("mkvToolnix","E:\M2\Projet\Dependances\mkvtoolnix\mkvinfo.exe");
 
 }

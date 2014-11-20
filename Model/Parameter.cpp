@@ -26,7 +26,7 @@ QString Model::Parameter::command() const
 
 QString Model::Parameter::commandAndValue() const
 {
-    return m_command + m_value;
+    return m_command.arg(m_value);
 }
 
 void Model::Parameter::SetNoSpaceForNext(bool val)

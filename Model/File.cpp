@@ -24,6 +24,12 @@ Model::File::File(QString filePath, QString info) {
                 //Stream *theStream;
                 QDomNode stream = streams.item(i);
                 QDomNamedNodeMap tab = stream.attributes();
+
+                QDomNode nodeCodecType = tab.namedItem("codec_type");
+                QString type = nodeCodecType.nodeValue();
+                qDebug() << type;
+
+
                 qDebug() << "------------attributes-------------------";
                 for(int j=0;j<tab.count();j++)
                 {
