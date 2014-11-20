@@ -54,7 +54,7 @@ Model::Parameter::Parameter(Model::Parameter &copy)
     this->m_command = copy.m_command;
     this->m_description = copy.m_description;
     this->m_value = copy.m_value;
-    this->m_noSpaceForNext = false;
+    this->m_noSpaceForNext = copy.m_noSpaceForNext;
 
 }
 
@@ -64,6 +64,7 @@ Model::Parameter &Model::Parameter::operator=(const Model::Parameter &o)
         this->m_command = o.m_command;
         this->m_description = o.m_description;
         this->m_value = o.m_value;
+        this->m_noSpaceForNext = o.m_noSpaceForNext;
     }
     return *this;
 }
