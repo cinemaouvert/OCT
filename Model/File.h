@@ -10,6 +10,7 @@ using namespace std;
 
 #include "Model/Serializable.h"
 #include "Model/Data.h"
+#include "Audio.h"
 #include "Video.h"
 #include "qdebug.h"
 namespace Model
@@ -29,6 +30,7 @@ namespace Model
             QString m_filePath;
             Model::Data* m___n;
             Video* genereVideo(QDomNode stream);
+            Audio* genereAudio(QDomNode stream);
         public:
             File();
             File(QString filePath, QString info);

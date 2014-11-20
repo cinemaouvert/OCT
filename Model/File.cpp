@@ -114,7 +114,7 @@ Model::Video* Model::File::genereVideo(QDomNode stream)
 
     QString resolution = width + "x" + height;
     qDebug() << resolution;
-    //-----------------------FRAME-RATE------------------------//
+    //-----------------------FRAME-RATE------------------------//   //!\\  A CONVERTIR
     QDomNode nodeFrameRate = tab.namedItem("r_frame_rate");
     QString frameRate = nodeFrameRate.nodeValue();
     qDebug() << frameRate;
@@ -144,6 +144,37 @@ Model::Video* Model::File::genereVideo(QDomNode stream)
     v->setParameter("r_frame_rate",pFrameRate);
 
     return v;
+}
+
+Model::Audio *Model::File::genereAudio(QDomNode stream)
+{
+    qDebug() << "Audio";
+    QDomNamedNodeMap tab = stream.attributes();
+    //-----------------------CODEC-NAME------------------------//
+    QDomNode nodeCodecName = tab.namedItem("codec_name");
+    QString codecName = nodeCodecName.nodeValue();
+    qDebug() << codecName;
+    //-----------------------LANGUAGE------------------------//
+    QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
+    qDebug() << tagList.count();
+
+    QString tagKey ="";
+    int i = 0;
+    while(tagKey != "language" && i<tagList.count()){
+        tagKey = tagList.at(i).attributes().namedItem("key").nodeValue();
+        i++;
+    }
+    QString language = "";
+    if(tagKey == "language")
+        language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
+
+
+    /* language
+    codec
+    freq
+    cannaux
+    resolution
+    */
 }
 
 ostream& Model::File::operator >> (ostream& o){
