@@ -13,6 +13,23 @@ QString Model::Stream::getUID() {
     return this->m_uID;
 }
 
+QStringList *Model::Stream::getCommand()
+{
+    QStringList *myStringList = new QStringList();
+
+    for(int i = 0; i < this->m_parameters->size();i++){
+       Parameter *param = this->m_parameters->values().at(i);
+       QString value = param->value();
+       while(param->noSpaceForNext()){
+            i++;
+            param = this->m_parameters->values().at(i);
+            value+=param->value();
+       }
+       *myStringList << param->command() << value ;
+    }
+    return myStringList;
+}
+
 Model::Stream::~Stream()
 {
     if (this->m_parameters != NULL)

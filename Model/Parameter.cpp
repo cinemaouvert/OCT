@@ -16,7 +16,7 @@ QString Model::Parameter::value() const
 
 void Model::Parameter::setValue(const QString &value)
 {
-    this->m_value = value;
+    this->m_value = this->m_value.arg(value);
 }
 
 QString Model::Parameter::command() const
@@ -26,12 +26,17 @@ QString Model::Parameter::command() const
 
 QString Model::Parameter::commandAndValue() const
 {
-    return m_command.arg(m_value);
+    return m_command +" " +m_value;
 }
 
 void Model::Parameter::SetNoSpaceForNext(bool val)
 {
     this->m_noSpaceForNext = val;
+}
+
+bool Model::Parameter::noSpaceForNext()
+{
+    return m_noSpaceForNext;
 }
 
 

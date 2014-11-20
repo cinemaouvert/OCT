@@ -55,8 +55,5 @@ void Model::Subtitle::initStaticParameters()
 
 }
 
-QString Model::Subtitle::getCommand()
-{
-    return NULL;
-}
+
 

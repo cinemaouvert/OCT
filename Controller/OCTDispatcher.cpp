@@ -104,6 +104,19 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     param.setValue("eng");
     qDebug() << param.commandAndValue().arg("0");
 
+    QStringList arguments2;
+        arguments2
+             <<"-v"<<"quiet"
+             << "-print_format"<<"xml"
+             <<"-show_streams" <<"E:\\M2\\Projet\\Test mkvtoolnix\\test2.mkv";
+
+    QProcess myProcess2(m_mainWindow);
+    myProcess2.start(program, arguments2);
+    myProcess2.waitForFinished();
+    QString string2(myProcess2.readAllStandardOutput());
+    Model::File f2("path",string2);
+
+
     /***********************/
 }
 

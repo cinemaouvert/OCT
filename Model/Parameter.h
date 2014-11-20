@@ -38,6 +38,7 @@ namespace Model
             QString commandAndValue() const;
 
             void SetNoSpaceForNext(bool val = true);
+            bool noSpaceForNext();
 
     };
 }

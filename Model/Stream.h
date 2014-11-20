@@ -6,6 +6,7 @@ using namespace std;
 
 #include <QString>
 #include <QMap>
+#include <qstringlist.h>
 
 // #include "Model/Data.h"
 #include "Model/Parameter.h"
@@ -28,7 +29,7 @@ namespace Model
         public:
             virtual void setParameter(QString name, Parameter *value);
             virtual QString getUID();
-            virtual QString getCommand() = 0;
+            virtual QStringList *getCommand();
             virtual ~Stream();
 	};
 }

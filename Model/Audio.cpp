@@ -82,7 +82,3 @@ void Model::Audio::initStaticParameters()
 
 }
 
-QString Model::Audio::getCommand()
-{
-    return NULL;
-}
