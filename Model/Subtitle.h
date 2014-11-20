@@ -30,6 +30,7 @@ namespace Model
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
             virtual ~Subtitle();
+            virtual QString getCommand();
 
             static Parameter *getStaticParameter(QString key);
             static void initStaticParameters();

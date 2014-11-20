@@ -73,7 +73,8 @@ istream& Model::Audio::operator << (istream& o){
 
 Model::Parameter *Model::Audio::getStaticParameter(QString key)
 {
-    return Audio::m_staticParameters.value(key);
+    Parameter *param = new Parameter(*(Audio::m_staticParameters.value(key)));
+    return param;
 }
 
 void Model::Audio::initStaticParameters()
@@ -81,3 +82,7 @@ void Model::Audio::initStaticParameters()
 
 }
 
+QString Model::Audio::getCommand()
+{
+    return NULL;
+}

@@ -32,6 +32,8 @@ namespace Model
             virtual istream& operator << (istream& o);
             virtual ~Video();
 
+            virtual QString getCommand();
+
             static Parameter *getStaticParameter(QString key);
             static void initStaticParameters();
 

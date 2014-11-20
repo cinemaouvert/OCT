@@ -46,10 +46,17 @@ Model::Subtitle::~Subtitle()
 
 Model::Parameter *Model::Subtitle::getStaticParameter(QString key)
 {
-    return Subtitle::m_staticParameters.value(key);
+    Parameter *param = new Parameter(*(Subtitle::m_staticParameters.value(key)));
+    return param;
 }
 
 void Model::Subtitle::initStaticParameters()
 {
 
 }
+
+QString Model::Subtitle::getCommand()
+{
+    return NULL;
+}
+

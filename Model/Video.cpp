@@ -54,35 +54,48 @@ Model::Video::~Video()
         delete(this->m_parameters);
 }
 
+QString Model::Video::getCommand()
+{
+    return NULL;
+}
+
 Model::Parameter *Model::Video::getStaticParameter(QString key)
 {
-    return Video::m_staticParameters.value(key);
+
+    Parameter *param = new Parameter(*(Video::m_staticParameters.value(key)));
+    return param;
 }
 
 void Model::Video::initStaticParameters()
 {
-    Parameter *v_codecNameParam = new Parameter("-vcodec %1","This is the codec of the video stream","");
-    m_staticParameters.insert("codec_name",v_codecNameParam);
+    Parameter *codecNameParam = new Parameter("-vcodec %1","This is the codec of the video stream","");
+    m_staticParameters.insert("codec_name",codecNameParam);
 
-    Parameter *v_language = new Parameter("-metadata:s:v:%2 language=%1","This is the language of the stream","");
-    m_staticParameters.insert("language",v_language);
+    Parameter *language = new Parameter("-metadata:s:v:%2 language=%1","This is the language of the stream","");
+    m_staticParameters.insert("language",language);
 
-    Parameter *v_isDefault = new Parameter("-metadata:s:v:%2 default-flag=%1","This indicates if the stream is tagged as the default one","1");
-    m_staticParameters.insert("default",v_isDefault);
+    Parameter *isDefault = new Parameter("-metadata:s:v:%2 default-flag=%1","This indicates if the stream is tagged as the default one","1");
+    m_staticParameters.insert("default",isDefault);
 
-    Parameter *v_resolution = new Parameter("-vf scale=%1","This is the resolution of the video stream (AAAxBBB)","");
-    v_resolution->SetNoSpaceForNext();
-    m_staticParameters.insert("resolution",v_resolution);
+    Parameter *resolution = new Parameter("-vf scale=%1","This is the resolution of the video stream (AAAxBBB)","");
+    resolution->SetNoSpaceForNext();
+    m_staticParameters.insert("resolution",resolution);
 
-    Parameter *v_forceAspect = new Parameter("force_original_aspect_ratio=%1","Enable decreasing or increasing output video width or height if necessary to keep the original aspect ratio. Possible values: disable,decrease,increase","");
-    m_staticParameters.insert("forceAspect",v_forceAspect);
+    Parameter *forceAspect = new Parameter("force_original_aspect_ratio=%1","Enable decreasing or increasing output video width or height if necessary to keep the original aspect ratio. Possible values: disable,decrease,increase","");
+    m_staticParameters.insert("forceAspect",forceAspect);
 
-    Parameter *v_frameRate = new Parameter("-r %1","This is the frame rate (in frame by second)","24");
-    m_staticParameters.insert("r_frame_rate",v_frameRate);
+    Parameter *frameRate = new Parameter("-r %1","This is the frame rate (in frame by second)","24");
+    m_staticParameters.insert("r_frame_rate",frameRate);
 
-    Parameter *v_averageBitRate= new Parameter("-b:v %1 -bufsize %1","This is the average bit rate (in frame by second)","");
-    m_staticParameters.insert("sample_rate",v_averageBitRate);
+    Parameter *averageBitRate= new Parameter("-b:v %1 -bufsize %1","This is the average bit rate","");
+    m_staticParameters.insert("bitRate",averageBitRate);
 
-    Parameter *v_filter= new Parameter("-filter:v %1","This is the video filter can be (yadif for deinterlace, ))","");
-    m_staticParameters.insert("deinterlace",v_filter);
+    Parameter *filter= new Parameter("-filter:v %1","This is the video filter can be (yadif for deinterlace, ))","");
+    m_staticParameters.insert("deinterlace",filter);
+
+    Parameter *startPoint= new Parameter("-ss %1","Start point of the video","");
+    m_staticParameters.insert("start_pts",startPoint);
+
+    Parameter *endPoint= new Parameter("-ss %1","End point of the video","");
+    m_staticParameters.insert("start_pts",endPoint);
 }

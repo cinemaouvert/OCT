@@ -28,6 +28,7 @@ namespace Model
         public:
             virtual void setParameter(QString name, Parameter *value);
             virtual QString getUID();
+            virtual QString getCommand() = 0;
             virtual ~Stream();
 	};
 }

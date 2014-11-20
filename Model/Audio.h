@@ -94,6 +94,13 @@ namespace Model
              */
             virtual istream& operator << (istream& o);
 
+            /**
+             * @brief getCommand
+=             * @return the command
+             */
+            virtual QString getCommand();
+
+
             static Parameter *getStaticParameter(QString key);
             static void initStaticParameters();
 
