@@ -46,6 +46,11 @@ Model::Data& Model::Data::operator=(const Data& d) {
 
 Model::Data::~Data() {
     m_string = "";
+    if(this->m_newStream != NULL)
+        delete this->m_newStream;
+
+    if(this->m_oldStream != NULL)
+        delete this->m_oldStream;
 }
 
 bool Model::Data::hasToBeTranscoded() {
