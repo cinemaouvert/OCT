@@ -54,7 +54,11 @@ QStringList *Model::Stream::getCommand()
             param = this->m_parameters->values().at(i);
             value+=param->value();
        }
-       *myStringList << param->command().arg(this->getUID()) << value ;
+       QString command = param->command();
+       if(command.contains("%")){
+            command = command.arg(this->getUID());
+       }
+       *myStringList << command << value ;
     }
     return myStringList;
 }

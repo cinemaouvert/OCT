@@ -59,7 +59,7 @@ namespace Model
              * @brief Old stream.
              */
             Model::Stream* m_oldStream;
-
+        
         public:
             /**
              * @brief Default constructor.
@@ -100,7 +100,7 @@ namespace Model
              * @brief This method generate the command line associated with the data.
              * @return The command line.
              */
-            QString generateCommandLine();
+            QStringList* generateCommandLine();
 
             /**
              * @brief Accessor on the m_oldStream member.

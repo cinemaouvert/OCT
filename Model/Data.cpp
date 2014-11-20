@@ -53,11 +53,11 @@ void Model::Data::setOldStream(Model::Stream *oldStream)
 {
     m_oldStream = oldStream;
 }
-Model::Data::Data() {
+Model::Data::Data() : m_oldStream(NULL), m_newStream(NULL) {
     m_string = "";
 }
 
-Model::Data::Data(QString string) {
+Model::Data::Data(QString string) : m_oldStream(NULL), m_newStream(NULL) {
     m_string = string;
 }
 
@@ -82,11 +82,17 @@ Model::Data::~Data() {
 }
 
 bool Model::Data::hasToBeTranscoded() {
-	throw "Not yet implemented";
+    bool res = false;
+    if(this->m_newStream != NULL)
+        res = true;
+    return res;
 }
 
-QString Model::Data::generateCommandLine() {
-	throw "Not yet implemented";
+QStringList* Model::Data::generateCommandLine() {
+    if(hasToBeTranscoded())
+        return this->m_newStream->getCommand();
+    else
+        return NULL;
 }
 
 Model::Stream* Model::Data::getOldStream() {

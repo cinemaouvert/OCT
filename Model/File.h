@@ -70,7 +70,7 @@ namespace Model
             /**
              * @brief The data contained in the file.
              */
-            Model::Data* m___n;
+            QList<Model::Data*> *m_datas;
 
             /**
              * @brief The generated video.
@@ -114,7 +114,7 @@ namespace Model
              * @brief Accessor on the data member.
              * @return The data member pointer value.
              */
-            QList<Model::Data*> getDatas();
+            QList<Model::Data*>* getDatas();
 
             /**
              * @brief Accessor on the name member.
