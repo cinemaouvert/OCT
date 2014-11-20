@@ -5,6 +5,9 @@ using namespace std;
 #include "Model/File.h"
 #include "Model/Data.h"
 
+
+
+
 Model::File::File() {}
 
 Model::File::File(QString filePath, QString info) {
@@ -26,42 +29,7 @@ Model::File::File(QString filePath, QString info) {
                 QDomNode nodeCodecType = tab.namedItem("codec_type");
                 QString type = nodeCodecType.nodeValue();
                 if(type == "video"){
-                    qDebug() << "video";
-                    //-----------------------CODEC-NAME------------------------//
-                    QDomNode nodeCodecName = tab.namedItem("codec_name");
-                    QString codecName = nodeCodecName.nodeValue();
-                    qDebug() << codecName;
-                    //-----------------------LANGUAGE------------------------//
-                    QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
-                    qDebug() << tagList.count();
-
-                    QString tagKey ="";
-                    int i = 0;
-                    while(tagKey != "language" && i<tagList.count()){
-                        tagKey = tagList.at(i).attributes().namedItem("key").nodeValue();
-                        i++;
-                    }
-                    if(tagKey == "language")
-                        QString language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
-                    //-----------------------IS-DEFAULT------------------------//
-                    QDomNode disposition = stream.toElement().elementsByTagName("disposition").item(0);
-                    QString isDefault = disposition.attributes().namedItem("default").nodeValue();
-                    qDebug() << isDefault;
-                    //-----------------------RESOLUTION------------------------//
-                    QDomNode nodeWidth = tab.namedItem("width");
-                    QString width = nodeWidth.nodeValue();
-                    qDebug() << width;
-
-                    QDomNode nodeHeight = tab.namedItem("height");
-                    QString height = nodeHeight.nodeValue();
-                    qDebug() << height;
-
-                    QString resolution = width + "x" + height;
-                    qDebug() << resolution;
-                    //-----------------------FRAME-RATE------------------------//
-                    QDomNode nodeFrameRate = tab.namedItem("r_frame_rate");
-                    QString frameRate = nodeFrameRate.nodeValue();
-                    qDebug() << frameRate;
+                  Video *v =  genereVideo(stream);
                 }
                 if(type == "audio"){
                     qDebug() << "audio";
@@ -100,6 +68,74 @@ QList<Model::Data*> Model::File::getDatas() {
 
 QString Model::File::getName() {
 	return this->m_name;
+}
+
+Model::Video* Model::File::genereVideo(QDomNode stream)
+{
+    qDebug() << "video";
+    QDomNamedNodeMap tab = stream.attributes();
+    //-----------------------CODEC-NAME------------------------//
+    QDomNode nodeCodecName = tab.namedItem("codec_name");
+    QString codecName = nodeCodecName.nodeValue();
+    qDebug() << codecName;
+    //-----------------------LANGUAGE------------------------//
+    QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
+    qDebug() << tagList.count();
+
+    QString tagKey ="";
+    int i = 0;
+    while(tagKey != "language" && i<tagList.count()){
+        tagKey = tagList.at(i).attributes().namedItem("key").nodeValue();
+        i++;
+    }
+    QString language = "";
+    if(tagKey == "language")
+        language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
+    //-----------------------IS-DEFAULT------------------------//
+    QDomNode disposition = stream.toElement().elementsByTagName("disposition").item(0);
+    QString isDefault = disposition.attributes().namedItem("default").nodeValue();
+    qDebug() << isDefault;
+    //-----------------------RESOLUTION------------------------//
+    QDomNode nodeWidth = tab.namedItem("width");
+    QString width = nodeWidth.nodeValue();
+    qDebug() << width;
+
+    QDomNode nodeHeight = tab.namedItem("height");
+    QString height = nodeHeight.nodeValue();
+    qDebug() << height;
+
+    QString resolution = width + "x" + height;
+    qDebug() << resolution;
+    //-----------------------FRAME-RATE------------------------//
+    QDomNode nodeFrameRate = tab.namedItem("r_frame_rate");
+    QString frameRate = nodeFrameRate.nodeValue();
+    qDebug() << frameRate;
+
+    //-----------------------VIDEO-BUILD------------------------//
+    Video *v = new Video();
+    Parameter *pCodecName = Video::getStaticParameter("codec_name");
+    pCodecName->setValue(codecName);
+    v->setParameter("codec_name",pCodecName);
+
+    if(language != ""){
+        Parameter *pLanguage = Video::getStaticParameter("language");
+        pLanguage->setValue(language);
+        v->setParameter("language",pLanguage);
+    }
+
+    Parameter *pDefault = Video::getStaticParameter("default");
+    pDefault->setValue(isDefault);
+    v->setParameter("default",pDefault);
+
+    Parameter *pResolution = Video::getStaticParameter("resolution");
+    pResolution->setValue(resolution);
+    v->setParameter("resolution",pResolution);
+
+    Parameter *pFrameRate = Video::getStaticParameter("r_frame_rate");
+    pFrameRate->setValue(frameRate);
+    v->setParameter("r_frame_rate",pFrameRate);
+
+    return v;
 }
 
 ostream& Model::File::operator >> (ostream& o){

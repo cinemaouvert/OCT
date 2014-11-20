@@ -6,9 +6,11 @@ using namespace std;
 
 #include <QString>
 #include <QList>
+#include <qdom.h>
 
 #include "Model/Serializable.h"
 #include "Model/Data.h"
+#include "Video.h"
 #include "qdebug.h"
 namespace Model
 {
@@ -26,6 +28,7 @@ namespace Model
             QString m_name;
             QString m_filePath;
             Model::Data* m___n;
+            Video* genereVideo(QDomNode stream);
         public:
             File();
             File(QString filePath, QString info);
