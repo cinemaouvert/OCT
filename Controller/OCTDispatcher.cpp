@@ -113,12 +113,14 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
           qDebug() <<"TEST : " + st;
     }
 
+   /*
     QString ffmpegProgram = getSetting("ffmpeg").toString();
     QProcess myProcessFFMPEG(m_mainWindow);
     myProcessFFMPEG.start(ffmpegProgram, *list);
-    myProcessFFMPEG.waitForFinished(-1);
+    myProcessFFMPEG.waitForFinished();
     QString retour(myProcessFFMPEG.readAllStandardOutput());
     qDebug()<<retour;
+*/
     /***********************/
 }
 

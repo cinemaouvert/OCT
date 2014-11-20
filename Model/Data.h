@@ -48,24 +48,94 @@ namespace Model
 	class Data: public Model::Serializable
     {
         private :
-            Model::Stream* m_oldStream;
+            /**
+             * @brief New stream.
+             */
             Model::Stream* m_newStream;
+
+            /**
+             * @brief Old stream.
+             */
+            Model::Stream* m_oldStream;
+        
         public:
+            /**
+             * @brief Default constructor.
+             */
             Data();
+
+            /**
+             * @brief Copy constructor.
+             * @param d
+             */
             Data(Data const& d);
+
+            /**
+             * @brief Affectation operator.
+             * @param d The Data object to affect.
+             * @return The current Data object modified.
+             */
             Data& operator=(Data const& d);
+
+            /**
+             * @brief Destructor.
+             */
             virtual ~Data();
 
+            /**
+             * @brief Define if the current Data has to be transcoded.
+             * @return 1 if yes, 0 if no.
+             */
             bool hasToBeTranscoded();
+
+            /**
+             * @brief This method generate the command line associated with the data.
+             * @return The command line.
+             */
             QStringList* generateCommandLine();
+
+            /**
+             * @brief Accessor on the m_oldStream member.
+             * @return The m_oldStream member pointer value.
+             */
             Model::Stream* getOldStream();
 
+            /**
+             * @brief operator >>
+             * @param o
+             * @return
+             */
             virtual ostream& operator >> (ostream& o);
+
+            /**
+             * @brief operator <<
+             * @param o
+             * @return
+             */
             virtual istream& operator << (istream& o);
 
+            /**
+             * @brief Accessor on the newStream member.
+             * @return The m_newStream member pointer value.
+             */
             Model::Stream *newStream() const;
+
+            /**
+             * @brief Mutator on the m_newStream member.
+             * @param The pointer value to modify the m_newStream member.
+             */
             void setNewStream(Model::Stream *newStream);
+
+            /**
+             * @brief Accessor on the m_oldStream member.
+             * @return The m_oldStream member pointer value.
+             */
             Model::Stream *oldStream() const;
+
+            /**
+             * @brief Mutator on the m_oldStream member.
+             * @param The pointer value to modify the m_oldStream member.
+             */
             void setOldStream(Model::Stream *oldStream);
     };
 }
