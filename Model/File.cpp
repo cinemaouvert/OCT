@@ -66,8 +66,8 @@ Model::File& Model::File::operator=(const File& f) {
 
 Model::File::~File() {}
 
-QList<Model::Data*> Model::File::getDatas() {
-	throw "Not yet implemented";
+QList<Model::Data*>* Model::File::getDatas() {
+    return m_datas;
 }
 
 QString Model::File::getName() {
