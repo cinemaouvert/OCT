@@ -16,6 +16,79 @@ Model::Video::Video(){
 
 }
 
+Model::Video::Video(QDomNode stream)
+{
+    qDebug() << "video";
+    QDomNamedNodeMap tab = stream.attributes();
+    //-----------------------UID------------------------//
+    QDomNode uidNode = tab.namedItem("index");
+    QString UID = uidNode.nodeValue();
+    qDebug() << UID;
+    //-----------------------CODEC-NAME------------------------//
+    QDomNode nodeCodecName = tab.namedItem("codec_name");
+    QString codecName = nodeCodecName.nodeValue();
+    qDebug() << codecName;
+    //-----------------------LANGUAGE------------------------//
+    QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
+    qDebug() << tagList.count();
+
+    QString tagKey ="";
+    int i = 0;
+    while(tagKey != "language" && i<tagList.count()){
+        tagKey = tagList.at(i).attributes().namedItem("key").nodeValue();
+        i++;
+    }
+    QString language = "";
+    if(tagKey == "language")
+        language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
+    //-----------------------IS-DEFAULT------------------------//
+    QDomNode disposition = stream.toElement().elementsByTagName("disposition").item(0);
+    QString isDefault = disposition.attributes().namedItem("default").nodeValue();
+    qDebug() << isDefault;
+    //-----------------------RESOLUTION------------------------//
+    QDomNode nodeWidth = tab.namedItem("width");
+    QString width = nodeWidth.nodeValue();
+    qDebug() << width;
+
+    QDomNode nodeHeight = tab.namedItem("height");
+    QString height = nodeHeight.nodeValue();
+    qDebug() << height;
+
+    QString resolution = width + "x" + height;
+    qDebug() << resolution;
+    //-----------------------FRAME-RATE------------------------//   //!\\  A CONVERTIR
+    QDomNode nodeFrameRate = tab.namedItem("r_frame_rate");
+    QString frameRate = nodeFrameRate.nodeValue();
+    qDebug() << frameRate;
+
+    //-----------------------VIDEO-BUILD------------------------//
+    this->m_uID = UID;
+    this->m_parameters = new QMap<QString,Parameter*>();
+
+    Parameter *pCodecName = Video::getStaticParameter("codec_name");
+    pCodecName->setValue(codecName);
+    this->setParameter("codec_name",pCodecName);
+
+    if(language != ""){
+        Parameter *pLanguage = Video::getStaticParameter("language");
+        pLanguage->setValue(language);
+        this->setParameter("language",pLanguage);
+    }
+
+    Parameter *pDefault = Video::getStaticParameter("default");
+    pDefault->setValue(isDefault);
+    this->setParameter("default",pDefault);
+
+    Parameter *pResolution = Video::getStaticParameter("resolution");
+    pResolution->setValue(resolution);
+    this->setParameter("resolution",pResolution);
+
+    Parameter *pFrameRate = Video::getStaticParameter("r_frame_rate");
+    pFrameRate->setValue(frameRate);
+    this->setParameter("r_frame_rate",pFrameRate);
+
+}
+
 Model::Video::Video(QString uid){
     this->m_parameters = new QMap<QString,Parameter*>();
 

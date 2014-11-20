@@ -30,7 +30,6 @@ namespace Model
             QString m_filePath;
             Model::Data* m___n;
             Video* genereVideo(QDomNode stream);
-            Audio* genereAudio(QDomNode stream);
         public:
             File();
             File(QString filePath, QString info);

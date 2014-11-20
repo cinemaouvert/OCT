@@ -5,6 +5,7 @@ using namespace std;
 #define __Model__Video_h__
 
 #include <QString>
+#include <qdom.h>
 
 #include "Model/Stream.h"
 
@@ -25,6 +26,7 @@ namespace Model
 
         public:
             Video();
+            Video(QDomNode stream);
             Video(QString uid);
             Video(const Video& copy);
             Video& operator=(const Video& o);
