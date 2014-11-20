@@ -50,8 +50,8 @@ namespace Model
         private :
             QString m_string;
 
-            Model::Stream* m_newStream;
             Model::Stream* m_oldStream;
+            Model::Stream* m_newStream;
         public:
             Data();
             Data(QString string);
@@ -60,7 +60,7 @@ namespace Model
             virtual ~Data();
 
             bool hasToBeTranscoded();
-            QString generateCommandLine();
+            QStringList* generateCommandLine();
             Model::Stream* getOldStream();
 
             virtual ostream& operator >> (ostream& o);
