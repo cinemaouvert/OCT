@@ -30,6 +30,10 @@ Model::File::File(QString filePath, QString info) {
                 QString type = nodeCodecType.nodeValue();
                 if(type == "video"){
                   Video *v =  genereVideo(stream);
+                  foreach (QString s, *(v->getCommand())) {
+                        qDebug() <<"TEST : " + s;
+                  }
+
                 }
                 if(type == "audio"){
                     qDebug() << "audio";
@@ -74,6 +78,10 @@ Model::Video* Model::File::genereVideo(QDomNode stream)
 {
     qDebug() << "video";
     QDomNamedNodeMap tab = stream.attributes();
+    //-----------------------UID------------------------//
+    QDomNode uidNode = tab.namedItem("index");
+    QString UID = uidNode.nodeValue();
+    qDebug() << UID;
     //-----------------------CODEC-NAME------------------------//
     QDomNode nodeCodecName = tab.namedItem("codec_name");
     QString codecName = nodeCodecName.nodeValue();
@@ -112,7 +120,7 @@ Model::Video* Model::File::genereVideo(QDomNode stream)
     qDebug() << frameRate;
 
     //-----------------------VIDEO-BUILD------------------------//
-    Video *v = new Video();
+    Video *v = new Video(UID);
     Parameter *pCodecName = Video::getStaticParameter("codec_name");
     pCodecName->setValue(codecName);
     v->setParameter("codec_name",pCodecName);

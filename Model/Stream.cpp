@@ -17,15 +17,16 @@ QStringList *Model::Stream::getCommand()
 {
     QStringList *myStringList = new QStringList();
 
-    for(int i = 0; i < this->m_parameters->size();i++){
+    for(int i = 0; i < this->m_parameters->size()-1;i++){
        Parameter *param = this->m_parameters->values().at(i);
        QString value = param->value();
        while(param->noSpaceForNext()){
+           if(i < this->m_parameters->size()-1 )
             i++;
             param = this->m_parameters->values().at(i);
             value+=param->value();
        }
-       *myStringList << param->command() << value ;
+       *myStringList << param->command().arg(this->getUID()) << value ;
     }
     return myStringList;
 }
