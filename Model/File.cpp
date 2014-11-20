@@ -19,45 +19,62 @@ Model::File::File(QString filePath, QString info) {
         if(!root.isNull()){
             QDomNodeList streams = root.elementsByTagName("stream");
             for (int i=0;i<streams.count();i++){
-                qDebug() << "------------stream-------------------";
-                //new stream // get attribute
-                //Stream *theStream;
+                //-----------------------STREAM------------------------//
                 QDomNode stream = streams.item(i);
                 QDomNamedNodeMap tab = stream.attributes();
 
+                //-----------------------TYPE------------------------//
                 QDomNode nodeCodecType = tab.namedItem("codec_type");
                 QString type = nodeCodecType.nodeValue();
-                qDebug() << type;
+                if(type == "video"){
+                    qDebug() << "video";
+                    //-----------------------CODEC-NAME------------------------//
+                    QDomNode nodeCodecName = tab.namedItem("codec_name");
+                    QString codecName = nodeCodecName.nodeValue();
+                    qDebug() << codecName;
+                    //-----------------------LANGUAGE------------------------//
+                    QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
+                    qDebug() << tagList.count();
 
+                    QString tagKey ="";
+                    int i = 0;
+                    while(tagKey != "language" && i<tagList.count()){
+                        tagKey = tagList.at(i).attributes().namedItem("key").nodeValue();
+                        i++;
+                    }
+                    if(tagKey == "language")
+                        QString language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
+                    //-----------------------IS-DEFAULT------------------------//
+                    QDomNode disposition = stream.toElement().elementsByTagName("disposition").item(0);
+                    QString isDefault = disposition.attributes().namedItem("default").nodeValue();
+                    qDebug() << isDefault;
+                    //-----------------------RESOLUTION------------------------//
+                    QDomNode nodeWidth = tab.namedItem("width");
+                    QString width = nodeWidth.nodeValue();
+                    qDebug() << width;
 
-                qDebug() << "------------attributes-------------------";
-                for(int j=0;j<tab.count();j++)
-                {
-                    QDomNode n = tab.item(j);
-                    qDebug() << n.nodeName() << " : " <<  n.nodeValue();
-                   /* Parameter *tmpParam = Parameters.getVideoParameter(n.nodeName());
-                    if(param != NULL){
-                        Parameter *param = new Parameter(tmpParam);
-                        param->setValue(n.nodeValue());
-                        theStream->setParameter(n.nodeName(),param);
-                    }*/
+                    QDomNode nodeHeight = tab.namedItem("height");
+                    QString height = nodeHeight.nodeValue();
+                    qDebug() << height;
 
+                    QString resolution = width + "x" + height;
+                    qDebug() << resolution;
+                    //-----------------------FRAME-RATE------------------------//
+                    QDomNode nodeFrameRate = tab.namedItem("r_frame_rate");
+                    QString frameRate = nodeFrameRate.nodeValue();
+                    qDebug() << frameRate;
+                }
+                if(type == "audio"){
+                    qDebug() << "audio";
 
                 }
-                qDebug() << "------------Dispositoion-------------------";
-                QDomElement e = stream.toElement();
-                QDomNodeList disposition = e.elementsByTagName("disposition");
-                for (int j=0;j<disposition.count();j++){
-                    QDomNode n = tab.item(j);
-                    qDebug() << n.nodeName() << " : " <<  n.nodeValue();
+                if(type == "subtitle"){
+                    qDebug() << "sous-titre";
                 }
-                qDebug() << "------------TAG-------------------";
-                QDomNodeList tag = e.elementsByTagName("tag");
-                for (int j=0;j<tag.count();j++){
-                    QDomNode n = tab.item(j);
-                    qDebug() << n.nodeName() << " : " <<  n.nodeValue();
+                if(type == "attachment"){
+                    qDebug() << "attachment";
+                }
 
-                }
             }
         }
     }
