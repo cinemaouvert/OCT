@@ -17,6 +17,8 @@ namespace Model
 	// class Serializable;
 	class Stream;
     class Parameter;
+
+
 }
 
 namespace Model
@@ -31,6 +33,13 @@ namespace Model
             virtual QString getUID();
             virtual QStringList *getCommand();
             virtual ~Stream();
+            enum fileType{
+                VIDEO = 0,
+                AUDIO = 1,
+                SUBTITLE = 2,
+                ATTACHMENT = 3
+            };
+            static int getEnumValue(QString type);
 	};
 }
 

@@ -49,6 +49,8 @@ using namespace std;
 #include <QProcess>
 #include <QDebug>
 
+#include <Model/Data.h>
+
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
                                             m_mainWindow(NULL) ,
                                             m_settings(NULL) ,
@@ -100,28 +102,41 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /***************************************/
     /*****Thibaud Test *****/
-    Model::Parameter param = *(Model::Video::getStaticParameter("language"));
-    param.setValue("eng");
-    qDebug() << param.commandAndValue().arg("0");
-
-    QStringList arguments2;
-        arguments2
-             <<"-v"<<"quiet"
-             << "-print_format"<<"xml"
-             <<"-show_streams" <<"E:\\M2\\Projet\\Test mkvtoolnix\\test2.mkv";
-
-    QProcess myProcess2(m_mainWindow);
-    myProcess2.start(program, arguments2);
-    myProcess2.waitForFinished();
-    QString string2(myProcess2.readAllStandardOutput());
-    Model::File f2("path",string2);
 
 
+
+    this->addFile("E:\\M2\\Projet\\Test mkvtoolnix\\movie1.mkv");
+    qDebug() << this->m_currentProject->fileList()->size();
+    this->m_currentProject->fileList()->at(0)->getDatas()->at(0)->setNewStream(this->m_currentProject->fileList()->at(0)->getDatas()->at(0)->getOldStream());
+    QStringList *list = this->m_currentProject->fileList()->at(0)->getCommandLine();
+    foreach (QString st, *(list)) {
+          qDebug() <<"TEST : " + st;
+    }
+
+    QString ffmpegProgram = getSetting("ffmpeg").toString();
+    QProcess myProcessFFMPEG(m_mainWindow);
+    myProcessFFMPEG.start(ffmpegProgram, *list);
+    myProcessFFMPEG.waitForFinished(-1);
+    QString retour(myProcessFFMPEG.readAllStandardOutput());
+    qDebug()<<retour;
     /***********************/
 }
 
 void Controller::OCTDispatcher::addFile(QString filePath) {
-	throw "Not yet implemented";
+    QString program = getSetting("ffprobe").toString();
+    QStringList arguments;
+        arguments
+             <<"-v"<<"quiet"
+             << "-print_format"<<"xml"
+             <<"-show_streams" <<filePath;
+
+    QProcess myProcess(m_mainWindow);
+    myProcess.start(program, arguments);
+    myProcess.waitForFinished();
+    QString infos(myProcess.readAllStandardOutput());
+
+    Model::File *file = new Model::File(filePath,infos);
+    this->m_currentProject->addFileToList(file);
 }
 
 void Controller::OCTDispatcher::save() {

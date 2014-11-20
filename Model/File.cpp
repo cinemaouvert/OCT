@@ -10,9 +10,10 @@ using namespace std;
 
 Model::File::File() {}
 
-Model::File::File(QString filePath, QString info) {
+Model::File::File(QString filePath, QString info) : m_datas(NULL) {
     m_filePath = filePath;
     m_name = filePath;
+    m_datas = new QList<Data*>();
 
     QDomDocument doc;
     doc.setContent(info);
@@ -28,24 +29,25 @@ Model::File::File(QString filePath, QString info) {
                 //-----------------------TYPE------------------------//
                 QDomNode nodeCodecType = tab.namedItem("codec_type");
                 QString type = nodeCodecType.nodeValue();
-                if(type == "video"){
-                  Video *v = new Video(stream);
-                  foreach (QString s, *(v->getCommand())) {
-                        qDebug() <<"TEST : " + s;
-                  }
 
-                }
-                if(type == "audio"){
-                    qDebug() << "audio";
-
-                }
-                if(type == "subtitle"){
-                    qDebug() << "sous-titre";
-                }
-                if(type == "attachment"){
-                    qDebug() << "attachment";
+                Stream *s;
+                switch (Model::Stream::getEnumValue(type)){
+                    case Model::Stream::VIDEO:
+                            s = new Video(stream);
+                            break;
+                    case Model::Stream::AUDIO:
+                            break;
+                    case Model::Stream::SUBTITLE:
+                            break;
+                    case Model::Stream::ATTACHMENT:
+                            break;
                 }
 
+                Data* theData;
+                theData= new Data();
+
+                theData->setOldStream(s);
+                this->m_datas->push_back(theData);
             }
         }
     }
@@ -60,14 +62,32 @@ Model::File& Model::File::operator=(const File& f) {
     if ( this != &f ) {
         m_name = f.m_name;
         m_filePath = f.m_filePath;
+        m_datas = f.m_datas;
     }
     return *this;
 }
 
-Model::File::~File() {}
+Model::File::~File() {
+    if(this->m_datas != NULL)
+        delete this->m_datas;
+}
 
 QList<Model::Data*>* Model::File::getDatas() {
     return m_datas;
+}
+
+QStringList *Model::File::getCommandLine()
+{
+    QStringList *stringList;
+    stringList = new QStringList();
+    *stringList << "-i" << this->m_filePath;
+    foreach (Data *data, *getDatas()) {
+        if(data->hasToBeTranscoded()){
+            (*stringList) << *(data->generateCommandLine());
+        }
+    }
+    *stringList << "E:\\M2\\Projet\\Test mkvtoolnix\\test3.mkv";
+    return stringList;
 }
 
 QString Model::File::getName() {

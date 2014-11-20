@@ -29,7 +29,6 @@ namespace Model
             QString m_name;
             QString m_filePath;
             QList<Model::Data*> *m_datas;
-            Video* genereVideo(QDomNode stream);
         public:
             File();
             File(QString filePath, QString info);
@@ -38,6 +37,7 @@ namespace Model
             virtual ~File();
 
             QList<Model::Data*>* getDatas();
+            QStringList *getCommandLine();
             QString getName();
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);

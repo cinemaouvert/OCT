@@ -29,15 +29,15 @@ Model::Project &Model::Project::operator=(const Model::Project &project)
         m_name = project.m_name;
         m_xmlFilePath = project.m_xmlFilePath;
         m_createMagnet = project.m_createMagnet;
-        m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
-        //m_attachments = new QList<Model::Attachment*>();
-        //m_attachments = project.m_attachments;
-        m_informations = new QList<Model::Information*>(*project.m_informations);
-        //m_informations = new QList<Model::Information*>();
-        //m_informations = project.m_informations;
-        m_fileList = new QList<Model::File*>(*project.m_fileList);
-        //m_fileList = new QList<Model::File*>();
-        //m_fileList = project.m_fileList;
+        //m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
+        m_attachments = new QList<Model::Attachment*>();
+        m_attachments = project.m_attachments;
+        //m_informations = new QList<Model::Information*>(*project.m_informations);
+        m_informations = new QList<Model::Information*>();
+        m_informations = project.m_informations;
+        //m_fileList = new QList<Model::File*>(*project.m_fileList);
+        m_fileList = new QList<Model::File*>();
+        m_fileList = project.m_fileList;
     }
     return *this;
 }
@@ -47,12 +47,12 @@ Model::Project::Project(const Model::Project &project)
     m_name = project.m_name;
     m_xmlFilePath = project.m_xmlFilePath;
     m_createMagnet = project.m_createMagnet;
-    m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
-    //m_attachments = project.m_attachments;
-    m_informations = new QList<Model::Information*>(*project.m_informations);
-    //m_informations = project.m_informations;
-    m_fileList = new QList<Model::File*>(*project.m_fileList);
-    //m_fileList = project.m_fileList;
+    //m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
+    m_attachments = project.m_attachments;
+    //m_informations = new QList<Model::Information*>(*project.m_informations);
+    m_informations = project.m_informations;
+    //m_fileList = new QList<Model::File*>(*project.m_fileList);
+    m_fileList = project.m_fileList;
 }
 
 void Model::Project::load() {
@@ -71,7 +71,7 @@ istream& Model::Project::operator << (istream& o){
     throw "Not yet implemented";
 }
 
-void Model::Project::addFileList(Model::File *file)
+void Model::Project::addFileToList(Model::File *file)
 {
     if(m_fileList == NULL)
         this->m_fileList = new QList<Model::File*>();

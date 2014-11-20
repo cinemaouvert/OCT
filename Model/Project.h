@@ -45,7 +45,7 @@ namespace Model
             void setName(const QString &name);
 
             QList<Model::File *> *fileList() const;
-            void addFileList(Model::File *fileList);
+            void addFileToList(Model::File *fileList);
 
             QList<Model::Information *> *informations() const;
             void addInformations(Model::Information *information);

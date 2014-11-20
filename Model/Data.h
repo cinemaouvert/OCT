@@ -48,13 +48,10 @@ namespace Model
 	class Data: public Model::Serializable
     {
         private :
-            QString m_string;
-
             Model::Stream* m_oldStream;
             Model::Stream* m_newStream;
         public:
             Data();
-            Data(QString string);
             Data(Data const& d);
             Data& operator=(Data const& d);
             virtual ~Data();
@@ -65,6 +62,7 @@ namespace Model
 
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
+
             Model::Stream *newStream() const;
             void setNewStream(Model::Stream *newStream);
             Model::Stream *oldStream() const;

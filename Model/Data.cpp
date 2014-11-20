@@ -26,26 +26,20 @@ void Model::Data::setOldStream(Model::Stream *oldStream)
     m_oldStream = oldStream;
 }
 Model::Data::Data() : m_oldStream(NULL), m_newStream(NULL) {
-    m_string = "";
-}
-
-Model::Data::Data(QString string) : m_oldStream(NULL), m_newStream(NULL) {
-    m_string = string;
 }
 
 Model::Data::Data(const Data& d) {
-    m_string = d.m_string;
 }
 
 Model::Data& Model::Data::operator=(const Data& d) {
     if ( this != &d ) {
-        m_string = d.m_string;
+        m_oldStream = d.m_oldStream;
+        m_newStream = d.m_newStream;
     }
     return *this;
 }
 
 Model::Data::~Data() {
-    m_string = "";
     if(this->m_newStream != NULL)
         delete this->m_newStream;
 

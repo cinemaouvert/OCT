@@ -41,3 +41,16 @@ Model::Stream::~Stream()
         delete(this->m_parameters);
 }
 
+int Model::Stream::getEnumValue(QString type)
+{
+    if(type == "audio"){
+       return 0;
+    }else if(type == "audio"){
+       return 1;
+    }else if(type == "subtitle"){
+       return 2;
+    }else if(type == "attachment"){
+       return 3;
+    }
+}
+
