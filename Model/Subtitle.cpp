@@ -4,6 +4,7 @@ using namespace std;
 #include "Model/Subtitle.h"
 #include "Model/Stream.h"
 
+QMap<QString, Model::Parameter *> Model::Subtitle::m_staticParameters;
 Model::Subtitle::Subtitle(){
     this->m_parameters = NULL;
 }
@@ -41,4 +42,14 @@ Model::Subtitle::~Subtitle()
 {
     if (this->m_parameters != NULL)
         delete(this->m_parameters);
+}
+
+Model::Parameter *Model::Subtitle::getStaticParameter(QString key)
+{
+    return Subtitle::m_staticParameters.value(key);
+}
+
+void Model::Subtitle::initStaticParameters()
+{
+
 }

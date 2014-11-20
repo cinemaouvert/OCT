@@ -25,7 +25,6 @@
  * You should have received a copy of the GNU General Public License
  * along with Open Cinema Transcoder. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************************/
-#include <QProcess>
 #include <exception>
 #include <vector>
 
@@ -38,11 +37,16 @@ using namespace std;
 #include "Controller/Exporter.h"
 #include "Controller/TreatmentThread.h"
 #include "Controller/Transcoder.h"
-#include "Model/Project.h"
-#include "View/MainWindow.h"
-#include "Model/File.h"
-#include "Model/parameters.h"
 
+#include "View/MainWindow.h"
+
+#include "Model/Project.h"
+#include "Model/File.h"
+#include "Model/Video.h"
+#include "Model/Audio.h"
+#include "Model/Subtitle.h"
+
+#include <QProcess>
 #include <QDebug>
 
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
@@ -74,7 +78,9 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
     m_transcoder= new Transcoder();
     //Initialisation of the parameters lists
-    Model::Parameters::init();
+    Model::Video::initStaticParameters();
+    Model::Audio::initStaticParameters();
+    Model::Subtitle::initStaticParameters();
 
 
     /****** TRY YOUR WORK IN HERE **********/
@@ -95,7 +101,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /***************************************/
     /*****Thibaud Test *****/
-    Model::Parameter param = *(Model::Parameters::getVideoParameter("language"));
+    Model::Parameter param = *(Model::Video::getStaticParameter("language"));
     param.setValue("eng");
     qDebug() << param.commandAndValue().arg("0");
 

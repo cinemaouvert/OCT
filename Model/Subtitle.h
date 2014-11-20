@@ -18,6 +18,9 @@ namespace Model
 {
 	class Subtitle: public Model::Stream
 	{
+        private:
+            static QMap<QString, Parameter *> m_staticParameters;
+
 
         public:
             Subtitle();
@@ -27,6 +30,10 @@ namespace Model
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
             virtual ~Subtitle();
+
+            static Parameter *getStaticParameter(QString key);
+            static void initStaticParameters();
+
 	};
 }
 

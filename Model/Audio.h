@@ -46,6 +46,10 @@ namespace Model
 {
 	class Audio: public Model::Stream
     {
+
+        private:
+            static QMap<QString, Parameter *> m_staticParameters;
+
         public:
             /**
              * @brief Default constructor.
@@ -89,6 +93,10 @@ namespace Model
              * @return
              */
             virtual istream& operator << (istream& o);
+
+            static Parameter *getStaticParameter(QString key);
+            static void initStaticParameters();
+
 	};
 }
 

@@ -18,7 +18,10 @@ namespace Model
 {
 	class Video: public Model::Stream
 	{
-		private: QString m_additionalCommand;
+        private:
+            QString m_additionalCommand;
+            static QMap<QString, Parameter *> m_staticParameters;
+
 
         public:
             Video();
@@ -28,6 +31,10 @@ namespace Model
             virtual ostream& operator >> (ostream& o);
             virtual istream& operator << (istream& o);
             virtual ~Video();
+
+            static Parameter *getStaticParameter(QString key);
+            static void initStaticParameters();
+
 	};
 }
 

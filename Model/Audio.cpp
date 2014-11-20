@@ -32,6 +32,7 @@ using namespace std;
 #include "Model/Audio.h"
 #include "Model/Stream.h"
 
+QMap<QString, Model::Parameter *> Model::Audio::m_staticParameters;
 Model::Audio::Audio() {
     m_uID = "";
     this->m_parameters = NULL;
@@ -69,3 +70,14 @@ ostream& Model::Audio::operator >> (ostream& o){
 istream& Model::Audio::operator << (istream& o){
     throw "Not yet implemented";
 }
+
+Model::Parameter *Model::Audio::getStaticParameter(QString key)
+{
+    return Audio::m_staticParameters.value(key);
+}
+
+void Model::Audio::initStaticParameters()
+{
+
+}
+
