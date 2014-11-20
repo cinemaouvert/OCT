@@ -27,6 +27,7 @@
  **********************************************************************************/
 
 #include <exception>
+#include <qdom.h>
 using namespace std;
 
 #ifndef __Model__Audio_h__
@@ -55,6 +56,12 @@ namespace Model
              * @brief Default constructor.
              */
             Audio();
+
+            /**
+             * @brief Constructor.
+             * @param stream Associated stream.
+             */
+            Audio(QDomNode stream);
 
             /**
              * @brief Constructor.

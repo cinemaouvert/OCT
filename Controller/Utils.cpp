@@ -25,7 +25,6 @@ QString Utils::convertFract(QString var)
             int fract =  nomi.toInt() / denomi.toInt();
             return QString::number(fract);
         }
-
     }
     else return nomi;
 

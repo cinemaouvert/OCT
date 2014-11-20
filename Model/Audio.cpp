@@ -31,11 +31,76 @@ using namespace std;
 
 #include "Model/Audio.h"
 #include "Model/Stream.h"
+#include "Controller/Utils.h"
+
+#include <QDebug>
+#include <QSettings>
 
 QMap<QString, Model::Parameter *> Model::Audio::m_staticParameters;
 Model::Audio::Audio() {
     m_uID = "";
     this->m_parameters = NULL;
+}
+
+Model::Audio::Audio(QDomNode stream)
+{
+    qDebug() << "Audio";
+    QDomNamedNodeMap tab = stream.attributes();
+    //-----------------------UID------------------------//
+    QDomNode uidNode = tab.namedItem("index");
+    QString UID = uidNode.nodeValue();
+    qDebug() << UID;
+    //-----------------------CODEC-NAME------------------------//
+    QDomNode nodeCodecName = tab.namedItem("codec_name");
+    QString codecName = nodeCodecName.nodeValue();
+    qDebug() << codecName;
+    //-----------------------LANGUAGE------------------------//
+    QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
+    qDebug() << tagList.count();
+    QString tagKey ="";
+    int i = 0;
+    while(tagKey != "language" && i<tagList.count()){
+        tagKey = tagList.at(i).attributes().namedItem("key").nodeValue();
+        i++;
+    }
+    QString language = "";
+    if(tagKey == "language")
+        language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
+    //-----------------------SAMPLE-RATE------------------------//
+    QDomNode nodeSampleRate = tab.namedItem("sample_rate");
+    QString SampleRate = nodeSampleRate.nodeValue();
+    qDebug() << SampleRate;
+    //-----------------------CHANNELS------------------------//
+    QDomNode nodeChannels = tab.namedItem("channels");
+    QString channels = nodeChannels.nodeValue();
+    qDebug() << channels;
+    //-----------------------CHANNELS-LAYOUT------------------------//
+    QDomNode nodeChannelLayout = tab.namedItem("channel_layout");
+    QString channelLayout= nodeChannelLayout.nodeValue();
+    qDebug() << channelLayout;
+    //-----------------------RESOLUTION------------------------//
+    //?????????????????????????????????????????????????????????//
+
+    //-----------------------AUDIO-BUILD------------------------//
+    this->m_uID = UID;
+    this->m_parameters = new QMap<QString,Parameter*>();
+
+    Parameter *pCodecName = Audio::getStaticParameter("codec_name");
+    pCodecName->setValue(codecName);
+    this->setParameter("codec_name",pCodecName);
+
+    if(language != ""){
+        Parameter *pLanguage = Audio::getStaticParameter("language");
+        pLanguage->setValue(language);
+        this->setParameter("language",pLanguage);
+    }
+
+    Parameter *pSampleRate = Audio::getStaticParameter("sample_rate");
+    pSampleRate->setValue(SampleRate);
+    this->setParameter("sample_rate",pSampleRate);
+
+    //??????????????CHANNELS???RESOLUTION??????????//
+
 }
 
 Model::Audio::Audio(QString uID) {
