@@ -31,6 +31,7 @@ using namespace std;
 
 #include "Model/Video.h"
 #include "Model/Stream.h"
+#include "Controller/Utils.h"
 
 #include <QDebug>
 #include <QSettings>
@@ -86,7 +87,7 @@ Model::Video::Video(QDomNode stream)
     qDebug() << resolution;
     //-----------------------FRAME-RATE------------------------//   //!\\  A CONVERTIR
     QDomNode nodeFrameRate = tab.namedItem("r_frame_rate");
-    QString frameRate = nodeFrameRate.nodeValue();
+    QString frameRate = Utils::convertFract(nodeFrameRate.nodeValue());
     qDebug() << frameRate;
 
     //-----------------------VIDEO-BUILD------------------------//
