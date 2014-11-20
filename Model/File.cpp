@@ -4,7 +4,6 @@ using namespace std;
 
 #include "Model/File.h"
 #include "Model/Data.h"
-#include "Model/parameters.h"
 
 Model::File::File() {}
 
