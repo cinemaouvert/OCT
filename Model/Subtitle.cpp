@@ -34,11 +34,11 @@ using namespace std;
 
 QMap<QString, Model::Parameter *> Model::Subtitle::m_staticParameters;
 Model::Subtitle::Subtitle(){
-    this->m_parameters = NULL;
+    this->m_parameters = new QMap<QString,Parameter*>();
 }
 
 Model::Subtitle::Subtitle(QString uid) {
-    this->m_parameters = NULL;
+    this->m_parameters = new QMap<QString,Parameter*>();
     this->m_uID = uid;
 }
 

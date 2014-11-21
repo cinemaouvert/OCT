@@ -39,7 +39,7 @@ using namespace std;
 QMap<QString, Model::Parameter *> Model::Audio::m_staticParameters;
 Model::Audio::Audio() {
     m_uID = "";
-    this->m_parameters = NULL;
+    this->m_parameters = new QMap<QString,Parameter*>();
 }
 
 Model::Audio::Audio(QDomNode stream)
@@ -105,7 +105,7 @@ Model::Audio::Audio(QDomNode stream)
 
 Model::Audio::Audio(QString uID) {
     m_uID = uID;
-    this->m_parameters = NULL;
+    this->m_parameters = new QMap<QString,Parameter*>();
 }
 
 Model::Audio::Audio(const Audio& a) {
