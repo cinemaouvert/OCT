@@ -27,30 +27,36 @@
  **********************************************************************************/
 
 #include <exception>
-using namespace std;
 
 #ifndef __Model__Attachment_h__
 #define __Model__Attachment_h__
 
 #include <QString>
-#include "Model/Serializable.h"
-#include "Model/Serializable.h"
+#include <QDataStream>
+#include <QVariant>
+#include <QMetaType>
+
+
 
 
 namespace Model
 {
-    class Serializable;
-	class Attachment;
+    class Attachment;
 }
 
 namespace Model
 {
-	class Attachment: public Model::Serializable
+
+    class Attachment
     {
-        /**
-         * @brief The associated file path.
-         */
-        QString m_filepath;
+        private:
+            /**
+             * @brief The associated file path.
+             */
+            QString m_filepath;
+
+            friend QDataStream & operator <<(QDataStream  &out, const Attachment  &valeur);
+            friend QDataStream & operator >>(QDataStream  &in, Attachment  &valeur);
 
         public:
             /**
@@ -81,21 +87,17 @@ namespace Model
              * @brief Destructor.
              */
             virtual ~Attachment();
+            QString filepath() const;
 
-            /**
-             * @brief operator >>
-             * @param o
-             * @return
-             */
-            virtual ostream& operator >> (ostream& o);
+            static void initMetaType();
 
-            /**
-             * @brief operator <<
-             * @param o
-             * @return
-             */
-            virtual istream& operator << (istream& o);
-	};
+    };
+
+    QDataStream & operator <<(QDataStream  &out, const Model::Attachment  &valeur);
+    QDataStream & operator >>(QDataStream  &in, Model::Attachment  &valeur);
+
 }
+Q_DECLARE_METATYPE(Model::Attachment)
+
 
 #endif

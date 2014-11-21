@@ -41,7 +41,7 @@ namespace Model
 
 namespace Model
 {
-    class Parameter : public Model::Serializable
+    class Parameter
 	{
         private:
             /**
@@ -90,20 +90,6 @@ namespace Model
              * @return The current Parameter object modified.
              */
             Parameter& operator=(const Parameter& o);
-
-            /**
-             * @brief operator >>
-             * @param o
-             * @return
-             */
-            virtual ostream& operator >> (ostream& o);
-
-            /**
-             * @brief operator <<
-             * @param o
-             * @return
-             */
-            virtual istream& operator << (istream& o);
 
             /**
              * @brief Destructor.

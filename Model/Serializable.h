@@ -26,39 +26,34 @@
  * along with Open Cinema Transcoder. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************************/
 
+
 #include <exception>
-using namespace std;
 
 #ifndef __Model__Serializable_h__
 #define __Model__Serializable_h__
 
 #include <ostream>
 #include <istream>
-namespace Model
-{
-	class Serializable;
-}
+#include <QDataStream>
+#include <QVariant>
 
-namespace Model
-{
+
+
+
+namespace Model{
     class Serializable
-	{
-
+    {
         public:
-            /**
-             * @brief operator >>
-             * @param o
-             * @return
-             */
-            virtual ostream& operator >> (ostream& o) = 0;
-
-            /**
-             * @brief operator <<
-             * @param o
-             * @return
-             */
-            virtual istream& operator << (istream& o) = 0;
+            static void initMetaTypes();
     };
 }
+
+
+
+
+
+
+
+
 
 #endif

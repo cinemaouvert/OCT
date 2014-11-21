@@ -51,7 +51,7 @@ namespace Model
 
 namespace Model
 {
-    class Stream: public Model::Serializable
+    class Stream
 	{
         protected:
             /**
@@ -97,6 +97,9 @@ namespace Model
             };
             static int getEnumValue(QString type);
 	};
+
+
+
 }
 
 #endif

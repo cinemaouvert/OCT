@@ -45,7 +45,7 @@ namespace Model
 
 namespace Model
 {
-	class Data: public Model::Serializable
+    class Data
     {
         private :
             /**
@@ -100,19 +100,6 @@ namespace Model
              */
             Model::Stream* getOldStream();
 
-            /**
-             * @brief operator >>
-             * @param o
-             * @return
-             */
-            virtual ostream& operator >> (ostream& o);
-
-            /**
-             * @brief operator <<
-             * @param o
-             * @return
-             */
-            virtual istream& operator << (istream& o);
 
             /**
              * @brief Accessor on the newStream member.

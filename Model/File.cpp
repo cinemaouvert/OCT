@@ -123,13 +123,9 @@ QStringList *Model::File::getCommandLine()
 }
 
 QString Model::File::getName() {
-	return this->m_name;
+    return this->m_name;
 }
 
-ostream& Model::File::operator >> (ostream& o){
-    throw "Not yet implemented";
-}
 
-istream& Model::File::operator << (istream& o){
-    throw "Not yet implemented";
-}
+
+

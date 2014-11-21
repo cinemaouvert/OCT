@@ -54,7 +54,7 @@ namespace Model
     /**
      * @brief The File model class
      */
-    class File : public Model::Serializable
+    class File
 	{
         private:
             /**
@@ -128,20 +128,6 @@ namespace Model
              * @return The name member value.
              */
             QString getName();
-
-            /**
-             * @brief operator >>
-             * @param o
-             * @return
-             */
-            virtual ostream& operator >> (ostream& o);
-
-            /**
-             * @brief operator <<
-             * @param o
-             * @return
-             */
-            virtual istream& operator << (istream& o);
 	};
 }
 

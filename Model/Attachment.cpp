@@ -27,10 +27,9 @@
  **********************************************************************************/
 
 #include <exception>
-using namespace std;
-
 #include "Model/Attachment.h"
-#include "Model/Serializable.h"
+
+
 
 Model::Attachment::Attachment() {
     m_filepath = "";
@@ -55,10 +54,28 @@ Model::Attachment::~Attachment() {
     m_filepath = "";
 }
 
-ostream& Model::Attachment::operator >> (ostream& o) {
-    throw "Not yet implemented";
+void Model::Attachment::initMetaType()
+{
+    qRegisterMetaTypeStreamOperators<Model::Attachment>("Model::Attachment");
+    qMetaTypeId<Model::Attachment>();
 }
 
-istream& Model::Attachment::operator << (istream& o) {
-    throw "Not yet implemented";
+
+QString Model::Attachment::filepath() const
+{
+    return this->m_filepath;
 }
+
+QDataStream &Model::operator >>(QDataStream &in, Model::Attachment &valeur)
+{
+    in >> valeur.m_filepath;
+    return in;
+}
+QDataStream &Model::operator <<(QDataStream &out, const Model::Attachment& valeur)
+{
+    out << valeur.m_filepath;
+    return out;
+}
+
+
+

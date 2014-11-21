@@ -48,8 +48,12 @@ using namespace std;
 
 #include <QProcess>
 #include <QDebug>
+#include <QFile>
+#include <QIODEVICE>
 
+#include <Model/Attachment.h>
 #include <Model/Data.h>
+#include <Model/Serializable.h>
 
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
                                             m_mainWindow(NULL) ,
@@ -121,6 +125,34 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     QString retour(myProcessFFMPEG.readAllStandardOutput());
     qDebug()<<retour;
 */
+
+    
+    Model::Serializable::initMetaTypes();
+    Model::Attachment toto1("TOTO1");
+    Model::Attachment toto2("TOTO2");
+     Model::Attachment toto3("TOTO3");
+
+    QFile file("H:\\Movies\\SerialTEst.OCTSAVE");
+    file.open(QIODevice::ReadWrite);
+    QDataStream out(&file);
+    out << toto1;
+    out << toto2;
+    out << toto3;
+    file.close();
+
+    Model::Attachment readedAttachment1;
+    Model::Attachment readedAttachment2;
+    Model::Attachment readedAttachment3;
+
+    file.open(QIODevice::ReadWrite);
+    QDataStream in(&file);
+    in >> readedAttachment1;
+    in >> readedAttachment2;
+    in >> readedAttachment3;
+    qDebug() << readedAttachment1.filepath();
+    qDebug() << readedAttachment2.filepath();
+    qDebug() << readedAttachment3.filepath();
+
     /***********************/
 }
 
@@ -185,7 +217,6 @@ void Controller::OCTDispatcher::initSettings()
     initSetting("ffmpeg","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
     initSetting("ffprobe","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
     initSetting("mkvToolnix","E:\M2\Projet\Dependances\mkvtoolnix\mkvinfo.exe");
-
 }
 
 void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &value)

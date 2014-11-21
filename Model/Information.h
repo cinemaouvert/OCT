@@ -41,7 +41,7 @@ namespace Model
 
 namespace Model
 {
-    class Information : public Model::Serializable
+    class Information
 	{
         private:
             /**
@@ -85,19 +85,6 @@ namespace Model
              */
             ~Information();
 
-            /**
-             * @brief operator >>
-             * @param o
-             * @return
-             */
-            virtual ostream& operator >> (ostream& o);
-
-            /**
-             * @brief operator <<
-             * @param o
-             * @return
-             */
-            virtual istream& operator << (istream& o);
 	};
 }
 

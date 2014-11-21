@@ -53,7 +53,7 @@ namespace Model
     /**
      * @brief The Project model class.
      */
-	class Project: public Model::Serializable
+    class Project
 	{
         private:
             /**
@@ -119,20 +119,6 @@ namespace Model
              * @brief Save a project into an XML file.
              */
             void save();
-
-            /**
-             * @brief operator >>
-             * @param o
-             * @return
-             */
-            virtual ostream& operator >> (ostream& o);
-
-            /**
-             * @brief operator <<
-             * @param o
-             * @return
-             */
-            virtual istream& operator << (istream& o);
 
             /**
              * @brief Accessor on the name member.
@@ -206,6 +192,8 @@ namespace Model
              * @param xmlFilePath New XML file path to replace the current one.
              */
             void setXmlFilePath(const QString &xmlFilePath);
+
+
     };
 }
 

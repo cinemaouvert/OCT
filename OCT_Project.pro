@@ -41,7 +41,8 @@ SOURCES += main.cpp\
     View/SubtitlePane.cpp \
     View/VideoPane.cpp \
     View/VideoPlayer.cpp \
-    Controller/Utils.cpp
+    Controller/Utils.cpp \
+    Model/Serializable.cpp
 
 HEADERS  += \
     Controller/Exporter.h \
