@@ -71,7 +71,7 @@ Model::Stream::~Stream()
 
 int Model::Stream::getEnumValue(QString type)
 {
-    if(type == "audio"){
+    if(type == "video"){
        return 0;
     }else if(type == "audio"){
        return 1;

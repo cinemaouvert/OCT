@@ -33,6 +33,8 @@ using namespace std;
 #include "Model/File.h"
 #include "Model/Data.h"
 
+#include "Subtitle.h"
+
 
 
 
@@ -50,6 +52,7 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
         if(!root.isNull()){
             QDomNodeList streams = root.elementsByTagName("stream");
             for (int i=0;i<streams.count();i++){
+                qDebug() << "//-----------------------STREAM------------------------//";
                 //-----------------------STREAM------------------------//
                 QDomNode stream = streams.item(i);
                 QDomNamedNodeMap tab = stream.attributes();
@@ -57,15 +60,16 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
                 //-----------------------TYPE------------------------//
                 QDomNode nodeCodecType = tab.namedItem("codec_type");
                 QString type = nodeCodecType.nodeValue();
-
                 Stream *s;
                 switch (Model::Stream::getEnumValue(type)){
                     case Model::Stream::VIDEO:
                             s = new Video(stream);
                             break;
                     case Model::Stream::AUDIO:
+                            s = new Audio(stream);
                             break;
                     case Model::Stream::SUBTITLE:
+                            s = new Subtitle(stream);
                             break;
                     case Model::Stream::ATTACHMENT:
                             break;

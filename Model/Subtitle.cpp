@@ -31,10 +31,54 @@ using namespace std;
 
 #include "Model/Subtitle.h"
 #include "Model/Stream.h"
+#include <QDebug>
 
 QMap<QString, Model::Parameter *> Model::Subtitle::m_staticParameters;
 Model::Subtitle::Subtitle(){
     this->m_parameters = new QMap<QString,Parameter*>();
+}
+
+Model::Subtitle::Subtitle(QDomNode stream)
+{
+    qDebug() << "Subtitle";
+    QDomNamedNodeMap tab = stream.attributes();
+    //-----------------------UID------------------------//
+    QDomNode uidNode = tab.namedItem("index");
+    QString UID = uidNode.nodeValue();
+    qDebug() << UID;
+    //-----------------------CODEC-NAME------------------------//
+    QDomNode nodeCodecName = tab.namedItem("codec_name");
+    QString codecName = nodeCodecName.nodeValue();
+    if (codecName == "subrip")
+        codecName = "srt";
+    qDebug() << codecName;
+    //-----------------------LANGUAGE------------------------//
+    QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
+    qDebug() << tagList.count();
+    QString tagKey ="";
+    int i = 0;
+    while(tagKey != "language" && i<tagList.count()){
+        tagKey = tagList.at(i).attributes().namedItem("key").nodeValue();
+        i++;
+    }
+    QString language = "";
+    if(tagKey == "language")
+        language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
+    //-----------------------ENCODE------------------------//
+
+    //-----------------------SUBTITLE-BUILD------------------------//
+    this->m_uID = UID;
+    this->m_parameters = new QMap<QString,Parameter*>();
+
+    Parameter *pCodecName = Subtitle::getStaticParameter("codec_name");
+    pCodecName->setValue(codecName);
+    this->setParameter("codec_name",pCodecName);
+
+    if(language != ""){
+        Parameter *pLanguage = Subtitle::getStaticParameter("language");
+        pLanguage->setValue(language);
+        this->setParameter("language",pLanguage);
+    }
 }
 
 Model::Subtitle::Subtitle(QString uid) {

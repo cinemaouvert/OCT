@@ -104,7 +104,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     /*****Thibaud Test *****/
 
 
-
+    /*
     this->addFile("E:\\M2\\Projet\\Test mkvtoolnix\\movie1.mkv");
     qDebug() << this->m_currentProject->fileList()->size();
     this->m_currentProject->fileList()->at(0)->getDatas()->at(0)->setNewStream(this->m_currentProject->fileList()->at(0)->getDatas()->at(0)->getOldStream());
@@ -112,7 +112,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     foreach (QString st, *(list)) {
           qDebug() <<"TEST : " + st;
     }
-
+*/
    /*
     QString ffmpegProgram = getSetting("ffmpeg").toString();
     QProcess myProcessFFMPEG(m_mainWindow);

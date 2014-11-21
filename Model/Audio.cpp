@@ -74,12 +74,10 @@ Model::Audio::Audio(QDomNode stream)
     QDomNode nodeChannels = tab.namedItem("channels");
     QString channels = nodeChannels.nodeValue();
     qDebug() << channels;
-    //-----------------------CHANNELS-LAYOUT------------------------//
-    QDomNode nodeChannelLayout = tab.namedItem("channel_layout");
-    QString channelLayout= nodeChannelLayout.nodeValue();
-    qDebug() << channelLayout;
     //-----------------------RESOLUTION------------------------//
-    //?????????????????????????????????????????????????????????//
+    QDomNode nodeBitRate = tab.namedItem("bit_rate");
+    QString bitRate = Utils::bpsToKbps(nodeBitRate.nodeValue());
+    qDebug() << bitRate;
 
     //-----------------------AUDIO-BUILD------------------------//
     this->m_uID = UID;
@@ -99,8 +97,13 @@ Model::Audio::Audio(QDomNode stream)
     pSampleRate->setValue(SampleRate);
     this->setParameter("sample_rate",pSampleRate);
 
-    //??????????????CHANNELS???RESOLUTION??????????//
+    Parameter *pChannels = Audio::getStaticParameter("channels");
+    pChannels->setValue(channels);
+    this->setParameter("channels",pChannels);
 
+    Parameter *pBitRate = Audio::getStaticParameter("resolution");
+    pBitRate->setValue(bitRate);
+    this->setParameter("resolution",pBitRate);
 }
 
 Model::Audio::Audio(QString uID) {

@@ -33,6 +33,7 @@ using namespace std;
 #define __Model__Subtitle_h__
 
 #include <QString>
+#include <qdom.h>
 
 #include "Model/Stream.h"
 
@@ -58,6 +59,12 @@ namespace Model
              * @brief Default constructor.
              */
             Subtitle();
+
+            /**
+             * @brief Constructor.
+             * @param stream Associated stream.
+             */
+            Subtitle(QDomNode stream);
 
             /**
              * @brief Constructor.

@@ -7,6 +7,7 @@ class Utils
 {
 public:
     static QString convertFract(QString var);
+    static QString bpsToKbps(QString var);
 };
 
 #endif // UTILS_H

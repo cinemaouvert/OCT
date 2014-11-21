@@ -29,3 +29,8 @@ QString Utils::convertFract(QString var)
     else return nomi;
 
 }
+
+QString Utils::bpsToKbps(QString var)
+{
+    return QString::number(var.toInt()/1000);
+}
