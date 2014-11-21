@@ -144,6 +144,22 @@ Model::Parameter *Model::Audio::getStaticParameter(QString key)
 
 void Model::Audio::initStaticParameters()
 {
+    Parameter *codecNameParam = new Parameter("-acodec","This is the codec of the audio stream","%1");
+    m_staticParameters.insert("codec_name",codecNameParam);
 
+    Parameter *language = new Parameter("-metadata:s:a:%1","This is the language of the audio stream","language=%1");
+    m_staticParameters.insert("language",language);
+
+    Parameter *delay = new Parameter("-itsoffset","This is the delay of the audio stream","%1");
+    m_staticParameters.insert("delay",delay);
+
+    Parameter *sampleRate = new Parameter("-ar","This is the sample rate of the audio stream","%1");
+    m_staticParameters.insert("sample_rate",sampleRate);
+
+    Parameter *channels = new Parameter("-ac","This is the channels of the audio stream","%1");
+    m_staticParameters.insert("channels",channels);
+
+    Parameter *resolution = new Parameter("-ab","This is the resolution of the audio stream","%1");
+    m_staticParameters.insert("resolution",resolution);
 }
 
