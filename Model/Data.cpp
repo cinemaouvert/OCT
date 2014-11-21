@@ -93,11 +93,5 @@ Model::Stream* Model::Data::getOldStream() {
     return m_oldStream;
 }
 
-ostream& Model::Data::operator >> (ostream& o){
-    throw "Not yet implemented";
-}
 
-istream& Model::Data::operator << (istream& o){
-    throw "Not yet implemented";
-}
 

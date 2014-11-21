@@ -102,14 +102,6 @@ Model::Subtitle &Model::Subtitle::operator=(const Model::Subtitle &o)
     return *this;
 }
 
-ostream& Model::Subtitle::operator >> (ostream& o){
-    throw "Not yet implemented";
-}
-
-istream& Model::Subtitle::operator << (istream& o){
-    throw "Not yet implemented";
-}
-
 Model::Subtitle::~Subtitle()
 {
     if (this->m_parameters != NULL)

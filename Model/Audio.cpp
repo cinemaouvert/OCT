@@ -131,14 +131,6 @@ Model::Audio::~Audio() {
         delete(this->m_parameters);
 }
 
-ostream& Model::Audio::operator >> (ostream& o){
-    throw "Not yet implemented";
-}
-
-istream& Model::Audio::operator << (istream& o){
-    throw "Not yet implemented";
-}
-
 Model::Parameter *Model::Audio::getStaticParameter(QString key)
 {
     Parameter *param = new Parameter(*(Audio::m_staticParameters.value(key)));

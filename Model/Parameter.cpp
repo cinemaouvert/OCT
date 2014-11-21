@@ -103,13 +103,7 @@ Model::Parameter &Model::Parameter::operator=(const Model::Parameter &o)
 }
 
 
-ostream& Model::Parameter::operator >> (ostream& o){
-    throw "Not yet implemented";
-}
 
-istream& Model::Parameter::operator << (istream& o){
-    throw "Not yet implemented";
-}
 
 Model::Parameter::~Parameter()
 {

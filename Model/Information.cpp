@@ -50,10 +50,4 @@ Model::Information& Model::Information::operator=(const Model::Information& i) {
 
 Model::Information::~Information() {}
 
-ostream& Model::Information::operator >> (ostream& o){
-    throw "Not yet implemented";
-}
 
-istream& Model::Information::operator << (istream& o){
-    throw "Not yet implemented";
-}

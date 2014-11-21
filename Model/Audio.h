@@ -87,20 +87,6 @@ namespace Model
              */
             virtual ~Audio();
 
-            /**
-             * @brief operator >>
-             * @param o
-             * @return
-             */
-            virtual ostream& operator >> (ostream& o);
-
-            /**
-             * @brief operator <<
-             * @param o
-             * @return
-             */
-            virtual istream& operator << (istream& o);
-
 
             static Parameter *getStaticParameter(QString key);
             static void initStaticParameters();

@@ -91,13 +91,6 @@ void Model::Project::save() {
 	throw "Not yet implemented";
 }
 
-ostream& Model::Project::operator >> (ostream& o){
-    throw "Not yet implemented";
-}
-
-istream& Model::Project::operator << (istream& o){
-    throw "Not yet implemented";
-}
 
 void Model::Project::addFileToList(Model::File *file)
 {

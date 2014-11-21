@@ -91,20 +91,6 @@ namespace Model
             Subtitle& operator=(const Subtitle& o);
 
             /**
-             * @brief operator >>
-             * @param o
-             * @return
-             */
-            virtual ostream& operator >> (ostream& o);
-
-            /**
-             * @brief operator <<
-             * @param o
-             * @return
-             */
-            virtual istream& operator << (istream& o);
-
-            /**
              * @brief Accessor on the static parameter list member.
              * @param key Key of the parameter we are looking for.
              * @return Parameter associated with the given key.

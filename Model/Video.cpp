@@ -143,13 +143,6 @@ Model::Video &Model::Video::Video::operator=(const Model::Video &o)
     return *this;
 }
 
-ostream& Model::Video::operator >> (ostream& o){
-    throw "Not yet implemented";
-}
-
-istream& Model::Video::operator << (istream& o){
-    throw "Not yet implemented";
-}
 
 Model::Video::~Video()
 {

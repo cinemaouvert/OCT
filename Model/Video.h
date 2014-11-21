@@ -98,20 +98,6 @@ namespace Model
             Video& operator=(const Video& o);
 
             /**
-             * @brief operator >>
-             * @param o
-             * @return
-             */
-            virtual ostream& operator >> (ostream& o);
-
-            /**
-             * @brief operator <<
-             * @param o
-             * @return
-             */
-            virtual istream& operator << (istream& o);
-
-            /**
              * @brief Accessor on the static parameter list.
              * @param key Key to search for the corresponding entry.
              * @return The corresponding entry.
