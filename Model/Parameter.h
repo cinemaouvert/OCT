@@ -64,6 +64,10 @@ namespace Model
              */
             bool m_noSpaceForNext;
 
+            friend QDataStream & operator <<(QDataStream  &out, const Parameter  &valeur);
+            friend QDataStream & operator >>(QDataStream  &in, Parameter  &valeur);
+
+
         public:
             /**
              * @brief Default constructor.
@@ -82,7 +86,7 @@ namespace Model
              * @brief Constructor.
              * @param
              */
-            Parameter(Parameter& copy);
+            Parameter(const Parameter& copy);
 
             /**
              * @brief Affectation operator.
@@ -137,7 +141,15 @@ namespace Model
              * @return The space member value.
              */
             bool noSpaceForNext();
+
+            static void initMetaType();
+
     };
+    QDataStream & operator <<(QDataStream  &out, const Model::Parameter  &valeur);
+    QDataStream & operator >>(QDataStream  &in, Model::Parameter &valeur);
 }
+Q_DECLARE_METATYPE(Model::Parameter)
+
+
 
 #endif

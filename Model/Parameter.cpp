@@ -82,7 +82,7 @@ Model::Parameter::Parameter(QString cmd, QString desc, QString val)
 
 }
 
-Model::Parameter::Parameter(Model::Parameter &copy)
+Model::Parameter::Parameter(const Model::Parameter &copy)
 {
     this->m_command = copy.m_command;
     this->m_description = copy.m_description;
@@ -109,3 +109,29 @@ Model::Parameter::~Parameter()
 {
 
 }
+
+void Model::Parameter::initMetaType()
+{
+    qRegisterMetaTypeStreamOperators<Model::Parameter>("Model::Parameter");
+    qMetaTypeId<Model::Parameter>();
+}
+
+QDataStream &Model::operator >>(QDataStream &in, Model::Parameter &valeur)
+{
+    in >> valeur.m_command;
+    in >> valeur.m_description;
+    in >> valeur.m_noSpaceForNext;
+    in >> valeur.m_value;
+
+
+    return in;
+}
+QDataStream &Model::operator <<(QDataStream &out, const Model::Parameter& valeur)
+{
+    out << valeur.m_command
+        << valeur.m_description
+        << valeur.m_noSpaceForNext
+        << valeur.m_value;
+    return out;
+}
+

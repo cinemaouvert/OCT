@@ -158,3 +158,34 @@ void Model::Audio::initStaticParameters()
     m_staticParameters.insert("resolution",resolution);
 }
 
+void Model::Audio::initMetaType()
+{
+    qRegisterMetaTypeStreamOperators<Model::Audio>("Model::Audio");
+    qMetaTypeId<Model::Audio>();
+}
+
+QDataStream &Model::operator >>(QDataStream &in, Model::Audio &valeur)
+{
+    in >> valeur.m_uID;
+    int parametersSize;
+    in >> parametersSize;
+    for(int i = 0; i < parametersSize ; i++){
+        QString key;
+        Parameter tmp;
+        in >> key;
+        in >> tmp;
+        Parameter *param = new Parameter(tmp);
+        valeur.m_parameters->insert(key, param);
+    }
+    return in;
+}
+QDataStream &Model::operator <<(QDataStream &out, const Model::Audio& valeur)
+{
+    out << valeur.m_uID;
+    out << valeur.m_parameters->size();
+    foreach (QString key, valeur.m_parameters->keys()) {
+        out << key;
+        out << *(valeur.m_parameters->value(key));
+    }
+    return out;
+}

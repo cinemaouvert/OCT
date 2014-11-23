@@ -132,7 +132,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     Model::Attachment toto2("TOTO2");
      Model::Attachment toto3("TOTO3");
 
-    QFile file("H:\\Movies\\SerialTEst.OCTSAVE");
+    QFile file("H:\\TEST\\SerialTEst.OCTSAVE");
     file.open(QIODevice::ReadWrite);
     QDataStream out(&file);
     out << toto1;

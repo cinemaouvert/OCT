@@ -51,6 +51,9 @@ namespace Model
         private:
             static QMap<QString, Parameter *> m_staticParameters;
 
+            friend QDataStream & operator <<(QDataStream  &out, const Audio  &valeur);
+            friend QDataStream & operator >>(QDataStream  &in, Audio  &valeur);
+
         public:
             /**
              * @brief Default constructor.
@@ -91,7 +94,13 @@ namespace Model
             static Parameter *getStaticParameter(QString key);
             static void initStaticParameters();
 
+            static void initMetaType();
+
 	};
+    QDataStream & operator <<(QDataStream  &out, const Model::Audio  &valeur);
+    QDataStream & operator >>(QDataStream  &in, Model::Audio  &valeur);
 }
+Q_DECLARE_METATYPE(Model::Audio)
+
 
 #endif
