@@ -167,6 +167,7 @@ void Model::Audio::initMetaType()
 QDataStream &Model::operator >>(QDataStream &in, Model::Audio &valeur)
 {
     in >> valeur.m_uID;
+    qDebug() << "Reading Audio : " << valeur.m_uID;
     int parametersSize;
     in >> parametersSize;
     for(int i = 0; i < parametersSize ; i++){
@@ -181,7 +182,9 @@ QDataStream &Model::operator >>(QDataStream &in, Model::Audio &valeur)
 }
 QDataStream &Model::operator <<(QDataStream &out, const Model::Audio& valeur)
 {
+    qDebug() << "Writing Audio";
     out << valeur.m_uID;
+
     out << valeur.m_parameters->size();
     foreach (QString key, valeur.m_parameters->keys()) {
         out << key;

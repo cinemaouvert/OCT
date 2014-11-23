@@ -45,7 +45,7 @@ QStringList *Model::Stream::getCommand()
 {
     QStringList *myStringList = new QStringList();
 
-    for(int i = 0; i < this->m_parameters->size()-1;i++){
+    for(int i = 0; i < this->m_parameters->size();i++){
        Parameter *param = this->m_parameters->values().at(i);
        QString value = param->value();
        while(param->noSpaceForNext()){

@@ -52,6 +52,7 @@ using namespace std;
 #include <QIODEVICE>
 
 #include <Model/Attachment.h>
+#include <Model/Audio.h>
 #include <Model/Data.h>
 #include <Model/Serializable.h>
 
@@ -130,7 +131,10 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     Model::Serializable::initMetaTypes();
     Model::Attachment toto1("TOTO1");
     Model::Attachment toto2("TOTO2");
-     Model::Attachment toto3("TOTO3");
+    Model::Attachment toto3("TOTO3");
+    Model::Audio *audio1 = new Model::Audio("3");
+    audio1->setParameter("codec_name",Model::Audio::getStaticParameter("codec_name"));
+    qDebug() << audio1->getUID();
 
     QFile file("H:\\TEST\\SerialTEst.OCTSAVE");
     file.open(QIODevice::ReadWrite);
@@ -138,20 +142,27 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     out << toto1;
     out << toto2;
     out << toto3;
+    out << *audio1;
     file.close();
 
     Model::Attachment readedAttachment1;
     Model::Attachment readedAttachment2;
     Model::Attachment readedAttachment3;
+    Model::Audio audio2;
 
     file.open(QIODevice::ReadWrite);
     QDataStream in(&file);
     in >> readedAttachment1;
     in >> readedAttachment2;
     in >> readedAttachment3;
+    in >> audio2;
     qDebug() << readedAttachment1.filepath();
     qDebug() << readedAttachment2.filepath();
     qDebug() << readedAttachment3.filepath();
+    qDebug() << audio2.getUID();
+    foreach (QString st, *(audio2.getCommand())) {
+          qDebug() <<"Lecture audio : " + st;
+    }
 
     /***********************/
 }
