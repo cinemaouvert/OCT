@@ -34,6 +34,20 @@ using namespace std;
 
 // #include "Controller/OCTDispatcher.h"
 
+#include <QObject>
+
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
+#include <QtCore/QUrl>
+#include <QtCore/QFile>
+#include <QEventLoop>
+#include <QMessageBox>
+#include <QProcess>
+#include <QDesktopServices>
+
+#include "configOCT.h"
+
 namespace Controller
 {
 	class OCTDispatcher;
@@ -42,25 +56,28 @@ namespace Controller
 
 namespace Controller
 {
-	class Updater
-	{
+    /**
+    * @brief Base class for update application
+    */
+    class Updater : public QObject
+    {
         public:
+            Updater(QObject *parent = 0);
+            virtual ~Updater();
             /**
-             * @brief Default constructor.
-             */
-            Updater(){};
-
+            * @brief Compare version software with installer on cinemaouvert.fr
+            *
+            */
+            void checkVersion();
+        private:
             /**
-             * @brief The associated updater controller.
-             */
-            Controller::OCTDispatcher* m_updater;
+            * @brief Download installer
+            *
+            */
+            void getInstaller();
+            QString link;
+    };
 
-            /**
-             * @brief PUT_OPP_S_UPDATER
-             */
-            void PUT_OPP_S_UPDATER();
-
-	};
 }
 
 #endif
