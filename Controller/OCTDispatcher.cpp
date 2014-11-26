@@ -142,7 +142,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     out << toto1;
     out << toto2;
     out << toto3;
-    out << *audio1;
+    out << audio1;
     file.close();
 
     Model::Attachment readedAttachment1;

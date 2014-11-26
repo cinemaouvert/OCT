@@ -49,10 +49,11 @@ QStringList *Model::Stream::getCommand()
        Parameter *param = this->m_parameters->values().at(i);
        QString value = param->value();
        while(param->noSpaceForNext()){
-           if(i < this->m_parameters->size()-1 )
-            i++;
-            param = this->m_parameters->values().at(i);
-            value+=param->value();
+           if(i < this->m_parameters->size()-1 ){
+                i++;
+                param = this->m_parameters->values().at(i);
+                value+=param->value();
+           }
        }
        QString command = param->command();
        if(command.contains("%")){
