@@ -32,16 +32,34 @@ using namespace std;
 #include "Controller/Transcoder.h"
 #include "Controller/OCTDispatcher.h"
 
+#include <QProcess>
+
 
 Controller::Transcoder::Transcoder() {
     m_settings = new QSettings("CinemaOuvert", "OpenCinemaTranscoder");
 }
 
 QString Controller::Transcoder::getInfo(QString filePath) {
-	throw "Not yet implemented";
+    QString program = m_settings->value("ffprobe").toString();
+    QStringList arguments;
+        arguments
+             <<"-v"<<"quiet"
+             << "-print_format"<<"xml"
+             <<"-show_streams" <<filePath;
+
+    QProcess myProcess;
+    myProcess.start(program, arguments);
+    myProcess.waitForFinished();
+    QString retour(myProcess.readAllStandardOutput());
+    return retour;
 }
 
-QString Controller::Transcoder::transcode(QString command) {
-	throw "Not yet implemented";
+QString Controller::Transcoder::transcode(QStringList *list) {
+    QString ffmpegProgram = m_settings->value("ffmpeg").toString();
+    QProcess myProcessFFMPEG;
+    myProcessFFMPEG.start(ffmpegProgram, *list);
+    myProcessFFMPEG.waitForFinished();
+    QString retour(myProcessFFMPEG.readAllStandardOutput());
+    return retour;
 }
 

@@ -104,7 +104,7 @@ Model::File::~File() {
         delete this->m_datas;
 }
 
-QList<Model::StreamWrapper*>* Model::File::getDatas() {
+QList<Model::StreamWrapper*>* Model::File::getStreamWrappers() {
     return m_datas;
 }
 
@@ -113,7 +113,7 @@ QStringList *Model::File::getCommandLine()
     QStringList *stringList;
     stringList = new QStringList();
     *stringList << "-i" << this->m_filePath;
-    foreach (StreamWrapper *data, *getDatas()) {
+    foreach (StreamWrapper *data, *getStreamWrappers()) {
         if(data->hasToBeTranscoded()){
             (*stringList) << *(data->generateCommandLine());
         }

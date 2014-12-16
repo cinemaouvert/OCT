@@ -114,7 +114,7 @@ namespace Model
              * @brief Accessor on the data member.
              * @return The data member pointer value.
              */
-            QList<Model::StreamWrapper*>* getDatas();
+            QList<Model::StreamWrapper*>* getStreamWrappers();
 
             /**
              * @brief getCommandLine generate the command line

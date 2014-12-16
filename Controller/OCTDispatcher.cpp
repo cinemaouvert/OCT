@@ -92,7 +92,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /****** TRY YOUR WORK IN HERE **********/
   //  addSetting("ffprobe","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
-    QString program = getSetting("ffprobe").toString();
+  /*  QString program = getSetting("ffprobe").toString();
     QStringList arguments;
         arguments
              <<"-v"<<"quiet"
@@ -104,21 +104,15 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     myProcess.waitForFinished();
     QString string(myProcess.readAllStandardOutput());
     Model::File f("path",string);
-
+*/
     /***************************************/
     /*****Thibaud Test *****/
 
 
-    /*
-    this->addFile("E:\\M2\\Projet\\Test mkvtoolnix\\movie1.mkv");
-    qDebug() << this->m_currentProject->fileList()->size();
-    this->m_currentProject->fileList()->at(0)->getDatas()->at(0)->setNewStream(this->m_currentProject->fileList()->at(0)->getDatas()->at(0)->getOldStream());
-    QStringList *list = this->m_currentProject->fileList()->at(0)->getCommandLine();
-    foreach (QString st, *(list)) {
-          qDebug() <<"TEST : " + st;
-    }
-*/
-   /*
+
+    //this->addFile("E:\\M2\\Projet\\Test mkvtoolnix\\movie1.mkv");
+
+/*
     QString ffmpegProgram = getSetting("ffmpeg").toString();
     QProcess myProcessFFMPEG(m_mainWindow);
     myProcessFFMPEG.start(ffmpegProgram, *list);
@@ -127,59 +121,12 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     qDebug()<<retour;
 */
 
-    
-    Model::Serializable::initMetaTypes();
-    Model::Attachment toto1("TOTO1");
-    Model::Attachment toto2("TOTO2");
-    Model::Attachment toto3("TOTO3");
-    Model::Audio *audio1 = new Model::Audio("3");
-    audio1->setParameter("codec_name",Model::Audio::getStaticParameter("codec_name"));
-    qDebug() << audio1->getUID();
-
-    QFile file("H:\\TEST\\SerialTEst.OCTSAVE");
-    file.open(QIODevice::ReadWrite);
-    QDataStream out(&file);
-    out << toto1;
-    out << toto2;
-    out << toto3;
-    out << audio1;
-    file.close();
-
-    Model::Attachment readedAttachment1;
-    Model::Attachment readedAttachment2;
-    Model::Attachment readedAttachment3;
-    Model::Audio audio2;
-
-    file.open(QIODevice::ReadWrite);
-    QDataStream in(&file);
-    in >> readedAttachment1;
-    in >> readedAttachment2;
-    in >> readedAttachment3;
-    in >> audio2;
-    qDebug() << readedAttachment1.filepath();
-    qDebug() << readedAttachment2.filepath();
-    qDebug() << readedAttachment3.filepath();
-    qDebug() << audio2.getUID();
-    foreach (QString st, *(audio2.getCommand())) {
-          qDebug() <<"Lecture audio : " + st;
-    }
 
     /***********************/
 }
 
 void Controller::OCTDispatcher::addFile(QString filePath) {
-    QString program = getSetting("ffprobe").toString();
-    QStringList arguments;
-        arguments
-             <<"-v"<<"quiet"
-             << "-print_format"<<"xml"
-             <<"-show_streams" <<filePath;
-
-    QProcess myProcess(m_mainWindow);
-    myProcess.start(program, arguments);
-    myProcess.waitForFinished();
-    QString infos(myProcess.readAllStandardOutput());
-
+    QString infos(m_transcoder->getInfo(filePath));
     Model::File *file = new Model::File(filePath,infos);
     this->m_currentProject->addFileToList(file);
 }

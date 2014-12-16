@@ -44,7 +44,7 @@ namespace Controller
              * @param command
              * @return
              */
-            QString transcode(QString command);
+            QString transcode(QStringList *list);
 
         private:
             /**
