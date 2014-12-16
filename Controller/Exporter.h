@@ -79,6 +79,8 @@ namespace Controller
              * @return 1 if ok, 0 else.
              */
             bool sendInformationsToJSON(Model::Project* project);
+
+            ~Exporter();
 	};
 }
 

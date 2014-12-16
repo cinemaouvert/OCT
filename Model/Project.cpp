@@ -33,6 +33,8 @@ using namespace std;
 #include "Model/Project.h"
 #include "Model/Attachment.h"
 #include "Model/Information.h"
+#include <QXmlStreamWriter>
+#include <QFile>
 
 Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileList(NULL)
 {
@@ -160,4 +162,28 @@ void Model::Project::setXmlFilePath(const QString &xmlFilePath)
 {
     m_xmlFilePath = xmlFilePath;
 }
+
+void Model::Project::generateInformationToXML()
+{
+    QFile file("infos.xml"); // TODO : changer emplacement du fichier
+    if (!file.open(QIODevice::WriteOnly)){
+        return;
+    }
+    QXmlStreamWriter writer(&file);
+    writer.setAutoFormatting(true);
+    writer.writeStartDocument("1.0");
+    writer.writeStartElement("Informations");
+
+    for (int i = 0; i < m_informations->size(); i++) {
+        Information *info = m_informations->at(i);
+        writer.writeTextElement(info->name(), info->value());
+    }
+
+    writer.writeEndElement();
+    writer.writeEndDocument();
+
+    file.close();
+}
+
+
 

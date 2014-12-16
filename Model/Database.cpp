@@ -72,9 +72,8 @@ Model::Database::~Database() {}
 int Model::Database::sendRequest(QByteArray jsonString) {
     QByteArray postDataSize = QByteArray::number(jsonString.size());
 
-    //Changer le premier dépot
+    //Changer le premier dépot par config_oct::DEPOTCOC
     QUrl url(this->m_depot + "?resolver="+ this->m_depot +"&movie");
-    qDebug() << url;
     QNetworkRequest request(url);
 
     request.setRawHeader("User-Agent", configOCT::NAME.toStdString().c_str());

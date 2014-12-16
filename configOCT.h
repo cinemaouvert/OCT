@@ -14,6 +14,11 @@ namespace configOCT {
     // c = number for the small changement
     const QString VERSION = "v0.0.1";
 
+    const QString ADDRESSTRACKER = "";
+
+    //Avec un / à la fin du dépôt
+    const QString DEPOTCOC = "";
+
     #if defined(Q_OS_MAC)
         const QString LINK_UPDATE = NAME + "macos/latest/";
         const QString NAME_INSTALLER = "";

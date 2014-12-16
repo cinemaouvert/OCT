@@ -102,7 +102,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /***********************/
     /*****Denis Test *****/
-
+    m_currentProject->generateInformationToXML();
     /***********************/
     /*****William Test *****/
 
@@ -145,7 +145,7 @@ void Controller::OCTDispatcher::addToQueue() {
 }
 
 void Controller::OCTDispatcher::checkForUpdate() {
-    throw "Not yet implemented";
+    m_updater->checkVersion();
 }
 
 void Controller::OCTDispatcher::initSetting(const QString &key, const QVariant &value)

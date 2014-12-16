@@ -193,7 +193,7 @@ namespace Model
              */
             void setXmlFilePath(const QString &xmlFilePath);
 
-
+            void generateInformationToXML();
     };
 }
 
