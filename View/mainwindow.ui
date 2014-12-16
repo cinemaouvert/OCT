@@ -32,7 +32,7 @@
          <bool>false</bool>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>5</number>
         </property>
         <widget class="FilePane" name="tab_files">
          <property name="sizePolicy">
@@ -45,27 +45,27 @@
           <string>Fichiers</string>
          </attribute>
         </widget>
-        <widget class="QWidget" name="tab_video">
+        <widget class="VideoPane" name="tab_video">
          <attribute name="title">
           <string>video</string>
          </attribute>
         </widget>
-        <widget class="QWidget" name="tab_sound">
+        <widget class="AudioPane" name="tab_sound">
          <attribute name="title">
           <string>son</string>
          </attribute>
         </widget>
-        <widget class="QWidget" name="tab_subtitle">
+        <widget class="SubtitlePane" name="tab_subtitle">
          <attribute name="title">
           <string>sous-titre</string>
          </attribute>
         </widget>
-        <widget class="QWidget" name="tab_infos">
+        <widget class="InformationPane" name="tab_infos">
          <attribute name="title">
           <string>informations</string>
          </attribute>
         </widget>
-        <widget class="QWidget" name="tab_encode">
+        <widget class="EncodePane" name="tab_encode">
          <attribute name="title">
           <string>encodage</string>
          </attribute>
@@ -135,6 +135,36 @@
    <class>FilePane</class>
    <extends>QWidget</extends>
    <header>View/FilePane.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>VideoPane</class>
+   <extends>QWidget</extends>
+   <header>View/VideoPane.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AudioPane</class>
+   <extends>QWidget</extends>
+   <header>View/AudioPane.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>EncodePane</class>
+   <extends>QWidget</extends>
+   <header>View/EncodePane.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SubtitlePane</class>
+   <extends>QWidget</extends>
+   <header>View/SubtitlePane.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>InformationPane</class>
+   <extends>QWidget</extends>
+   <header>View/InformationPane.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

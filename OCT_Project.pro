@@ -36,7 +36,12 @@ SOURCES += main.cpp\
     Controller/Utils.cpp \
     Model/Serializable.cpp \
     Model/StreamWrapper.cpp \
-    View/FilePane.cpp
+    View/FilePane.cpp \
+    View/VideoPane.cpp \
+    View/AudioPane.cpp \
+    View/InformationPane.cpp \
+    View/SubtitlePane.cpp \
+    View/EncodePane.cpp
 
 HEADERS  += \
     Controller/Exporter.h \
@@ -61,8 +66,18 @@ HEADERS  += \
     configOCT.h \
     Controller/Utils.h \
     Model/StreamWrapper.h \
-    View/FilePane.h
+    View/FilePane.h \
+    View/VideoPane.h \
+    View/AudioPane.h \
+    View/InformationPane.h \
+    View/SubtitlePane.h \
+    View/EncodePane.h
 
 FORMS    += \
     View/mainwindow.ui \
-    View/filepane.ui
+    View/filepane.ui \
+    View/videopane.ui \
+    View/audiopane.ui \
+    View/informationpane.ui \
+    View/subtitlepane.ui \
+    View/encodepane.ui
