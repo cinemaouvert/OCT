@@ -77,4 +77,3 @@ HEADERS  += \
 
 FORMS    += \
     mainwindow.ui \
-    ../FileTabForm.ui
