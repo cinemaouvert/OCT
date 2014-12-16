@@ -102,7 +102,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /***********************/
     /*****Denis Test *****/
-    m_currentProject->generateInformationToXML();
+
     /***********************/
     /*****William Test *****/
 
