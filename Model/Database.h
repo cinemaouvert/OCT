@@ -86,7 +86,10 @@ namespace Model
              */
             int sendRequest(QByteArray jsonString);
 
-	};
+            QString depot() const;
+            QString userKey() const;
+
+    };
 }
 
 #endif

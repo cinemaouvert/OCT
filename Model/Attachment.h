@@ -38,7 +38,6 @@
 
 
 
-
 namespace Model
 {
     class Attachment;
@@ -90,7 +89,6 @@ namespace Model
             QString filepath() const;
 
             static void initMetaType();
-
     };
 
     QDataStream & operator <<(QDataStream  &out, const Model::Attachment  &valeur);

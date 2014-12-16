@@ -68,6 +68,11 @@ namespace Model
             QString m_filePath;
 
             /**
+             * @brief The output path to the file.
+             */
+            QString m_outFilePath;
+
+            /**
              * @brief The data contained in the file.
              */
             QList<Model::StreamWrapper*> *m_datas;
@@ -114,7 +119,7 @@ namespace Model
              * @brief Accessor on the data member.
              * @return The data member pointer value.
              */
-            QList<Model::StreamWrapper*>* getDatas();
+            QList<Model::StreamWrapper*>* getStreamWrappers();
 
             /**
              * @brief getCommandLine generate the command line

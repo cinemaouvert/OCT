@@ -14,66 +14,67 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>611</width>
-      <height>381</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QTabWidget" name="tabWidget">
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <widget class="QWidget" name="tab_files">
-        <attribute name="title">
-         <string>Fichiers</string>
-        </attribute>
-        <widget class="QWidget" name="horizontalLayoutWidget_2">
-         <property name="geometry">
-          <rect>
-           <x>-1</x>
-           <y>-1</y>
-           <width>551</width>
-           <height>331</height>
-          </rect>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>1</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="tab_files">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+         <attribute name="title">
+          <string>Fichiers</string>
+         </attribute>
+        </widget>
+        <widget class="QWidget" name="tab_video">
+         <attribute name="title">
+          <string>video</string>
+         </attribute>
+        </widget>
+        <widget class="QWidget" name="tab_sound">
+         <attribute name="title">
+          <string>son</string>
+         </attribute>
+        </widget>
+        <widget class="QWidget" name="tab_subtitle">
+         <attribute name="title">
+          <string>sous-titre</string>
+         </attribute>
+        </widget>
+        <widget class="QWidget" name="tab_infos">
+         <attribute name="title">
+          <string>informations</string>
+         </attribute>
+        </widget>
+        <widget class="QWidget" name="tab_encode">
+         <attribute name="title">
+          <string>encodage</string>
+         </attribute>
         </widget>
        </widget>
-       <widget class="QWidget" name="tab_video">
-        <attribute name="title">
-         <string>video</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="tab_sound">
-        <attribute name="title">
-         <string>son</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="tab_subtitle">
-        <attribute name="title">
-         <string>sous-titre</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="tab_infos">
-        <attribute name="title">
-         <string>informations</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="tab_encode">
-        <attribute name="title">
-         <string>encodage</string>
-        </attribute>
-       </widget>
-      </widget>
-     </item>
-    </layout>
-   </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -28,6 +28,26 @@
 
 #include "Model/Information.h"
 
+
+QString Model::Information::value() const
+{
+    return m_value;
+}
+
+void Model::Information::setValue(const QString &value)
+{
+    m_value = value;
+}
+
+QString Model::Information::name() const
+{
+    return m_name;
+}
+
+void Model::Information::setName(const QString &name)
+{
+    m_name = name;
+}
 Model::Information::Information() {}
 
 Model::Information::Information(QString name, QString value) {

@@ -76,4 +76,4 @@ HEADERS  += \
     Model/StreamWrapper.h
 
 FORMS    += \
-    mainwindow.ui
+    mainwindow.ui \
