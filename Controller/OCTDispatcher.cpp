@@ -55,6 +55,7 @@ using namespace std;
 #include <Model/Audio.h>
 #include <Model/StreamWrapper.h>
 #include <Model/Serializable.h>
+#include <Model/Project.h>
 
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
                                             m_mainWindow(NULL) ,
@@ -98,8 +99,25 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /***********************/
     /*****Romain Test *****/
+    /*
+    initSetting("ffmpeg","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
+    initSetting("ffprobe","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
+    initSetting("mkvmerge","C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\mkvmerge.exe");
 
+    addFile("C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\test1.mkv");
+    addFile("C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\test2.mkv");
+    addFile("C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\test1.mp3");
 
+    qDebug() <<  *m_currentProject->getMergeCommandLine();
+
+    QString program = m_settings->value("mkvmerge").toString();
+    QStringList arguments;
+        arguments << *m_currentProject->getMergeCommandLine();
+
+    QProcess myProcess;
+    myProcess.start(program, arguments);
+    myProcess.waitForFinished();
+*/
     /***********************/
     /*****Denis Test *****/
 
