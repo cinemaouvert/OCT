@@ -39,9 +39,8 @@ using namespace std;
 
 QMap<QString, Model::Parameter *> Model::Video::m_staticParameters;
 Model::Video::Video(){
+    m_default = false;
     this->m_parameters = new QMap<QString,Parameter*>();
-
-
 
 }
 
@@ -92,6 +91,7 @@ Model::Video::Video(QDomNode stream)
 
     //-----------------------VIDEO-BUILD------------------------//
     this->m_uID = UID;
+    this->m_default = false;
     this->m_parameters = new QMap<QString,Parameter*>();
 
     Parameter *pCodecName = Video::getStaticParameter("codec_name");
@@ -107,6 +107,9 @@ Model::Video::Video(QDomNode stream)
     Parameter *pDefault = Video::getStaticParameter("default");
     pDefault->setValue(isDefault);
     this->setParameter("default",pDefault);
+    if(isDefault == "1")
+        this->m_default = true;
+
 
     Parameter *pResolution = Video::getStaticParameter("resolution");
     pResolution->setValue(resolution);
@@ -120,22 +123,22 @@ Model::Video::Video(QDomNode stream)
 
 Model::Video::Video(QString uid){
     this->m_parameters = new QMap<QString,Parameter*>();
-
-
-
     this->m_uID = uid;
+    this->m_default = false;
 }
 
 Model::Video::Video(const Model::Video & copy){
     this->m_uID = copy.m_uID;
     this->m_additionalCommand = copy.m_additionalCommand;
     this->m_parameters = new QMap<QString,Parameter*>(*(copy.m_parameters));
+    this->m_default = copy.m_default;
 }
 
 Model::Video &Model::Video::Video::operator=(const Model::Video &o)
 {
     if(this != &o){
         this->m_uID = o.m_uID;
+        this->m_default = o.m_default;
         this->m_additionalCommand = o.m_additionalCommand;
         QMap<QString,Parameter*> *param(o.m_parameters) ;
         this->m_parameters = param;

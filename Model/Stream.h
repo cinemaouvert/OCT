@@ -60,6 +60,11 @@ namespace Model
             QString m_uID;
 
             /**
+             * @brief m_default
+             */
+            bool m_default;
+
+            /**
              * @brief List of parameter associated with the stream.
              */
             QMap<QString,Parameter*> *m_parameters;
@@ -96,7 +101,9 @@ namespace Model
                 ATTACHMENT = 3
             };
             static int getEnumValue(QString type);
-	};
+            virtual bool isDefault() const;
+            virtual void setDefault(bool d);
+    };
 
 
 

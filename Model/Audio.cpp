@@ -39,6 +39,7 @@ using namespace std;
 QMap<QString, Model::Parameter *> Model::Audio::m_staticParameters;
 Model::Audio::Audio() {
     m_uID = "";
+    m_default = false;
     this->m_parameters = new QMap<QString,Parameter*>();
 }
 
@@ -78,10 +79,18 @@ Model::Audio::Audio(QDomNode stream)
     QDomNode nodeBitRate = tab.namedItem("bit_rate");
     QString bitRate = Utils::bpsToKbps(nodeBitRate.nodeValue());
     qDebug() << bitRate;
+    //-----------------------IS-DEFAULT------------------------//
+    QDomNode disposition = stream.toElement().elementsByTagName("disposition").item(0);
+    QString isDefault = disposition.attributes().namedItem("default").nodeValue();
+    qDebug() << isDefault;
 
     //-----------------------AUDIO-BUILD------------------------//
     this->m_uID = UID;
     this->m_parameters = new QMap<QString,Parameter*>();
+    this->m_default = false;
+
+    if(isDefault == "1")
+        this->m_default = true;
 
     Parameter *pCodecName = Audio::getStaticParameter("codec_name");
     pCodecName->setValue(codecName);
@@ -109,12 +118,14 @@ Model::Audio::Audio(QDomNode stream)
 Model::Audio::Audio(QString uID) {
     m_uID = uID;
     this->m_parameters = new QMap<QString,Parameter*>();
+    this->m_default = false;
 }
 
 Model::Audio::Audio(const Audio& a) {
     m_uID = a.m_uID;
     QMap<QString,Parameter*> *param(a.m_parameters) ;
     this->m_parameters = param;
+    this->m_default = a.m_default;
 }
 
 Model::Audio& Model::Audio::operator=(const Audio& a) {
@@ -122,6 +133,7 @@ Model::Audio& Model::Audio::operator=(const Audio& a) {
         m_uID = a.m_uID;
         QMap<QString,Parameter*> *param(a.m_parameters) ;
         this->m_parameters = param;
+        this->m_default = a.m_default;
     }
     return *this;
 }

@@ -35,6 +35,7 @@ using namespace std;
 
 // #include "Controller/OCTDispatcher.h"
 #include "Model/Project.h"
+#include "Model/Attachment.h"
 
 namespace Controller
 {
@@ -44,13 +45,20 @@ namespace Controller
 namespace Model
 {
 	class Project;
+    class Attachment;
 }
 
 namespace Controller
 {
 	class Merger
-	{
+    {
+
+
         public:
+        QStringList addAttachment(const QString &name);
+        QStringList setTitle(const QString &name);
+        QStringList setOutputFile(const QString &name);
+        QStringList setDefaultTrack(const QString &name);
             /**
              * @brief The associated merger.
              */
@@ -69,8 +77,14 @@ namespace Controller
 
             /**
              * @brief This method creates an MKV file from the current project.
+             * @param project
              */
-            void createMKVFile();
+            void createMKVFile(Model::Project *project);
+
+
+
+
+
 	};
 }
 

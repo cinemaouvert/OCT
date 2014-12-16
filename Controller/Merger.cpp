@@ -33,6 +33,42 @@ using namespace std;
 #include "Controller/OCTDispatcher.h"
 #include "Model/Project.h"
 
+QStringList Controller::Merger::addAttachment(const QString &name)
+{
+    QStringList argument;
+        argument
+             <<"--attach-file"<<name;
+
+        return argument;
+}
+
+QStringList Controller::Merger::setTitle(const QString &name)
+{
+    QStringList argument;
+        argument
+             <<"--title"<<name;
+
+        return argument;
+}
+
+QStringList Controller::Merger::setOutputFile(const QString &name)
+{
+    QStringList argument;
+        argument
+             <<"-o"<<name;
+
+        return argument;
+}
+
+QStringList Controller::Merger::setDefaultTrack(const QString &name)
+{
+    QStringList argument;
+        argument
+             <<"--default-track"<<name;
+
+        return argument;
+}
+
 Controller::Merger::Merger() {
 }
 
@@ -40,7 +76,16 @@ void Controller::Merger::createXML(Model::Project *project) {
 	throw "Not yet implemented";
 }
 
-void Controller::Merger::createMKVFile() {
-	throw "Not yet implemented";
+void Controller::Merger::createMKVFile(Model::Project *project) {
+    QStringList arguments;
+
+    foreach (Model::File *f, *(project->fileList())){
+       // foreach(StreamWrapper *sw, f->)
+       //     arguments << setDefaultTrack(a->filepath());
+    }
+
+    foreach (Model::Attachment *a, *(project->attachments())){
+        arguments << addAttachment(a->filepath());
+    }
 }
 

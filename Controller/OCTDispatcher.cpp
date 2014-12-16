@@ -92,7 +92,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /****** TRY YOUR WORK IN HERE **********/
   //  addSetting("ffprobe","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
-    QString program = getSetting("ffprobe").toString();
+  /*  QString program = getSetting("ffprobe").toString();
     QStringList arguments;
         arguments
              <<"-v"<<"quiet"
@@ -104,7 +104,12 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     myProcess.waitForFinished();
     QString string(myProcess.readAllStandardOutput());
     Model::File f("path",string);
+*/
 
+    QStringList qls = m_merger->addAttachment("blala");
+    QStringList qls2 = m_merger->addAttachment("blala");
+    QStringList qls3 = qls << qls2;
+    qDebug() << qls3;
     /***************************************/
     /*****Thibaud Test *****/
 

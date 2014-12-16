@@ -30,7 +30,7 @@
 using namespace std;
 
 #include "Model/Stream.h"
-#include "Model/Data.h"
+#include "Model/StreamWrapper.h"
 #include "Model/Serializable.h"
 
 void Model::Stream::setParameter(QString name, Parameter *value) {
@@ -64,6 +64,16 @@ QStringList *Model::Stream::getCommand()
     return myStringList;
 }
 
+
+bool Model::Stream::isDefault() const
+{
+    return m_default;
+}
+
+void Model::Stream::setDefault(bool d)
+{
+    m_default = d;
+}
 Model::Stream::~Stream()
 {
     if (this->m_parameters != NULL)

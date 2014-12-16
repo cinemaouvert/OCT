@@ -36,6 +36,7 @@ using namespace std;
 QMap<QString, Model::Parameter *> Model::Subtitle::m_staticParameters;
 Model::Subtitle::Subtitle(){
     this->m_parameters = new QMap<QString,Parameter*>();
+    this->m_default = false;
 }
 
 Model::Subtitle::Subtitle(QDomNode stream)
@@ -64,11 +65,18 @@ Model::Subtitle::Subtitle(QDomNode stream)
     QString language = "";
     if(tagKey == "language")
         language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
+    //-----------------------IS-DEFAULT------------------------//
+    QDomNode disposition = stream.toElement().elementsByTagName("disposition").item(0);
+    QString isDefault = disposition.attributes().namedItem("default").nodeValue();
+    qDebug() << isDefault;
     //-----------------------ENCODE------------------------//
 
     //-----------------------SUBTITLE-BUILD------------------------//
     this->m_uID = UID;
     this->m_parameters = new QMap<QString,Parameter*>();
+    this->m_default = false;
+    if(isDefault == "1")
+        this->m_default = true;
 
     Parameter *pCodecName = Subtitle::getStaticParameter("codec_name");
     pCodecName->setValue(codecName);
@@ -84,12 +92,14 @@ Model::Subtitle::Subtitle(QDomNode stream)
 Model::Subtitle::Subtitle(QString uid) {
     this->m_parameters = new QMap<QString,Parameter*>();
     this->m_uID = uid;
+    this->m_default = false;
 }
 
 Model::Subtitle::Subtitle(Model::Subtitle& copy) {
     this->m_uID = copy.m_uID;
     QMap<QString,Parameter*> *param(copy.m_parameters) ;
     this->m_parameters = param;
+    this->m_default = copy.m_default;
 }
 
 Model::Subtitle &Model::Subtitle::operator=(const Model::Subtitle &o)
@@ -98,6 +108,7 @@ Model::Subtitle &Model::Subtitle::operator=(const Model::Subtitle &o)
         this->m_uID = o.m_uID;
         QMap<QString,Parameter*> *param(o.m_parameters) ;
         this->m_parameters = param;
+        this->m_default = o.m_default;
     }
     return *this;
 }
