@@ -32,15 +32,20 @@ using namespace std;
 #include "Controller/Exporter.h"
 #include "Controller/OCTDispatcher.h"
 #include "Model/Database.h"
+#include "Model/Project.h"
 
-Controller::Exporter::Exporter() {
+Controller::Exporter::Exporter(QString userKey, QString depot) : m_Database(NULL) {
+    this->m_Database = new Model::Database(userKey, depot);
 }
 
 QString Controller::Exporter::createMagnetLink(QString filepath) {
-	throw "Not yet implemented";
+    throw "Not yet implemented";
 }
 
-bool Controller::Exporter::sendXML(QString filepathXML, QString filepathMagnet) {
-	throw "Not yet implemented";
+bool Controller::Exporter::convertInformationsToJSON(Model::Project project)
+{
+
 }
+
+
 

@@ -47,6 +47,7 @@ namespace Controller
 namespace Model
 {
 	class Database;
+    class Project;
 }
 
 namespace Controller
@@ -54,20 +55,16 @@ namespace Controller
 	class Exporter
     {
         public:
-            /**
-             * @brief The associated exporter controller.
-             */
-            Controller::OCTDispatcher* m_exporter;
 
             /**
              * @brief The associated database.
              */
-            Model::Database* m_unnamed_Database_;
+            Model::Database* m_Database;
 
             /**
-             * @brief Default constructor
+             * @brief constructor to connect database
              */
-            Exporter();
+            Exporter(QString userKey, QString depot);
 
             /**
              * @brief This method creates a magnet link to bind a local file in the database.
@@ -78,11 +75,10 @@ namespace Controller
 
             /**
              * @brief This method sends an XML file to the database.
-             * @param filepathXML
-             * @param filepathMagnet
+             * @param Project
              * @return 1 if ok, 0 else.
              */
-            bool sendXML(QString filepathXML, QString filepathMagnet);
+            bool convertInformationsToJSON(Model::Project project);
 	};
 }
 
