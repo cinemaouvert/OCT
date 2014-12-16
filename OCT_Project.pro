@@ -32,17 +32,11 @@ SOURCES += main.cpp\
     Model/Stream.cpp \
     Model/Subtitle.cpp \
     Model/Video.cpp \
-    View/AudioPane.cpp \
-    View/EncodePane.cpp \
-    View/FilePane.cpp \
-    View/InformationPane.cpp \
     View/MainWindow.cpp \
-    View/SubtitlePane.cpp \
-    View/VideoPane.cpp \
-    View/VideoPlayer.cpp \
     Controller/Utils.cpp \
     Model/Serializable.cpp \
-    Model/StreamWrapper.cpp
+    Model/StreamWrapper.cpp \
+    View/FilePane.cpp
 
 HEADERS  += \
     Controller/Exporter.h \
@@ -63,17 +57,16 @@ HEADERS  += \
     Model/Stream.h \
     Model/Subtitle.h \
     Model/Video.h \
-    View/AudioPane.h \
-    View/EncodePane.h \
-    View/FilePane.h \
-    View/InformationPane.h \
     View/MainWindow.h \
-    View/SubtitlePane.h \
-    View/VideoPane.h \
-    View/VideoPlayer.h \
     configOCT.h \
     Controller/Utils.h \
-    Model/StreamWrapper.h
+    Model/StreamWrapper.h \
+    View/FilePane.h
 
 FORMS    += \
+<<<<<<< HEAD
+    View/mainwindow.ui \
+    View/filepane.ui
+=======
     mainwindow.ui \
+>>>>>>> origin/master
