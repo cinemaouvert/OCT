@@ -37,7 +37,7 @@ using namespace std;
 #include <QDebug>
 
 Controller::Exporter::Exporter(QString userKey, QString depot) : m_Database(NULL) {
-    this->m_Database = new Model::Database("1", "http://localhost/CODB-Depot-master/");
+    this->m_Database = new Model::Database(userKey, depot);
 }
 
 QString Controller::Exporter::createMagnetLink(QString filepath) {

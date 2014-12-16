@@ -103,7 +103,6 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     /***********************/
     /*****Denis Test *****/
 
-
     /***********************/
     /*****William Test *****/
 

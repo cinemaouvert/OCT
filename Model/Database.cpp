@@ -72,16 +72,14 @@ Model::Database::~Database() {}
 int Model::Database::sendRequest(QByteArray jsonString) {
     QByteArray postDataSize = QByteArray::number(jsonString.size());
 
-    QUrl url(this->m_depot + "/?resolver="+ this->m_depot +"&movie");
+    //Changer le premier dépot
+    QUrl url(this->m_depot + "?resolver="+ this->m_depot +"&movie");
     qDebug() << url;
     QNetworkRequest request(url);
 
     request.setRawHeader("User-Agent", configOCT::NAME.toStdString().c_str());
     request.setRawHeader("Content-Type", "application/json");
     request.setRawHeader("Content-Length", postDataSize);
-
-    qDebug() << jsonString;
-    qDebug() << postDataSize;
 
     QNetworkAccessManager *networkManager = new QNetworkAccessManager();
 
