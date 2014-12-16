@@ -110,7 +110,8 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
 
 
-    //this->addFile("E:\\M2\\Projet\\Test mkvtoolnix\\movie1.mkv");
+    this->addFile("E:\\M2\\Projet\\Test mkvtoolnix\\movie1.mkv");
+    qDebug() << m_transcoder->transcode(this->m_currentProject->fileList()->at(0)->getCommandLine());
 
 /*
     QString ffmpegProgram = getSetting("ffmpeg").toString();

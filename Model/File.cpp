@@ -27,6 +27,7 @@
  **********************************************************************************/
 
 #include <QDomDocument>
+#include <QTemporaryDir>
 #include <exception>
 using namespace std;
 
@@ -41,9 +42,20 @@ using namespace std;
 Model::File::File() {}
 
 Model::File::File(QString filePath, QString info) : m_datas(NULL) {
-    m_filePath = filePath;
-    m_name = filePath;
-    m_datas = new QList<StreamWrapper*>();
+    this->m_filePath = filePath;
+    QStringList path= filePath.split(QDir::separator());
+    QString finalOutput;
+    for(int i = 0 ; i < path.size() ; i++){
+        if(i== path.size()-1){
+            finalOutput += "transcoded_";
+            finalOutput += path.at(i);
+        }else{
+            finalOutput += path.at(i) + QDir::separator();
+        }
+    }
+    this->m_outFilePath = finalOutput;
+    this->m_name = filePath;
+    this->m_datas = new QList<StreamWrapper*>();
 
     QDomDocument doc;
     doc.setContent(info);
@@ -118,7 +130,8 @@ QStringList *Model::File::getCommandLine()
             (*stringList) << *(data->generateCommandLine());
         }
     }
-    *stringList << "E:\\M2\\Projet\\Test mkvtoolnix\\test3.mkv";
+    *stringList << this->m_outFilePath;
+    qDebug() << this->m_outFilePath;
     return stringList;
 }
 

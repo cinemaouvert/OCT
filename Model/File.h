@@ -68,6 +68,11 @@ namespace Model
             QString m_filePath;
 
             /**
+             * @brief The output path to the file.
+             */
+            QString m_outFilePath;
+
+            /**
              * @brief The data contained in the file.
              */
             QList<Model::StreamWrapper*> *m_datas;
