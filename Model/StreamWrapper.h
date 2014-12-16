@@ -40,12 +40,12 @@ namespace Model
 {
 	class Stream;
 	// class Serializable;
-	class Data;
+    class StreamWrapper;
 }
 
 namespace Model
 {
-    class Data
+    class StreamWrapper
     {
         private :
             /**
@@ -62,25 +62,25 @@ namespace Model
             /**
              * @brief Default constructor.
              */
-            Data();
+            StreamWrapper();
 
             /**
              * @brief Copy constructor.
              * @param d
              */
-            Data(Data const& d);
+            StreamWrapper(StreamWrapper const& d);
 
             /**
              * @brief Affectation operator.
              * @param d The Data object to affect.
              * @return The current Data object modified.
              */
-            Data& operator=(Data const& d);
+            StreamWrapper& operator=(StreamWrapper const& d);
 
             /**
              * @brief Destructor.
              */
-            virtual ~Data();
+            virtual ~StreamWrapper();
 
             /**
              * @brief Define if the current Data has to be transcoded.

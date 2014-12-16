@@ -7,6 +7,8 @@ using namespace std;
 
 
 #include <QString>
+#include <QSettings>
+
 // #include "Controller/OCTDispatcher.h"
 
 namespace Controller
@@ -43,6 +45,12 @@ namespace Controller
              * @return
              */
             QString transcode(QString command);
+
+        private:
+            /**
+             * @brief The associated settings.
+             */
+            QSettings                   *m_settings;
 	};
 }
 

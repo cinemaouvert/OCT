@@ -37,7 +37,7 @@ using namespace std;
 
 
 // #include "Controller/OCTDispatcher.h"
-#include "Model/Data.h"
+#include "Model/StreamWrapper.h"
 
 namespace Controller
 {
@@ -46,7 +46,7 @@ namespace Controller
 }
 namespace Model
 {
-	class Data;
+	class StreamWrapper;
 }
 
 namespace Controller
@@ -71,7 +71,7 @@ namespace Controller
              * @param streamToParse
              * @return
              */
-            Model::Data* parseStreams(QString streamToParse);
+            Model::StreamWrapper* parseStreams(QString streamToParse);
 	};
 }
 

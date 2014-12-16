@@ -53,7 +53,7 @@ using namespace std;
 
 #include <Model/Attachment.h>
 #include <Model/Audio.h>
-#include <Model/Data.h>
+#include <Model/StreamWrapper.h>
 #include <Model/Serializable.h>
 
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,

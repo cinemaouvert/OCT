@@ -24,7 +24,6 @@ SOURCES += main.cpp\
     Controller/Updater.cpp \
     Model/Attachment.cpp \
     Model/Audio.cpp \
-    Model/Data.cpp \
     Model/Database.cpp \
     Model/File.cpp \
     Model/Information.cpp \
@@ -42,7 +41,8 @@ SOURCES += main.cpp\
     View/VideoPane.cpp \
     View/VideoPlayer.cpp \
     Controller/Utils.cpp \
-    Model/Serializable.cpp
+    Model/Serializable.cpp \
+    Model/StreamWrapper.cpp
 
 HEADERS  += \
     Controller/Exporter.h \
@@ -54,7 +54,6 @@ HEADERS  += \
     Controller/Updater.h \
     Model/Attachment.h \
     Model/Audio.h \
-    Model/Data.h \
     Model/Database.h \
     Model/File.h \
     Model/Information.h \
@@ -73,7 +72,8 @@ HEADERS  += \
     View/VideoPane.h \
     View/VideoPlayer.h \
     configOCT.h \
-    Controller/Utils.h
+    Controller/Utils.h \
+    Model/StreamWrapper.h
 
 FORMS    += \
     mainwindow.ui

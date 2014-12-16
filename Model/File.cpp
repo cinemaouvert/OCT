@@ -31,7 +31,7 @@
 using namespace std;
 
 #include "Model/File.h"
-#include "Model/Data.h"
+#include "Model/StreamWrapper.h"
 
 #include "Subtitle.h"
 
@@ -43,7 +43,7 @@ Model::File::File() {}
 Model::File::File(QString filePath, QString info) : m_datas(NULL) {
     m_filePath = filePath;
     m_name = filePath;
-    m_datas = new QList<Data*>();
+    m_datas = new QList<StreamWrapper*>();
 
     QDomDocument doc;
     doc.setContent(info);
@@ -75,8 +75,8 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
                             break;
                 }
 
-                Data* theData;
-                theData= new Data();
+                StreamWrapper* theData;
+                theData= new StreamWrapper();
 
                 theData->setOldStream(s);
                 this->m_datas->push_back(theData);
@@ -104,7 +104,7 @@ Model::File::~File() {
         delete this->m_datas;
 }
 
-QList<Model::Data*>* Model::File::getDatas() {
+QList<Model::StreamWrapper*>* Model::File::getDatas() {
     return m_datas;
 }
 
@@ -113,7 +113,7 @@ QStringList *Model::File::getCommandLine()
     QStringList *stringList;
     stringList = new QStringList();
     *stringList << "-i" << this->m_filePath;
-    foreach (Data *data, *getDatas()) {
+    foreach (StreamWrapper *data, *getDatas()) {
         if(data->hasToBeTranscoded()){
             (*stringList) << *(data->generateCommandLine());
         }

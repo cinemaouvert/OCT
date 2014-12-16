@@ -32,7 +32,9 @@ using namespace std;
 #include "Controller/Transcoder.h"
 #include "Controller/OCTDispatcher.h"
 
+
 Controller::Transcoder::Transcoder() {
+    m_settings = new QSettings("CinemaOuvert", "OpenCinemaTranscoder");
 }
 
 QString Controller::Transcoder::getInfo(QString filePath) {

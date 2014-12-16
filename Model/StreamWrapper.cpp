@@ -29,37 +29,37 @@
 #include <exception>
 using namespace std;
 
-#include "Model/Data.h"
+#include "Model/StreamWrapper.h"
 #include "Model/Stream.h"
 #include "Model/Serializable.h"
 
 
-Model::Stream *Model::Data::newStream() const
+Model::Stream *Model::StreamWrapper::newStream() const
 {
     return m_newStream;
 }
 
-void Model::Data::setNewStream(Model::Stream *newStream)
+void Model::StreamWrapper::setNewStream(Model::Stream *newStream)
 {
     m_newStream = newStream;
 }
 
-Model::Stream *Model::Data::oldStream() const
+Model::Stream *Model::StreamWrapper::oldStream() const
 {
     return m_oldStream;
 }
 
-void Model::Data::setOldStream(Model::Stream *oldStream)
+void Model::StreamWrapper::setOldStream(Model::Stream *oldStream)
 {
     m_oldStream = oldStream;
 }
-Model::Data::Data() : m_oldStream(NULL), m_newStream(NULL) {
+Model::StreamWrapper::StreamWrapper() : m_oldStream(NULL), m_newStream(NULL) {
 }
 
-Model::Data::Data(const Data& d) {
+Model::StreamWrapper::StreamWrapper(const StreamWrapper& d) {
 }
 
-Model::Data& Model::Data::operator=(const Data& d) {
+Model::StreamWrapper& Model::StreamWrapper::operator=(const StreamWrapper& d) {
     if ( this != &d ) {
         m_oldStream = d.m_oldStream;
         m_newStream = d.m_newStream;
@@ -67,7 +67,7 @@ Model::Data& Model::Data::operator=(const Data& d) {
     return *this;
 }
 
-Model::Data::~Data() {
+Model::StreamWrapper::~StreamWrapper() {
     if(this->m_newStream != NULL)
         delete this->m_newStream;
 
@@ -75,21 +75,21 @@ Model::Data::~Data() {
         delete this->m_oldStream;
 }
 
-bool Model::Data::hasToBeTranscoded() {
+bool Model::StreamWrapper::hasToBeTranscoded() {
     bool res = false;
     if(this->m_newStream != NULL)
         res = true;
     return res;
 }
 
-QStringList* Model::Data::generateCommandLine() {
+QStringList* Model::StreamWrapper::generateCommandLine() {
     if(hasToBeTranscoded())
         return this->m_newStream->getCommand();
     else
         return NULL;
 }
 
-Model::Stream* Model::Data::getOldStream() {
+Model::Stream* Model::StreamWrapper::getOldStream() {
     return m_oldStream;
 }
 

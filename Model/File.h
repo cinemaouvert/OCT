@@ -37,13 +37,13 @@ using namespace std;
 #include <qdom.h>
 
 #include "Model/Serializable.h"
-#include "Model/Data.h"
+#include "Model/StreamWrapper.h"
 #include "Audio.h"
 #include "Video.h"
 #include "qdebug.h"
 namespace Model
 {
-	class Data;
+	class StreamWrapper;
 	class File;
     class Serializable;
     class Parameters;
@@ -70,7 +70,7 @@ namespace Model
             /**
              * @brief The data contained in the file.
              */
-            QList<Model::Data*> *m_datas;
+            QList<Model::StreamWrapper*> *m_datas;
 
             /**
              * @brief The generated video.
@@ -114,7 +114,7 @@ namespace Model
              * @brief Accessor on the data member.
              * @return The data member pointer value.
              */
-            QList<Model::Data*>* getDatas();
+            QList<Model::StreamWrapper*>* getDatas();
 
             /**
              * @brief getCommandLine generate the command line
