@@ -50,7 +50,7 @@ bool Controller::Exporter::sendInformationsToJSON(Model::Project* project)
     if(project != NULL){
         QList<Model::Information*> *informations = project->informations();
         if(informations != NULL){
-            QByteArray  json = "{\"key_user\":\"" + m_Database->userKey()+ "\",\"quick\":\"false\"";
+            QByteArray  json = "{";
             for (int i = 0; i < informations->size(); i++) {
                 Model::Information* info = informations->at(i);
                 json += "\"" + info->name() + "\":\"" + info->value() +"\",";
