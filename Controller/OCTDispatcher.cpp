@@ -81,7 +81,8 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_streamLoader = new StreamLoader();
     m_updater= new Updater();
     m_merger= new Merger();
-    m_exporter= new Exporter();
+    //ne pas init ici
+    //m_exporter= new Exporter();
     m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
     m_transcoder= new Transcoder();
     //Initialisation of the parameters lists

@@ -64,9 +64,5 @@ HEADERS  += \
     View/FilePane.h
 
 FORMS    += \
-<<<<<<< HEAD
     View/mainwindow.ui \
     View/filepane.ui
-=======
-    mainwindow.ui \
->>>>>>> origin/master
