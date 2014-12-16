@@ -30,7 +30,6 @@
 using namespace std;
 
 #include "Model/Stream.h"
-#include "Model/Data.h"
 #include "Model/Serializable.h"
 
 void Model::Stream::setParameter(QString name, Parameter *value) {

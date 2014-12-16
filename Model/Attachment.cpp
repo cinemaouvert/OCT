@@ -54,16 +54,16 @@ Model::Attachment::~Attachment() {
     m_filepath = "";
 }
 
-void Model::Attachment::initMetaType()
-{
-    qRegisterMetaTypeStreamOperators<Model::Attachment>("Model::Attachment");
-    qMetaTypeId<Model::Attachment>();
+QString Model::Attachment::filepath() const {
+    return this->m_filepath;
 }
 
-
-QString Model::Attachment::filepath() const
-{
-    return this->m_filepath;
+//============================================================================//
+//== Serialization ===========================================================//
+//============================================================================//
+void Model::Attachment::initMetaType() {
+    qRegisterMetaTypeStreamOperators<Model::Attachment>("Model::Attachment");
+    qMetaTypeId<Model::Attachment>();
 }
 
 QDataStream &Model::operator >>(QDataStream &in, Model::Attachment &valeur)
