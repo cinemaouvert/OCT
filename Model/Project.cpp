@@ -189,15 +189,15 @@ void Model::Project::generateInformationToXML()
 
 QStringList *Model::Project::getMergeCommandLine()
 {
-    QStringList *arguments;
-    *arguments << "mkvmerge.exe";
-    *arguments << "-o" << m_name;
-    *arguments <<"--title"<<"TITRE";
+    QStringList *arguments = new QStringList();
+   // *arguments << "mkvmerge.exe";
+    *arguments << "-o" << "m_name.mkv";
+  //  *arguments <<"--title"<<"TITRE";
 
     foreach (Model::File *f, *(fileList())){
         foreach(Model::StreamWrapper *sw, *(f->getStreamWrappers())){
-            if(sw->newStream()->isDefault())
-                *arguments << "--default-track" << sw->newStream()->getUID();
+            if(sw->oldStream()->isDefault())
+                *arguments << "--default-track" << sw->oldStream()->getUID(); //////////////////getNew
         }
         *arguments <<f->getName();
     }
@@ -206,7 +206,7 @@ QStringList *Model::Project::getMergeCommandLine()
         *arguments << "--attach-file" << a->filepath();
     }
 
-    *arguments <<"--attach-file"<< m_xmlFilePath;
+    //*arguments <<"--attach-file"<< m_xmlFilePath;
 
     return arguments;
 }
