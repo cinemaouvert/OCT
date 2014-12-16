@@ -74,11 +74,11 @@ namespace Controller
             QString createMagnetLink(QString filepath);
 
             /**
-             * @brief This method sends an XML file to the database.
+             * @brief This method sends information in json  to the database.
              * @param Project
              * @return 1 if ok, 0 else.
              */
-            bool convertInformationsToJSON(Model::Project project);
+            bool sendInformationsToJSON(Model::Project* project);
 	};
 }
 

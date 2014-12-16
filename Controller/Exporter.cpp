@@ -33,6 +33,8 @@ using namespace std;
 #include "Controller/OCTDispatcher.h"
 #include "Model/Database.h"
 #include "Model/Project.h"
+#include "Model/Information.h"
+#include <QDebug>
 
 Controller::Exporter::Exporter(QString userKey, QString depot) : m_Database(NULL) {
     this->m_Database = new Model::Database(userKey, depot);
@@ -42,9 +44,26 @@ QString Controller::Exporter::createMagnetLink(QString filepath) {
     throw "Not yet implemented";
 }
 
-bool Controller::Exporter::convertInformationsToJSON(Model::Project project)
+bool Controller::Exporter::sendInformationsToJSON(Model::Project* project)
 {
-
+    bool send = false;
+    if(project != NULL){
+        QList<Model::Information*> *informations = project->informations();
+        if(informations != NULL){
+            QByteArray  json = "{";
+            for (int i = 0; i < informations->size(); i++) {
+                Model::Information* info = informations->at(i);
+                json += "\"" + info->name() + "\":\"" + info->value() +"\",";
+            }
+            json.remove(json.size()-1, 1); // Supprime la dernière virgule
+            json += "}";
+            int res = this->m_Database->sendRequest(json);
+            if(res == 200 ){
+                send = true;
+            }
+        }
+    }
+    return send;
 }
 
 

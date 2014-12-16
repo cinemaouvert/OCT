@@ -85,7 +85,13 @@ namespace Model
              */
             ~Information();
 
-	};
+
+
+            QString value() const;
+            void setValue(const QString &value);
+            QString name() const;
+            void setName(const QString &name);
+    };
 }
 
 #endif
