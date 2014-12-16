@@ -58,7 +58,7 @@ bool Controller::Exporter::sendInformationsToJSON(Model::Project* project)
             json.remove(json.size()-1, 1); // Supprime la dernière virgule
             json += "}";
             int res = this->m_Database->sendRequest(json);
-            if(res == 200 ){
+            if(res == 200){
                 send = true;
             }
         }

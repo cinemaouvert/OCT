@@ -38,6 +38,17 @@ using namespace std;
 
 #include "configOCT.h"
 
+
+QString Model::Database::depot() const
+{
+    return m_depot;
+}
+
+QString Model::Database::userKey() const
+{
+    return m_userKey;
+}
+
 Model::Database::Database(QString userKey, QString depot) {
     this->m_userKey = userKey;
     this->m_depot = depot;
