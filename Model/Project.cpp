@@ -165,24 +165,26 @@ void Model::Project::setXmlFilePath(const QString &xmlFilePath)
 
 void Model::Project::generateInformationToXML()
 {
-    QFile file("infos.xml"); // TODO : changer emplacement du fichier
-    if (!file.open(QIODevice::WriteOnly)){
-        return;
+    if(m_informations != NULL){
+        QFile file("infos.xml"); // TODO : changer emplacement du fichier
+        if (!file.open(QIODevice::WriteOnly)){
+            return;
+        }
+        QXmlStreamWriter writer(&file);
+        writer.setAutoFormatting(true);
+        writer.writeStartDocument("1.0");
+        writer.writeStartElement("Informations");
+
+        for (int i = 0; i < m_informations->size(); i++) {
+            Information *info = m_informations->at(i);
+            writer.writeTextElement(info->name(), info->value());
+        }
+
+        writer.writeEndElement();
+        writer.writeEndDocument();
+
+        file.close();
     }
-    QXmlStreamWriter writer(&file);
-    writer.setAutoFormatting(true);
-    writer.writeStartDocument("1.0");
-    writer.writeStartElement("Informations");
-
-    for (int i = 0; i < m_informations->size(); i++) {
-        Information *info = m_informations->at(i);
-        writer.writeTextElement(info->name(), info->value());
-    }
-
-    writer.writeEndElement();
-    writer.writeEndDocument();
-
-    file.close();
 }
 
 QStringList *Model::Project::getMergeCommandLine()
