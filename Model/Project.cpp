@@ -185,5 +185,26 @@ void Model::Project::generateInformationToXML()
     file.close();
 }
 
+QStringList *Model::Project::getMergeCommandLine()
+{
+    QStringList *arguments;
+    *arguments << "mkvmerge.exe";
+    *arguments << "-o" << m_name;
+    *arguments <<"--title"<<"TITRE";
 
+    foreach (Model::File *f, *(fileList())){
+        foreach(Model::StreamWrapper *sw, *(f->getStreamWrappers())){
+            if(sw->newStream()->isDefault())
+                *arguments << "--default-track" << sw->newStream()->getUID();
+        }
+        *arguments <<f->getName();
+    }
 
+    foreach (Model::Attachment *a, *(attachments())){
+        *arguments << "--attach-file" << a->filepath();
+    }
+
+    *arguments <<"--attach-file"<< m_xmlFilePath;
+
+    return arguments;
+}

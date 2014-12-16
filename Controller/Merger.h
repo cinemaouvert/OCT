@@ -36,6 +36,7 @@ using namespace std;
 // #include "Controller/OCTDispatcher.h"
 #include "Model/Project.h"
 #include "Model/Attachment.h"
+#include "Model/File.h"
 
 namespace Controller
 {
@@ -46,6 +47,7 @@ namespace Model
 {
 	class Project;
     class Attachment;
+    class File;
 }
 
 namespace Controller
@@ -55,10 +57,6 @@ namespace Controller
 
 
         public:
-        QStringList addAttachment(const QString &name);
-        QStringList setTitle(const QString &name);
-        QStringList setOutputFile(const QString &name);
-        QStringList setDefaultTrack(const QString &name);
             /**
              * @brief The associated merger.
              */

@@ -38,6 +38,7 @@ using namespace std;
 // #include "Model/Attachment.h"
 #include "Model/Information.h"
 #include "Model/Serializable.h"
+#include "Model/File.h"
 
 namespace Model
 {
@@ -194,6 +195,11 @@ namespace Model
             void setXmlFilePath(const QString &xmlFilePath);
 
             void generateInformationToXML();
+            /**
+             * @brief getMergeCommandLine generate the command line
+             * @return the arguments of the command line
+             */
+            QStringList *getMergeCommandLine();
     };
 }
 
