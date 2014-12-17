@@ -23,11 +23,6 @@ namespace Controller
 	{
         public:
             /**
-             * @brief The associated transcoder controller.
-             */
-            Controller::OCTDispatcher* m_transcoder;
-
-            /**
              * @brief Default constructor.
              */
             Transcoder();

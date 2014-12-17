@@ -34,7 +34,6 @@ using namespace std;
 #include "Model/Database.h"
 #include "Model/Project.h"
 #include "Model/Information.h"
-#include <QDebug>
 
 Controller::Exporter::Exporter(QString userKey, QString depot) : m_Database(NULL) {
     this->m_Database = new Model::Database(userKey, depot);
