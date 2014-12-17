@@ -83,8 +83,6 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
                     case Model::Stream::SUBTITLE:
                             s = new Subtitle(stream);
                             break;
-                    case Model::Stream::ATTACHMENT:
-                            break;
                 }
 
                 StreamWrapper* theData;

@@ -4,9 +4,10 @@
 View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispatcher) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    dispatcher(theDispatcher)
+    m_dispatcher(theDispatcher)
 {
     ui->setupUi(this);
+    ui->tab_files->setDispatcher(m_dispatcher);
 }
 
 View::MainWindow::~MainWindow()

@@ -50,6 +50,7 @@ using namespace std;
 #include <QDebug>
 #include <QFile>
 #include <QIODEVICE>
+#include <QMimeDatabase>
 
 #include <Model/Attachment.h>
 #include <Model/Audio.h>
@@ -104,10 +105,6 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     initSetting("ffprobe","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
     initSetting("mkvmerge","C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\mkvmerge.exe");
 
-    addFile("C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\test1.mkv");
-    addFile("C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\test2.mkv");
-    addFile("C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\test1.mp3");
-
     qDebug() <<  *m_currentProject->getMergeCommandLine();
 
     m_merger->createMKVFile(m_currentProject);
@@ -123,9 +120,18 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 }
 
 void Controller::OCTDispatcher::addFile(QString filePath) {
-    QString infos(m_transcoder->getInfo(filePath));
-    Model::File *file = new Model::File(filePath,infos);
-    this->m_currentProject->addFileToList(file);
+    QMimeDatabase db;
+    QMimeType mime = db.mimeTypeForFile(filePath);
+    if(mime.name().contains("video") || mime.name().contains("audio") || mime.name().contains("subrip") || mime.name().contains("ssa") || mime.name().contains("ass")){
+        QString infos(m_transcoder->getInfo(filePath));
+        Model::File *file = new Model::File(filePath,infos);
+        this->m_currentProject->addFileToList(file);
+    }
+    else{
+        Model::Attachment *attachement = new Model::Attachment(filePath);
+        this->m_currentProject->addAttachment(attachement);
+    }
+
 }
 
 void Controller::OCTDispatcher::save() {

@@ -17,10 +17,6 @@ namespace View
         Q_OBJECT
 
         public:
-            /**
-             * @brief The associated OCTDispatcher.
-             */
-            Controller::OCTDispatcher* m_unnamed_OCTDispatcher_;
 
             /**
              * @brief Explicit constructor.
@@ -43,7 +39,7 @@ namespace View
             /**
              * @brief The associated dispatcher.
              */
-            Controller::OCTDispatcher *dispatcher;
+            Controller::OCTDispatcher *m_dispatcher;
 
     };
 }

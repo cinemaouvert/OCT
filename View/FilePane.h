@@ -3,9 +3,16 @@
 
 #include <QWidget>
 
+#include <Controller/OCTDispatcher.h>
+
 namespace Ui {
 class FilePane;
 }
+namespace Controller
+{
+    class OCTDispatcher;
+}
+
 
 class FilePane : public QWidget
 {
@@ -13,6 +20,7 @@ class FilePane : public QWidget
 
 public:
     explicit FilePane(QWidget *parent = 0);
+    void setDispatcher(Controller::OCTDispatcher *dispatcheur);
     ~FilePane();
 
 private slots:
@@ -20,6 +28,7 @@ private slots:
 
 private:
     Ui::FilePane *ui;
+    Controller::OCTDispatcher * m_dispatcher;
 };
 
 #endif // FILEPANE_H
