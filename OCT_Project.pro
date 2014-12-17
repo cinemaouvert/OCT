@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     View/AudioPane.cpp \
     View/InformationPane.cpp \
     View/SubtitlePane.cpp \
-    View/EncodePane.cpp
+    View/EncodePane.cpp \
+    View/VideoPlayer.cpp
 
 HEADERS  += \
     Controller/Exporter.h \
@@ -73,7 +74,8 @@ HEADERS  += \
     View/AudioPane.h \
     View/InformationPane.h \
     View/SubtitlePane.h \
-    View/EncodePane.h
+    View/EncodePane.h \
+    View/VideoPlayer.h
 
 FORMS    += \
     View/mainwindow.ui \
@@ -82,4 +84,5 @@ FORMS    += \
     View/audiopane.ui \
     View/informationpane.ui \
     View/subtitlepane.ui \
-    View/encodepane.ui
+    View/encodepane.ui \
+    View/videoplayer.ui

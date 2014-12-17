@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QVideoWidget>
+#include <QMediaPlayer>
 
 namespace Ui {
 class VideoPane;
@@ -16,9 +17,12 @@ public:
     explicit VideoPane(QWidget *parent = 0);
     ~VideoPane();
 
+private slots:
+    void on_playButton_clicked();
+
 private:
     Ui::VideoPane *ui;
-    QVideoWidget *qvideoWidget;
+    QMediaPlayer * player;
 };
 
 #endif // VIDEOPANE_H

@@ -803,30 +803,30 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
-             <widget class="QWidget" name="videoWidget" native="true"/>
+             <widget class="VideoPlayer" name="videoWidget" native="true"/>
             </item>
             <item>
-             <widget class="QWidget" name="widget_2" native="true">
+             <widget class="QWidget" name="videoButtons" native="true">
               <layout class="QHBoxLayout" name="horizontalLayout_2">
                <property name="topMargin">
                 <number>0</number>
                </property>
                <item>
-                <widget class="QPushButton" name="pushButton">
+                <widget class="QPushButton" name="playButton">
                  <property name="text">
                   <string>Play</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_2">
+                <widget class="QPushButton" name="pauseButton">
                  <property name="text">
                   <string>Pause</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_3">
+                <widget class="QPushButton" name="stopButton">
                  <property name="text">
                   <string>Stop</string>
                  </property>
@@ -874,6 +874,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VideoPlayer</class>
+   <extends>QWidget</extends>
+   <header>View/VideoPlayer.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
