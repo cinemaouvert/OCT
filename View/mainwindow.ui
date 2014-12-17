@@ -46,7 +46,7 @@
 </string>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="FilePane" name="tab_files">
          <property name="sizePolicy">
@@ -67,7 +67,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget_2">
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="VideoPane" name="tab">
              <attribute name="title">
@@ -104,10 +104,26 @@
           </item>
          </layout>
         </widget>
-        <widget class="SubtitlePane" name="tab_subtitle">
+        <widget class="QWidget" name="tab_subtitle">
          <attribute name="title">
           <string>Sous-titres</string>
          </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QTabWidget" name="tabWidget_4">
+            <widget class="SubtitlePane" name="tab_5">
+             <attribute name="title">
+              <string>Tab 1</string>
+             </attribute>
+            </widget>
+            <widget class="SubtitlePane" name="tab_6">
+             <attribute name="title">
+              <string>Tab 2</string>
+             </attribute>
+            </widget>
+           </widget>
+          </item>
+         </layout>
         </widget>
         <widget class="InformationPane" name="tab_infos">
          <attribute name="title">
