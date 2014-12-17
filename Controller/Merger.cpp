@@ -34,7 +34,7 @@ using namespace std;
 #include "Model/Project.h"
 #include <QProcess>
 
-Controller::Merger::Merger() {
+Controller::Merger::Merger() : m_settings(NULL) {
      m_settings = new QSettings("CinemaOuvert", "OpenCinemaTranscoder");
 }
 
@@ -50,5 +50,10 @@ void Controller::Merger::createMKVFile(Model::Project *project) {
     QProcess myProcess;
     myProcess.start(program, arguments);
     myProcess.waitForFinished();
+}
+
+Controller::Merger::~Merger()
+{
+    delete(m_settings);
 }
 

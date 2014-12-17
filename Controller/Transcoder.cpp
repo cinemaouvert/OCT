@@ -35,8 +35,13 @@ using namespace std;
 #include <QProcess>
 
 
-Controller::Transcoder::Transcoder() {
+Controller::Transcoder::Transcoder() : m_settings(NULL) {
     m_settings = new QSettings("CinemaOuvert", "OpenCinemaTranscoder");
+}
+
+Controller::Transcoder::~Transcoder()
+{
+    delete(m_settings);
 }
 
 QString Controller::Transcoder::getInfo(QString filePath) {

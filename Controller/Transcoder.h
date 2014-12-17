@@ -32,6 +32,8 @@ namespace Controller
              */
             Transcoder();
 
+            ~Transcoder();
+
             /**
              * @brief This method retrieves informations from a given file.
              * @param filePath to the file.

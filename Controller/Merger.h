@@ -58,10 +58,6 @@ namespace Controller
 
 
         public:
-            /**
-             * @brief The associated merger.
-             */
-            Controller::OCTDispatcher* m_merger;
 
             /**
              * @brief Default constructor.
@@ -79,6 +75,8 @@ namespace Controller
              * @param project
              */
             void createMKVFile(Model::Project *project);
+
+            ~Merger();
 
         private:
             /**
