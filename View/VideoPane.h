@@ -2,6 +2,7 @@
 #define VIDEOPANE_H
 
 #include <QWidget>
+#include <QVideoWidget>
 
 namespace Ui {
 class VideoPane;
@@ -17,6 +18,7 @@ public:
 
 private:
     Ui::VideoPane *ui;
+    QVideoWidget *qvideoWidget;
 };
 
 #endif // VIDEOPANE_H

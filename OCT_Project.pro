@@ -10,6 +10,8 @@ greaterThan(QT_MAJOR_VERSION, 4):
     QT += widgets
     QT += xml
     QT += network
+    QT += multimediawidgets
+    QT += multimedia
 
 TARGET = OCT_Project
 TEMPLATE = app
