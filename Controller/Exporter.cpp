@@ -41,6 +41,9 @@ Controller::Exporter::Exporter(QString userKey, QString depot) : m_Database(NULL
 }
 
 QString Controller::Exporter::createMagnetLink(QString filepath) {
+    //QProcess mkTorrent
+    //QProcess jar to generate magnetlink
+
     throw "Not yet implemented";
 }
 
