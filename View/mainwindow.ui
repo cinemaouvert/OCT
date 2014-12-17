@@ -28,15 +28,25 @@
           <verstretch>1</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <family>Malgun Gothic</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="autoFillBackground">
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">
+         <string notr="true">#tabWidget::tab-bar{
+	alignment:center; 
+}
 </string>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="FilePane" name="tab_files">
          <property name="sizePolicy">
@@ -49,29 +59,64 @@
           <string>Fichiers</string>
          </attribute>
         </widget>
-        <widget class="VideoPane" name="tab_video">
+        <widget class="QWidget" name="tab_video">
          <attribute name="title">
-          <string>video</string>
+          <string>Vidéos</string>
          </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QTabWidget" name="tabWidget_2">
+            <property name="currentIndex">
+             <number>1</number>
+            </property>
+            <widget class="VideoPane" name="tab">
+             <attribute name="title">
+              <string>Tab 1</string>
+             </attribute>
+            </widget>
+            <widget class="VideoPane" name="tab_2">
+             <attribute name="title">
+              <string>Tab 2</string>
+             </attribute>
+            </widget>
+           </widget>
+          </item>
+         </layout>
         </widget>
-        <widget class="AudioPane" name="tab_sound">
+        <widget class="QWidget" name="tab_sound">
          <attribute name="title">
-          <string>son</string>
+          <string>Audio</string>
          </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QTabWidget" name="tabWidget_3">
+            <widget class="AudioPane" name="tab_3">
+             <attribute name="title">
+              <string>Tab 1</string>
+             </attribute>
+            </widget>
+            <widget class="AudioPane" name="tab_4">
+             <attribute name="title">
+              <string>Tab 2</string>
+             </attribute>
+            </widget>
+           </widget>
+          </item>
+         </layout>
         </widget>
         <widget class="SubtitlePane" name="tab_subtitle">
          <attribute name="title">
-          <string>sous-titre</string>
+          <string>Sous-titres</string>
          </attribute>
         </widget>
         <widget class="InformationPane" name="tab_infos">
          <attribute name="title">
-          <string>informations</string>
+          <string>Informations</string>
          </attribute>
         </widget>
         <widget class="EncodePane" name="tab_encode">
          <attribute name="title">
-          <string>encodage</string>
+          <string>Encodage</string>
          </attribute>
         </widget>
        </widget>
@@ -125,7 +170,7 @@
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
+    <enum>BottomToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
