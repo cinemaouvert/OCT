@@ -15,6 +15,9 @@ public:
     explicit FilePane(QWidget *parent = 0);
     ~FilePane();
 
+private slots:
+    void on_pushButton_2_clicked();
+
 private:
     Ui::FilePane *ui;
 };

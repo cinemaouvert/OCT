@@ -99,7 +99,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /***********************/
     /*****Romain Test *****/
-    /*
+/*
     initSetting("ffmpeg","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
     initSetting("ffprobe","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
     initSetting("mkvmerge","C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\mkvmerge.exe");
@@ -110,13 +110,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     qDebug() <<  *m_currentProject->getMergeCommandLine();
 
-    QString program = m_settings->value("mkvmerge").toString();
-    QStringList arguments;
-        arguments << *m_currentProject->getMergeCommandLine();
-
-    QProcess myProcess;
-    myProcess.start(program, arguments);
-    myProcess.waitForFinished();
+    m_merger->createMKVFile(m_currentProject);
 */
     /***********************/
     /*****Denis Test *****/

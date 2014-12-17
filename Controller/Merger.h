@@ -37,6 +37,7 @@ using namespace std;
 #include "Model/Project.h"
 #include "Model/Attachment.h"
 #include "Model/File.h"
+#include <QSettings>
 
 namespace Controller
 {
@@ -79,7 +80,11 @@ namespace Controller
              */
             void createMKVFile(Model::Project *project);
 
-
+        private:
+            /**
+             * @brief The associated settings.
+             */
+            QSettings                   *m_settings;
 
 
 

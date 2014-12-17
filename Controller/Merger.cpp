@@ -32,9 +32,10 @@ using namespace std;
 #include "Controller/Merger.h"
 #include "Controller/OCTDispatcher.h"
 #include "Model/Project.h"
-
+#include <QProcess>
 
 Controller::Merger::Merger() {
+     m_settings = new QSettings("CinemaOuvert", "OpenCinemaTranscoder");
 }
 
 void Controller::Merger::createXML(Model::Project *project) {
@@ -42,6 +43,12 @@ void Controller::Merger::createXML(Model::Project *project) {
 }
 
 void Controller::Merger::createMKVFile(Model::Project *project) {
-    throw "Not yet implemented";
+    QString program = m_settings->value("mkvmerge").toString();
+    QStringList arguments;
+    arguments << *project->getMergeCommandLine();
+
+    QProcess myProcess;
+    myProcess.start(program, arguments);
+    myProcess.waitForFinished();
 }
 
