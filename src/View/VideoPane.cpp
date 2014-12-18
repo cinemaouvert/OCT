@@ -18,7 +18,7 @@ VideoPane::VideoPane(QWidget *parent) :
 
     ui->videoWidget->show();
 
-    this->loadFile("H:\\Media\\movie1.mkv");
+    this->loadFile("H:\\Downloads\\Strange Empire S01E05 FASTSUB VOSTFR 720p HDTV x264-ADDiCTiON zone-telechargement com\\Strange.Empire.S01E05.FASTSUB.VOSTFR.720p.HDTV.x264-ADDiCTiON.zone-telechargement.com.mkv");
 
 }
 
@@ -53,19 +53,32 @@ void VideoPane::on_stopButton_clicked()
 
 void VideoPane::loadFile(QString filepath)
 {
-    player->load("H:\\Media\\movie1.mkv",false);
+    player->load(filepath,false);
     ui->startSlider->setMaximum(player->duration());
     ui->stopSlider->setMaximum(player->duration());
+    ui->stopSlider->setValue(player->duration());
+    ui->timeStop->setTime(QTime(0,0).addMSecs(player->duration()));
+
 }
 
-void VideoPane::on_stopSlider_sliderReleased()
+
+void VideoPane::on_stopSlider_sliderMoved(int position)
 {
-    player->setStopPosition(qint64(ui->stopSlider->value()));
-    player->setPosition(qint64(ui->stopSlider->value()));
+    if(position>ui->startSlider->value()){
+        player->setStopPosition(qint64(position));
+        ui->timeStop->setTime(QTime(0,0).addMSecs(position));
+    }else{
+        ui->stopSlider->setValue(ui->startSlider->value());
+    }
 }
 
-void VideoPane::on_startSlider_sliderReleased()
+void VideoPane::on_startSlider_sliderMoved(int position)
 {
-    player->setStartPosition(qint64(ui->startSlider->value()));
-    player->setPosition(qint64(ui->startSlider->value()));
+    if(position<ui->stopSlider->value()){
+        player->setStartPosition(qint64(position));
+        ui->timeStart->setTime(QTime(0,0).addMSecs(position));
+    }else{
+        ui->startSlider->setValue(ui->stopSlider->value());
+    }
+
 }

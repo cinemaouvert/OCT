@@ -23,9 +23,9 @@ private slots:
 
     void on_stopButton_clicked();
 
-    void on_stopSlider_sliderReleased();
+    void on_stopSlider_sliderMoved(int position);
 
-    void on_startSlider_sliderReleased();
+    void on_startSlider_sliderMoved(int position);
 
 private:
     Ui::VideoPane *ui;

@@ -908,22 +908,38 @@
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QGroupBox" name="groupBox_Cropping">
+        <property name="maximumSize">
+         <size>
+          <width>400</width>
+          <height>150</height>
+         </size>
+        </property>
         <property name="title">
          <string/>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="4" column="3">
+         <item row="4" column="2">
+          <widget class="QSpinBox" name="spinLeft"/>
+         </item>
+         <item row="3" column="3">
+          <widget class="QSpinBox" name="spinTop"/>
+         </item>
+         <item row="4" column="4">
+          <widget class="QSpinBox" name="spinRight"/>
+         </item>
+         <item row="3" column="2">
+          <widget class="QLabel" name="label_CroppingLeft">
+           <property name="text">
+            <string>gauche :</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="3">
           <widget class="QLabel" name="label_CroppingBottom">
            <property name="text">
             <string>bas :</string>
            </property>
           </widget>
-         </item>
-         <item row="3" column="4">
-          <widget class="QComboBox" name="comboBox_CroppingRight"/>
-         </item>
-         <item row="1" column="3">
-          <widget class="QComboBox" name="comboBox_CroppingTop"/>
          </item>
          <item row="0" column="0">
           <widget class="QLabel" name="label_Cropping">
@@ -932,7 +948,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="4">
+         <item row="3" column="4">
           <widget class="QLabel" name="label_CroppingRight">
            <property name="text">
             <string>droite :</string>
@@ -946,18 +962,8 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="2">
-          <widget class="QComboBox" name="comboBox_CroppingLeft"/>
-         </item>
-         <item row="2" column="2">
-          <widget class="QLabel" name="label_CroppingLeft">
-           <property name="text">
-            <string>gauche :</string>
-           </property>
-          </widget>
-         </item>
          <item row="5" column="3">
-          <widget class="QComboBox" name="comboBox_CroppingBottom"/>
+          <widget class="QSpinBox" name="spinBot"/>
          </item>
         </layout>
        </widget>
@@ -988,10 +994,17 @@
                 <height>50</height>
                </size>
               </property>
+              <zorder>groupBox_Cropping</zorder>
              </widget>
             </item>
             <item>
              <widget class="QWidget" name="videoButtons" native="true">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>35</height>
+               </size>
+              </property>
               <layout class="QHBoxLayout" name="horizontalLayout_2">
                <property name="leftMargin">
                 <number>5</number>
@@ -1027,24 +1040,6 @@
                  </property>
                 </widget>
                </item>
-               <item>
-                <layout class="QVBoxLayout" name="verticalLayout_7">
-                 <item>
-                  <widget class="QSlider" name="startSlider">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QSlider" name="stopSlider">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
               </layout>
              </widget>
             </item>
@@ -1061,7 +1056,18 @@
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox_EntryPointA"/>
+            <widget class="QSlider" name="startSlider">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTimeEdit" name="timeStart">
+             <property name="displayFormat">
+              <string>hh:mm:ss:z</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -1070,12 +1076,23 @@
            <item>
             <widget class="QLabel" name="label_EntryPointB">
              <property name="text">
-              <string>Point d'entrée (B)</string>
+              <string>Point de sortie (B)</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox_EntryPointB"/>
+            <widget class="QSlider" name="stopSlider">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTimeEdit" name="timeStop">
+             <property name="displayFormat">
+              <string>hh:mm:ss:z</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
