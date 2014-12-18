@@ -88,7 +88,7 @@ int Model::Stream::getEnumValue(QString type)
        return 1;
     }else if(type == "subtitle"){
        return 2;
-    }else if(type == "attachment"){
+    }else{
        return 3;
     }
 }

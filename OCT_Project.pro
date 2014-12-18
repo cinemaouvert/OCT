@@ -88,3 +88,5 @@ FORMS    += \
     src/View/subtitlepane.ui \
     src/View/encodepane.ui \
     src/View/videoplayer.ui
+
+RESOURCES += images.qrc
