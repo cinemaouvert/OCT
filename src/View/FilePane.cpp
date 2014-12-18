@@ -1,6 +1,6 @@
 #include "FilePane.h"
 #include "ui_filepane.h"
-
+#include "MyModel.h"
 #include <QFileDialog>
 #include <QDebug>
 #include "src/Model/Attachment.h"
@@ -13,6 +13,10 @@ FilePane::FilePane(QWidget *parent) :
 {
     ui->setupUi(this);
     model = new QStringListModel(this);
+
+    MyModel *m = new MyModel(12,12);
+    ui->tableView->setModel(m);
+
 }
 
 void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
