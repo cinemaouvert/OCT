@@ -46,7 +46,7 @@
 </string>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="FilePane" name="tab_files">
          <property name="sizePolicy">
@@ -67,7 +67,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget_2">
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="VideoPane" name="tab">
              <attribute name="title">
@@ -202,37 +202,37 @@
   <customwidget>
    <class>FilePane</class>
    <extends>QWidget</extends>
-   <header>View/FilePane.h</header>
+   <header>src/View/FilePane.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>VideoPane</class>
    <extends>QWidget</extends>
-   <header>View/VideoPane.h</header>
+   <header>src/View/VideoPane.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>AudioPane</class>
    <extends>QWidget</extends>
-   <header>View/AudioPane.h</header>
+   <header>src/View/AudioPane.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>EncodePane</class>
    <extends>QWidget</extends>
-   <header>View/EncodePane.h</header>
+   <header>src/View/EncodePane.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SubtitlePane</class>
    <extends>QWidget</extends>
-   <header>View/SubtitlePane.h</header>
+   <header>src/View/SubtitlePane.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>InformationPane</class>
    <extends>QWidget</extends>
-   <header>View/InformationPane.h</header>
+   <header>src/View/InformationPane.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
