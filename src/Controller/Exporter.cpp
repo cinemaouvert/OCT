@@ -28,6 +28,7 @@
 
 #include <exception>
 using namespace std;
+#include <QProcess>
 
 #include "src/Controller/Exporter.h"
 #include "src/Controller/OCTDispatcher.h"
@@ -41,10 +42,17 @@ Controller::Exporter::Exporter(QString userKey, QString depot) : m_Database(NULL
 
 QString Controller::Exporter::createMagnetLink(QString filepath) {
     //QProcess mkTorrent
-    //QProcess jar to generate magnetlink
+    QStringList arguments;
+        arguments << filepath;
 
-    throw "Not yet implemented";
+    QProcess myProcess;
+    myProcess.start("java -jar OCT.jar", arguments);
+    myProcess.waitForFinished();
+    QString retour(myProcess.readAllStandardOutput());
+    return retour;
 }
+
+
 
 bool Controller::Exporter::sendInformationsToJSON(Model::Project* project)
 {
