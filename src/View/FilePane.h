@@ -14,6 +14,11 @@ namespace Controller
     class OCTDispatcher;
 }
 
+namespace Model
+{
+    class File;
+    class Attachment;
+}
 
 class FilePane : public QWidget
 {
@@ -22,6 +27,7 @@ class FilePane : public QWidget
 public:
     explicit FilePane(QWidget *parent = 0);
     void setDispatcher(Controller::OCTDispatcher *dispatcheur);
+    void refresh();
     ~FilePane();
 
 private slots:
@@ -33,6 +39,7 @@ private:
     Ui::FilePane *ui;
     Controller::OCTDispatcher * m_dispatcher;
     QStringListModel *model;
+    QStringList list;
     void addItem(QString name);
 
 };

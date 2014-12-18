@@ -59,8 +59,8 @@ using namespace std;
 #include <src/Model/Project.h>
 
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
-                                            m_mainWindow(NULL) ,
-                                            m_settings(NULL) ,
+    m_mainWindow(NULL) ,
+    m_settings(NULL) ,
                                             m_streamLoader(NULL) ,
                                             m_updater(NULL) ,
                                             m_merger(NULL) ,
@@ -131,12 +131,14 @@ void Controller::OCTDispatcher::addFile(QString filePath) {
         Model::Attachment *attachement = new Model::Attachment(filePath);
         this->m_currentProject->addAttachment(attachement);
     }
+    this->m_mainWindow->refresh();
 
 }
 
 void Controller::OCTDispatcher::removeFile(QString filePath)
 {
     this->m_currentProject->removeFile(filePath);
+    this->m_mainWindow->refresh();
 }
 
 void Controller::OCTDispatcher::save() {
@@ -183,6 +185,11 @@ void Controller::OCTDispatcher::initSettings()
     initSetting("ffmpeg","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
     initSetting("ffprobe","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
     initSetting("mkvToolnix","E:\\M2\\Projet\\Dependances\\mkvtoolnix\\mkvinfo.exe");
+}
+
+Model::Project *Controller::OCTDispatcher::getCurrentProject() const
+{
+    return this->m_currentProject;
 }
 
 void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &value)

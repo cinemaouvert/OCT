@@ -123,14 +123,21 @@ void Model::Project::removeFile(QString filePath)
     int i = 0;
     while(i < this->m_fileList->size() && this->m_fileList->at(i)->getFilePath().compare(filePath) !=0 )
         i++;
-    if (i < this->m_fileList->size())
-        this->m_fileList->removeAt(i-1);
+    if (i < this->m_fileList->size()){
+        File *f = m_fileList->at(i);
+        this->m_fileList->removeAt(i);
+        delete(f);
+    }
     else{
         i = 0;
         while(i < this->m_attachments->size() && this->m_attachments->at(i)->filepath().compare(filePath) !=0 )
             i++;
-        if (i < this->m_attachments->size())
-            this->m_attachments->removeAt(i-1);
+
+        if (i < this->m_attachments->size()){
+            Attachment *a = m_attachments->at(i);
+            this->m_attachments->removeAt(i);
+            delete(a);
+        }
     }
 }
 

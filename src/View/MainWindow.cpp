@@ -10,6 +10,11 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
     ui->tab_files->setDispatcher(m_dispatcher);
 }
 
+void View::MainWindow::refresh()
+{
+    ui->tab_files->refresh();
+}
+
 View::MainWindow::~MainWindow()
 {
     delete ui;

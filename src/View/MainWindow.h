@@ -26,6 +26,11 @@ namespace View
             explicit MainWindow(QWidget *parent = 0,Controller::OCTDispatcher *dispatcher = NULL);
 
             /**
+             * @brief Refresh MainWindow.
+             */
+            void refresh();
+
+            /**
              * @brief Destructeur.
              */
             ~MainWindow();
