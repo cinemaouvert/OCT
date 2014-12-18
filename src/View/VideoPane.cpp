@@ -31,3 +31,19 @@ void VideoPane::on_playButton_clicked()
 {
     player->play("H:\\Media\\movie1.mkv");
 }
+
+void VideoPane::on_pauseButton_clicked()
+{
+    if(player->isPaused()){
+        player->pause(false);
+    }else{
+        player->pause(true);
+    }
+}
+
+void VideoPane::on_stopButton_clicked()
+{
+    if(player->isPlaying()){
+        player->stop();
+    }
+}

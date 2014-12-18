@@ -15,19 +15,6 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <spacer name="horizontalSpacer_12">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
     <layout class="QVBoxLayout" name="verticalLayout_6">
      <property name="leftMargin">
       <number>0</number>
@@ -914,37 +901,11 @@
     </layout>
    </item>
    <item>
-    <spacer name="horizontalSpacer_11">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
     <widget class="QGroupBox" name="groupBoxMainVideoPane">
      <property name="title">
       <string/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <spacer name="verticalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
       <item>
        <widget class="QGroupBox" name="groupBox_Cropping">
         <property name="title">
@@ -1002,38 +963,47 @@
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <widget class="QGroupBox" name="groupBox_VideoPlayerMain">
         <property name="title">
          <string/>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="topMargin">
+          <number>5</number>
+         </property>
          <item>
           <widget class="QGroupBox" name="groupBox_VideoPlayer">
            <property name="title">
             <string/>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="topMargin">
+             <number>5</number>
+            </property>
             <item>
-             <widget class="VideoPlayer" name="videoWidget" native="true"/>
+             <widget class="VideoPlayer" name="videoWidget" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QWidget" name="videoButtons" native="true">
               <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <property name="leftMargin">
+                <number>5</number>
+               </property>
                <property name="topMargin">
-                <number>0</number>
+                <number>5</number>
+               </property>
+               <property name="rightMargin">
+                <number>5</number>
+               </property>
+               <property name="bottomMargin">
+                <number>5</number>
                </property>
                <item>
                 <widget class="QPushButton" name="playButton">
@@ -1093,34 +1063,8 @@
         </layout>
        </widget>
       </item>
-      <item>
-       <spacer name="verticalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
      </layout>
     </widget>
-   </item>
-   <item>
-    <spacer name="horizontalSpacer_13">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>

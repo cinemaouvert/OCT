@@ -21,9 +21,13 @@ public:
 private slots:
     void on_playButton_clicked();
 
+    void on_pauseButton_clicked();
+
+    void on_stopButton_clicked();
+
 private:
     Ui::VideoPane *ui;
-    QtAV::AVPlayer * player;
+    QtAV::AVPlayer *player;
 };
 
 #endif // VIDEOPANE_H
