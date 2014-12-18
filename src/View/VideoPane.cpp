@@ -29,21 +29,23 @@ VideoPane::~VideoPane()
 
 void VideoPane::on_playButton_clicked()
 {
-    player->play("H:\\Media\\movie1.mkv");
-}
-
-void VideoPane::on_pauseButton_clicked()
-{
-    if(player->isPaused()){
+    if(!player->isPlaying()){
+        player->play("H:\\Media\\movie1.mkv");
+        ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_pause.png"));
+    }else if(player->isPaused()){
         player->pause(false);
+        ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_pause.png"));
     }else{
         player->pause(true);
+        ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_play.png"));
     }
 }
+
 
 void VideoPane::on_stopButton_clicked()
 {
     if(player->isPlaying()){
         player->stop();
+        ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_play.png"));
     }
 }

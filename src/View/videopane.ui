@@ -1008,21 +1008,35 @@
                <item>
                 <widget class="QPushButton" name="playButton">
                  <property name="text">
-                  <string>Play</string>
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../images.qrc">
+                   <normaloff>:/icons/resources/icons/icon_play.png</normaloff>:/icons/resources/icons/icon_play.png</iconset>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pauseButton">
-                 <property name="text">
-                  <string>Pause</string>
+                <spacer name="horizontalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                </widget>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
                <item>
                 <widget class="QPushButton" name="stopButton">
                  <property name="text">
-                  <string>Stop</string>
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../images.qrc">
+                   <normaloff>:/icons/resources/glyphicons/glyphicons_175_stop.png</normaloff>:/icons/resources/glyphicons/glyphicons_175_stop.png</iconset>
                  </property>
                 </widget>
                </item>
@@ -1076,6 +1090,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../images.qrc"/>
+ </resources>
  <connections/>
 </ui>
