@@ -133,6 +133,12 @@ namespace Model
              * @return The name member value.
              */
             QString getName();
+
+            /**
+             * @brief Accessor on the filePath member.
+             * @return The filePath member value.
+             */
+            QString getFilePath();
 	};
 }
 

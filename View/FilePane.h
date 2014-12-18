@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include <Controller/OCTDispatcher.h>
+#include <QStringListModel>
 
 namespace Ui {
 class FilePane;
@@ -26,9 +27,14 @@ public:
 private slots:
     void on_pushButton_2_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::FilePane *ui;
     Controller::OCTDispatcher * m_dispatcher;
+    QStringListModel *model;
+    void addItem(QString name);
+
 };
 
 #endif // FILEPANE_H

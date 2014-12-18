@@ -137,6 +137,11 @@ QString Model::File::getName() {
     return this->m_name;
 }
 
+QString Model::File::getFilePath()
+{
+    return this->m_filePath;
+}
+
 
 
 

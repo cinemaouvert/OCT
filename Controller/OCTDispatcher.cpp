@@ -134,6 +134,11 @@ void Controller::OCTDispatcher::addFile(QString filePath) {
 
 }
 
+void Controller::OCTDispatcher::removeFile(QString filePath)
+{
+    this->m_currentProject->removeFile(filePath);
+}
+
 void Controller::OCTDispatcher::save() {
 	throw "Not yet implemented";
 }

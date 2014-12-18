@@ -183,6 +183,12 @@ namespace Model
             void addAttachment(Model::Attachment *attachment);
 
             /**
+             * @brief remove a file to the current project.
+             * @param filePath
+             */
+            void removeFile(QString filePath);
+
+            /**
              * @brief Accessor on the path of the XML file.
              * @return The XML file path value member.
              */

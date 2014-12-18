@@ -118,6 +118,22 @@ void Model::Project::addAttachment(Model::Attachment *attachment)
     this->m_attachments->push_back(attachment);
 }
 
+void Model::Project::removeFile(QString filePath)
+{
+    int i = 0;
+    while(i < this->m_fileList->size() && this->m_fileList->at(i)->getFilePath().compare(filePath) !=0 )
+        i++;
+    if (i < this->m_fileList->size())
+        this->m_fileList->removeAt(i-1);
+    else{
+        i = 0;
+        while(i < this->m_attachments->size() && this->m_attachments->at(i)->filepath().compare(filePath) !=0 )
+            i++;
+        if (i < this->m_attachments->size())
+            this->m_attachments->removeAt(i-1);
+    }
+}
+
 QString Model::Project::name() const
 {
     return m_name;

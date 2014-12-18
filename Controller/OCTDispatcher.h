@@ -137,6 +137,12 @@ namespace Controller
             void addFile(QString filePath);
 
             /**
+             * @brief remove a file to the current project.
+             * @param filePath
+             */
+            void removeFile(QString filePath);
+
+            /**
              * @brief Save the current project.
              */
             void save();
