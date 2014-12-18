@@ -18,7 +18,7 @@ VideoPane::VideoPane(QWidget *parent) :
 
     ui->videoWidget->show();
 
-
+    this->loadFile("H:\\Media\\movie1.mkv");
 
 }
 
@@ -30,8 +30,9 @@ VideoPane::~VideoPane()
 void VideoPane::on_playButton_clicked()
 {
     if(!player->isPlaying()){
-        player->play("H:\\Media\\movie1.mkv");
-        ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_pause.png"));
+        player->play();
+        if(player->isPlaying())
+            ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_pause.png"));
     }else if(player->isPaused()){
         player->pause(false);
         ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_pause.png"));
@@ -48,4 +49,23 @@ void VideoPane::on_stopButton_clicked()
         player->stop();
         ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_play.png"));
     }
+}
+
+void VideoPane::loadFile(QString filepath)
+{
+    player->load("H:\\Media\\movie1.mkv",false);
+    ui->startSlider->setMaximum(player->duration());
+    ui->stopSlider->setMaximum(player->duration());
+}
+
+void VideoPane::on_stopSlider_sliderReleased()
+{
+    player->setStopPosition(qint64(ui->stopSlider->value()));
+    player->setPosition(qint64(ui->stopSlider->value()));
+}
+
+void VideoPane::on_startSlider_sliderReleased()
+{
+    player->setStartPosition(qint64(ui->startSlider->value()));
+    player->setPosition(qint64(ui->startSlider->value()));
 }

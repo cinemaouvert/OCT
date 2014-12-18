@@ -23,9 +23,15 @@ private slots:
 
     void on_stopButton_clicked();
 
+    void on_stopSlider_sliderReleased();
+
+    void on_startSlider_sliderReleased();
+
 private:
     Ui::VideoPane *ui;
     QtAV::AVPlayer *player;
+
+    void loadFile(QString filepath);
 };
 
 #endif // VIDEOPANE_H
