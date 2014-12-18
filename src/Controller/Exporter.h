@@ -54,6 +54,14 @@ namespace Controller
 {
 	class Exporter
     {
+        private:
+            /**
+             * @brief This method creates a torrent file to create a magnet link.
+             * @param filepath
+             * @return
+             */
+            QString createTorrentFile(QString filepath, QString nomTorrent);
+
         public:
 
             /**
@@ -71,7 +79,7 @@ namespace Controller
              * @param filepath
              * @return
              */
-            QString createMagnetLink(QString filepath);
+            QString createMagnetLink(QString filepath, QString nomTorrent);
 
             /**
              * @brief This method sends information in json  to the database.

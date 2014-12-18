@@ -35,24 +35,40 @@ using namespace std;
 #include "src/Model/Database.h"
 #include "src/Model/Project.h"
 #include "src/Model/Information.h"
+#include "src/configOCT.h"
 
 Controller::Exporter::Exporter(QString userKey, QString depot) : m_Database(NULL) {
     this->m_Database = new Model::Database(userKey, depot);
 }
 
-QString Controller::Exporter::createMagnetLink(QString filepath) {
-    //QProcess mkTorrent
+QString Controller::Exporter::createMagnetLink(QString filepath, QString nomTorrent) {
+
     QStringList arguments;
-        arguments << filepath;
+        arguments << "-jar" << "OCT.jar" <<createTorrentFile(filepath, nomTorrent);
 
     QProcess myProcess;
-    myProcess.start("java -jar OCT.jar", arguments);
+    myProcess.start("java", arguments);
     myProcess.waitForFinished();
     QString retour(myProcess.readAllStandardOutput());
     return retour;
 }
 
+QString Controller::Exporter::createTorrentFile(QString filepath, QString nomTorrent) {
+    nomTorrent.append(".torrent");
+    QStringList arguments;
+        arguments << "-v" << "-p" << "-a" << configOCT::ADDRESSTRACKER << "-o" << nomTorrent << filepath;
 
+    QString program = "mktorrent";
+    #if defined(Q_OS_WIN)
+        program = "mktorrent.exe";
+    #endif
+
+    QProcess myProcess;
+    myProcess.start(program, arguments);
+    myProcess.waitForFinished();
+   // QString retour(myProcess.readAllStandardOutput());
+    return nomTorrent;
+}
 
 bool Controller::Exporter::sendInformationsToJSON(Model::Project* project)
 {
