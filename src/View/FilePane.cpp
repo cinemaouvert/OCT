@@ -83,15 +83,11 @@ void FilePane::refresh()
 
 
     foreach(Model::File *f , *(this->m_dispatcher->getCurrentProject()->fileList())){
-         int cptv = 0;
-         int cpta = 0;
-         int cpts = 0;
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
 
             if(sw->getOldStream()->getType() == Model::Stream::VIDEO){
                 i++;
-                cptv++;
-                m->setItem(i,0,QString("piste: %2 : %1").arg(f->getName()).arg(cptv));
+                m->setItem(i,0,QString("piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
                 Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
                 m->setItem(i,1,p->value());
 
@@ -107,8 +103,7 @@ void FilePane::refresh()
             }
             else if(sw->getOldStream()->getType() == Model::Stream::AUDIO){
                 j++;
-                cpta++;
-                m->setItem(j,0,QString("Piste: %2 : %1").arg(f->getName()).arg(cpta));
+                m->setItem(j,0,QString("Piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
                 Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
                 m->setItem(j,1,p->value());
 
