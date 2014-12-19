@@ -60,7 +60,10 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
         }
     }
     this->m_outFilePath = finalOutput;
-    this->m_name = filePath;
+
+    QStringList name = filePath.split("/");
+
+    this->m_name = name.at(name.length()-1);
     this->m_datas = new QList<StreamWrapper*>();
 
     QDomDocument doc;

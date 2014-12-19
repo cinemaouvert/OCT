@@ -1,5 +1,6 @@
 #include "mymodel.h"
 
+
 MyModel::MyModel( int rows, int columns, QObject *parent ) : QAbstractTableModel( parent )
 {
   m_rows = rows;
@@ -29,18 +30,21 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
 {
     if (!index.isValid() || role != Qt::DisplayRole)
         return QVariant();
+
     return m_array[index.row()][index.column()];
 }
 
 QVariant MyModel::headerData( int section, Qt::Orientation orientation, int role ) const
 {
-    if (role != Qt::DisplayRole)
+    /*if (role != Qt::DisplayRole)
         return QVariant();
 
     if (orientation == Qt::Horizontal)
         return QString("Word %1").arg(section);
     else
         return QString("Set %1").arg(section);
+        */
+    return QVariant();
 }
 
 int MyModel::setItem(int row, int col, QString datum) const

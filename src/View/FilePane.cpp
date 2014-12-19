@@ -42,8 +42,7 @@ void FilePane::refresh()
     list.clear();
     foreach(Model::File *f , *(this->m_dispatcher->getCurrentProject()->fileList())){
         list << f->getFilePath();
-        QStringList name = f->getFilePath().split("/");
-        names << name.at(name.length()-1);
+        names << f->getName();
     }
     foreach(Model::Attachment *a , *(this->m_dispatcher->getCurrentProject()->attachments())){
         list << a->filepath();
@@ -137,10 +136,29 @@ void FilePane::refresh()
         i++;*/
     }
 
-
     ui->tableView->setModel(m);
+
+
+    /*
+
+    if (role == Qt::BackgroundRole) {
+               int row = index.row();
+              // QColor color = calculateColorForRow(row);
+               QColor c = Qt::red;
+               return QBrush(c);
+    }
+
+    */
+
+
+
+
+
     ui->tableView->setSpan(0, 4, 1, 5);
     ui->tableView->setSpan(k, 4, 1, 5);
+    ui->tableView->setAlternatingRowColors(true);
+    qDebug() << ui->tableView->styleSheet();
+
   //  ui->tableView->setSpan(0, 1, 0, 2);
 
 }
