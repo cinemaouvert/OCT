@@ -19,7 +19,6 @@ VideoPane::VideoPane(QWidget *parent) :
 
     ui->videoWidget->show();
 
-    this->loadFile("H:\\Downloads\\Strange Empire S01E05 FASTSUB VOSTFR 720p HDTV x264-ADDiCTiON zone-telechargement com\\Strange.Empire.S01E05.FASTSUB.VOSTFR.720p.HDTV.x264-ADDiCTiON.zone-telechargement.com.mkv");
 }
 
 VideoPane::VideoPane(Model::File *file, int streamId, QWidget *parent) :
