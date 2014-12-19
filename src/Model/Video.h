@@ -108,6 +108,8 @@ namespace Model
              * @brief Initialize the static parameter list member.
              */
             static void initStaticParameters();
+
+            int getType();
 	};
 }
 

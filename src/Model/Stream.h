@@ -110,6 +110,8 @@ namespace Model
             static int getEnumValue(QString type);
             virtual bool isDefault() const;
             virtual void setDefault(bool d);
+
+            virtual int getType()=0;
     };
 
 

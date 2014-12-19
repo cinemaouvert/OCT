@@ -176,6 +176,11 @@ void Model::Audio::initMetaType()
     qMetaTypeId<Model::Audio>();
 }
 
+int Model::Audio::getType()
+{
+    return Stream::AUDIO;
+}
+
 QDataStream &Model::operator >>(QDataStream &in, Model::Audio &valeur)
 {
     in >> valeur.m_uID;

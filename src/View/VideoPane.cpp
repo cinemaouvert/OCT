@@ -36,6 +36,7 @@ VideoPane::VideoPane(Model::File *file, int streamId, QWidget *parent) :
     ui->videoWidget->show();
 
     this->loadFile(m_file->getFilePath());
+    player->setVideoStream(streamId);
     this->m_streamId = streamId;
 }
 

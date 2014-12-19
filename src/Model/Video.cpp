@@ -198,3 +198,8 @@ void Model::Video::initStaticParameters()
     Parameter *crop= new Parameter("-filter:v","Crop the video (w:h:x:y)","%1");
     m_staticParameters.insert("crop",crop);
 }
+
+int Model::Video::getType()
+{
+    return Stream::VIDEO;
+}

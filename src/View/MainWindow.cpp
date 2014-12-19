@@ -1,6 +1,10 @@
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
 
+#include "src/Model/StreamWrapper.h"
+
+#include "src/Model/Stream.h"
+
 View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispatcher) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -15,12 +19,24 @@ void View::MainWindow::refresh()
     ui->tab_files->refresh();
 
     /** video pane **/
-   /* (QTabWidget*)((QWidget*)(ui->tab_video)->children()->at(0))->clear();
-    foreach (Model::File *file, m_dispatcher->getCurrentProject()->fileList()) {
-        file->getFilePath();
-        ((QTabWidget)ui->tab_video->childAt(0)).insertTab(0,new VideoPane(file,0),file->getFilePath());
+    ui->tabWidgetVideo->clear();
+
+    foreach (Model::File *file, *(m_dispatcher->getCurrentProject()->fileList())) {
+        foreach (Model::StreamWrapper *streamW, *(file->getStreamWrappers())) {
+            switch (streamW->getOldStream()->getType()) {
+                case Model::Stream::AUDIO:
+                    break;
+                case Model::Stream::VIDEO:
+                    ui->tabWidgetVideo->addTab(new VideoPane(file,streamW->getOldStream()->getUID().toInt()),file->getName());
+                    break;
+                case Model::Stream::SUBTITLE:
+                    break;
+                default:
+
+                    break;
+            };
+        }
     }
-    */
 }
 
 View::MainWindow::~MainWindow()

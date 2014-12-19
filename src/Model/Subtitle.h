@@ -101,6 +101,8 @@ namespace Model
              * @brief Initialize the static list of parameter.
              */
             static void initStaticParameters();
+
+            int getType();
 	};
 }
 
