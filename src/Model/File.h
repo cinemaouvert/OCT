@@ -139,7 +139,8 @@ namespace Model
              * @return The filePath member value.
              */
             QString getFilePath();
-	};
+            QList<Model::StreamWrapper *> *getDatas() const;
+    };
 }
 
 #endif

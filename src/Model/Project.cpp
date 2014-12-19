@@ -33,6 +33,7 @@ using namespace std;
 #include "src/Model/Project.h"
 #include "src/Model/Attachment.h"
 #include "src/Model/Information.h"
+#include "Subtitle.h"
 #include <QXmlStreamWriter>
 #include <QFile>
 
@@ -232,4 +233,43 @@ QStringList *Model::Project::getMergeCommandLine()
     //*arguments <<"--attach-file"<< m_xmlFilePath;
 
     return arguments;
+}
+
+int Model::Project::nbVideo() const
+{
+    int cpt = 0;
+    foreach(Model::File *f , *(this->m_fileList)){
+        foreach( Model::StreamWrapper *sw, *(f->getDatas())){
+            Model::Video* v = dynamic_cast<Model::Video*>(sw->getOldStream());
+            if(v !=0)
+                cpt++;
+        }
+    }
+    return cpt;
+}
+
+int Model::Project::nbAudio() const
+{
+    int cpt = 0;
+    foreach(Model::File *f , *(this->m_fileList)){
+        foreach( Model::StreamWrapper *sw, *(f->getDatas())){
+            Model::Audio* a = dynamic_cast<Model::Audio*>(sw->getOldStream());
+            if(a !=0)
+                cpt++;
+        }
+    }
+    return cpt;
+}
+
+int Model::Project::nbSub() const
+{
+    int cpt = 0;
+    foreach(Model::File *f , *(this->m_fileList)){
+        foreach( Model::StreamWrapper *sw, *(f->getDatas())){
+            Model::Subtitle* s = dynamic_cast<Model::Subtitle*>(sw->getOldStream());
+            if(s !=0)
+                cpt++;
+        }
+    }
+    return cpt;
 }

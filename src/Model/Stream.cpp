@@ -41,6 +41,12 @@ QString Model::Stream::getUID() {
     return this->m_uID;
 }
 
+QMap<QString, Model::Parameter *> *Model::Stream::getParameters()
+{
+    return this->m_parameters;
+}
+
+
 QStringList *Model::Stream::getCommand()
 {
     QStringList *myStringList = new QStringList();

@@ -39,6 +39,12 @@ using namespace std;
 
 
 
+
+QList<Model::StreamWrapper *> *Model::File::getDatas() const
+{
+    return m_datas;
+}
+
 Model::File::File() {}
 
 Model::File::File(QString filePath, QString info) : m_datas(NULL) {

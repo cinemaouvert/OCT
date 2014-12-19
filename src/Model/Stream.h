@@ -89,10 +89,17 @@ namespace Model
             virtual QString getUID();
 
             /**
+             * @brief Accessor for the parameters member.
+             * @return The parameters member value.
+             */
+            virtual QMap<QString,Parameter*> *getParameters();
+
+            /**
              * @brief Accessor for the command list.
              * @return The command list member value.
              */
             virtual QStringList *getCommand();
+
 
             enum fileType{
                 VIDEO = 0,

@@ -4,6 +4,10 @@ MyModel::MyModel( int rows, int columns, QObject *parent ) : QAbstractTableModel
 {
   m_rows = rows;
   m_columns = columns;
+  m_array = new QString*[m_rows];
+  for (int i = 0; i < m_rows; ++i) {
+    m_array[i] = new QString[m_columns];
+  }
 }
 
 int MyModel::rowCount( const QModelIndex &parent ) const
@@ -23,23 +27,33 @@ Qt::ItemFlags MyModel::flags( const QModelIndex &index ) const
 
 QVariant MyModel::data( const QModelIndex &index, int role ) const
 {
-  switch( role )
-  {
-  case Qt::DisplayRole:
-    return (index.row()+1) * (index.column()+1);
-
-  case Qt::ToolTipRole:
-    return QString( "%1 x %2" ).arg( index.row()+1 ).arg( index.column()+1 );
-
-  default:
-    return QVariant();
-  }
+    if (!index.isValid() || role != Qt::DisplayRole)
+        return QVariant();
+    return m_array[index.row()][index.column()];
 }
 
 QVariant MyModel::headerData( int section, Qt::Orientation orientation, int role ) const
 {
-  if( role != Qt::DisplayRole )
-    return QVariant();
+    if (role != Qt::DisplayRole)
+        return QVariant();
 
-  return QString::number( section+1 );
+    if (orientation == Qt::Horizontal)
+        return QString("Word %1").arg(section);
+    else
+        return QString("Set %1").arg(section);
+}
+
+int MyModel::setItem(int row, int col, QString datum) const
+{
+    //--- validate the index ---
+        if ( row < 0 || col < 0 || row >= m_rows|| col >= m_columns )
+            return 0;	// error!
+
+        //--- sets the data ---
+        m_array[row][col] = datum;
+
+        //--- tell the world ---
+        //emit dataChanged( createIndex( row, col ), createIndex( row, col ) );
+
+        return 1;
 }

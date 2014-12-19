@@ -206,6 +206,24 @@ namespace Model
              * @return the arguments of the command line
              */
             QStringList *getMergeCommandLine();
+
+            /**
+             * @brief Accessor number of video stream.
+             * @return The number of video stream.
+             */
+            int nbVideo() const;
+
+            /**
+             * @brief Accessor number of audio stream.
+             * @return The number of audio stream.
+             */
+            int nbAudio() const;
+
+            /**
+             * @brief Accessor number of subtitle stream.
+             * @return The number of subtitle stream.
+             */
+            int nbSub() const;
     };
 }
 

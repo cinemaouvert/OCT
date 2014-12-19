@@ -18,6 +18,7 @@ namespace Model
 {
     class File;
     class Attachment;
+    class FileWrapper;
 }
 
 class FilePane : public QWidget
