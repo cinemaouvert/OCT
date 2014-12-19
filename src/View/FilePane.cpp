@@ -29,7 +29,7 @@ FilePane::~FilePane()
     delete ui;
 }
 
-void FilePane::on_pushButton_2_clicked()
+void FilePane::on_pushButton_AddFile_clicked()
 {
     QString filePath = QFileDialog::getOpenFileName(this,tr("Open"));
     this->m_dispatcher->addFile(filePath);
@@ -50,7 +50,7 @@ void FilePane::refresh()
         names << name.at(name.length()-1);
     }
     model->setStringList(names);
-    ui->listView_2->setModel(model);
+    ui->listView_ImportFile->setModel(model);
 
     //////////////////////////////TableView////////////////////////////////////////////
     int nbVideo = this->m_dispatcher->getCurrentProject()->nbVideo();
@@ -131,10 +131,8 @@ void FilePane::refresh()
         QStringList name = a->filepath().split("/");
         m->setItem(i,1,name.at(name.length()-1));
         i++;*/
+        ui->tableView_ImportFile->setModel(m);
     }
-
-
-    ui->tableView->setModel(m);
 
 
    // ui->tableView->->setStyleSheet("* { background-color: rgb(250, 50, 50); }");
@@ -153,20 +151,20 @@ void FilePane::refresh()
 
 
 
-    ui->tableView->setSpan(0, 4, 1, 5);
-    ui->tableView->setSpan(k, 4, 1, 5);
-    ui->tableView->setAlternatingRowColors(true);
-    qDebug() << ui->tableView->styleSheet();
+    ui->tableView_ImportFile->setSpan(0, 4, 1, 5);
+    ui->tableView_ImportFile->setSpan(k, 4, 1, 5);
+    ui->tableView_ImportFile->setAlternatingRowColors(true);
+    qDebug() << ui->tableView_ImportFile->styleSheet();
 
   //  ui->tableView->setSpan(0, 1, 0, 2);
 
 }
 
-void FilePane::on_pushButton_clicked()
+void FilePane::on_pushButton_DeleteFile_clicked()
 {
     QStringList names = model->stringList();
     if (names.size() != 0){
-        QModelIndexList indexes = ui->listView_2->selectionModel()->selectedIndexes();
+        QModelIndexList indexes = ui->listView_ImportFile->selectionModel()->selectedIndexes();
         if(indexes.size() != 0){
             QString filePath = list.at(indexes.at(0).row());
             this->m_dispatcher->removeFile(filePath);

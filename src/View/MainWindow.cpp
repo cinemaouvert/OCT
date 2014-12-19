@@ -45,3 +45,48 @@ View::MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+// ========================================================================== //
+// == EVENT METHODS ========================================================= //
+// ========================================================================== //
+/*
+void View::MainWindow::on_GroupBox_Import_clicked() {
+    ui->groupBox_Import->setStyleSheet("background-color: red");
+    ui->groupBox_Config->setStyleSheet("background-color: grey");
+    ui->groupBox_TracksNaming->setStyleSheet("background-color: grey");
+    ui->groupBox_Infos->setStyleSheet("background-color: grey");
+    ui->groupBox_Encode->setStyleSheet("background-color: grey");
+}
+
+void View::MainWindow::on_GroupBox_Config_clicked() {
+    ui->groupBox_Import->setStyleSheet("background-color: red");
+    ui->groupBox_Config->setStyleSheet("background-color: red");
+    ui->groupBox_TracksNaming->setStyleSheet("background-color: grey");
+    ui->groupBox_Infos->setStyleSheet("background-color: grey");
+    ui->groupBox_Encode->setStyleSheet("background-color: grey");
+}
+
+void View::MainWindow::on_GroupBox_TracksNaming_clicked() {
+    ui->groupBox_Import->setStyleSheet("background-color: red");
+    ui->groupBox_Config->setStyleSheet("background-color: red");
+    ui->groupBox_TracksNaming->setStyleSheet("background-color: red");
+    ui->groupBox_Infos->setStyleSheet("background-color: grey");
+    ui->groupBox_Encode->setStyleSheet("background-color: grey");
+}
+
+void View::MainWindow::on_GroupBox_Infos_clicked() {
+    ui->groupBox_Import->setStyleSheet("background-color: red");
+    ui->groupBox_Config->setStyleSheet("background-color: red");
+    ui->groupBox_TracksNaming->setStyleSheet("background-color: red");
+    ui->groupBox_Infos->setStyleSheet("background-color: red");
+    ui->groupBox_Encode->setStyleSheet("background-color: grey");
+}
+
+void View::MainWindow::on_GroupBox_Encode_clicked() {
+    ui->groupBox_Import->setStyleSheet("background-color: red");
+    ui->groupBox_Config->setStyleSheet("background-color: red");
+    ui->groupBox_TracksNaming->setStyleSheet("background-color: red");
+    ui->groupBox_Infos->setStyleSheet("background-color: red");
+    ui->groupBox_Encode->setStyleSheet("background-color: red");
+}
+*/

@@ -32,9 +32,9 @@ public:
     ~FilePane();
 
 private slots:
-    void on_pushButton_2_clicked();
+    void on_pushButton_AddFile_clicked();
 
-    void on_pushButton_clicked();
+    void on_pushButton_DeleteFile_clicked();
 
 private:
     Ui::FilePane *ui;

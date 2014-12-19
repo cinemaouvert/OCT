@@ -117,7 +117,7 @@
            <item>
             <widget class="QLabel" name="label_Format">
              <property name="text">
-              <string>Format :</string>
+              <string>Format sous-titre :</string>
              </property>
             </widget>
            </item>

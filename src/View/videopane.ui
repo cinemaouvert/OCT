@@ -137,12 +137,7 @@
               </property>
               <item>
                <property name="text">
-                <string>Un codec vidéo pas très long</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Un codec video super mais alors super super super super super mega long</string>
+                <string>H264 (x264)</string>
                </property>
               </item>
              </widget>
@@ -179,16 +174,16 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_Title">
+           <layout class="QHBoxLayout" name="horizontalLayout_Langage">
             <item>
-             <widget class="QLabel" name="label_Title">
+             <widget class="QLabel" name="label_Langage">
               <property name="text">
-               <string>Titre :</string>
+               <string>Langue :</string>
               </property>
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer_10">
+             <spacer name="horizontalSpacer_3">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -201,7 +196,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_Title">
+             <widget class="QComboBox" name="comboBox_Langage">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -220,7 +215,7 @@
              </widget>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_11">
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
               <property name="sizeConstraint">
                <enum>QLayout::SetFixedSize</enum>
               </property>
@@ -228,7 +223,79 @@
                <number>0</number>
               </property>
               <item>
-               <widget class="QLabel" name="labelTitle">
+               <widget class="QLabel" name="labelLanguage">
+                <property name="minimumSize">
+                 <size>
+                  <width>50</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>50</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>english</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_DefaultTrack">
+            <item>
+             <widget class="QLabel" name="label_DefaultTrack">
+              <property name="text">
+               <string>Marquer piste par défaut :</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBox_DefaultTrack">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>125</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_14">
+              <property name="sizeConstraint">
+               <enum>QLayout::SetFixedSize</enum>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="labelDefault">
                 <property name="minimumSize">
                  <size>
                   <width>50</width>
@@ -317,16 +384,16 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_DefaultTrack">
+           <layout class="QHBoxLayout" name="horizontalLayout_Scale">
             <item>
-             <widget class="QLabel" name="label_DefaultTrack">
+             <widget class="QLabel" name="label_Scale">
               <property name="text">
-               <string>Marquer piste par défaut :</string>
+               <string>Mise à l'échelle :</string>
               </property>
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer_4">
+             <spacer name="horizontalSpacer_6">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -339,7 +406,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_DefaultTrack">
+             <widget class="QComboBox" name="comboBox_Scale">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -358,15 +425,18 @@
              </widget>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_14">
+             <layout class="QVBoxLayout" name="verticalLayout">
               <property name="sizeConstraint">
                <enum>QLayout::SetFixedSize</enum>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
               </property>
               <property name="topMargin">
                <number>0</number>
               </property>
               <item>
-               <widget class="QLabel" name="labelDefault">
+               <widget class="QLabel" name="labelScale">
                 <property name="minimumSize">
                  <size>
                   <width>50</width>
@@ -389,16 +459,16 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_Langage">
+           <layout class="QHBoxLayout" name="horizontalLayout_BlackStuff">
             <item>
-             <widget class="QLabel" name="label_Langage">
+             <widget class="QLabel" name="label_BlackStuff">
               <property name="text">
-               <string>Langue :</string>
+               <string>Ajouter des bandes noires :</string>
               </property>
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer_3">
+             <spacer name="horizontalSpacer_7">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -411,7 +481,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_Langage">
+             <widget class="QComboBox" name="comboBox_BlackStuff">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -427,10 +497,20 @@
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToMinimumContentsLength</enum>
               </property>
+              <item>
+               <property name="text">
+                <string>Oui</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Non</string>
+               </property>
+              </item>
              </widget>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
               <property name="sizeConstraint">
                <enum>QLayout::SetFixedSize</enum>
               </property>
@@ -438,7 +518,7 @@
                <number>0</number>
               </property>
               <item>
-               <widget class="QLabel" name="labelLanguage">
+               <widget class="QLabel" name="labelBars">
                 <property name="minimumSize">
                  <size>
                   <width>50</width>
@@ -452,7 +532,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>english</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -724,16 +804,16 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_BlackStuff">
+           <layout class="QHBoxLayout" name="horizontalLayout_Filter">
             <item>
-             <widget class="QLabel" name="label_BlackStuff">
+             <widget class="QLabel" name="label_Filter">
               <property name="text">
-               <string>Ajouter des bandes noires :</string>
+               <string>Filtre</string>
               </property>
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer_7">
+             <spacer name="horizontalSpacer_10">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -746,89 +826,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_BlackStuff">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>125</width>
-                <height>25</height>
-               </size>
-              </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-              </property>
-              <item>
-               <property name="text">
-                <string>Oui</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Non</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_8">
-              <property name="sizeConstraint">
-               <enum>QLayout::SetFixedSize</enum>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QLabel" name="labelBars">
-                <property name="minimumSize">
-                 <size>
-                  <width>50</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>50</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_Scale">
-            <item>
-             <widget class="QLabel" name="label_Scale">
-              <property name="text">
-               <string>Mise à l'échelle :</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_6">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QComboBox" name="comboBox_Scale">
+             <widget class="QComboBox" name="comboBox_Filter">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -847,18 +845,15 @@
              </widget>
             </item>
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout">
+             <layout class="QHBoxLayout" name="horizontalLayout_11">
               <property name="sizeConstraint">
                <enum>QLayout::SetFixedSize</enum>
-              </property>
-              <property name="leftMargin">
-               <number>0</number>
               </property>
               <property name="topMargin">
                <number>0</number>
               </property>
               <item>
-               <widget class="QLabel" name="labelScale">
+               <widget class="QLabel" name="labelFiltre">
                 <property name="minimumSize">
                  <size>
                   <width>50</width>
@@ -994,7 +989,6 @@
                 <height>50</height>
                </size>
               </property>
-              <zorder>groupBox_Cropping</zorder>
              </widget>
             </item>
             <item>

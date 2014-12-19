@@ -34,7 +34,14 @@ namespace View
              * @brief Destructeur.
              */
             ~MainWindow();
-
+/*
+        private slots:
+            void on_GroupBox_Import_clicked();
+            void on_GroupBox_Config_clicked();
+            void on_GroupBox_TracksNaming_clicked();
+            void on_GroupBox_Infos_clicked();
+            void on_GroupBox_Encode_clicked();
+*/
         private:
             /**
              * @brief MainWindow.
