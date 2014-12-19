@@ -12,6 +12,8 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
 {
     ui->setupUi(this);
     ui->tab_files->setDispatcher(m_dispatcher);
+    ui->tabWidgetVideo->clear();
+
 }
 
 void View::MainWindow::refresh()
