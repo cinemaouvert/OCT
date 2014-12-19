@@ -7,6 +7,7 @@ using namespace std;
 
 
 #include <QString>
+#include <QObject>
 #include <QSettings>
 
 // #include "src/Controller/OCTDispatcher.h"
@@ -19,9 +20,11 @@ namespace Controller
 
 namespace Controller
 {
-	class Transcoder
+    class Transcoder : public QObject
 	{
+        Q_OBJECT
         public:
+
             /**
              * @brief Default constructor.
              */
@@ -42,6 +45,12 @@ namespace Controller
              * @return
              */
             QString transcode(QStringList *list);
+
+        public slots:
+            void process();
+
+        signals:
+            void finished();
 
         private:
             /**

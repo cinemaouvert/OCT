@@ -85,8 +85,10 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_merger= new Merger();
     //ne pas init ici
     //m_exporter= new Exporter();
-    m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
+
     m_transcoder= new Transcoder();
+    m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
+
     //Initialisation of the parameters lists
     Model::Video::initStaticParameters();
     Model::Audio::initStaticParameters();
@@ -111,6 +113,8 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 */
     /***********************/
     /*****Denis Test *****/
+    m_treatmentThread->startTreatment();
+
 
     /***********************/
     /*****William Test *****/

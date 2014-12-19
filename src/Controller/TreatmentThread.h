@@ -33,6 +33,7 @@ using namespace std;
 #define __Controller__TreatmentThread_h__
 
 #include <QList>
+#include <QThread>
 
 #include "src/Controller/Transcoder.h"
 #include "src/Controller/Merger.h"
@@ -55,8 +56,11 @@ namespace Model
 
 namespace Controller
 {
-	class TreatmentThread
+    class TreatmentThread : public QObject
 	{
+        private:
+            QThread *m_transcoderThread;
+
         public:
             /**
              * @brief The associated transcoder controller.

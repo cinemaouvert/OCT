@@ -46,14 +46,26 @@ Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, C
 }
 
 void Controller::TreatmentThread::startTreatment() {
-	throw "Not yet implemented";
+    m_transcoderThread = new QThread();
+
+    connect(m_transcoderThread, SIGNAL(started()), m_transcoder, SLOT(process()));
+    connect(m_transcoder, SIGNAL(finished()), m_transcoderThread, SLOT(quit()));
+    //connect(m_transcoder, SIGNAL(finished()), m_transcoder, SLOT(deleteLater()));
+
+    connect(m_transcoderThread, SIGNAL(finished()), m_transcoderThread, SLOT(deleteLater()));
+
+    m_transcoder->moveToThread(m_transcoderThread);
+    m_transcoderThread->start();
 }
 
 void Controller::TreatmentThread::pauseTreatment() {
-	throw "Not yet implemented";
+    if(m_transcoderThread->isRunning())
+        m_transcoderThread->wait(ULONG_MAX);
+    else
+        m_transcoderThread->start();
 }
 
 void Controller::TreatmentThread::stopTreatment() {
-	throw "Not yet implemented";
+    if(m_transcoderThread->isRunning())
+        m_transcoderThread->quit();
 }
-
