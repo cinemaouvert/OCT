@@ -46,7 +46,7 @@
 </string>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>1</number>
         </property>
         <widget class="FilePane" name="tab_files">
          <property name="sizePolicy">
@@ -65,7 +65,7 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QTabWidget" name="tabWidget_2">
+           <widget class="QTabWidget" name="tabWidgetVideo">
             <property name="currentIndex">
              <number>1</number>
             </property>

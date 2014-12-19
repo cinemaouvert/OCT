@@ -6,6 +6,8 @@
 #include <QMediaPlayer>
 #include <AVPlayer.h>
 
+#include <src/Model/File.h>
+
 namespace Ui {
 class VideoPane;
 }
@@ -16,6 +18,7 @@ class VideoPane : public QWidget
 
 public:
     explicit VideoPane(QWidget *parent = 0);
+    explicit VideoPane(Model::File *file,int streamId,QWidget *parent = 0);
     ~VideoPane();
 
 private slots:
@@ -30,7 +33,8 @@ private slots:
 private:
     Ui::VideoPane *ui;
     QtAV::AVPlayer *player;
-
+    Model::File *m_file;
+    int m_streamId;
     void loadFile(QString filepath);
 };
 

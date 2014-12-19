@@ -8,9 +8,10 @@
 
 VideoPane::VideoPane(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::VideoPane)
+    ui(new Ui::VideoPane),
+    player(NULL),
+    m_file(NULL)
 {
-
     ui->setupUi(this);
 
     player = new QtAV::AVPlayer;
@@ -19,12 +20,30 @@ VideoPane::VideoPane(QWidget *parent) :
     ui->videoWidget->show();
 
     this->loadFile("H:\\Downloads\\Strange Empire S01E05 FASTSUB VOSTFR 720p HDTV x264-ADDiCTiON zone-telechargement com\\Strange.Empire.S01E05.FASTSUB.VOSTFR.720p.HDTV.x264-ADDiCTiON.zone-telechargement.com.mkv");
-
 }
+
+VideoPane::VideoPane(Model::File *file, int streamId, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::VideoPane),
+    player(NULL),
+    m_file(file)
+{
+    ui->setupUi(this);
+
+    player = new QtAV::AVPlayer;
+    player->setRenderer(ui->videoWidget);
+
+    ui->videoWidget->show();
+
+    this->loadFile(m_file->getFilePath());
+    this->m_streamId = streamId;
+}
+
 
 VideoPane::~VideoPane()
 {
     delete ui;
+    delete player;
 }
 
 void VideoPane::on_playButton_clicked()
@@ -49,6 +68,7 @@ void VideoPane::on_stopButton_clicked()
         player->stop();
         ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_play.png"));
     }
+
 }
 
 void VideoPane::loadFile(QString filepath)
@@ -58,6 +78,8 @@ void VideoPane::loadFile(QString filepath)
     ui->stopSlider->setMaximum(player->duration());
     ui->stopSlider->setValue(player->duration());
     ui->timeStop->setTime(QTime(0,0).addMSecs(player->duration()));
+    ui->timeStop->setMaximumTime(QTime(0,0).addMSecs(player->duration()));
+    ui->timeStart->setMaximumTime(QTime(0,0).addMSecs(player->duration()));
 
 }
 
