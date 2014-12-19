@@ -68,10 +68,3 @@ QString Controller::Transcoder::transcode(QStringList *list) {
     return retour;
 }
 
-void Controller::Transcoder::process()
-{
-    qDebug() << "Super Thread";
-    emit finished();
-
-}
-

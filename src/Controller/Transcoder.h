@@ -20,9 +20,8 @@ namespace Controller
 
 namespace Controller
 {
-    class Transcoder : public QObject
+    class Transcoder
 	{
-        Q_OBJECT
         public:
 
             /**
@@ -45,12 +44,6 @@ namespace Controller
              * @return
              */
             QString transcode(QStringList *list);
-
-        public slots:
-            void process();
-
-        signals:
-            void finished();
 
         private:
             /**

@@ -58,9 +58,7 @@ namespace Controller
 {
     class TreatmentThread : public QObject
 	{
-        private:
-            QThread *m_transcoderThread;
-
+        Q_OBJECT
         public:
             /**
              * @brief The associated transcoder controller.
@@ -90,6 +88,12 @@ namespace Controller
              * @param exporter Selected exporter controller.
              */
             TreatmentThread(QList<Model::Project*> *projects, Controller::Transcoder *transcoder, Controller::Merger *merger, Controller::Exporter *exporter);
+
+            signals:
+                void finished();
+
+
+            public slots:
 
             /**
              * @brief This method start the treatement queue.

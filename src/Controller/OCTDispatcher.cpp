@@ -87,8 +87,6 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     //m_exporter= new Exporter();
 
     m_transcoder= new Transcoder();
-    m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
-
     //Initialisation of the parameters lists
     Model::Video::initStaticParameters();
     Model::Audio::initStaticParameters();
@@ -113,8 +111,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 */
     /***********************/
     /*****Denis Test *****/
-    m_treatmentThread->startTreatment();
-
+    this->startTreatment();
 
     /***********************/
     /*****William Test *****/
@@ -154,11 +151,28 @@ void Controller::OCTDispatcher::load() {
 }
 
 void Controller::OCTDispatcher::startTreatment() {
-	throw "Not yet implemented";
+    m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
+
+
+    m_startTreatmentThread = new QThread();
+
+    connect(m_startTreatmentThread, SIGNAL(started()), m_treatmentThread, SLOT(startTreatment()));
+    connect(m_treatmentThread, SIGNAL(finished()), m_startTreatmentThread, SLOT(quit()));
+    //connect(m_transcoder, SIGNAL(finished()), m_transcoder, SLOT(deleteLater()));
+
+    connect(m_startTreatmentThread, SIGNAL(finished()), m_startTreatmentThread, SLOT(deleteLater()));
+
+    m_treatmentThread->moveToThread(m_startTreatmentThread);
+    m_startTreatmentThread->start();
 }
 
 void Controller::OCTDispatcher::pauseTreatment() {
-	throw "Not yet implemented";
+    if(m_startTreatmentThread != NULL){
+        if(m_startTreatmentThread->isRunning())
+            m_startTreatmentThread->wait(ULONG_MAX);
+        else
+            m_startTreatmentThread->start();
+    }
 }
 
 void Controller::OCTDispatcher::restartTreatment() {
@@ -166,7 +180,10 @@ void Controller::OCTDispatcher::restartTreatment() {
 }
 
 void Controller::OCTDispatcher::stopTreatment() {
-	throw "Not yet implemented";
+    if(m_startTreatmentThread != NULL){
+        if(m_startTreatmentThread->isRunning())
+            m_startTreatmentThread->quit();
+    }
 }
 
 void Controller::OCTDispatcher::addToQueue() {

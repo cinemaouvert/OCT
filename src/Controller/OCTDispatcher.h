@@ -36,6 +36,7 @@ using namespace std;
 #include <QString>
 #include <QList>
 #include <QSettings>
+#include <QObject>
 
 // #include "src/Controller/StreamLoader.h"
 // #include "src/Controller/Updater.h"
@@ -71,9 +72,14 @@ namespace Controller
     /**
      * @brief Main controller which dispatches treatment between controllers.
      */
-	class OCTDispatcher
+    class OCTDispatcher : public QObject
 	{
         private:
+            /**
+             * @brief Thread to start treatment
+             */
+            QThread                     *m_startTreatmentThread;
+
             /**
              * @brief The associated current project.
              */

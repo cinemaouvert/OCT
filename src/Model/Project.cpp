@@ -78,12 +78,12 @@ Model::Project::Project(const Model::Project &project)
     m_name = project.m_name;
     m_xmlFilePath = project.m_xmlFilePath;
     m_createMagnet = project.m_createMagnet;
-    //m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
-    m_attachments = project.m_attachments;
-    //m_informations = new QList<Model::Information*>(*project.m_informations);
-    m_informations = project.m_informations;
-    //m_fileList = new QList<Model::File*>(*project.m_fileList);
-    m_fileList = project.m_fileList;
+    m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
+    //m_attachments = project.m_attachments;
+    m_informations = new QList<Model::Information*>(*project.m_informations);
+    //m_informations = project.m_informations;
+    m_fileList = new QList<Model::File*>(*project.m_fileList);
+    //m_fileList = project.m_fileList;
 }
 
 void Model::Project::load() {
