@@ -43,14 +43,10 @@ Model::Audio::Audio() {
     this->m_parameters = new QMap<QString,Parameter*>();
 }
 
-Model::Audio::Audio(QDomNode stream)
+Model::Audio::Audio(QDomNode stream, int uid)
 {
     qDebug() << "Audio";
     QDomNamedNodeMap tab = stream.attributes();
-    //-----------------------UID------------------------//
-    QDomNode uidNode = tab.namedItem("index");
-    QString UID = uidNode.nodeValue();
-    qDebug() << UID;
     //-----------------------CODEC-NAME------------------------//
     QDomNode nodeCodecName = tab.namedItem("codec_name");
     QString codecName = nodeCodecName.nodeValue();
@@ -85,7 +81,7 @@ Model::Audio::Audio(QDomNode stream)
     qDebug() << isDefault;
 
     //-----------------------AUDIO-BUILD------------------------//
-    this->m_uID = UID;
+    this->m_uID = QString::number(uid);
     this->m_parameters = new QMap<QString,Parameter*>();
     this->m_default = false;
 

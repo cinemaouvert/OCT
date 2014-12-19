@@ -72,6 +72,9 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
         QDomElement root = doc.documentElement();
         if(!root.isNull()){
             QDomNodeList streams = root.elementsByTagName("stream");
+            int cptv = 0;
+            int cpta = 0;
+            int cpts = 0;
             for (int i=0;i<streams.count();i++){
                 qDebug() << "//-----------------------STREAM------------------------//";
                 //-----------------------STREAM------------------------//
@@ -84,13 +87,16 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
                 Stream *s;
                 switch (Model::Stream::getEnumValue(type)){
                     case Model::Stream::VIDEO:
-                            s = new Video(stream);
+                            s = new Video(stream, cptv);
+                            cptv++;
                             break;
                     case Model::Stream::AUDIO:
-                            s = new Audio(stream);
+                            s = new Audio(stream, cpta);
+                            cpta++;
                             break;
                     case Model::Stream::SUBTITLE:
-                            s = new Subtitle(stream);
+                            s = new Subtitle(stream, cpts);
+                            cpts++;
                             break;
                 }
 

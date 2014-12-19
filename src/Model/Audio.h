@@ -64,8 +64,9 @@ namespace Model
             /**
              * @brief Constructor.
              * @param stream Associated stream.
+             * @param uid
              */
-            Audio(QDomNode stream);
+            Audio(QDomNode stream, int uid);
 
             /**
              * @brief Constructor.

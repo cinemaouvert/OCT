@@ -70,8 +70,9 @@ namespace Model
             /**
              * @brief Constructor.
              * @param stream Associated stream.
+             * @param uid Assiciated UID
              */
-            Video(QDomNode stream);
+            Video(QDomNode stream,  int uid);
 
             /**
              * @brief Constructor.

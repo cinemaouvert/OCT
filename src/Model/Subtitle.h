@@ -63,8 +63,9 @@ namespace Model
             /**
              * @brief Constructor.
              * @param stream Associated stream.
+             * @param uid
              */
-            Subtitle(QDomNode stream);
+            Subtitle(QDomNode stream, int uid);
 
             /**
              * @brief Constructor.

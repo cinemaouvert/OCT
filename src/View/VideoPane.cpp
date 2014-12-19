@@ -49,6 +49,7 @@ VideoPane::~VideoPane()
 
 void VideoPane::on_playButton_clicked()
 {
+    qDebug() << m_streamId;
     if(!player->isPlaying()){
         player->play();
         if(player->isPlaying())

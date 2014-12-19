@@ -1,5 +1,5 @@
 #include "mymodel.h"
-
+#include <QColor>
 
 MyModel::MyModel( int rows, int columns, QObject *parent ) : QAbstractTableModel( parent )
 {
@@ -31,6 +31,14 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
     if (!index.isValid() || role != Qt::DisplayRole)
         return QVariant();
 
+    if (role == Qt::BackgroundRole){
+        if (index.row() == 0)
+            return QColor(Qt::blue);
+        if (index.row() == 1)
+            return QColor(Qt::red);
+        if (index.row() == 2)
+            return QColor(Qt::green);
+    }
     return m_array[index.row()][index.column()];
 }
 

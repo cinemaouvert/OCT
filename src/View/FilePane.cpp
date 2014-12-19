@@ -83,46 +83,48 @@ void FilePane::refresh()
 
 
     foreach(Model::File *f , *(this->m_dispatcher->getCurrentProject()->fileList())){
+         int cptv = 0;
+         int cpta = 0;
+         int cpts = 0;
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
-            Model::Video* v = dynamic_cast<Model::Video*>(sw->getOldStream());
-            Model::Audio* a = dynamic_cast<Model::Audio*>(sw->getOldStream());
-            Model::Subtitle* s = dynamic_cast<Model::Subtitle*>(sw->getOldStream());
 
-            if(v !=0){
+            if(sw->getOldStream()->getType() == Model::Stream::VIDEO){
                 i++;
-                m->setItem(i,0,QString("Video piste: %1").arg(i));
-                Model::Parameter *p = v->getParameters()->find("codec_name").value();
+                cptv++;
+                m->setItem(i,0,QString("piste: %2 : %1").arg(f->getName()).arg(cptv));
+                Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
                 m->setItem(i,1,p->value());
 
-                p = v->getParameters()->find("r_frame_rate").value();
+                p = sw->getOldStream()->getParameters()->find("r_frame_rate").value();
                 m->setItem(i,2,p->value());
 
-                p = v->getParameters()->find("resolution").value();
+                p = sw->getOldStream()->getParameters()->find("resolution").value();
                 m->setItem(i,3,p->value());
 
                 m->setItem(i,4,QString("ok"));
 
 
             }
-            else if(a !=0){
+            else if(sw->getOldStream()->getType() == Model::Stream::AUDIO){
                 j++;
-                m->setItem(j,0,QString("Audio Piste: %1").arg(j-nbVideo-1));
-                Model::Parameter *p = a->getParameters()->find("codec_name").value();
+                cpta++;
+                m->setItem(j,0,QString("Piste: %2 : %1").arg(f->getName()).arg(cpta));
+                Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
                 m->setItem(j,1,p->value());
 
-                p = a->getParameters()->find("sample_rate").value();
+                p = sw->getOldStream()->getParameters()->find("sample_rate").value();
                 m->setItem(j,2,p->value());
 
-                p = a->getParameters()->find("resolution").value();
+                p = sw->getOldStream()->getParameters()->find("resolution").value();
                 m->setItem(j,3,p->value());
 
-                p = a->getParameters()->find("channels").value();
+                p = sw->getOldStream()->getParameters()->find("channels").value();
                 m->setItem(j,4,p->value());
 
                 m->setItem(j,5,QString("ok"));
 
             }
-            else if(s !=0){
+            else if(sw->getOldStream()->getType() == Model::Stream::SUBTITLE){
                  qDebug() << "sub";
             }
 
@@ -136,9 +138,11 @@ void FilePane::refresh()
         i++;*/
     }
 
+
     ui->tableView->setModel(m);
 
 
+   // ui->tableView->->setStyleSheet("* { background-color: rgb(250, 50, 50); }");
     /*
 
     if (role == Qt::BackgroundRole) {

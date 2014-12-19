@@ -39,14 +39,10 @@ Model::Subtitle::Subtitle(){
     this->m_default = false;
 }
 
-Model::Subtitle::Subtitle(QDomNode stream)
+Model::Subtitle::Subtitle(QDomNode stream, int uid)
 {
     qDebug() << "Subtitle";
     QDomNamedNodeMap tab = stream.attributes();
-    //-----------------------UID------------------------//
-    QDomNode uidNode = tab.namedItem("index");
-    QString UID = uidNode.nodeValue();
-    qDebug() << UID;
     //-----------------------CODEC-NAME------------------------//
     QDomNode nodeCodecName = tab.namedItem("codec_name");
     QString codecName = nodeCodecName.nodeValue();
@@ -72,7 +68,7 @@ Model::Subtitle::Subtitle(QDomNode stream)
     //-----------------------ENCODE------------------------//
 
     //-----------------------SUBTITLE-BUILD------------------------//
-    this->m_uID = UID;
+    this->m_uID = QString::number(uid);
     this->m_parameters = new QMap<QString,Parameter*>();
     this->m_default = false;
     if(isDefault == "1")

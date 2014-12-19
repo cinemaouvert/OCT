@@ -44,14 +44,10 @@ Model::Video::Video(){
 
 }
 
-Model::Video::Video(QDomNode stream)
+Model::Video::Video(QDomNode stream, int uid)
 {
     qDebug() << "video";
     QDomNamedNodeMap tab = stream.attributes();
-    //-----------------------UID------------------------//
-    QDomNode uidNode = tab.namedItem("index");
-    QString UID = uidNode.nodeValue();
-    qDebug() << UID;
     //-----------------------CODEC-NAME------------------------//
     QDomNode nodeCodecName = tab.namedItem("codec_name");
     QString codecName = nodeCodecName.nodeValue();
@@ -90,7 +86,7 @@ Model::Video::Video(QDomNode stream)
     qDebug() << frameRate;
 
     //-----------------------VIDEO-BUILD------------------------//
-    this->m_uID = UID;
+    this->m_uID = QString::number(uid);
     this->m_default = false;
     this->m_parameters = new QMap<QString,Parameter*>();
 
