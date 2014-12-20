@@ -29,7 +29,7 @@ void View::MainWindow::refresh()
                 case Model::Stream::AUDIO:
                     break;
                 case Model::Stream::VIDEO:
-                    ui->tabWidgetVideo->addTab(new VideoPane(file,streamW->getOldStream()->getUID().toInt()),file->getName() + " piste : " +streamW->getOldStream()->getUID());
+                    ui->tabWidgetVideo->addTab(new VideoPane(file,streamW->getOldStream()),file->getName() + " piste : " +streamW->getOldStream()->getUID());
                     break;
                 case Model::Stream::SUBTITLE:
                     break;

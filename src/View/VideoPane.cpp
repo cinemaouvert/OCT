@@ -22,11 +22,12 @@ VideoPane::VideoPane(QWidget *parent) :
 
 }
 
-VideoPane::VideoPane(Model::File *file, int streamId, QWidget *parent) :
+VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VideoPane),
     player(NULL),
-    m_file(file)
+    m_file(file),
+    m_stream(stream)
 {
     ui->setupUi(this);
 
@@ -36,8 +37,8 @@ VideoPane::VideoPane(Model::File *file, int streamId, QWidget *parent) :
     ui->videoWidget->show();
 
     this->loadFile(m_file->getFilePath());
-    player->setVideoStream(streamId);
-    this->m_streamId = streamId;
+    this->m_streamId = stream->getUID().toInt();
+    player->setVideoStream(this->m_streamId);
 }
 
 
