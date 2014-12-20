@@ -15,6 +15,15 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>9</number>
+    </property>
+    <property name="rightMargin">
+     <number>9</number>
+    </property>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
@@ -158,6 +167,9 @@
         <width>16777215</width>
         <height>60</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-style:none;</string>
       </property>
       <property name="title">
        <string/>
@@ -358,14 +370,6 @@ border-radius:5px;</string>
    <addaction name="menuAffichage"/>
    <addaction name="menuConfiguration"/>
    <addaction name="menuAide"/>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>BottomToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
