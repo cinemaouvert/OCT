@@ -150,127 +150,160 @@
       <property name="minimumSize">
        <size>
         <width>0</width>
-        <height>100</height>
+        <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>100</height>
+        <height>60</height>
        </size>
       </property>
       <property name="title">
        <string/>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
        <item>
-        <widget class="QGroupBox" name="groupBox_Import">
+        <widget class="QLabel" name="labelStatus1">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>20</height>
           </size>
          </property>
-         <property name="title">
-          <string/>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
-          <item>
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Importation des fichiers</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(141, 141, 141);</string>
+         </property>
+         <property name="text">
+          <string>Importation des fichiers</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_Config">
+        <widget class="QLabel" name="labelStatus2">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>20</height>
           </size>
          </property>
-         <property name="title">
-          <string/>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_7">
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Choix de la configuration</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(203, 203, 203);</string>
+         </property>
+         <property name="text">
+          <string>Choix de la configuration</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_TracksNaming">
+        <widget class="QLabel" name="labelStatus3">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>20</height>
           </size>
          </property>
-         <property name="title">
-          <string/>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_8">
-          <item>
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Nommage des pistes</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(203, 203, 203);</string>
+         </property>
+         <property name="text">
+          <string>Nommage des pistes</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_Infos">
+        <widget class="QLabel" name="labelStatus4">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>20</height>
           </size>
          </property>
-         <property name="title">
-          <string/>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_9">
-          <item>
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Remplissage des </string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(203, 203, 203);</string>
+         </property>
+         <property name="text">
+          <string>Remplissage des informations</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_Encode">
+        <widget class="QLabel" name="labelStatus5">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>20</height>
           </size>
          </property>
-         <property name="title">
-          <string/>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_10">
-          <item>
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>Encodage et ampaquetage</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(203, 203, 203);</string>
+         </property>
+         <property name="text">
+          <string>Encodage et empaquetage</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
       </layout>
@@ -284,7 +317,7 @@
      <x>0</x>
      <y>0</y>
      <width>974</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="nativeMenuBar">
@@ -329,7 +362,6 @@
     <bool>false</bool>
    </attribute>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

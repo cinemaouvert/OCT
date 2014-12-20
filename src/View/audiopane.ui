@@ -219,7 +219,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Original : WAV</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
@@ -348,7 +348,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Original : 44100 Hz</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
@@ -414,7 +414,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Original : Stéréo</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
@@ -483,7 +483,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Original : 16 bits</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>

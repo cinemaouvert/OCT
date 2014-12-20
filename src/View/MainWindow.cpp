@@ -90,3 +90,34 @@ void View::MainWindow::on_GroupBox_Encode_clicked() {
     ui->groupBox_Encode->setStyleSheet("background-color: red");
 }
 */
+
+void View::MainWindow::on_tabWidget_currentChanged(int index)
+{
+    ui->labelStatus1->setStyleSheet("background-color: rgb(203, 203, 203);");
+    ui->labelStatus2->setStyleSheet("background-color: rgb(203, 203, 203);");
+    ui->labelStatus3->setStyleSheet("background-color: rgb(203, 203, 203);");
+    ui->labelStatus4->setStyleSheet("background-color: rgb(203, 203, 203);");
+    ui->labelStatus5->setStyleSheet("background-color: rgb(203, 203, 203);");
+    switch (index) {
+    case 0:
+        ui->labelStatus1->setStyleSheet("background-color: rgb(141, 141, 141);");
+        break;
+    case 1:
+        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);");
+        break;
+    case 2:
+        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);");
+        break;
+    case 3:
+        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);");
+        break;
+    case 4:
+        ui->labelStatus4->setStyleSheet("background-color: rgb(141, 141, 141);");
+        break;
+    case 5:
+        ui->labelStatus5->setStyleSheet("background-color: rgb(141, 141, 141);");
+        break;
+    default:
+        break;
+    }
+}

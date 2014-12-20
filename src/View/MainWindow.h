@@ -42,7 +42,10 @@ namespace View
             void on_GroupBox_Infos_clicked();
             void on_GroupBox_Encode_clicked();
 */
-        private:
+    private slots:
+            void on_tabWidget_currentChanged(int index);
+
+    private:
             /**
              * @brief MainWindow.
              */

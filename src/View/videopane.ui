@@ -237,7 +237,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>english</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -618,7 +618,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>50fps</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -795,7 +795,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>15</string>
+                 <string/>
                 </property>
                </widget>
               </item>
