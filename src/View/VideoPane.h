@@ -38,6 +38,10 @@ private slots:
 
 
 
+    void on_timeStart_timeChanged(const QTime &time);
+
+    void on_timeStop_timeChanged(const QTime &time);
+
 private:
     Ui::VideoPane *ui;
     QtAV::AVPlayer *player;

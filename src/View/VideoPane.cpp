@@ -132,3 +132,13 @@ void VideoPane::updateSlider()
     ui->timeSlider->setValue(int(player->position()/1000LL));
     ui->timeLabel->setText(QTime(0,0).addMSecs(player->position()).toString("hh:mm:ss"));
 }
+
+void VideoPane::on_timeStart_timeChanged(const QTime &time)
+{
+    ui->startSlider->setValue(QTime(0,0).msecsTo(time));
+}
+
+void VideoPane::on_timeStop_timeChanged(const QTime &time)
+{
+    ui->stopSlider->setValue(QTime(0,0).msecsTo(time));
+}
