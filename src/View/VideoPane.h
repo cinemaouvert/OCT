@@ -21,6 +21,9 @@ public:
     explicit VideoPane(Model::File *file,int streamId,QWidget *parent = 0);
     ~VideoPane();
 
+public slots:
+    void seek(int);
+
 private slots:
     void on_playButton_clicked();
 
@@ -29,6 +32,10 @@ private slots:
     void on_stopSlider_sliderMoved(int position);
 
     void on_startSlider_sliderMoved(int position);
+
+    void updateSlider();
+
+
 
 private:
     Ui::VideoPane *ui;

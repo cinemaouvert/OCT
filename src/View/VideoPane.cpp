@@ -19,6 +19,7 @@ VideoPane::VideoPane(QWidget *parent) :
 
     ui->videoWidget->show();
 
+
 }
 
 VideoPane::VideoPane(Model::File *file, int streamId, QWidget *parent) :
@@ -48,7 +49,9 @@ VideoPane::~VideoPane()
 
 void VideoPane::on_playButton_clicked()
 {
-    qDebug() << m_streamId;
+    player->setStartPosition(ui->startSlider->value());
+    player->setStopPosition(ui->stopSlider->value());
+
     if(!player->isPlaying()){
         player->play();
         if(player->isPlaying())
@@ -67,9 +70,10 @@ void VideoPane::on_stopButton_clicked()
 {
     if(player->isPlaying()){
         player->stop();
-        ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_play.png"));
     }
-
+    ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_play.png"));
+    ui->timeSlider->setValue(0);
+    ui->timeLabel->setText(QTime(0,0).toString("hh:mm:ss"));
 }
 
 void VideoPane::loadFile(QString filepath)
@@ -81,6 +85,13 @@ void VideoPane::loadFile(QString filepath)
     ui->timeStop->setTime(QTime(0,0).addMSecs(player->duration()));
     ui->timeStop->setMaximumTime(QTime(0,0).addMSecs(player->duration()));
     ui->timeStart->setMaximumTime(QTime(0,0).addMSecs(player->duration()));
+    ui->timeSlider->setMaximum(player->duration());
+
+    connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
+    connect(player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
+    connect(player, SIGNAL(started()), SLOT(updateSlider()));
+    connect(player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
+
 
 }
 
@@ -104,4 +115,19 @@ void VideoPane::on_startSlider_sliderMoved(int position)
         ui->startSlider->setValue(ui->stopSlider->value());
     }
 
+}
+
+
+void VideoPane::seek(int pos)
+{
+    if (!player->isPlaying())
+        return;
+    player->seek(pos*1000LL); // to msecs
+}
+
+void VideoPane::updateSlider()
+{
+    ui->timeSlider->setRange(0, int(player->duration()/1000LL));
+    ui->timeSlider->setValue(int(player->position()/1000LL));
+    ui->timeLabel->setText(QTime(0,0).addMSecs(player->position()).toString("hh:mm:ss"));
 }
