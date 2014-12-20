@@ -93,29 +93,29 @@ void View::MainWindow::on_GroupBox_Encode_clicked() {
 
 void View::MainWindow::on_tabWidget_currentChanged(int index)
 {
-    ui->labelStatus1->setStyleSheet("background-color: rgb(203, 203, 203);");
-    ui->labelStatus2->setStyleSheet("background-color: rgb(203, 203, 203);");
-    ui->labelStatus3->setStyleSheet("background-color: rgb(203, 203, 203);");
-    ui->labelStatus4->setStyleSheet("background-color: rgb(203, 203, 203);");
-    ui->labelStatus5->setStyleSheet("background-color: rgb(203, 203, 203);");
+    ui->labelStatus1->setStyleSheet("background-color: rgb(203, 203, 203);border-radius:5px;");
+    ui->labelStatus2->setStyleSheet("background-color: rgb(203, 203, 203);border-radius:5px;");
+    ui->labelStatus3->setStyleSheet("background-color: rgb(203, 203, 203);border-radius:5px;");
+    ui->labelStatus4->setStyleSheet("background-color: rgb(203, 203, 203);border-radius:5px;");
+    ui->labelStatus5->setStyleSheet("background-color: rgb(203, 203, 203);border-radius:5px;");
     switch (index) {
     case 0:
-        ui->labelStatus1->setStyleSheet("background-color: rgb(141, 141, 141);");
+        ui->labelStatus1->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
         break;
     case 1:
-        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);");
+        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
         break;
     case 2:
-        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);");
+        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
         break;
     case 3:
-        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);");
+        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
         break;
     case 4:
-        ui->labelStatus4->setStyleSheet("background-color: rgb(141, 141, 141);");
+        ui->labelStatus4->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
         break;
     case 5:
-        ui->labelStatus5->setStyleSheet("background-color: rgb(141, 141, 141);");
+        ui->labelStatus5->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
         break;
     default:
         break;

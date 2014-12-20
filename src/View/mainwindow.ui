@@ -196,7 +196,8 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(141, 141, 141);</string>
+          <string notr="true">background-color: rgb(141, 141, 141);
+border-radius:5px;</string>
          </property>
          <property name="text">
           <string>Importation des fichiers</string>
@@ -221,7 +222,8 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(203, 203, 203);</string>
+          <string notr="true">background-color: rgb(203, 203, 203);
+border-radius:5px;</string>
          </property>
          <property name="text">
           <string>Choix de la configuration</string>
@@ -246,7 +248,8 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(203, 203, 203);</string>
+          <string notr="true">background-color: rgb(203, 203, 203);
+border-radius:5px;</string>
          </property>
          <property name="text">
           <string>Nommage des pistes</string>
@@ -271,7 +274,8 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(203, 203, 203);</string>
+          <string notr="true">background-color: rgb(203, 203, 203);
+border-radius:5px;</string>
          </property>
          <property name="text">
           <string>Remplissage des informations</string>
@@ -296,7 +300,8 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(203, 203, 203);</string>
+          <string notr="true">background-color: rgb(203, 203, 203);
+border-radius:5px;</string>
          </property>
          <property name="text">
           <string>Encodage et empaquetage</string>
