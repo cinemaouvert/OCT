@@ -15,7 +15,7 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
     ui->tabWidgetVideo->clear();
     ui->tabWidgetSubtitle->clear();
     ui->tabWidgetAudio->clear();
-
+    setOCPMState(false);
 }
 
 void View::MainWindow::refresh()
@@ -54,50 +54,16 @@ View::MainWindow::~MainWindow()
     delete ui;
 }
 
-// ========================================================================== //
-// == EVENT METHODS ========================================================= //
-// ========================================================================== //
-/*
-void View::MainWindow::on_GroupBox_Import_clicked() {
-    ui->groupBox_Import->setStyleSheet("background-color: red");
-    ui->groupBox_Config->setStyleSheet("background-color: grey");
-    ui->groupBox_TracksNaming->setStyleSheet("background-color: grey");
-    ui->groupBox_Infos->setStyleSheet("background-color: grey");
-    ui->groupBox_Encode->setStyleSheet("background-color: grey");
+void View::MainWindow::setOCPMState(bool isValid)
+{
+    if(isValid){
+        ui->labelStatusOKNOK->setStyleSheet("background-color:  rgba(0, 255, 0, 100);border-radius:5px;");
+        ui->labelStatusOKNOK->setText("OCPM valide");
+    }else{
+        ui->labelStatusOKNOK->setStyleSheet("background-color:  rgba(255, 0, 0, 100);border-radius:5px;");
+        ui->labelStatusOKNOK->setText("OCPM invalide");
+    }
 }
-
-void View::MainWindow::on_GroupBox_Config_clicked() {
-    ui->groupBox_Import->setStyleSheet("background-color: red");
-    ui->groupBox_Config->setStyleSheet("background-color: red");
-    ui->groupBox_TracksNaming->setStyleSheet("background-color: grey");
-    ui->groupBox_Infos->setStyleSheet("background-color: grey");
-    ui->groupBox_Encode->setStyleSheet("background-color: grey");
-}
-
-void View::MainWindow::on_GroupBox_TracksNaming_clicked() {
-    ui->groupBox_Import->setStyleSheet("background-color: red");
-    ui->groupBox_Config->setStyleSheet("background-color: red");
-    ui->groupBox_TracksNaming->setStyleSheet("background-color: red");
-    ui->groupBox_Infos->setStyleSheet("background-color: grey");
-    ui->groupBox_Encode->setStyleSheet("background-color: grey");
-}
-
-void View::MainWindow::on_GroupBox_Infos_clicked() {
-    ui->groupBox_Import->setStyleSheet("background-color: red");
-    ui->groupBox_Config->setStyleSheet("background-color: red");
-    ui->groupBox_TracksNaming->setStyleSheet("background-color: red");
-    ui->groupBox_Infos->setStyleSheet("background-color: red");
-    ui->groupBox_Encode->setStyleSheet("background-color: grey");
-}
-
-void View::MainWindow::on_GroupBox_Encode_clicked() {
-    ui->groupBox_Import->setStyleSheet("background-color: red");
-    ui->groupBox_Config->setStyleSheet("background-color: red");
-    ui->groupBox_TracksNaming->setStyleSheet("background-color: red");
-    ui->groupBox_Infos->setStyleSheet("background-color: red");
-    ui->groupBox_Encode->setStyleSheet("background-color: red");
-}
-*/
 
 void View::MainWindow::on_tabWidget_currentChanged(int index)
 {
