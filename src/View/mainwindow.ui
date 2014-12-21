@@ -76,7 +76,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidgetVideo">
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="VideoPane" name="tab">
              <attribute name="title">
@@ -317,6 +317,32 @@ border-radius:5px;</string>
          </property>
          <property name="text">
           <string>Encodage et empaquetage</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelStatusOKNOK">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:  rgba(255, 0, 0, 100);
+border-radius:5px;</string>
+         </property>
+         <property name="text">
+          <string>OCPM invalide</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

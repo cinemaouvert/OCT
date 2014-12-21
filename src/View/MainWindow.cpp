@@ -13,6 +13,8 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
     ui->setupUi(this);
     ui->tab_files->setDispatcher(m_dispatcher);
     ui->tabWidgetVideo->clear();
+    ui->tabWidgetSubtitle->clear();
+    ui->tabWidgetAudio->clear();
 
 }
 
@@ -22,16 +24,20 @@ void View::MainWindow::refresh()
 
     /** video pane **/
     ui->tabWidgetVideo->clear();
+    ui->tabWidgetSubtitle->clear();
+    ui->tabWidgetAudio->clear();
 
     foreach (Model::File *file, *(m_dispatcher->getCurrentProject()->fileList())) {
         foreach (Model::StreamWrapper *streamW, *(file->getStreamWrappers())) {
             switch (streamW->getOldStream()->getType()) {
                 case Model::Stream::AUDIO:
+                    ui->tabWidgetAudio->addTab(new AudioPane(file,streamW->getOldStream()),file->getName() + " piste : " +streamW->getOldStream()->getUID());
                     break;
                 case Model::Stream::VIDEO:
                     ui->tabWidgetVideo->addTab(new VideoPane(file,streamW->getOldStream()),file->getName() + " piste : " +streamW->getOldStream()->getUID());
                     break;
                 case Model::Stream::SUBTITLE:
+                    ui->tabWidgetSubtitle->addTab(new SubtitlePane(file,streamW->getOldStream()),file->getName() + " piste : " +streamW->getOldStream()->getUID());
                     break;
                 default:
 
@@ -39,6 +45,8 @@ void View::MainWindow::refresh()
             };
         }
     }
+
+    ui->tab_encode->refresh();
 }
 
 View::MainWindow::~MainWindow()

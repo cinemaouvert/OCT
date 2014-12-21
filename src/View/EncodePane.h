@@ -15,6 +15,7 @@ public:
     explicit EncodePane(QWidget *parent = 0);
     ~EncodePane();
 
+    void refresh();
 private:
     Ui::EncodePane *ui;
 };

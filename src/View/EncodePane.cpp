@@ -12,3 +12,8 @@ EncodePane::~EncodePane()
 {
     delete ui;
 }
+
+void EncodePane::refresh()
+{
+
+}

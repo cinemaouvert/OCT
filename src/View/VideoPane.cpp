@@ -80,6 +80,7 @@ void VideoPane::on_stopButton_clicked()
 void VideoPane::loadFile(QString filepath)
 {
     player->load(filepath,false);
+
     ui->startSlider->setMaximum(player->duration());
     ui->stopSlider->setMaximum(player->duration());
     ui->stopSlider->setValue(player->duration());
@@ -92,7 +93,6 @@ void VideoPane::loadFile(QString filepath)
     connect(player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
     connect(player, SIGNAL(started()), SLOT(updateSlider()));
     connect(player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
-
 
 }
 

@@ -187,7 +187,10 @@ void Controller::OCTDispatcher::stopTreatment() {
 }
 
 void Controller::OCTDispatcher::addToQueue() {
-	throw "Not yet implemented";
+    Model::Project *project = new Model::Project();
+    m_projects->push_back(project);
+    m_currentProject = project;
+    m_mainWindow->refresh();
 }
 
 void Controller::OCTDispatcher::checkForUpdate() {
