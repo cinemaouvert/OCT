@@ -26,7 +26,8 @@ void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
 
 FilePane::~FilePane()
 {
-    delete ui;
+    if(ui) delete ui;
+    if(model) delete model;
 }
 
 void FilePane::on_pushButton_AddFile_clicked()
@@ -50,7 +51,8 @@ void FilePane::refresh()
         names << name.at(name.length()-1);
     }
     model->setStringList(names);
-    ui->listView_ImportFile->setModel(model);
+    ui->listView_ImportFile->setModel(model
+                                      );
 
     //////////////////////////////TableView////////////////////////////////////////////
     int nbVideo = this->m_dispatcher->getCurrentProject()->nbVideo();

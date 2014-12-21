@@ -26,6 +26,7 @@
  * along with Open Cinema Transcoder. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************************/
 
+#include <QCoreApplication>
 #include <exception>
 #include <vector>
 using namespace std;
@@ -42,6 +43,7 @@ Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileLis
     this->m_attachments = new QList<Model::Attachment*>();
     this->m_informations = new QList<Model::Information*>();
     this->m_fileList = new QList<Model::File*>();
+    this->m_name = "Projet";
 }
 
 Model::Project::~Project()

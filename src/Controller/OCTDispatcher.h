@@ -213,7 +213,11 @@ namespace Controller
              * @brief Initialize entire set of settings.
              */
             void initSettings();
+
+
             Model::Project *getCurrentProject() const;
+
+            QList<Model::Project*> *getProjects();
     };
 }
 

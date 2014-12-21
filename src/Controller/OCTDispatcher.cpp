@@ -216,6 +216,11 @@ Model::Project *Controller::OCTDispatcher::getCurrentProject() const
     return this->m_currentProject;
 }
 
+QList<Model::Project *> *Controller::OCTDispatcher::getProjects()
+{
+    return this->m_projects;
+}
+
 void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &value)
 {
     m_settings->setValue(key, value);

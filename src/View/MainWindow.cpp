@@ -12,6 +12,7 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
 {
     ui->setupUi(this);
     ui->tab_files->setDispatcher(m_dispatcher);
+    ui->tab_encode->setDispatcher(m_dispatcher);
     ui->tabWidgetVideo->clear();
     ui->tabWidgetSubtitle->clear();
     ui->tabWidgetAudio->clear();
@@ -22,7 +23,6 @@ void View::MainWindow::refresh()
 {
     ui->tab_files->refresh();
 
-    /** video pane **/
     ui->tabWidgetVideo->clear();
     ui->tabWidgetSubtitle->clear();
     ui->tabWidgetAudio->clear();
@@ -67,29 +67,31 @@ void View::MainWindow::setOCPMState(bool isValid)
 
 void View::MainWindow::on_tabWidget_currentChanged(int index)
 {
-    ui->labelStatus1->setStyleSheet("background-color: rgb(203, 203, 203);border-radius:5px;");
-    ui->labelStatus2->setStyleSheet("background-color: rgb(203, 203, 203);border-radius:5px;");
-    ui->labelStatus3->setStyleSheet("background-color: rgb(203, 203, 203);border-radius:5px;");
-    ui->labelStatus4->setStyleSheet("background-color: rgb(203, 203, 203);border-radius:5px;");
-    ui->labelStatus5->setStyleSheet("background-color: rgb(203, 203, 203);border-radius:5px;");
+    QString inactiveStyle = "background-color: rgb(203, 203, 203);border-radius:5px;";
+    QString activeStyle = "background-color: rgb(141, 141, 141);border-radius:5px;";
+    ui->labelStatus1->setStyleSheet(inactiveStyle);
+    ui->labelStatus2->setStyleSheet(inactiveStyle);
+    ui->labelStatus3->setStyleSheet(inactiveStyle);
+    ui->labelStatus4->setStyleSheet(inactiveStyle);
+    ui->labelStatus5->setStyleSheet(inactiveStyle);
     switch (index) {
     case 0:
-        ui->labelStatus1->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
+        ui->labelStatus1->setStyleSheet(activeStyle);
         break;
     case 1:
-        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
+        ui->labelStatus3->setStyleSheet(activeStyle);
         break;
     case 2:
-        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
+        ui->labelStatus3->setStyleSheet(activeStyle);
         break;
     case 3:
-        ui->labelStatus3->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
+        ui->labelStatus3->setStyleSheet(activeStyle);
         break;
     case 4:
-        ui->labelStatus4->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
+        ui->labelStatus4->setStyleSheet(activeStyle);
         break;
     case 5:
-        ui->labelStatus5->setStyleSheet("background-color: rgb(141, 141, 141);border-radius:5px;");
+        ui->labelStatus5->setStyleSheet(activeStyle);
         break;
     default:
         break;

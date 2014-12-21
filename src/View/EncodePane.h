@@ -1,7 +1,10 @@
 #ifndef ENCODEPANE_H
 #define ENCODEPANE_H
 
+#include <QStringListModel>
 #include <QWidget>
+
+#include <src/Controller/OCTDispatcher.h>
 
 namespace Ui {
 class EncodePane;
@@ -13,11 +16,15 @@ class EncodePane : public QWidget
 
 public:
     explicit EncodePane(QWidget *parent = 0);
+    void setDispatcher(Controller::OCTDispatcher *dispatcher);
     ~EncodePane();
 
     void refresh();
+    void refreshProjectPane();
 private:
     Ui::EncodePane *ui;
+    Controller::OCTDispatcher *m_dispatcher;
+    QStringListModel *m_modelProjectList;
 };
 
 #endif // ENCODEPANE_H
