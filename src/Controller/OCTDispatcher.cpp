@@ -112,8 +112,6 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     /***********************/
     /*****Denis Test *****/
     this->startTreatment();
-    Model::Project *p = new Model::Project(*m_currentProject);
-    p->name();
 
     /***********************/
     /*****William Test *****/
