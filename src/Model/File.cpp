@@ -113,6 +113,12 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
 Model::File::File(const File& f) {
     m_name = f.m_name;
     m_filePath = f.m_filePath;
+
+    m_datas = new QList<Model::StreamWrapper*>();
+    for(int i = 0; i < f.m_datas->size(); i++){
+        Model::StreamWrapper *p = new Model::StreamWrapper(*f.m_datas->at(i));
+        m_datas->push_back(p);
+    }
 }
 
 Model::File& Model::File::operator=(const File& f) {

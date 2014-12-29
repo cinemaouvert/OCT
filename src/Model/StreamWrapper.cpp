@@ -32,7 +32,9 @@ using namespace std;
 #include "src/Model/StreamWrapper.h"
 #include "src/Model/Stream.h"
 #include "src/Model/Serializable.h"
-
+#include "src/Model/Video.h"
+#include "src/Model/Audio.h"
+#include "src/Model/Subtitle.h"
 
 Model::Stream *Model::StreamWrapper::newStream() const
 {
@@ -56,7 +58,35 @@ void Model::StreamWrapper::setOldStream(Model::Stream *oldStream)
 Model::StreamWrapper::StreamWrapper() : m_oldStream(NULL), m_newStream(NULL) {
 }
 
+//A tester
 Model::StreamWrapper::StreamWrapper(const StreamWrapper& d) {
+    if(d.m_oldStream != NULL){
+        switch (d.m_oldStream->getType()){
+            case Model::Stream::VIDEO:
+                m_oldStream = new Model::Video(*((Model::Video*)d.m_oldStream));
+                break;
+            case Model::Stream::AUDIO:
+                m_oldStream = new Model::Audio(*((Model::Audio*)d.m_oldStream));
+                break;
+            case Model::Stream::SUBTITLE:
+                m_oldStream = new Model::Subtitle(*((Model::Subtitle*)d.m_oldStream));
+                break;
+        }
+    }
+
+    if(d.m_newStream != NULL){
+        switch (d.m_newStream->getType()){
+            case Model::Stream::VIDEO:
+                m_newStream = new Model::Video(*((Model::Video*)d.m_newStream));
+                break;
+            case Model::Stream::AUDIO:
+                m_newStream = new Model::Audio(*((Model::Audio*)d.m_newStream));
+                break;
+            case Model::Stream::SUBTITLE:
+                m_newStream = new Model::Subtitle(*((Model::Subtitle*)d.m_newStream));
+                break;
+        }
+    }
 }
 
 Model::StreamWrapper& Model::StreamWrapper::operator=(const StreamWrapper& d) {

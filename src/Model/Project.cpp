@@ -63,14 +63,33 @@ Model::Project &Model::Project::operator=(const Model::Project &project)
         m_xmlFilePath = project.m_xmlFilePath;
         m_createMagnet = project.m_createMagnet;
         //m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
-        m_attachments = new QList<Model::Attachment*>();
-        m_attachments = project.m_attachments;
+        //m_attachments = new QList<Model::Attachment*>();
+        //m_attachments = project.m_attachments;
         //m_informations = new QList<Model::Information*>(*project.m_informations);
-        m_informations = new QList<Model::Information*>();
-        m_informations = project.m_informations;
+        //m_informations = new QList<Model::Information*>();
+        //m_informations = project.m_informations;
         //m_fileList = new QList<Model::File*>(*project.m_fileList);
+        //m_fileList = new QList<Model::File*>();
+        //m_fileList = project.m_fileList;
+
+
         m_fileList = new QList<Model::File*>();
-        m_fileList = project.m_fileList;
+        for(int i = 0; i < project.m_fileList->size(); i++){
+            Model::File *p = new Model::File(*project.m_fileList->at(i));
+            m_fileList->push_back(p);
+        }
+
+        m_attachments = new QList<Model::Attachment*>();
+        for(int i = 0; i < project.m_attachments->size(); i++){
+            Model::Attachment *p = new Model::Attachment(*project.m_attachments->at(i));
+            m_attachments->push_back(p);
+        }
+
+        m_informations = new QList<Model::Information*>();
+        for(int i = 0; i < project.m_informations->size(); i++){
+            Model::Information *p = new Model::Information(*project.m_informations->at(i));
+            m_informations->push_back(p);
+        }
     }
     return *this;
 }
@@ -80,12 +99,24 @@ Model::Project::Project(const Model::Project &project)
     m_name = project.m_name;
     m_xmlFilePath = project.m_xmlFilePath;
     m_createMagnet = project.m_createMagnet;
-    m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
-    //m_attachments = project.m_attachments;
-    m_informations = new QList<Model::Information*>(*project.m_informations);
-    //m_informations = project.m_informations;
-    m_fileList = new QList<Model::File*>(*project.m_fileList);
-    //m_fileList = project.m_fileList;
+
+    m_fileList = new QList<Model::File*>();
+    for(int i = 0; i < project.m_fileList->size(); i++){
+        Model::File *p = new Model::File(*project.m_fileList->at(i));
+        m_fileList->push_back(p);
+    }
+
+    m_attachments = new QList<Model::Attachment*>();
+    for(int i = 0; i < project.m_attachments->size(); i++){
+        Model::Attachment *p = new Model::Attachment(*project.m_attachments->at(i));
+        m_attachments->push_back(p);
+    }
+
+    m_informations = new QList<Model::Information*>();
+    for(int i = 0; i < project.m_informations->size(); i++){
+        Model::Information *p = new Model::Information(*project.m_informations->at(i));
+        m_informations->push_back(p);
+    }
 }
 
 void Model::Project::load() {

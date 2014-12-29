@@ -38,11 +38,18 @@ using namespace std;
 #include "src/Model/Project.h"
 
 Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, Controller::Transcoder *transcoder, Controller::Merger *merger, Controller::Exporter *exporter) :
-    m_transcoder(transcoder),
-    m_merger(merger),
-    m_exporter(exporter),
-    m_projects(projects)
+    m_transcoder(NULL),
+    m_merger(NULL),
+    m_exporter(NULL),
+    m_projects(NULL)
 {
+    m_transcoder = new Transcoder();
+
+    m_projects = new QList<Model::Project*>();
+    for(int i = 0; i < projects->size(); i++){
+        Model::Project *p = new Model::Project(*projects->at(i));
+        m_projects->push_back(p);
+    }
 }
 
 void Controller::TreatmentThread::startTreatment() {
