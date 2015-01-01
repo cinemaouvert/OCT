@@ -8,7 +8,8 @@
 View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispatcher) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    m_dispatcher(theDispatcher)
+    m_dispatcher(theDispatcher),
+    m_settingsW(NULL)
 {
     ui->setupUi(this);
     ui->tab_files->setDispatcher(m_dispatcher);
@@ -17,6 +18,9 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
     ui->tabWidgetSubtitle->clear();
     ui->tabWidgetAudio->clear();
     setOCPMState(false);
+
+    m_settingsW = new ParametersDialog();
+    connect(ui->actionPreferences, SIGNAL(triggered()),SLOT(on_OpenSettings()));
 }
 
 void View::MainWindow::refresh()
@@ -51,7 +55,8 @@ void View::MainWindow::refresh()
 
 View::MainWindow::~MainWindow()
 {
-    delete ui;
+    if(ui) delete ui;
+    if(m_settingsW) delete m_settingsW;
 }
 
 void View::MainWindow::setOCPMState(bool isValid)
@@ -96,4 +101,9 @@ void View::MainWindow::on_tabWidget_currentChanged(int index)
     default:
         break;
     }
+}
+
+void View::MainWindow::on_OpenSettings()
+{
+    m_settingsW->show();
 }

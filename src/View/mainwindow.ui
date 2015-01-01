@@ -360,7 +360,7 @@ border-radius:5px;</string>
      <x>0</x>
      <y>0</y>
      <width>974</width>
-     <height>27</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="nativeMenuBar">
@@ -383,13 +383,13 @@ border-radius:5px;</string>
     <addaction name="actionCouper"/>
     <addaction name="actionCopier"/>
     <addaction name="actionColler"/>
-    <addaction name="actionTout_s_l_ctionner"/>
+    <addaction name="actionTout_selectionner"/>
    </widget>
    <widget class="QMenu" name="menuConfiguration">
     <property name="title">
      <string>Configuration</string>
     </property>
-    <addaction name="actionPr_f_rences"/>
+    <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -444,12 +444,12 @@ border-radius:5px;</string>
     <string>Coller</string>
    </property>
   </action>
-  <action name="actionTout_s_l_ctionner">
+  <action name="actionTout_selectionner">
    <property name="text">
     <string>Tout séléctionner</string>
    </property>
   </action>
-  <action name="actionPr_f_rences">
+  <action name="actionPreferences">
    <property name="text">
     <string>Préférences</string>
    </property>

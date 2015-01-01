@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "ParametersDialog.h"
+
 #include <QMainWindow>
 
 namespace Ui {
@@ -39,6 +41,7 @@ namespace View
 
     private slots:
             void on_tabWidget_currentChanged(int index);
+            void on_OpenSettings();
 
     private:
             /**
@@ -50,6 +53,10 @@ namespace View
              * @brief The associated dispatcher.
              */
             Controller::OCTDispatcher *m_dispatcher;
+
+            ParametersDialog *m_settingsW;
+
+
 
     };
 }

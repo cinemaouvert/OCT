@@ -45,7 +45,8 @@ SOURCES += src/main.cpp\
     src/View/SubtitlePane.cpp \
     src/View/EncodePane.cpp \
     src/View/MyModel.cpp \
-    src/View/VideoPlayer.cpp
+    src/View/VideoPlayer.cpp \
+    src/View/ParametersDialog.cpp
 
 HEADERS  += \
     src/Controller/Exporter.h \
@@ -77,7 +78,8 @@ HEADERS  += \
     src/View/SubtitlePane.h \
     src/View/EncodePane.h \
     src/View/MyModel.h \
-    src/View/VideoPlayer.h
+    src/View/VideoPlayer.h \
+    src/View/ParametersDialog.h
 
 FORMS    += \
     src/View/mainwindow.ui \
@@ -87,6 +89,7 @@ FORMS    += \
     src/View/informationpane.ui \
     src/View/subtitlepane.ui \
     src/View/encodepane.ui \
-    src/View/videoplayer.ui
+    src/View/videoplayer.ui \
+    src/View/ParametersDialog.ui
 
 RESOURCES += images.qrc
