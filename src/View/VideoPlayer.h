@@ -2,7 +2,6 @@
 #define VIDEOPLAYER_H
 
 #include <GLWidgetRenderer2.h>
-#include <QVideoWidget>
 #include <QWidget>
 
 namespace Ui {
