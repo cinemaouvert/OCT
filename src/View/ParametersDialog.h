@@ -2,6 +2,7 @@
 #define PARAMETERSDIALOG_H
 
 #include <QDialog>
+#include <QSettings>
 
 namespace Ui {
 class ParametersDialog;
@@ -15,6 +16,8 @@ public:
     explicit ParametersDialog(QWidget *parent = 0);
     ~ParametersDialog();
 
+    void showWithRefresh();
+
 private slots:
     void on_ffmpegButton_clicked();
 
@@ -27,6 +30,12 @@ private slots:
 private:
     Ui::ParametersDialog *ui;
     QString getExecutablePath();
+
+    /**
+     * @brief The associated settings.
+     */
+    QSettings                   *m_settings;
+
 };
 
 #endif // PARAMETERSDIALOG_H

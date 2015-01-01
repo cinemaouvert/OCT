@@ -103,8 +103,8 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 /*
     initSetting("ffmpeg","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
     initSetting("ffprobe","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
-    initSetting("mkvmerge","C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\mkvmerge.exe");
-
+   */ initSetting("mkvmerge","C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\mkvmerge.exe");
+/*
     qDebug() <<  *m_currentProject->getMergeCommandLine();
 
     m_merger->createMKVFile(m_currentProject);

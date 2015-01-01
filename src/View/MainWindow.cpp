@@ -105,5 +105,5 @@ void View::MainWindow::on_tabWidget_currentChanged(int index)
 
 void View::MainWindow::on_OpenSettings()
 {
-    m_settingsW->show();
+    m_settingsW->showWithRefresh();
 }

@@ -17,6 +17,8 @@ public:
 
 private:
     Ui::InformationPane *ui;
+
+
 };
 
 #endif // INFORMATIONPANE_H
