@@ -49,7 +49,7 @@ using namespace std;
 #include <QProcess>
 #include <QDebug>
 #include <QFile>
-#include <QIODEVICE>
+//#include <QIODEVICE>
 #include <QMimeDatabase>
 
 #include <src/Model/Attachment.h>

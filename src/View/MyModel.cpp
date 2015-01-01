@@ -1,4 +1,4 @@
-#include "mymodel.h"
+#include "MyModel.h"
 #include <QColor>
 
 MyModel::MyModel( int rows, int columns, QObject *parent ) : QAbstractTableModel( parent )

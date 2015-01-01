@@ -2,8 +2,6 @@
 #define VIDEOPANE_H
 
 #include <QWidget>
-#include <QVideoWidget>
-#include <QMediaPlayer>
 #include <AVPlayer.h>
 
 #include "src/Model/File.h"

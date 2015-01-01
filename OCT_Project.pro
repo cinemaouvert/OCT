@@ -10,8 +10,6 @@ greaterThan(QT_MAJOR_VERSION, 4):
     QT += widgets
     QT += xml
     QT += network
-    QT += multimediawidgets
-    QT += multimedia
 
 CONFIG += av
 
@@ -46,8 +44,8 @@ SOURCES += src/main.cpp\
     src/View/InformationPane.cpp \
     src/View/SubtitlePane.cpp \
     src/View/EncodePane.cpp \
-    src/View/VideoPlayer.cpp \
-    src/View/MyModel.cpp
+    src/View/MyModel.cpp \
+    src/View/VideoPlayer.cpp
 
 HEADERS  += \
     src/Controller/Exporter.h \
@@ -78,8 +76,8 @@ HEADERS  += \
     src/View/InformationPane.h \
     src/View/SubtitlePane.h \
     src/View/EncodePane.h \
-    src/View/VideoPlayer.h \
-    src/View/MyModel.h
+    src/View/MyModel.h \
+    src/View/VideoPlayer.h
 
 FORMS    += \
     src/View/mainwindow.ui \

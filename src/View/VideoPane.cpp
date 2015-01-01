@@ -1,9 +1,6 @@
 #include "VideoPane.h"
 #include "ui_videopane.h"
 
-#include <QGraphicsView>
-#include <QGraphicsVideoItem>
-#include <QMediaPlaylist>
 #include <AVPlayer.h>
 
 VideoPane::VideoPane(QWidget *parent) :
