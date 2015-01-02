@@ -380,6 +380,13 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_EncodingButtons">
         <item>
+         <widget class="QPushButton" name="newProjectButton">
+          <property name="text">
+           <string>Nouveau projet</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="pushButton_Encode">
           <property name="text">
            <string>Encoder</string>
@@ -388,6 +395,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_Cancel">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Annuler</string>
           </property>
@@ -395,6 +405,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_Pause">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Pause</string>
           </property>

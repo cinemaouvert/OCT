@@ -21,6 +21,9 @@ public:
 
     void refresh();
     void refreshProjectPane();
+private slots:
+    void on_newProjectButton_clicked();
+
 private:
     Ui::EncodePane *ui;
     Controller::OCTDispatcher *m_dispatcher;

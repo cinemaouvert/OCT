@@ -32,6 +32,8 @@ namespace View
              */
             void refresh();
 
+            void refreshProjectPane();
+
             /**
              * @brief Destructeur.
              */

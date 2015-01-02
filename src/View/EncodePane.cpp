@@ -34,7 +34,12 @@ void EncodePane::refreshProjectPane(){
     QStringList list;
     foreach (Model::Project *project, *(m_dispatcher->getProjects())) {
         list << project->name() + QString::number(i);
-        qDebug() << project->name() + QString::number(i);
     }
     m_modelProjectList->setStringList(list);
+}
+
+void EncodePane::on_newProjectButton_clicked()
+{
+    m_dispatcher->addToQueue();
+    refreshProjectPane();
 }

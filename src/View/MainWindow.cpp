@@ -53,6 +53,11 @@ void View::MainWindow::refresh()
     ui->tab_encode->refresh();
 }
 
+void View::MainWindow::refreshProjectPane()
+{
+    ui->tab_encode->refreshProjectPane();
+}
+
 View::MainWindow::~MainWindow()
 {
     if(ui) delete ui;

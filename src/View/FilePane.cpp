@@ -62,6 +62,7 @@ void FilePane::refresh()
     int j = 1 + nbVideo;
     int k = 1+ j + nbAudio;
     MyModel *m = new MyModel( 3 + nbVideo + nbAudio + nbSub, 6);
+    ui->tableView_ImportFile->setModel(m);
 
     m->setItem(0,0,QString("Nom"));
     m->setItem(0,1,QString("Codec"));
@@ -89,7 +90,7 @@ void FilePane::refresh()
 
             if(sw->getOldStream()->getType() == Model::Stream::VIDEO){
                 i++;
-                m->setItem(i,0,QString("piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
+                m->setItem(i,0,QString("Vidéo piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
                 Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
                 m->setItem(i,1,p->value());
 
@@ -105,7 +106,7 @@ void FilePane::refresh()
             }
             else if(sw->getOldStream()->getType() == Model::Stream::AUDIO){
                 j++;
-                m->setItem(j,0,QString("Piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
+                m->setItem(j,0,QString("Audio Piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
                 Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
                 m->setItem(j,1,p->value());
 
@@ -133,7 +134,6 @@ void FilePane::refresh()
         QStringList name = a->filepath().split("/");
         m->setItem(i,1,name.at(name.length()-1));
         i++;*/
-        ui->tableView_ImportFile->setModel(m);
     }
 
 
