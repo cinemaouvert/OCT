@@ -34,6 +34,7 @@ void EncodePane::refreshProjectPane(){
     QStringList list;
     foreach (Model::Project *project, *(m_dispatcher->getProjects())) {
         list << project->name() + QString::number(i);
+        i++;
     }
     m_modelProjectList->setStringList(list);
 }
