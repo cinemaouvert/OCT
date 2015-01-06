@@ -46,6 +46,9 @@ Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, C
 {
     m_transcoder = new Transcoder();
 
+    if(this->m_projects != NULL)
+        delete this->m_projects;
+
     m_projects = new QList<Model::Project*>();
     for(int i = 0; i < projects->size(); i++){
         Model::Project *p = new Model::Project(*projects->at(i));
