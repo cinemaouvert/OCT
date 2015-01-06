@@ -16,7 +16,7 @@ FilePane::FilePane(QWidget *parent) :
 {
     ui->setupUi(this);
     model = new QStringListModel(this);
-
+    splitterNoCollapsing();
 }
 
 void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
@@ -178,5 +178,9 @@ void FilePane::on_pushButton_DeleteFile_clicked()
             this->m_dispatcher->removeFile(filePath);
         }
     }
+}
 
+void FilePane::splitterNoCollapsing() {
+    ui->splitter->setChildrenCollapsible(false);
+    ui->splitter_2->setChildrenCollapsible(false);
 }

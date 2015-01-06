@@ -17,6 +17,7 @@ class AudioPane : public QWidget
 public:
     explicit AudioPane(QWidget *parent = 0);
     explicit AudioPane(Model::File *file,Model::Stream *stream, QWidget *parent = 0);
+    void fillAudioCodecComboBox();
     ~AudioPane();
 
 private:

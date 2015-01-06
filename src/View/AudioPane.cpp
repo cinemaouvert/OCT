@@ -9,6 +9,7 @@ AudioPane::AudioPane(QWidget *parent) :
     m_stream(NULL)
 {
     ui->setupUi(this);
+    fillAudioCodecComboBox();
 }
 
 AudioPane::AudioPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
@@ -18,6 +19,12 @@ AudioPane::AudioPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     m_stream(stream)
 {
     ui->setupUi(this);
+    fillAudioCodecComboBox();
+}
+
+void AudioPane::fillAudioCodecComboBox() {
+    QStringList list = (QStringList() << "AAC" << "MP1" << "MP2" << "MP3" << "FLAC");
+    ui->comboBox_Codec->addItems( list );
 }
 
 AudioPane::~AudioPane()

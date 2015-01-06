@@ -42,7 +42,7 @@ private:
     QStringListModel *model;
     QStringList list;
     void addItem(QString name);
-
+    void splitterNoCollapsing();
 };
 
 #endif // FILEPANE_H
