@@ -33,8 +33,8 @@ public:
 
 private slots:
     void on_pushButton_AddFile_clicked();
-
     void on_pushButton_DeleteFile_clicked();
+    void on_EditLine_Name_Changed();
 
 private:
     Ui::FilePane *ui;

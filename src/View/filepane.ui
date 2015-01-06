@@ -76,7 +76,20 @@
        </widget>
       </item>
       <item>
-       <widget class="QTableView" name="tableView_ImportFile"/>
+       <widget class="QTableView" name="tableView_ImportFile">
+        <property name="acceptDrops">
+         <bool>true</bool>
+        </property>
+        <property name="dragEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="dragDropOverwriteMode">
+         <bool>true</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::DragDrop</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -187,5 +200,25 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>lineEdit_ExportName</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>FilePane</receiver>
+   <slot>on_LineEdit_Name_Changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>650</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>381</x>
+     <y>130</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_LineEdit_Name_Changed()</slot>
+ </slots>
 </ui>

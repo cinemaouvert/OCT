@@ -121,21 +121,18 @@
                </spacer>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_Name">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
+               <widget class="QLineEdit" name="lineEdit_Name">
                 <property name="minimumSize">
                  <size>
                   <width>125</width>
-                  <height>25</height>
+                  <height>0</height>
                  </size>
                 </property>
-                <property name="sizeAdjustPolicy">
-                 <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                <property name="baseSize">
+                 <size>
+                  <width>125</width>
+                  <height>0</height>
+                 </size>
                 </property>
                </widget>
               </item>

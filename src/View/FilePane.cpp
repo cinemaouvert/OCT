@@ -36,6 +36,11 @@ void FilePane::on_pushButton_AddFile_clicked()
     this->m_dispatcher->addFile(filePath);
 }
 
+void FilePane::on_EditLine_Name_Changed()
+{
+
+}
+
 void FilePane::refresh()
 {
     ///////////////////////////////ListView2/////////////////////////////////////////
@@ -60,7 +65,7 @@ void FilePane::refresh()
     int nbSub = this->m_dispatcher->getCurrentProject()->nbSub();
     int i = 0;
     int j = 1 + nbVideo;
-    int k = 1+ j + nbAudio;
+    int k = 1 + j + nbAudio;
     MyModel *m = new MyModel( 3 + nbVideo + nbAudio + nbSub, 6);
     ui->tableView_ImportFile->setModel(m);
 
@@ -129,6 +134,7 @@ void FilePane::refresh()
         }
 
     }
+
     foreach(Model::Attachment *a , *(this->m_dispatcher->getCurrentProject()->attachments())){
        /* m->setItem(i,0,QString("attachment"));
         QStringList name = a->filepath().split("/");
