@@ -42,7 +42,7 @@ void Controller::Merger::createXML(Model::Project *project) {
 	throw "Not yet implemented";
 }
 
-void Controller::Merger::createMKVFile(Model::Project *project) {
+QString Controller::Merger::createMKVFile(Model::Project *project) {
     QString program = m_settings->value("mkvmerge").toString();
     QStringList arguments;
     arguments << *project->getMergeCommandLine();
@@ -50,6 +50,7 @@ void Controller::Merger::createMKVFile(Model::Project *project) {
     QProcess myProcess;
     myProcess.start(program, arguments);
     myProcess.waitForFinished();
+    return "filepath";
 }
 
 Controller::Merger::~Merger()

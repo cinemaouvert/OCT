@@ -60,9 +60,9 @@ void Controller::TreatmentThread::startTreatment() {
             Model::File *f = p->fileList()->at(j);
             m_transcoder->transcode(f->getCommandLine());
         }
-        m_merger->createMKVFile(p);
-        m_exporter->createMagnetLink("",p->name());
-        m_exporter->sendInformationsToJSON(p);
+        //QString filepath = m_merger->createMKVFile(p);
+        //m_exporter->createMagnetLink("", p->name());
+        //m_exporter->sendInformationsToJSON(p);
     }
 }
 

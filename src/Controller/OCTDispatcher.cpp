@@ -111,7 +111,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 */
     /***********************/
     /*****Denis Test *****/
-    this->startTreatment();
+    //this->startTreatment();
 
     /***********************/
     /*****William Test *****/

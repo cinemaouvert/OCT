@@ -74,7 +74,7 @@ namespace Controller
              * @brief This method creates an MKV file from the current project.
              * @param project
              */
-            void createMKVFile(Model::Project *project);
+            QString createMKVFile(Model::Project *project);
 
             ~Merger();
 
