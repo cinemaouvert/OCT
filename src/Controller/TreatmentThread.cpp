@@ -36,11 +36,12 @@ using namespace std;
 #include "src/Controller/Exporter.h"
 #include "src/Controller/OCTDispatcher.h"
 #include "src/Model/Project.h"
+#include "src/configOCT.h"
 
 Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, Controller::Transcoder *transcoder, Controller::Merger *merger, Controller::Exporter *exporter) :
-    m_transcoder(NULL),
-    m_merger(NULL),
-    m_exporter(NULL),
+    m_transcoder(transcoder),
+    m_merger(merger),
+    m_exporter(exporter),
     m_projects(NULL)
 {
     m_transcoder = new Transcoder();
@@ -53,7 +54,16 @@ Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, C
 }
 
 void Controller::TreatmentThread::startTreatment() {
-
+    for(int i = 0; i < m_projects->size(); i++){
+        Model::Project *p = m_projects->at(i);
+        for(int j = 0; j < p->fileList()->size(); j++){
+            Model::File *f = p->fileList()->at(j);
+            m_transcoder->transcode(f->getCommandLine());
+        }
+        m_merger->createMKVFile(p);
+        m_exporter->createMagnetLink("",p->name());
+        m_exporter->sendInformationsToJSON(p);
+    }
 }
 
 void Controller::TreatmentThread::pauseTreatment() {
