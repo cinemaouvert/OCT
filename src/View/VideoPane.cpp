@@ -6,13 +6,13 @@
 VideoPane::VideoPane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VideoPane),
-    player(NULL),
+    m_player(NULL),
     m_file(NULL)
 {
     ui->setupUi(this);
 
-    player = new QtAV::AVPlayer;
-    player->setRenderer(ui->videoWidget);
+    m_player = new QtAV::AVPlayer;
+    m_player->setRenderer(ui->videoWidget);
 
     ui->videoWidget->show();
 
@@ -22,43 +22,43 @@ VideoPane::VideoPane(QWidget *parent) :
 VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VideoPane),
-    player(NULL),
+    m_player(NULL),
     m_file(file),
     m_stream(stream)
 {
     ui->setupUi(this);
 
-    player = new QtAV::AVPlayer;
-    player->setRenderer(ui->videoWidget);
+    m_player = new QtAV::AVPlayer;
+    m_player->setRenderer(ui->videoWidget);
 
     ui->videoWidget->show();
 
     this->loadFile(m_file->getFilePath());
     this->m_streamId = stream->getUID().toInt();
-    player->setVideoStream(this->m_streamId);
+    m_player->setVideoStream(this->m_streamId);
 }
 
 
 VideoPane::~VideoPane()
 {
-    delete ui;
-    delete player;
+    if(ui) delete ui;
+    if(m_player) delete m_player;
 }
 
 void VideoPane::on_playButton_clicked()
 {
-    player->setStartPosition(ui->startSlider->value());
-    player->setStopPosition(ui->stopSlider->value());
+    m_player->setStartPosition(ui->startSlider->value());
+    m_player->setStopPosition(ui->stopSlider->value());
 
-    if(!player->isPlaying()){
-        player->play();
-        if(player->isPlaying())
+    if(!m_player->isPlaying()){
+        m_player->play();
+        if(m_player->isPlaying())
             ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_pause.png"));
-    }else if(player->isPaused()){
-        player->pause(false);
+    }else if(m_player->isPaused()){
+        m_player->pause(false);
         ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_pause.png"));
     }else{
-        player->pause(true);
+        m_player->pause(true);
         ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_play.png"));
     }
 }
@@ -66,8 +66,8 @@ void VideoPane::on_playButton_clicked()
 
 void VideoPane::on_stopButton_clicked()
 {
-    if(player->isPlaying()){
-        player->stop();
+    if(m_player->isPlaying()){
+        m_player->stop();
     }
     ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_play.png"));
     ui->timeSlider->setValue(0);
@@ -76,20 +76,20 @@ void VideoPane::on_stopButton_clicked()
 
 void VideoPane::loadFile(QString filepath)
 {
-    player->load(filepath,false);
+    m_player->load(filepath,false);
 
-    ui->startSlider->setMaximum(player->duration());
-    ui->stopSlider->setMaximum(player->duration());
-    ui->stopSlider->setValue(player->duration());
-    ui->timeStop->setTime(QTime(0,0).addMSecs(player->duration()));
-    ui->timeStop->setMaximumTime(QTime(0,0).addMSecs(player->duration()));
-    ui->timeStart->setMaximumTime(QTime(0,0).addMSecs(player->duration()));
-    ui->timeSlider->setMaximum(player->duration());
+    ui->startSlider->setMaximum(m_player->duration());
+    ui->stopSlider->setMaximum(m_player->duration());
+    ui->stopSlider->setValue(m_player->duration());
+    ui->timeStop->setTime(QTime(0,0).addMSecs(m_player->duration()));
+    ui->timeStop->setMaximumTime(QTime(0,0).addMSecs(m_player->duration()));
+    ui->timeStart->setMaximumTime(QTime(0,0).addMSecs(m_player->duration()));
+    ui->timeSlider->setMaximum(m_player->duration());
 
     connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
-    connect(player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
-    connect(player, SIGNAL(started()), SLOT(updateSlider()));
-    connect(player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
+    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
 
 }
 
@@ -97,7 +97,7 @@ void VideoPane::loadFile(QString filepath)
 void VideoPane::on_stopSlider_sliderMoved(int position)
 {
     if(position>ui->startSlider->value()){
-        player->setStopPosition(qint64(position));
+        m_player->setStopPosition(qint64(position));
         ui->timeStop->setTime(QTime(0,0).addMSecs(position));
     }else{
         ui->stopSlider->setValue(ui->startSlider->value());
@@ -107,7 +107,7 @@ void VideoPane::on_stopSlider_sliderMoved(int position)
 void VideoPane::on_startSlider_sliderMoved(int position)
 {
     if(position<ui->stopSlider->value()){
-        player->setStartPosition(qint64(position));
+        m_player->setStartPosition(qint64(position));
         ui->timeStart->setTime(QTime(0,0).addMSecs(position));
     }else{
         ui->startSlider->setValue(ui->stopSlider->value());
@@ -118,16 +118,16 @@ void VideoPane::on_startSlider_sliderMoved(int position)
 
 void VideoPane::seek(int pos)
 {
-    if (!player->isPlaying())
+    if (!m_player->isPlaying())
         return;
-    player->seek(pos*1000LL); // to msecs
+    m_player->seek(pos*1000LL); // to msecs
 }
 
 void VideoPane::updateSlider()
 {
-    ui->timeSlider->setRange(0, int(player->duration()/1000LL));
-    ui->timeSlider->setValue(int(player->position()/1000LL));
-    ui->timeLabel->setText(QTime(0,0).addMSecs(player->position()).toString("hh:mm:ss"));
+    ui->timeSlider->setRange(0, int(m_player->duration()/1000LL));
+    ui->timeSlider->setValue(int(m_player->position()/1000LL));
+    ui->timeLabel->setText(QTime(0,0).addMSecs(m_player->position()).toString("hh:mm:ss"));
 }
 
 void VideoPane::on_timeStart_timeChanged(const QTime &time)

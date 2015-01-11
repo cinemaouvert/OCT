@@ -42,7 +42,7 @@ private slots:
 
 private:
     Ui::VideoPane *ui;
-    QtAV::AVPlayer *player;
+    QtAV::AVPlayer *m_player;
     Model::File *m_file;
     int m_streamId;
     Model::Stream *m_stream;
