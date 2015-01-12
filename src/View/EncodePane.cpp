@@ -44,3 +44,8 @@ void EncodePane::on_newProjectButton_clicked()
     m_dispatcher->addToQueue();
     refreshProjectPane();
 }
+
+void EncodePane::on_listViewProjects_clicked(const QModelIndex &index)
+{
+    m_dispatcher->setCurrentProjectIndex(index.row());
+}

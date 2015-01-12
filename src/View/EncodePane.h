@@ -24,10 +24,14 @@ public:
 private slots:
     void on_newProjectButton_clicked();
 
+    void on_listViewProjects_clicked(const QModelIndex &index);
+
 private:
     Ui::EncodePane *ui;
     Controller::OCTDispatcher *m_dispatcher;
     QStringListModel *m_modelProjectList;
+
+protected:
 };
 
 #endif // ENCODEPANE_H

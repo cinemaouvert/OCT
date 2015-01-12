@@ -57,11 +57,20 @@ Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, C
 }
 
 void Controller::TreatmentThread::startTreatment() {
+    int nbSteps = 0;
+    for(int i = 0; i < m_projects->size(); i++){
+        Model::Project *p = m_projects->at(i);
+        nbSteps += p->fileList()->size();
+    }
+    emit initProgress(nbSteps);
+
     for(int i = 0; i < m_projects->size(); i++){
         Model::Project *p = m_projects->at(i);
         for(int j = 0; j < p->fileList()->size(); j++){
+
             Model::File *f = p->fileList()->at(j);
             m_transcoder->transcode(f->getCommandLine());
+            emit passedStep();
         }
         //QString filepath = m_merger->createMKVFile(p);
         //m_exporter->createMagnetLink("", p->name());

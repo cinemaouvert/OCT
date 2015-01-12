@@ -91,6 +91,8 @@ namespace Controller
 
             signals:
                 void finished();
+                void initProgress(int value);
+                void passedStep();
 
 
             public slots:

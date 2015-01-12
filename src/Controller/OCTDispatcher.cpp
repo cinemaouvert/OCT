@@ -221,6 +221,12 @@ QList<Model::Project *> *Controller::OCTDispatcher::getProjects()
     return this->m_projects;
 }
 
+void Controller::OCTDispatcher::setCurrentProjectIndex(int index)
+{
+    m_currentProject = m_projects->at(index);
+    m_mainWindow->refresh();
+}
+
 void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &value)
 {
     m_settings->setValue(key, value);

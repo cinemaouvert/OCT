@@ -184,3 +184,5 @@ void FilePane::splitterNoCollapsing() {
     ui->splitter->setChildrenCollapsible(false);
     ui->splitter_2->setChildrenCollapsible(false);
 }
+
+

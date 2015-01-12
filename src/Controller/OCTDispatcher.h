@@ -218,6 +218,8 @@ namespace Controller
             Model::Project *getCurrentProject() const;
 
             QList<Model::Project*> *getProjects();
+
+            void setCurrentProjectIndex(int index);
     };
 }
 
