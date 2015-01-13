@@ -2,6 +2,7 @@
 #define SUBTITLEPANE_H
 
 #include <AVPlayer.h>
+#include <QStringListModel>
 #include <QWidget>
 
 #include "src/Model/File.h"
@@ -36,10 +37,13 @@ private:
     Model::File *m_file;
     Model::Stream *m_stream;
     QtAV::AVPlayer *m_player;
+    QStringListModel *m_model;
+
     void loadFile(QString filepath);
 
 
 
+    void parseSubtitleFile();
 };
 
 #endif // SUBTITLEPANE_H

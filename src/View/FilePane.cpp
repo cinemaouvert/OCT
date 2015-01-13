@@ -105,7 +105,7 @@ void FilePane::refresh()
                 p = sw->getOldStream()->getParameters()->find("resolution").value();
                 m->setItem(i,3,p->value());
 
-                m->setItem(i,4,QString("ok"));
+                m->setItem(i,4,QString("OK"));
 
 
             }
@@ -124,7 +124,7 @@ void FilePane::refresh()
                 p = sw->getOldStream()->getParameters()->find("channels").value();
                 m->setItem(j,4,p->value());
 
-                m->setItem(j,5,QString("ok"));
+                m->setItem(j,5,QString("OK"));
 
             }
             else if(sw->getOldStream()->getType() == Model::Stream::SUBTITLE){

@@ -335,7 +335,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QColumnView" name="columnView_SubtitlePrev"/>
+       <widget class="QTableView" name="subtitleTableView"/>
       </item>
      </layout>
     </widget>

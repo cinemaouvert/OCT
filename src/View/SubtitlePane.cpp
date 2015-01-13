@@ -1,5 +1,9 @@
+#include "MyModel.h"
 #include "SubtitlePane.h"
 #include "ui_subtitlepane.h"
+
+#include <QFile>
+#include <QMimeDatabase>
 
 
 SubtitlePane::SubtitlePane(QWidget *parent) :
@@ -7,7 +11,8 @@ SubtitlePane::SubtitlePane(QWidget *parent) :
     ui(new Ui::SubtitlePane),
     m_file(NULL),
     m_stream(NULL),
-    m_player(NULL)
+    m_player(NULL),
+    m_model(NULL)
 {
     ui->setupUi(this);
 }
@@ -17,14 +22,19 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
     ui(new Ui::SubtitlePane),
     m_file(file),
     m_stream(stream),
-    m_player(NULL)
+    m_player(NULL),
+    m_model(NULL)
 {
     ui->setupUi(this);
 
     m_player = new QtAV::AVPlayer;
     m_player->setRenderer(ui->videoWidget);
-
+    m_model = new QStringListModel(this);
+    ui->subtitleTableView->setModel(m_model);
     ui->videoWidget->show();
+
+
+    parseSubtitleFile();
 
     /*
      * TODO : file to load
@@ -39,6 +49,7 @@ SubtitlePane::~SubtitlePane()
 {
     if(ui) delete ui;
     if(m_player) delete m_player;
+    if(m_model) delete m_model;
 }
 
 void SubtitlePane::on_playButton_clicked()
@@ -93,4 +104,29 @@ void SubtitlePane::updateSlider()
     ui->timeSlider->setRange(0, int(m_player->duration()/1000LL));
     ui->timeSlider->setValue(int(m_player->position()/1000LL));
     ui->timeLabel->setText(QTime(0,0).addMSecs(m_player->position()).toString("hh:mm:ss"));
+}
+
+void SubtitlePane::parseSubtitleFile(){
+    QMimeDatabase db;
+    QMimeType mime = db.mimeTypeForFile(this->m_file->getFilePath());
+    QStringList subtitleList;
+    QFile *file = new QFile(this->m_file->getFilePath());
+
+    if (file->open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        if(mime.name().contains("subrip")){
+            QString line;
+            QTextStream in(file);
+            while ( !in.atEnd() )
+            {
+                QString line = in.readLine();
+                subtitleList.append(line);
+            }
+        }else if(mime.name().contains("ssa") || mime.name().contains("ass")){
+
+        }
+    }
+    file->close();
+    delete file;
+    m_model->setStringList(subtitleList);
 }

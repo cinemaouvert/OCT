@@ -1,5 +1,7 @@
 #include "MyModel.h"
 #include <QColor>
+#include <qicon.h>
+#include <QDebug>
 
 MyModel::MyModel( int rows, int columns, QObject *parent ) : QAbstractTableModel( parent )
 {
@@ -28,16 +30,31 @@ Qt::ItemFlags MyModel::flags( const QModelIndex &index ) const
 
 QVariant MyModel::data( const QModelIndex &index, int role ) const
 {
-    if (!index.isValid() || role != Qt::DisplayRole)
+    if (!index.isValid() || (role != Qt::BackgroundRole && role != Qt::DecorationRole && role != Qt::DisplayRole)){
         return QVariant();
+    }
 
-    if (role == Qt::BackgroundRole){
-        if (index.row() == 0)
+    if(role == Qt::DecorationRole){
+       if(index.column()==4 || index.column()==5){
+            if(m_array[index.row()][index.column()] == "OK"){
+                return QIcon(":/icons/resources/glyphicons/glyphicons_152_check.png");
+            }else if(m_array[index.row()][index.column()] == "NOK"){
+                return QIcon(":/icons/resources/glyphicons/glyphicons_153_unchecked.png");
+            }
+       }
+    }else if(role == Qt::DisplayRole){
+        if(index.column()==4 || index.column()==5){
+            if(m_array[index.row()][index.column()] == "OK" || m_array[index.row()][index.column()] == "NOK"){
+                return "";
+            }
+        }
+    }else if (role == Qt::BackgroundRole){
+       /* if (index.row() == 0)
             return QColor(Qt::blue);
         if (index.row() == 1)
             return QColor(Qt::red);
         if (index.row() == 2)
-            return QColor(Qt::green);
+            return QColor(Qt::green);*/
     }
     return m_array[index.row()][index.column()];
 }
