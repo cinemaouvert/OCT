@@ -220,32 +220,6 @@ border-radius:5px;</string>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="labelStatus2">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(203, 203, 203);
-border-radius:5px;</string>
-         </property>
-         <property name="text">
-          <string>Choix de la configuration</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="labelStatus3">
          <property name="minimumSize">
           <size>
@@ -264,7 +238,7 @@ border-radius:5px;</string>
 border-radius:5px;</string>
          </property>
          <property name="text">
-          <string>Nommage des pistes</string>
+          <string>Configuration</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

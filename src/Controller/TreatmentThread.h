@@ -89,13 +89,13 @@ namespace Controller
              */
             TreatmentThread(QList<Model::Project*> *projects, Controller::Transcoder *transcoder, Controller::Merger *merger, Controller::Exporter *exporter);
 
-            signals:
-                void finished();
-                void initProgress(int value);
-                void passedStep();
+        signals:
+            void finished();
+            void initProgress(int value);
+            void passedStep();
 
 
-            public slots:
+        public slots:
 
             /**
              * @brief This method start the treatement queue.

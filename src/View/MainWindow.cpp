@@ -80,7 +80,6 @@ void View::MainWindow::on_tabWidget_currentChanged(int index)
     QString inactiveStyle = "background-color: rgb(203, 203, 203);border-radius:5px;";
     QString activeStyle = "background-color: rgb(141, 141, 141);border-radius:5px;";
     ui->labelStatus1->setStyleSheet(inactiveStyle);
-    ui->labelStatus2->setStyleSheet(inactiveStyle);
     ui->labelStatus3->setStyleSheet(inactiveStyle);
     ui->labelStatus4->setStyleSheet(inactiveStyle);
     ui->labelStatus5->setStyleSheet(inactiveStyle);

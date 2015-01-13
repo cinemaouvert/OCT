@@ -24,7 +24,6 @@ ParametersDialog::~ParametersDialog()
 {
     if(ui)          delete ui;
     if(m_settings)  delete m_settings;
-
 }
 
 void ParametersDialog::on_ffmpegButton_clicked()

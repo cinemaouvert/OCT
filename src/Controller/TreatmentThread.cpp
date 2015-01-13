@@ -57,6 +57,7 @@ Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, C
 }
 
 void Controller::TreatmentThread::startTreatment() {
+    //Init barre avancement
     int nbSteps = 0;
     for(int i = 0; i < m_projects->size(); i++){
         Model::Project *p = m_projects->at(i);
