@@ -53,7 +53,7 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
         }
     }else if (role == Qt::BackgroundRole){
         if(m_array[index.row()][index.column()] == "Video" || m_array[index.row()][index.column()] == "Audio" || m_array[index.row()][index.column()] == "Sous Titre"){
-             return QColor(Qt::lightGray);
+            return QColor(QColor(100,100,100,50));
         }
         else if(m_array[index.row()][index.column()] == "Nom" || m_array[index.row()][index.column()] == "Nom"
                 || m_array[index.row()][index.column()] == "Codec"|| m_array[index.row()][index.column()] == "IPS"
@@ -61,7 +61,7 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
                 || m_array[index.row()][index.column()] == "Echantillonage"|| m_array[index.row()][index.column()] == "Profondeur"
                 || m_array[index.row()][index.column()] == "Cannaux"|| m_array[index.row()][index.column()] == "Format"
                 || m_array[index.row()][index.column()] == "Encodage"){
-            return QColor(Qt::lightGray);
+            return QColor(QColor(150,150,150,50));
         }
     }
     return m_array[index.row()][index.column()];
