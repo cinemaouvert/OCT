@@ -14,6 +14,7 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
     ui->setupUi(this);
     ui->tab_files->setDispatcher(m_dispatcher);
     ui->tab_encode->setDispatcher(m_dispatcher);
+    ui->tab_infos->setDispatcher(m_dispatcher);
     ui->tabWidgetVideo->clear();
     ui->tabWidgetSubtitle->clear();
     ui->tabWidgetAudio->clear();
@@ -51,6 +52,7 @@ void View::MainWindow::refresh()
     }
 
     ui->tab_encode->refresh();
+    ui->tab_infos->refresh();
 }
 
 void View::MainWindow::refreshProjectPane()
