@@ -74,27 +74,27 @@ void FilePane::refresh()
     MyModel *m = new MyModel( 8 + nbVideo + nbAudio + nbSub, 6 , nbVideo , nbAudio , nbSub);
     ui->tableView_ImportFile->setModel(m);
 
-    m->setItem(0,0,QString("Video"));
-    m->setItem(1,0,QString("Nom"));
-    m->setItem(1,1,QString("Codec"));
-    m->setItem(1,2,QString("IPS"));
-    m->setItem(1,3,QString("Taille"));
-    m->setItem(1,4,QString("Supporté"));
+    m->setItem(0,0,tr("Video"));
+    m->setItem(1,0,tr("Nom"));
+    m->setItem(1,1,tr("Codec"));
+    m->setItem(1,2,tr("IPS"));
+    m->setItem(1,3,tr("Taille"));
+    m->setItem(1,4,tr("Supporté"));
 
-    m->setItem(j-1,0,QString("Audio"));
-    m->setItem(j,0,QString("Nom"));
-    m->setItem(j,1,QString("Codec"));
-    m->setItem(j,2,QString("Echantillonage"));
-    m->setItem(j,3,QString("Profondeur"));
-    m->setItem(j,4,QString("Cannaux"));
-    m->setItem(j,5,QString("Supporté"));
+    m->setItem(j-1,0,tr("Audio"));
+    m->setItem(j,0,tr("Nom"));
+    m->setItem(j,1,tr("Codec"));
+    m->setItem(j,2,tr("Echantillonage"));
+    m->setItem(j,3,tr("Profondeur"));
+    m->setItem(j,4,tr("Cannaux"));
+    m->setItem(j,5,tr("Supporté"));
 
-    m->setItem(k-1,0,QString("Sous Titre"));
-    m->setItem(k,0,QString("Nom"));
-    m->setItem(k,1,QString("Format"));
-    m->setItem(k,2,QString("Encodage"));
-    m->setItem(k,3,QString("IPS"));
-    m->setItem(k,4,QString("Supporté"));
+    m->setItem(k-1,0,tr("Sous Titre"));
+    m->setItem(k,0,tr("Nom"));
+    m->setItem(k,1,tr("Format"));
+    m->setItem(k,2,tr("Encodage"));
+    m->setItem(k,3,tr("IPS"));
+    m->setItem(k,4,tr("Supporté"));
 
     ui->tableView_ImportFile->clearSpans();
     ui->tableView_ImportFile->setSpan(0, 0, 1, 6);
@@ -109,7 +109,7 @@ void FilePane::refresh()
 
             if(sw->getOldStream()->getType() == Model::Stream::VIDEO){
                 i++;
-                m->setItem(i,0,QString("piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
+                m->setItem(i,0,tr("piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
                 Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
                 m->setItem(i,1,p->value());
 
@@ -125,7 +125,7 @@ void FilePane::refresh()
             }
             else if(sw->getOldStream()->getType() == Model::Stream::AUDIO){
                 j++;
-                m->setItem(j,0,QString("Piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
+                m->setItem(j,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
                 Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
                 m->setItem(j,1,p->value());
 
@@ -143,7 +143,7 @@ void FilePane::refresh()
             }
             else if(sw->getOldStream()->getType() == Model::Stream::SUBTITLE){
                 k++;
-                m->setItem(k,0,QString("Piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
+                m->setItem(k,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
                 Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
                 m->setItem(k,1,p->value());
 
