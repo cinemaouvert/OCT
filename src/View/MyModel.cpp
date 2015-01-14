@@ -30,10 +30,13 @@ Qt::ItemFlags MyModel::flags( const QModelIndex &index ) const
 
 QVariant MyModel::data( const QModelIndex &index, int role ) const
 {
-    if (!index.isValid() || (role != Qt::BackgroundRole && role != Qt::DecorationRole && role != Qt::DisplayRole)){
+    if (!index.isValid() || (role != Qt::TextAlignmentRole && role != Qt::BackgroundRole && role != Qt::DecorationRole && role != Qt::DisplayRole)){
         return QVariant();
     }
 
+    if (role == Qt::TextAlignmentRole) {
+           return Qt::AlignCenter;
+    }
     if(role == Qt::DecorationRole){
        if(index.column()==4 || index.column()==5){
             if(m_array[index.row()][index.column()] == "OK"){
@@ -49,12 +52,17 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
             }
         }
     }else if (role == Qt::BackgroundRole){
-       /* if (index.row() == 0)
-            return QColor(Qt::blue);
-        if (index.row() == 1)
-            return QColor(Qt::red);
-        if (index.row() == 2)
-            return QColor(Qt::green);*/
+        if(m_array[index.row()][index.column()] == "Video" || m_array[index.row()][index.column()] == "Audio" || m_array[index.row()][index.column()] == "Sous Titre"){
+             return QColor(Qt::lightGray);
+        }
+        else if(m_array[index.row()][index.column()] == "Nom" || m_array[index.row()][index.column()] == "Nom"
+                || m_array[index.row()][index.column()] == "Codec"|| m_array[index.row()][index.column()] == "IPS"
+                || m_array[index.row()][index.column()] == "Taille"|| m_array[index.row()][index.column()] == "Supporté"
+                || m_array[index.row()][index.column()] == "Echantillonage"|| m_array[index.row()][index.column()] == "Profondeur"
+                || m_array[index.row()][index.column()] == "Cannaux"|| m_array[index.row()][index.column()] == "Format"
+                || m_array[index.row()][index.column()] == "Encodage"){
+            return QColor(Qt::lightGray);
+        }
     }
     return m_array[index.row()][index.column()];
 }
@@ -71,6 +79,7 @@ QVariant MyModel::headerData( int section, Qt::Orientation orientation, int role
         */
     return QVariant();
 }
+
 
 int MyModel::setItem(int row, int col, QString datum) const
 {

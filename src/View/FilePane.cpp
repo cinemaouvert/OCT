@@ -19,7 +19,7 @@ FilePane::FilePane(QWidget *parent) :
     splitterNoCollapsing();
    // ui->tableView_ImportFile->horizontalHeader()->setVisible(false);
     ui->tableView_ImportFile->verticalHeader()->setVisible(false);
-    ui->tableView_ImportFile->setAlternatingRowColors(true);
+  //  ui->tableView_ImportFile->setAlternatingRowColors(true);
     ui->tableView_ImportFile->horizontalHeader()->setStretchLastSection(true);
     ui->tableView_ImportFile->resizeColumnsToContents();
 }
@@ -62,8 +62,7 @@ void FilePane::refresh()
         names << name.at(name.length()-1);
     }
     model->setStringList(names);
-    ui->listView_ImportFile->setModel(model
-                                      );
+    ui->listView_ImportFile->setModel(model);
 
     //////////////////////////////TableView////////////////////////////////////////////
     int nbVideo = this->m_dispatcher->getCurrentProject()->nbVideo();
@@ -72,7 +71,7 @@ void FilePane::refresh()
     int i = 1;
     int j = 3 + nbVideo;
     int k = 2 + j + nbAudio;
-    MyModel *m = new MyModel( 6 + nbVideo + nbAudio + nbSub, 6);
+    MyModel *m = new MyModel( 8 + nbVideo + nbAudio + nbSub, 6);
     ui->tableView_ImportFile->setModel(m);
 
     m->setItem(0,0,QString("Video"));
@@ -103,6 +102,7 @@ void FilePane::refresh()
     ui->tableView_ImportFile->setSpan(2+nbVideo, 0, 1, 6);
     ui->tableView_ImportFile->setSpan(4+nbVideo+nbAudio, 0, 1, 6);
     ui->tableView_ImportFile->setSpan(5+nbVideo+nbAudio, 4, 1, 5);
+
 
     foreach(Model::File *f , *(this->m_dispatcher->getCurrentProject()->fileList())){
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
@@ -162,12 +162,13 @@ void FilePane::refresh()
         m->setItem(i,1,name.at(name.length()-1));
         i++;*/
     }
+    m->setItem(k+1,0,QString("Champs d'informations"));
+    m->setItem(k+1,1,QString("X champ remplie sur Y"));
+    m->setItem(k+2,0,QString("Pieces Jointes"));
+    m->setItem(k+2,1,QString::number(this->m_dispatcher->getCurrentProject()->attachments()->size()));
 
-
-
-
-
-  //  ui->tableView->setSpan(0, 1, 0, 2);
+    ui->tableView_ImportFile->setSpan(k+1, 1, 1, 6);
+    ui->tableView_ImportFile->setSpan(k+2, 1, 1, 6);
 
 }
 
