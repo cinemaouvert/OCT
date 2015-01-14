@@ -139,7 +139,18 @@ void SubtitlePane::parseSubtitleFile(){
             while ( !in.atEnd() )
             {
                 QString line = in.readLine();
-                subtitleList.append(line);
+                if(line.startsWith("Dialogue:")){
+                    line = line.remove("Dialogue:");
+                    QStringList list = line.split(",");
+                    startList.append(list.size()>1 ? list.at(1) : "");
+                    endList.append(list.size()>2 ? list.at(2) : "");
+                    QString restLine = "";
+                    for(int i = 9 ; i < list.size() ; i++ ){ // start at 9 for remove unused information
+                        restLine+= list.at(i);
+                    }
+
+                    subtitleList.append(restLine);
+                }
             }
         }
     }
@@ -149,8 +160,8 @@ void SubtitlePane::parseSubtitleFile(){
     m_model = new QStandardItemModel(subtitleList.size(),3);
     for(int i = 0; i < subtitleList.count() ; i++)
     {
-        m_model->setItem(i,0,new QStandardItem(startList.at(i)));
-        m_model->setItem(i,1,new QStandardItem(endList.at(i)));
+        m_model->setItem(i,0,new QStandardItem(startList.size()>= i+1 ? startList.at(i) : ""));
+        m_model->setItem(i,1,new QStandardItem(endList.size()>= i+1 ? endList.at(i) : ""));
         m_model->setItem(i,2,new QStandardItem(subtitleList.at(i)));
     }
     ui->subtitleTableView->setModel(m_model);
