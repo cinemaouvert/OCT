@@ -7,7 +7,7 @@ class MyModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    explicit MyModel( int rows, int columns, QObject *parent = 0 );
+    explicit MyModel( int rows, int columns,int nbVideo ,int  nbAudio ,int  nbSub, QObject *parent = 0 );
 
       Qt::ItemFlags flags( const QModelIndex &index ) const;
       QVariant data( const QModelIndex &index, int role = Qt::DisplayRole ) const;
@@ -19,6 +19,9 @@ public:
 private:
       int m_rows, m_columns;
       QString **m_array;
+      int m_nbVideo;
+      int m_nbAudio;
+      int m_nbSubtitle;
 signals:
 
 public slots:

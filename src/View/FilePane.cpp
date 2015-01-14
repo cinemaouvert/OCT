@@ -71,7 +71,7 @@ void FilePane::refresh()
     int i = 1;
     int j = 3 + nbVideo;
     int k = 2 + j + nbAudio;
-    MyModel *m = new MyModel( 8 + nbVideo + nbAudio + nbSub, 6);
+    MyModel *m = new MyModel( 8 + nbVideo + nbAudio + nbSub, 6 , nbVideo , nbAudio , nbSub);
     ui->tableView_ImportFile->setModel(m);
 
     m->setItem(0,0,QString("Video"));

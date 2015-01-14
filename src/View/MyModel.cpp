@@ -3,7 +3,7 @@
 #include <qicon.h>
 #include <QDebug>
 
-MyModel::MyModel( int rows, int columns, QObject *parent ) : QAbstractTableModel( parent )
+MyModel::MyModel( int rows, int columns,int nbVideo ,int  nbAudio ,int  nbSub,QObject *parent ) : QAbstractTableModel( parent )
 {
   m_rows = rows;
   m_columns = columns;
@@ -11,6 +11,9 @@ MyModel::MyModel( int rows, int columns, QObject *parent ) : QAbstractTableModel
   for (int i = 0; i < m_rows; ++i) {
     m_array[i] = new QString[m_columns];
   }
+  m_nbAudio = nbAudio;
+  m_nbVideo = nbVideo;
+  m_nbSubtitle = nbSub;
 }
 
 int MyModel::rowCount( const QModelIndex &parent ) const
@@ -52,16 +55,14 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
             }
         }
     }else if (role == Qt::BackgroundRole){
-        if(m_array[index.row()][index.column()] == "Video" || m_array[index.row()][index.column()] == "Audio" || m_array[index.row()][index.column()] == "Sous Titre"){
-            return QColor(QColor(100,100,100,50));
-        }
-        else if(m_array[index.row()][index.column()] == "Nom" || m_array[index.row()][index.column()] == "Nom"
-                || m_array[index.row()][index.column()] == "Codec"|| m_array[index.row()][index.column()] == "IPS"
-                || m_array[index.row()][index.column()] == "Taille"|| m_array[index.row()][index.column()] == "Supporté"
-                || m_array[index.row()][index.column()] == "Echantillonage"|| m_array[index.row()][index.column()] == "Profondeur"
-                || m_array[index.row()][index.column()] == "Cannaux"|| m_array[index.row()][index.column()] == "Format"
-                || m_array[index.row()][index.column()] == "Encodage"){
+
+        if(     index.row() == 0 || index.row() == 1 ||
+                index.row() == m_nbVideo +2 || index.row() == m_nbVideo+1+2 ||
+                index.row() == m_nbVideo + m_nbAudio +4 || index.row() == m_nbVideo + m_nbAudio +1+4 ||
+                index.row() == m_nbVideo + m_nbAudio + m_nbSubtitle +6 || index.row() == m_nbVideo + m_nbAudio + m_nbSubtitle +1+6
+        ){
             return QColor(QColor(150,150,150,50));
+
         }
     }
     return m_array[index.row()][index.column()];
