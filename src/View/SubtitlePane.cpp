@@ -6,6 +6,7 @@
 #include <QMimeDatabase>
 
 
+
 SubtitlePane::SubtitlePane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SubtitlePane),
@@ -157,6 +158,7 @@ void SubtitlePane::parseSubtitleFile(){
     file->close();
     delete file;
 
+    if(m_model) delete m_model;
     m_model = new QStandardItemModel(subtitleList.size(),3);
     for(int i = 0; i < subtitleList.count() ; i++)
     {
@@ -164,5 +166,9 @@ void SubtitlePane::parseSubtitleFile(){
         m_model->setItem(i,1,new QStandardItem(endList.size()>= i+1 ? endList.at(i) : ""));
         m_model->setItem(i,2,new QStandardItem(subtitleList.at(i)));
     }
+    m_model->setHorizontalHeaderItem(0,new QStandardItem(tr("Début")));
+    m_model->setHorizontalHeaderItem(1,new QStandardItem(tr("Fin")));
+    m_model->setHorizontalHeaderItem(2,new QStandardItem(tr("Contenu")));
+
     ui->subtitleTableView->setModel(m_model);
 }
