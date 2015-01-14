@@ -2,11 +2,14 @@
 #define SUBTITLEPANE_H
 
 #include <AVPlayer.h>
+#include <QStandardItemModel>
 #include <QStringListModel>
 #include <QWidget>
 
 #include "src/Model/File.h"
 #include "src/Model/Stream.h"
+
+#include "MyModel.h"
 
 namespace Ui {
 class SubtitlePane;
@@ -37,7 +40,7 @@ private:
     Model::File *m_file;
     Model::Stream *m_stream;
     QtAV::AVPlayer *m_player;
-    QStringListModel *m_model;
+    QStandardItemModel *m_model;
 
     void loadFile(QString filepath);
 
