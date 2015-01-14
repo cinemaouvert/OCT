@@ -130,10 +130,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox_TextField6"/>
+       <widget class="QComboBox" name="posterComboBox"/>
       </item>
       <item>
-       <widget class="QGraphicsView" name="graphicsView"/>
+       <widget class="QGraphicsView" name="posterGraphicsView"/>
       </item>
       <item>
        <widget class="QLabel" name="label_FilmScreenDefault">
@@ -143,10 +143,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="comboBox_TextField7"/>
+       <widget class="QComboBox" name="sampleComboBox"/>
       </item>
       <item>
-       <widget class="QGraphicsView" name="graphicsView_2"/>
+       <widget class="QGraphicsView" name="sampleGraphicView"/>
       </item>
      </layout>
     </widget>
