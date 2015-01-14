@@ -38,8 +38,10 @@ FilePane::~FilePane()
 
 void FilePane::on_pushButton_AddFile_clicked()
 {
-    QString filePath = QFileDialog::getOpenFileName(this,tr("Open"));
-    this->m_dispatcher->addFile(filePath);
+    QStringList filePaths = QFileDialog::getOpenFileNames(this,tr("Open"));
+    foreach (QString filePath, filePaths) {
+        this->m_dispatcher->addFile(filePath);
+    }
 }
 
 void FilePane::on_EditLine_Name_Changed()
