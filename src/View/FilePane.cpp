@@ -162,9 +162,9 @@ void FilePane::refresh()
         m->setItem(i,1,name.at(name.length()-1));
         i++;*/
     }
-    m->setItem(k+1,0,QString("Champs d'informations"));
-    m->setItem(k+1,1,QString("X champ remplie sur Y"));
-    m->setItem(k+2,0,QString("Pieces Jointes"));
+    m->setItem(k+1,0,tr("Champs d'informations"));
+    m->setItem(k+1,1,tr("%1 champ remplie sur %2"));
+    m->setItem(k+2,0,tr("Pieces Jointes"));
     m->setItem(k+2,1,QString::number(this->m_dispatcher->getCurrentProject()->attachments()->size()));
 
     ui->tableView_ImportFile->setSpan(k+1, 1, 1, 6);
