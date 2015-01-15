@@ -74,6 +74,9 @@ namespace Controller
      */
     class OCTDispatcher : public QObject
 	{
+
+        Q_OBJECT
+
         private:
             /**
              * @brief Thread to start treatment
@@ -220,6 +223,12 @@ namespace Controller
             QList<Model::Project*> *getProjects();
 
             void setCurrentProjectIndex(int index);
+
+            void duplicateProject(int index);
+
+
+    public slots:
+            void treatProjectNameChanged(QString newName);
     };
 }
 

@@ -12,8 +12,18 @@ namespace Controller
 {
     class OCTDispatcher;
 }
+
+class FilePane;
+class EncodePane;
+class AudioPane;
+class VideoPane;
+class InformationPane;
+class SubtitlePane;
+
+
 namespace View
 {
+
     class MainWindow : public QMainWindow
     {
         Q_OBJECT
@@ -41,9 +51,17 @@ namespace View
 
             void setOCPMState(bool isValid);
 
+            FilePane* getFilePane();
+            EncodePane* getEncodePane();
+            QObjectList getAudioPanes();
+            QObjectList getVideoPanes();
+            QObjectList getSubtitlePanes();
+            InformationPane* getInformationPane();
+
     private slots:
             void on_tabWidget_currentChanged(int index);
             void on_OpenSettings();
+
 
     private:
             /**

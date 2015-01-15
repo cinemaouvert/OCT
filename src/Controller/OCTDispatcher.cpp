@@ -58,6 +58,8 @@ using namespace std;
 #include <src/Model/Serializable.h>
 #include <src/Model/Project.h>
 
+#include <src/View/FilePane.h>
+
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_mainWindow(NULL) ,
     m_settings(NULL) ,
@@ -91,6 +93,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     Model::Video::initStaticParameters();
     Model::Audio::initStaticParameters();
     Model::Subtitle::initStaticParameters();
+
 
 
     /****** TRY YOUR WORK IN HERE **********/
@@ -225,6 +228,21 @@ void Controller::OCTDispatcher::setCurrentProjectIndex(int index)
 {
     m_currentProject = m_projects->at(index);
     m_mainWindow->refresh();
+}
+
+void Controller::OCTDispatcher::duplicateProject(int index)
+{
+    Model::Project *project = new Model::Project(*(m_projects->at(index)));
+    m_projects->append(project);
+    setCurrentProjectIndex(m_projects->size()-1);
+}
+
+
+
+void Controller::OCTDispatcher::treatProjectNameChanged(QString newName)
+{
+    qDebug() << newName;
+    m_currentProject->setName(newName);
 }
 
 void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &value)

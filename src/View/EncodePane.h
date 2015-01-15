@@ -21,15 +21,19 @@ public:
 
     void refresh();
     void refreshProjectPane();
+    void changeCurrentProject(int index);
+    void duplicateProject(int index);
+
 private slots:
     void on_newProjectButton_clicked();
 
-    void on_listViewProjects_clicked(const QModelIndex &index);
 
 private:
     Ui::EncodePane *ui;
     Controller::OCTDispatcher *m_dispatcher;
     QStringListModel *m_modelProjectList;
+
+    void connectInterface();
 
 protected:
 };

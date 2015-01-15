@@ -5,6 +5,13 @@
 
 #include "src/Model/Stream.h"
 
+#include "src/View/FilePane.h"
+#include "src/View/AudioPane.h"
+#include "src/View/VideoPane.h"
+#include "src/View/SubtitlePane.h"
+#include "src/View/InformationPane.h"
+#include "src/View/EncodePane.h"
+
 View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispatcher) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -75,6 +82,36 @@ void View::MainWindow::setOCPMState(bool isValid)
         ui->labelStatusOKNOK->setStyleSheet("background-color:  rgba(255, 0, 0, 100);border-radius:5px;");
         ui->labelStatusOKNOK->setText("OCPM invalide");
     }
+}
+
+FilePane* View::MainWindow::getFilePane()
+{
+    return ui->tab_files;
+}
+
+EncodePane *View::MainWindow::getEncodePane()
+{
+    return ui->tab_encode;
+}
+
+QObjectList View::MainWindow::getAudioPanes()
+{
+    return ui->tab_sound->children();
+}
+
+QObjectList View::MainWindow::getVideoPanes()
+{
+    return ui->tab_video->children();
+}
+
+InformationPane *View::MainWindow::getInformationPane()
+{
+    return ui->tab_infos;
+}
+
+QObjectList View::MainWindow::getSubtitlePanes()
+{
+    return ui->tab_subtitle->children();
 }
 
 void View::MainWindow::on_tabWidget_currentChanged(int index)

@@ -364,7 +364,7 @@
          <widget class="QTextBrowser" name="textBrowser_EncodingLog"/>
         </item>
         <item>
-         <widget class="QListView" name="listViewProjects"/>
+         <widget class="QueueListView" name="listViewProjects"/>
         </item>
        </layout>
       </widget>
@@ -488,6 +488,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QueueListView</class>
+   <extends>QListView</extends>
+   <header>src/View/QueueListView.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

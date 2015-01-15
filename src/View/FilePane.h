@@ -31,10 +31,14 @@ public:
     void refresh();
     ~FilePane();
 
+signals:
+    void projectNameChanged(QString newName);
+
 private slots:
     void on_pushButton_AddFile_clicked();
     void on_pushButton_DeleteFile_clicked();
-    void on_EditLine_Name_Changed();
+
+    void on_lineEdit_ExportName_textChanged(const QString &arg1);
 
 private:
     Ui::FilePane *ui;
@@ -43,6 +47,7 @@ private:
     QStringList list;
     void addItem(QString name);
     void splitterNoCollapsing();
+    void connectInterface();
 };
 
 #endif // FILEPANE_H

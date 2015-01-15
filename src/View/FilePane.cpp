@@ -27,6 +27,7 @@ FilePane::FilePane(QWidget *parent) :
 void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
 {
     this->m_dispatcher = dispatcheur;
+    connectInterface();
 
 }
 
@@ -44,10 +45,6 @@ void FilePane::on_pushButton_AddFile_clicked()
     }
 }
 
-void FilePane::on_EditLine_Name_Changed()
-{
-
-}
 
 void FilePane::refresh()
 {
@@ -191,4 +188,14 @@ void FilePane::splitterNoCollapsing() {
     ui->splitter_2->setChildrenCollapsible(false);
 }
 
+void FilePane::connectInterface()
+{
+    connect(this, SIGNAL(projectNameChanged(QString)), m_dispatcher, SLOT(treatProjectNameChanged(QString)));
+}
 
+
+
+void FilePane::on_lineEdit_ExportName_textChanged(const QString &arg1)
+{
+    emit projectNameChanged(arg1);
+}
