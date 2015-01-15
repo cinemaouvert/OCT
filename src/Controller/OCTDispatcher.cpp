@@ -59,6 +59,7 @@ using namespace std;
 #include <src/Model/Project.h>
 
 #include <src/View/FilePane.h>
+#include <src/View/EncodePane.h>
 
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_mainWindow(NULL) ,
@@ -241,8 +242,8 @@ void Controller::OCTDispatcher::duplicateProject(int index)
 
 void Controller::OCTDispatcher::treatProjectNameChanged(QString newName)
 {
-    qDebug() << newName;
     m_currentProject->setName(newName);
+    m_mainWindow->getEncodePane()->refreshProjectPane();
 }
 
 void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &value)

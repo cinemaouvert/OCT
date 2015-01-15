@@ -48,6 +48,10 @@ void FilePane::on_pushButton_AddFile_clicked()
 
 void FilePane::refresh()
 {
+    //////REFRESH FIELDS/////
+    ui->lineEdit_ExportName->setText(this->m_dispatcher->getCurrentProject()->name());
+
+
     ///////////////////////////////ListView2/////////////////////////////////////////
     QStringList names;
     list.clear();
@@ -198,4 +202,5 @@ void FilePane::connectInterface()
 void FilePane::on_lineEdit_ExportName_textChanged(const QString &arg1)
 {
     emit projectNameChanged(arg1);
+
 }
