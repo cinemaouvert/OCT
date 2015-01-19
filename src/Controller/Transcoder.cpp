@@ -63,7 +63,7 @@ QString Controller::Transcoder::transcode(QStringList *list) {
     QString ffmpegProgram = m_settings->value("ffmpeg").toString();
     QProcess myProcessFFMPEG;
     myProcessFFMPEG.start(ffmpegProgram, *list);
-    myProcessFFMPEG.waitForFinished();
+    myProcessFFMPEG.waitForFinished(-1);
     QString retour(myProcessFFMPEG.readAll());
     qDebug() << "DEBUG :" << *list;
     qDebug() << "DEBUG :" << myProcessFFMPEG.readAllStandardError();
