@@ -54,7 +54,7 @@ QString Controller::Transcoder::getInfo(QString filePath) {
 
     QProcess myProcess;
     myProcess.start(program, arguments);
-    myProcess.waitForFinished();
+    myProcess.waitForFinished(-1);
     QString retour(myProcess.readAllStandardOutput());
     return retour;
 }
