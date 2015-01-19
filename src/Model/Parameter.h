@@ -60,6 +60,11 @@ namespace Model
             QString m_value;
 
             /**
+             * @brief Original Value of the current parameter.
+             */
+            QString m_originalValue;
+
+            /**
              * @brief Member defined whether the parameter need to be spaced from next one.
              */
             bool m_noSpaceForNext;

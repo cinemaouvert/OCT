@@ -44,7 +44,7 @@ QString Model::Parameter::value() const
 
 void Model::Parameter::setValue(const QString &value)
 {
-    this->m_value = this->m_value.arg(value);
+    this->m_value = this->m_originalValue.arg(value);
 }
 
 QString Model::Parameter::command() const
@@ -78,6 +78,7 @@ Model::Parameter::Parameter(QString cmd, QString desc, QString val)
     this->m_command = cmd;
     this->m_description = desc;
     this->m_value = val;
+    this->m_originalValue = val;
     this->m_noSpaceForNext = false;
 
 }
@@ -87,6 +88,7 @@ Model::Parameter::Parameter(const Model::Parameter &copy)
     this->m_command = copy.m_command;
     this->m_description = copy.m_description;
     this->m_value = copy.m_value;
+    this->m_originalValue = copy.m_originalValue;
     this->m_noSpaceForNext = copy.m_noSpaceForNext;
 
 }
@@ -97,6 +99,7 @@ Model::Parameter &Model::Parameter::operator=(const Model::Parameter &o)
         this->m_command = o.m_command;
         this->m_description = o.m_description;
         this->m_value = o.m_value;
+        this->m_originalValue = o.m_originalValue;
         this->m_noSpaceForNext = o.m_noSpaceForNext;
     }
     return *this;
