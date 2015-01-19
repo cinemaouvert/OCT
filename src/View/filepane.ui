@@ -216,7 +216,12 @@
               </property>
               <item>
                <property name="text">
-                <string>OCPM V0.1</string>
+                <string>OCPM V1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>OCPM V2</string>
                </property>
               </item>
              </widget>
