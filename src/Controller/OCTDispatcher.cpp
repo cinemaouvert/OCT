@@ -105,19 +105,18 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /***********************/
     /*****Romain Test *****/
-/*
+
     initSetting("ffmpeg","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
     initSetting("ffprobe","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
     initSetting("mkvmerge","C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\mkvmerge.exe");
-*/
+
 /*
     qDebug() <<  *m_currentProject->getMergeCommandLine();
 
     m_merger->createMKVFile(m_currentProject);
 */
-
-    addFile("H:\\Media\\Zone-Telechargement.com.HGGMS.VOSTFR.XviD.avi");
- /*   addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test2.mkv");
+    addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test1.mkv");
+/*    addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test2.mkv");
     addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.mp3");
     addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.ass");
     addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.jpg");
@@ -131,8 +130,6 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     ns->getParameters()->take("codec_name")->setValue("mpeg4");
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->setNewStream(ns);
 
-    //this->m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
-    //this->m_treatmentThread->startTreatment();
 
     this->startTreatment();
 
