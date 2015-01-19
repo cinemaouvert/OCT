@@ -58,6 +58,8 @@ Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, C
 
 void Controller::TreatmentThread::startTreatment() {
     //Init barre avancement
+    qDebug() << "start treatment";
+
     int nbSteps = 0;
     for(int i = 0; i < m_projects->size(); i++){
         Model::Project *p = m_projects->at(i);
@@ -77,6 +79,7 @@ void Controller::TreatmentThread::startTreatment() {
         //m_exporter->createMagnetLink("", p->name());
         //m_exporter->sendInformationsToJSON(p);
     }
+    qDebug() << "ended treatment";
 }
 
 void Controller::TreatmentThread::pauseTreatment() {

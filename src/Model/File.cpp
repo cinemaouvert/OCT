@@ -49,16 +49,17 @@ Model::File::File() {}
 
 Model::File::File(QString filePath, QString info) : m_datas(NULL) {
     this->m_filePath = filePath;
-    QStringList path= filePath.split(QDir::separator());
+    QStringList path= filePath.split("\\");
     QString finalOutput;
     for(int i = 0 ; i < path.size() ; i++){
         if(i== path.size()-1){
             finalOutput += "transcoded_";
             finalOutput += path.at(i);
         }else{
-            finalOutput += path.at(i) + QDir::separator();
+            finalOutput += path.at(i) + "\\";
         }
     }
+
     this->m_outFilePath = finalOutput;
 
     QStringList name = filePath.split("/");
@@ -113,6 +114,7 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
 Model::File::File(const File& f) {
     m_name = f.m_name;
     m_filePath = f.m_filePath;
+    m_outFilePath = f.m_outFilePath;
 
     m_datas = new QList<Model::StreamWrapper*>();
     for(int i = 0; i < f.m_datas->size(); i++){
@@ -126,6 +128,7 @@ Model::File& Model::File::operator=(const File& f) {
         m_name = f.m_name;
         m_filePath = f.m_filePath;
         m_datas = f.m_datas;
+        m_outFilePath = f.m_outFilePath;
     }
     return *this;
 }
@@ -149,8 +152,7 @@ QStringList *Model::File::getCommandLine()
             (*stringList) << *(data->generateCommandLine());
         }
     }
-    *stringList << this->m_outFilePath;
-    //qDebug() << this->m_outFilePath;
+    (*stringList) << this->m_outFilePath;
     return stringList;
 }
 

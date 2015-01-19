@@ -116,7 +116,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_merger->createMKVFile(m_currentProject);
 */
 
-    addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test1.mkv");
+    addFile("H:\\Media\\Zone-Telechargement.com.HGGMS.VOSTFR.XviD.avi");
  /*   addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test2.mkv");
     addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.mp3");
     addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.ass");
@@ -125,15 +125,16 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
 */
 
-  /*
+
     Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->getOldStream();
     Model::Stream *ns = new Model::Video((Model::Video&)*os);
-    ns->getParameters()->take("codec_name")->setValue("xvid");
+    ns->getParameters()->take("codec_name")->setValue("mpeg4");
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->setNewStream(ns);
 
-    this->m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
-    this->m_treatmentThread->startTreatment();
-*/
+    //this->m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
+    //this->m_treatmentThread->startTreatment();
+
+    this->startTreatment();
 
     /***********************/
     /*****Denis Test *****/
