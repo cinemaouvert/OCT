@@ -150,7 +150,7 @@ QStringList *Model::File::getCommandLine()
         }
     }
     *stringList << this->m_outFilePath;
-    qDebug() << this->m_outFilePath;
+    //qDebug() << this->m_outFilePath;
     return stringList;
 }
 

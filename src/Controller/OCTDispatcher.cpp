@@ -45,6 +45,7 @@ using namespace std;
 #include "src/Model/Video.h"
 #include "src/Model/Audio.h"
 #include "src/Model/Subtitle.h"
+#include "src/Model/StreamWrapper.h"
 
 #include <QProcess>
 #include <QDebug>
@@ -107,12 +108,33 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 /*
     initSetting("ffmpeg","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
     initSetting("ffprobe","C:\\Users\\Moi\\Documents\\M2\\OCT\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
-   */ initSetting("mkvmerge","C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\mkvmerge.exe");
+    initSetting("mkvmerge","C:\\Users\\Moi\\Documents\\M2\\OCT\\mkvtoolnix\\mkvmerge.exe");
+*/
 /*
     qDebug() <<  *m_currentProject->getMergeCommandLine();
 
     m_merger->createMKVFile(m_currentProject);
 */
+
+    addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test1.mkv");
+ /*   addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test2.mkv");
+    addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.mp3");
+    addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.ass");
+    addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.jpg");
+    addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.xml");
+
+*/
+
+  /*
+    Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->getOldStream();
+    Model::Stream *ns = new Model::Video((Model::Video&)*os);
+    ns->getParameters()->take("codec_name")->setValue("xvid");
+    this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->setNewStream(ns);
+
+    this->m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
+    this->m_treatmentThread->startTreatment();
+*/
+
     /***********************/
     /*****Denis Test *****/
     //this->startTreatment();

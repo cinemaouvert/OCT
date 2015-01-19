@@ -88,6 +88,7 @@ Model::Video::Video(QDomNode stream, int uid)
     //-----------------------VIDEO-BUILD------------------------//
     this->m_uID = QString::number(uid);
     this->m_default = false;
+    this->m_additionalCommand = QString();
     this->m_parameters = new QMap<QString,Parameter*>();
 
     Parameter *pCodecName = Video::getStaticParameter("codec_name");
@@ -125,7 +126,7 @@ Model::Video::Video(QString uid){
 
 Model::Video::Video(const Model::Video & copy){
     this->m_uID = copy.m_uID;
-    this->m_additionalCommand = copy.m_additionalCommand;
+    this->m_additionalCommand = QString(copy.m_additionalCommand);
     this->m_parameters = new QMap<QString,Parameter*>(*(copy.m_parameters));
     this->m_default = copy.m_default;
 }
