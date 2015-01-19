@@ -235,7 +235,6 @@ void Controller::OCTDispatcher::duplicateProject(int index)
 {
     Model::Project *project = new Model::Project(*(m_projects->at(index)));
     m_projects->append(project);
-    setCurrentProjectIndex(m_projects->size()-1);
 }
 
 

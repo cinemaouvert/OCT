@@ -116,7 +116,7 @@ Model::File::File(const File& f) {
 
     m_datas = new QList<Model::StreamWrapper*>();
     for(int i = 0; i < f.m_datas->size(); i++){
-        Model::StreamWrapper *p = new Model::StreamWrapper(*f.m_datas->at(i));
+        Model::StreamWrapper *p = new Model::StreamWrapper(*(f.m_datas->at(i)));
         m_datas->push_back(p);
     }
 }

@@ -29,6 +29,8 @@
 #include <exception>
 using namespace std;
 
+#include <QDebug>
+
 #include "src/Model/StreamWrapper.h"
 #include "src/Model/Stream.h"
 #include "src/Model/Serializable.h"
@@ -60,7 +62,7 @@ Model::StreamWrapper::StreamWrapper() : m_oldStream(NULL), m_newStream(NULL) {
 
 //A tester
 Model::StreamWrapper::StreamWrapper(const StreamWrapper& d) {
-    if(d.m_oldStream != NULL){
+    if(d.m_oldStream){
         switch (d.m_oldStream->getType()){
             case Model::Stream::VIDEO:
                 m_oldStream = new Model::Video(*((Model::Video*)d.m_oldStream));
@@ -72,9 +74,11 @@ Model::StreamWrapper::StreamWrapper(const StreamWrapper& d) {
                 m_oldStream = new Model::Subtitle(*((Model::Subtitle*)d.m_oldStream));
                 break;
         }
+    }else{
+        m_oldStream = NULL;
     }
+    if(d.m_newStream){
 
-    if(d.m_newStream != NULL){
         switch (d.m_newStream->getType()){
             case Model::Stream::VIDEO:
                 m_newStream = new Model::Video(*((Model::Video*)d.m_newStream));
@@ -86,6 +90,8 @@ Model::StreamWrapper::StreamWrapper(const StreamWrapper& d) {
                 m_newStream = new Model::Subtitle(*((Model::Subtitle*)d.m_newStream));
                 break;
         }
+    }else{
+        m_newStream = NULL;
     }
 }
 
