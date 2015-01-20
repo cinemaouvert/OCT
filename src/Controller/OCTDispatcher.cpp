@@ -105,7 +105,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     /****** TRY YOUR WORK IN HERE **********/
 
     /*****Thibaud Test *****/
-    addFile("H:\\Media\\movie1.mkv");
+  /*  addFile("H:\\Media\\movie1.mkv");
     addFile("H:\\Media\\movie2.mkv");
     addFile("H:\\Media\\movie3.mkv");
 
@@ -122,7 +122,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->setNewStream(ns2);
 
 
-    this->startTreatment();
+    this->startTreatment();*/
 
     /***********************/
     /*****Romain Test *****/
