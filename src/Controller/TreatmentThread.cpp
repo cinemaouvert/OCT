@@ -75,7 +75,9 @@ void Controller::TreatmentThread::startTreatment() {
         for(int j = 0; j < p->fileList()->size(); j++){
 
             Model::File *f = p->fileList()->at(j);
-            m_transcoder->transcode(f->getCommandLine());
+            if(f->hasToBeTranscoded()){
+                m_transcoder->transcode(f->getCommandLine());
+            }
             emit passedStep();
         }
         //QString filepath = m_merger->createMKVFile(p);

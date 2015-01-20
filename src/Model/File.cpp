@@ -165,6 +165,15 @@ QString Model::File::getFilePath()
     return this->m_filePath;
 }
 
+bool Model::File::hasToBeTranscoded(){
+    foreach (StreamWrapper *data, *getStreamWrappers()) {
+        if(data->hasToBeTranscoded()){
+            return true;
+        }
+    }
+    return false;
+}
+
 
 
 
