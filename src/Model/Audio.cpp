@@ -162,7 +162,7 @@ void Model::Audio::initStaticParameters()
     Parameter *channels = new Parameter("-ac","This is the channels of the audio stream","%1");
     m_staticParameters.insert("channels",channels);
 
-    Parameter *resolution = new Parameter("-ab","This is the resolution of the audio stream","%1");
+    Parameter *resolution = new Parameter("-ab","This is the resolution of the audio stream","%1k");
     m_staticParameters.insert("resolution",resolution);
 }
 
