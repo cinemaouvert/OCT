@@ -77,9 +77,6 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     //Creation of the Project
     m_currentProject = new Model::Project();
     m_projects->push_back(m_currentProject);
-    //Creation of the view
-    m_mainWindow = new View::MainWindow(0,this);
-    m_mainWindow->show();
     //Creations of the settings
     m_settings = new QSettings("CinemaOuvert", "OpenCinemaTranscoder");
     initSettings();
@@ -91,17 +88,26 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     //m_exporter= new Exporter();
 
     m_transcoder= new Transcoder();
+
+    m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
+
     //Initialisation of the parameters lists
     Model::Video::initStaticParameters();
     Model::Audio::initStaticParameters();
     Model::Subtitle::initStaticParameters();
+
+    //Creation of the view
+    m_mainWindow = new View::MainWindow(0,this);
+    m_mainWindow->show();
 
 
 
     /****** TRY YOUR WORK IN HERE **********/
 
     /*****Thibaud Test *****/
-
+    addFile("H:\\Media\\movie1.mkv");
+    addFile("H:\\Media\\movie2.mkv");
+    addFile("H:\\Media\\movie3.mkv");
 
     /***********************/
     /*****Romain Test *****/
@@ -115,7 +121,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     m_merger->createMKVFile(m_currentProject);
 */
-    addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test1.mkv");
+
 /*    addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test2.mkv");
     addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.mp3");
     addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.ass");
@@ -175,8 +181,8 @@ void Controller::OCTDispatcher::load() {
 }
 
 void Controller::OCTDispatcher::startTreatment() {
-    m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
 
+    m_treatmentThread->initTreatment();
 
     m_startTreatmentThread = new QThread();
 
@@ -255,6 +261,11 @@ void Controller::OCTDispatcher::duplicateProject(int index)
 {
     Model::Project *project = new Model::Project(*(m_projects->at(index)));
     m_projects->append(project);
+}
+
+Controller::TreatmentThread *Controller::OCTDispatcher::getTreatmentThread()
+{
+    return this->m_treatmentThread;
 }
 
 

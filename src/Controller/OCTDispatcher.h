@@ -226,6 +226,8 @@ namespace Controller
 
             void duplicateProject(int index);
 
+            TreatmentThread *getTreatmentThread();
+
 
     public slots:
             void treatProjectNameChanged(QString newName);

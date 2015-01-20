@@ -42,16 +42,19 @@ Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, C
     m_transcoder(transcoder),
     m_merger(merger),
     m_exporter(exporter),
-    m_projects(NULL)
+    m_projects(NULL),
+    m_projectsOriginal(projects)
 {
-    m_transcoder = new Transcoder();
 
+}
+
+void Controller::TreatmentThread::initTreatment(){
     if(this->m_projects != NULL)
         delete this->m_projects;
 
     m_projects = new QList<Model::Project*>();
-    for(int i = 0; i < projects->size(); i++){
-        Model::Project *p = new Model::Project(*projects->at(i));
+    for(int i = 0; i < m_projectsOriginal->size(); i++){
+        Model::Project *p = new Model::Project(*m_projectsOriginal->at(i));
         m_projects->push_back(p);
     }
 }

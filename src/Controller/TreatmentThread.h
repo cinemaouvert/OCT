@@ -79,6 +79,7 @@ namespace Controller
              * @brief The associated projects.
              */
             QList<Model::Project*>      *m_projects;
+            QList<Model::Project*>      *m_projectsOriginal;
 
             /**
              * @brief Constructor.
@@ -89,7 +90,8 @@ namespace Controller
              */
             TreatmentThread(QList<Model::Project*> *projects, Controller::Transcoder *transcoder, Controller::Merger *merger, Controller::Exporter *exporter);
 
-        signals:
+            void initTreatment();
+    signals:
             void finished();
             void initProgress(int value);
             void passedStep();

@@ -1,5 +1,6 @@
 #include "EncodePane.h"
 #include "ui_encodepane.h"
+#include "src/Controller/TreatmentThread.h"
 
 #include <QMouseEvent>
 
@@ -12,6 +13,7 @@ EncodePane::EncodePane(QWidget *parent) :
     ui->listViewProjects->setModel(m_modelProjectList);
     ui->listViewProjects->setAlternatingRowColors(true);
     ui->listViewProjects->setEncodePane(this);
+    m_currentSteps = 0;
 }
 
 void EncodePane::setDispatcher(Controller::OCTDispatcher *dispatcher)
@@ -47,8 +49,22 @@ void EncodePane::on_newProjectButton_clicked()
     refreshProjectPane();
 }
 
+void EncodePane::initProgressBar(int progressMax)
+{
+    m_progressMax = progressMax;
+    ui->progressBar_Encoding->setValue(0);
+}
+
+void EncodePane::passedProgressStep()
+{
+    m_currentSteps ++;
+    ui->progressBar_Encoding->setValue((int)((float)((float)m_currentSteps/(float)m_progressMax)*100));
+}
+
 void EncodePane::connectInterface()
 {
+    connect(m_dispatcher->getTreatmentThread(),SIGNAL(initProgress(int)),this,SLOT(initProgressBar(int)));
+    connect(m_dispatcher->getTreatmentThread(),SIGNAL(passedStep()),this,SLOT(passedProgressStep()));
 }
 
 void EncodePane::changeCurrentProject(int index)

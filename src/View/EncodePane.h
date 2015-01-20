@@ -26,13 +26,16 @@ public:
 
 private slots:
     void on_newProjectButton_clicked();
-
+    void initProgressBar(int);
+    void passedProgressStep();
 
 private:
     Ui::EncodePane *ui;
     Controller::OCTDispatcher *m_dispatcher;
     QStringListModel *m_modelProjectList;
 
+    int m_progressMax;
+    int m_currentSteps;
     void connectInterface();
 
 protected:
