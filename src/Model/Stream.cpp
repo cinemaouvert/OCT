@@ -33,6 +33,8 @@ using namespace std;
 #include "src/Model/StreamWrapper.h"
 #include "src/Model/Serializable.h"
 
+#include <QDebug>
+
 void Model::Stream::setParameter(QString name, Parameter *value) {
     this->m_parameters->insert(name,value);
 }
@@ -54,7 +56,7 @@ QStringList *Model::Stream::getCommand()
     for(int i = 0; i < this->m_parameters->size();i++){
        Parameter *param = this->m_parameters->values().at(i);
        QString value = param->value();
-       while(param->noSpaceForNext() && i < m_parameters->size() -1){
+       while(param->noSpaceForNext() && i < m_parameters->size()-1){
            if(i < this->m_parameters->size()-1 ){
                 i++;
                 param = this->m_parameters->values().at(i);

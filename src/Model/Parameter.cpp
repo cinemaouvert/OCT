@@ -30,7 +30,7 @@
 using namespace std;
 
 #include "src/Model/Parameter.h"
-
+#include <QDebug>
 
 QString Model::Parameter::description() const
 {

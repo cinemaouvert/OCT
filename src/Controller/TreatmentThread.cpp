@@ -68,6 +68,7 @@ void Controller::TreatmentThread::startTreatment() {
         Model::Project *p = m_projects->at(i);
         nbSteps += p->fileList()->size();
     }
+    qDebug() << "HERE";
     emit initProgress(nbSteps);
 
     for(int i = 0; i < m_projects->size(); i++){

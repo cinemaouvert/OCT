@@ -105,25 +105,27 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     /****** TRY YOUR WORK IN HERE **********/
 
     /*****Thibaud Test *****/
-  /*  addFile("H:\\Media\\movie1.mkv");
+/*    addFile("H:\\Media\\movie1.mkv");
     addFile("H:\\Media\\movie2.mkv");
     addFile("H:\\Media\\movie3.mkv");
 
 
     Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->getOldStream();
     Model::Stream *ns = new Model::Video((Model::Video&)*os);
-    ns->getParameters()->take("codec_name")->setValue("mpeg4");
+    ns->getParameters()->value("codec_name")->setValue("mpeg4");
+
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->setNewStream(ns);
 
 
     Model::Stream *os2 = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->getOldStream();
     Model::Stream *ns2 = new Model::Audio((Model::Audio&)*os2);
-    ns2->getParameters()->take("codec_name")->setValue("mp3");
+    ns2->getParameters()->value("codec_name")->setValue("flac");
+
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->setNewStream(ns2);
 
 
-    this->startTreatment();*/
-
+    this->startTreatment();
+*/
     /***********************/
     /*****Romain Test *****/
 
