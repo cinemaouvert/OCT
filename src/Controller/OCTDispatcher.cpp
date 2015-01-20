@@ -105,10 +105,10 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     /****** TRY YOUR WORK IN HERE **********/
 
     /*****Thibaud Test *****/
-    addFile("H:\\Media\\movie1.mkv");
+ /*   addFile("H:\\Media\\movie1.mkv");
     addFile("H:\\Media\\movie2.mkv");
     addFile("H:\\Media\\movie3.mkv");
-
+*/
     /***********************/
     /*****Romain Test *****/
 
@@ -128,7 +128,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.jpg");
     addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.xml");
 
-*/
+
 
 
     Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->getOldStream();
@@ -138,7 +138,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
 
     this->startTreatment();
-
+*/
     /***********************/
     /*****Denis Test *****/
     //this->startTreatment();
