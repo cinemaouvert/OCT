@@ -256,7 +256,7 @@ QStringList *Model::Project::getMergeCommandLine()
             if(sw->oldStream()->isDefault())
                 *arguments << "--default-track" << sw->oldStream()->getUID(); //////////////////getNew
         }
-        *arguments <<f->getName();
+        *arguments <<f->getFilePath();
     }
 
     foreach (Model::Attachment *a, *(attachments())){
@@ -265,6 +265,7 @@ QStringList *Model::Project::getMergeCommandLine()
 
     //*arguments <<"--attach-file"<< m_xmlFilePath;
 
+    qDebug() << *arguments;
     return arguments;
 }
 

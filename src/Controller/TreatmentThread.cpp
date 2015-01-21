@@ -69,7 +69,7 @@ void Controller::TreatmentThread::startTreatment() {
         nbSteps += p->fileList()->size();
     }
     qDebug() << "HERE";
-    emit initProgress(nbSteps);
+    emit initProgress(nbSteps+1);
 
     for(int i = 0; i < m_projects->size(); i++){
         Model::Project *p = m_projects->at(i);
@@ -81,7 +81,8 @@ void Controller::TreatmentThread::startTreatment() {
             }
             emit passedStep();
         }
-        //QString filepath = m_merger->createMKVFile(p);
+        QString filepath = m_merger->createMKVFile(p);
+        emit passedStep();
         //m_exporter->createMagnetLink("", p->name());
         //m_exporter->sendInformationsToJSON(p);
     }
