@@ -418,7 +418,7 @@
       <item>
        <widget class="QProgressBar" name="progressBar_Encoding">
         <property name="value">
-         <number>24</number>
+         <number>0</number>
         </property>
        </widget>
       </item>
@@ -437,7 +437,7 @@
         <item>
          <widget class="QLabel" name="label_EncodingTime">
           <property name="text">
-           <string>10 heures</string>
+           <string> heures</string>
           </property>
          </widget>
         </item>
@@ -464,7 +464,7 @@
         <item>
          <widget class="QLabel" name="label_EncodingTimeDone">
           <property name="text">
-           <string>10 heures</string>
+           <string> heures</string>
           </property>
          </widget>
         </item>
