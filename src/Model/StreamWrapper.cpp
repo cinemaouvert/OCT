@@ -122,7 +122,7 @@ QStringList* Model::StreamWrapper::generateCommandLine() {
     if(hasToBeTranscoded())
         return this->m_newStream->getCommand();
     else
-        return NULL;
+        return this->m_oldStream->getCommand();
 }
 
 Model::Stream* Model::StreamWrapper::getOldStream() {

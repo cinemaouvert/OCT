@@ -105,18 +105,17 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     /****** TRY YOUR WORK IN HERE **********/
 
     /*****Thibaud Test *****/
-   /*
-
+/*
     addFile("H:\\Media\\movie1.mkv");
     addFile("H:\\Media\\movie2.mkv");
     addFile("C:\\Users\\Thibaud\\Downloads\\dom.srt");
     addFile("C:\\Users\\Thibaud\\Downloads\\2838-etoiles-fin-fond-univers-WallFizz.jpg");
 
-    Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->getOldStream();
+    Model::Stream *os = this->m_currentProject->fileList()->at(1)->getStreamWrappers()->at(0)->getOldStream();
     Model::Stream *ns = new Model::Video((Model::Video&)*os);
-    ns->getParameters()->value("codec_name")->setValue("mpeg4");
+    ns->getParameters()->value("codec_name")->setValue("avi");
 
-    this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->setNewStream(ns);
+    this->m_currentProject->fileList()->at(1)->getStreamWrappers()->at(0)->setNewStream(ns);
 
 
     Model::Stream *os2 = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->getOldStream();

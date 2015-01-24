@@ -147,10 +147,8 @@ QStringList *Model::File::getCommandLine()
     QStringList *stringList;
     stringList = new QStringList();
     *stringList << "-i" << this->m_filePath;
-    foreach (StreamWrapper *data, *getStreamWrappers()) {
-        if(data->hasToBeTranscoded()){
-            (*stringList) << *(data->generateCommandLine());
-        }
+    foreach (StreamWrapper *sW, *getStreamWrappers()) {
+        (*stringList) << *(sW->generateCommandLine());
     }
     (*stringList) << this->m_outFilePath;
     return stringList;
