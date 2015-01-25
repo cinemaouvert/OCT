@@ -10,15 +10,14 @@
 #include <QDebug>
 #include <typeinfo>
 #include <QResource>
-#include <QDir>
-
+#include <QXmlQuery>
 
 FilePane::FilePane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FilePane)
 {
     ui->setupUi(this);
-    model = new QStringListModel(this);
+    m_model = new QStringListModel(this);
     splitterNoCollapsing();
    // ui->tableView_ImportFile->horizontalHeader()->setVisible(false);
     ui->tableView_ImportFile->verticalHeader()->setVisible(false);
@@ -36,10 +35,10 @@ void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
 
     QResource preconfigs(":/preconfigs/resources/preconfig");
 
-    QDir preconfigsDir(preconfigs.absoluteFilePath());
+    m_preConfigsDir = QDir(preconfigs.absoluteFilePath());
 
-    if(preconfigsDir.isReadable()){
-        foreach (QString file, preconfigsDir.entryList()) {
+    if(m_preConfigsDir.isReadable()){
+        foreach (QString file, m_preConfigsDir.entryList()) {
             ui->comboBox_Preconfig->insertItem(0,file.remove(".xml"));
         }
     }
@@ -51,7 +50,7 @@ void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
 FilePane::~FilePane()
 {
     if(ui) delete ui;
-    if(model) delete model;
+    if(m_model) delete m_model;
 }
 
 void FilePane::on_pushButton_AddFile_clicked()
@@ -81,8 +80,8 @@ void FilePane::refresh()
         QStringList name = a->filepath().split("/");
         names << name.at(name.length()-1);
     }
-    model->setStringList(names);
-    ui->listView_ImportFile->setModel(model);
+    m_model->setStringList(names);
+    ui->listView_ImportFile->setModel(m_model);
 
     //////////////////////////////TableView////////////////////////////////////////////
     int nbVideo = this->m_dispatcher->getCurrentProject()->nbVideo();
@@ -194,7 +193,7 @@ void FilePane::refresh()
 
 void FilePane::on_pushButton_DeleteFile_clicked()
 {
-    QStringList names = model->stringList();
+    QStringList names = m_model->stringList();
     if (names.size() != 0){
         QModelIndexList indexes = ui->listView_ImportFile->selectionModel()->selectedIndexes();
         if(indexes.size() != 0){
@@ -219,5 +218,26 @@ void FilePane::connectInterface()
 void FilePane::on_lineEdit_ExportName_textChanged(const QString &arg1)
 {
     emit projectNameChanged(arg1);
+
+}
+
+void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)
+{
+    QFile file(m_preConfigsDir.filePath(arg1).append(".xml"));
+    if(file.exists()){
+        file.open(QFile::ReadOnly);
+
+        QXmlQuery query(QXmlQuery::XPath20);
+        query.setFocus(&file);
+
+        //Get video codec
+        query.setQuery("/oct/video/codec");
+        QString videoCodec;
+        query.evaluateTo(&videoCodec);
+       // qDebug() << "codec : " << videoCodec;
+
+
+    }
+
 
 }

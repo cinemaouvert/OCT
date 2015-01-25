@@ -10,6 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4):
     QT += widgets
     QT += xml
     QT += network
+    QT += xmlpatterns
 
 CONFIG += av
 

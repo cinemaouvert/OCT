@@ -5,6 +5,7 @@
 
 #include <src/Controller/OCTDispatcher.h>
 #include <QStringListModel>
+#include <QDir>
 
 namespace Ui {
 class FilePane;
@@ -40,11 +41,15 @@ private slots:
 
     void on_lineEdit_ExportName_textChanged(const QString &arg1);
 
+    void on_comboBox_Preconfig_currentTextChanged(const QString &arg1);
+
 private:
     Ui::FilePane *ui;
     Controller::OCTDispatcher * m_dispatcher;
-    QStringListModel *model;
+    QStringListModel *m_model;
     QStringList list;
+    QDir m_preConfigsDir;
+
     void addItem(QString name);
     void splitterNoCollapsing();
     void connectInterface();
