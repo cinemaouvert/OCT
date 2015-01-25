@@ -94,4 +94,5 @@ FORMS    += \
     src/View/videoplayer.ui \
     src/View/ParametersDialog.ui
 
-RESOURCES += images.qrc
+RESOURCES += images.qrc \
+             extra.qrc

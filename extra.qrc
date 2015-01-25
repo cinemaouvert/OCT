@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/preconfigs">
+		<file>resources/preconfig</file>
+	</qresource>
+</RCC>

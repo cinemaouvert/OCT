@@ -1,13 +1,16 @@
 #include "FilePane.h"
 #include "ui_filepane.h"
 #include "MyModel.h"
+
+#include "src/Model/Attachment.h"
+#include "src/Model/StreamWrapper.h"
+#include "src/Model/Subtitle.h"
+
 #include <QFileDialog>
 #include <QDebug>
 #include <typeinfo>
-#include "src/Model/Attachment.h"
-#include <src/Model/StreamWrapper.h>
-#include <src/Model/Subtitle.h>
-
+#include <QResource>
+#include <QDir>
 
 
 FilePane::FilePane(QWidget *parent) :
@@ -22,12 +25,26 @@ FilePane::FilePane(QWidget *parent) :
   //  ui->tableView_ImportFile->setAlternatingRowColors(true);
     ui->tableView_ImportFile->horizontalHeader()->setStretchLastSection(true);
     ui->tableView_ImportFile->resizeColumnsToContents();
+    ui->comboBox_Preconfig->clear();
+
 }
 
 void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
 {
     this->m_dispatcher = dispatcheur;
     connectInterface();
+
+    QResource preconfigs(":/preconfigs/resources/preconfig");
+
+    QDir preconfigsDir(preconfigs.absoluteFilePath());
+
+    if(preconfigsDir.isReadable()){
+        foreach (QString file, preconfigsDir.entryList()) {
+            ui->comboBox_Preconfig->insertItem(0,file.remove(".xml"));
+        }
+    }
+    ui->comboBox_Preconfig->insertItem(0,tr("None"));
+    ui->comboBox_Preconfig->setCurrentIndex(0);
 
 }
 
