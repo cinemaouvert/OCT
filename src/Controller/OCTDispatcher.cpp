@@ -62,11 +62,12 @@ using namespace std;
 #include <src/View/FilePane.h>
 #include <src/View/EncodePane.h>
 
+
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_mainWindow(NULL) ,
     m_settings(NULL) ,
-                                            m_streamLoader(NULL) ,
-                                            m_updater(NULL) ,
+    m_streamLoader(NULL) ,
+    m_updater(NULL) ,
                                             m_merger(NULL) ,
                                             m_exporter(NULL) ,
                                             m_projects(NULL) ,
@@ -353,6 +354,11 @@ void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &v
 QVariant Controller::OCTDispatcher::getSetting(QString key)
 {
     return m_settings->value(key);
+}
+
+QStringList *Controller::OCTDispatcher::informationMovieStruct() const
+{
+    return m_informationMovieStruct;
 }
 
 

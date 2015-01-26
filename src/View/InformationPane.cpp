@@ -84,10 +84,10 @@ void InformationPane::on_sampleComboBox_currentIndexChanged(int index)
 void InformationPane::generateStruct(){
     QScrollArea *scrollArea = new QScrollArea;
     QVBoxLayout *vLayout = new QVBoxLayout;
-    for(int i = 0; i <= 15; i++){
+    for(int i = 0; i <= this->m_dispatcher->informationMovieStruct()->size(); i++){
 
         QHBoxLayout *hLayout = new QHBoxLayout;
-        QLabel *label = new QLabel("Nom du label");
+        QLabel *label = new QLabel("");
         label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         hLayout->addWidget(label);
         QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Maximum);
