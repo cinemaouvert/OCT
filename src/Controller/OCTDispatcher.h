@@ -45,6 +45,7 @@ using namespace std;
 // #include "src/Controller/TreatmentThread.h"
 // #include "src/Controller/Transcoder.h"
 #include "src/Model/Project.h"
+#include "src/Model/OCPMValidation.h"
 #include "src/View/MainWindow.h"
 // #include "src/View/MainWindow.h"
 
@@ -61,6 +62,7 @@ namespace Controller
 namespace Model
 {
 	class Project;
+    class OCPMValidation;
 }
 namespace View
 {
@@ -138,11 +140,22 @@ namespace Controller
              */
             QStringList *m_informationMovieStruct;
 
+            /**
+              * @brief the model representation of the validation
+              */
+            Model::OCPMValidation *m_OCPMvalidation;
+
+
         public:
             /**
              * @brief Default constructor.
              */
             OCTDispatcher();
+
+            /**
+              * @brief The destructor
+              * */
+            ~OCTDispatcher();
 
             /**
              * @brief Add a file to the current project.
@@ -227,11 +240,14 @@ namespace Controller
 
             QList<Model::Project*> *getProjects();
 
+            Model::OCPMValidation *getOCPMValidation();
+
             void setCurrentProjectIndex(int index);
 
             void duplicateProject(int index);
 
             TreatmentThread *getTreatmentThread();
+
 
 
     public slots:

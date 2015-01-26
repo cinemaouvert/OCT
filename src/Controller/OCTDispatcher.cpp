@@ -72,6 +72,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
                                             m_projects(NULL) ,
                                             m_treatmentThread(NULL) ,
                                             m_transcoder(NULL),
+                                            m_OCPMvalidation(NULL),
                                             m_informationMovieStruct(NULL){
     //Init Projects
     m_projects = new QList<Model::Project*>();
@@ -92,6 +93,9 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_transcoder= new Transcoder();
 
     m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
+
+    m_OCPMvalidation = new Model::OCPMValidation(this);
+
 
     //Initialisation of the parameters lists
     Model::Video::initStaticParameters();
@@ -166,6 +170,21 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
 
     /***********************/
+}
+
+Controller::OCTDispatcher::~OCTDispatcher()
+{
+    if(m_currentProject) delete m_currentProject  ;
+    if(m_mainWindow) delete m_mainWindow  ;
+    if(m_settings) delete m_settings  ;
+    if(m_streamLoader) delete m_streamLoader   ;
+    if(m_updater) delete m_updater  ;
+    if(m_merger) delete m_merger  ;
+    if(m_exporter) delete  m_exporter ;
+    if(m_projects) delete  m_projects ;
+    if(m_treatmentThread) delete  m_treatmentThread ;
+    if(m_transcoder) delete m_transcoder  ;
+    if(m_OCPMvalidation) delete  m_OCPMvalidation ;
 }
 
 void Controller::OCTDispatcher::addFile(QString filePath) {
@@ -267,6 +286,11 @@ Model::Project *Controller::OCTDispatcher::getCurrentProject() const
 QList<Model::Project *> *Controller::OCTDispatcher::getProjects()
 {
     return this->m_projects;
+}
+
+Model::OCPMValidation *Controller::OCTDispatcher::getOCPMValidation()
+{
+    return this->m_OCPMvalidation;
 }
 
 void Controller::OCTDispatcher::setCurrentProjectIndex(int index)
