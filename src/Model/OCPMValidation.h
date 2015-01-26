@@ -7,6 +7,7 @@
 
 namespace Model{
     class OCPMValidation;
+    class Stream;
 }
 namespace Model{
     class OCPMValidation : public QObject
@@ -16,6 +17,11 @@ namespace Model{
             explicit OCPMValidation(QObject *parent = 0);
             void loadPreConfXML(QFile *file);
             void loadValidationXML(QFile *file);
+
+            bool isValidVideo(Stream *stream);
+            bool isValidAudio(Stream *stream);
+            bool isValidSubtitle(Stream *stream);
+
         signals:
 
         public slots:

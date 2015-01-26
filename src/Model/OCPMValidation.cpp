@@ -1,6 +1,7 @@
 #include "OCPMValidation.h"
 #include <QXmlQuery>
 #include <QDebug>
+#include "Stream.h"
 
 Model::OCPMValidation::OCPMValidation(QObject *parent) :
     QObject(parent)
@@ -51,6 +52,7 @@ void Model::OCPMValidation::loadValidationXML(QFile *file)
     file->close();
 }
 
+
 void Model::OCPMValidation::loadPreConfXML(QFile *file)
 {
     file->open(QFile::ReadOnly);
@@ -94,4 +96,52 @@ void Model::OCPMValidation::loadPreConfXML(QFile *file)
     loadValidationXML(file);
 }
 
+
+bool Model::OCPMValidation::isValidVideo(Model::Stream *stream)
+{
+    bool retval = true;
+
+    QString codec = stream->getParameters()->value("codec_name")->value();
+    retval = retval && m_validationVideoCodec.contains(codec,Qt::CaseInsensitive);
+
+    QString bitRate = stream->getParameters()->value("bitRate")->value();
+    QString maxBitRate = m_validationVideoMaxRate.at(0);
+    retval = retval && (bitRate.toInt() <= maxBitRate.toInt());
+
+    QString resolution = stream->getParameters()->value("resolution")->value();
+    retval = retval && m_validationVideoResolution.contains(resolution,Qt::CaseInsensitive);
+
+    return retval;
+}
+
+bool Model::OCPMValidation::isValidAudio(Model::Stream *stream)
+{
+    bool retval = true;
+
+    QString codec = stream->getParameters()->value("codec_name")->value();
+    retval = retval && m_validationAudioCodec.contains(codec,Qt::CaseInsensitive);
+
+    QString channels = stream->getParameters()->value("channels")->value();
+    retval = retval && m_validationAudioChanel.contains(channels == "1" ? "mono" : "stereo" ,Qt::CaseInsensitive);
+
+    QString samplingRate = stream->getParameters()->value("sample_rate")->value();
+    retval = retval && m_validationAudioSamplingRate.contains(samplingRate,Qt::CaseInsensitive);
+
+    return retval;
+
+}
+
+bool Model::OCPMValidation::isValidSubtitle(Model::Stream *stream)
+{
+    bool retval = true;
+
+    QString codec = stream->getParameters()->value("codec_name")->value();
+    retval = retval && m_validationSubtitleFormat.contains(codec,Qt::CaseInsensitive);
+
+    QString encoding = stream->getParameters()->value("charEncode")->value();
+    retval = retval && m_validationAudioSamplingRate.contains(encoding,Qt::CaseInsensitive);
+
+    return retval;
+
+}
 

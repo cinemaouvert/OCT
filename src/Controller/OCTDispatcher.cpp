@@ -117,14 +117,14 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     addFile("C:\\Users\\Thibaud\\Downloads\\dom.srt");
     addFile("C:\\Users\\Thibaud\\Downloads\\2838-etoiles-fin-fond-univers-WallFizz.jpg");
 
-    Model::Stream *os = this->m_currentProject->fileList()->at(1)->getStreamWrappers()->at(0)->getOldStream();
+    Model::Stream *os = this->m_currentProject->fileList()->at(1)->getStreamWrappers()->at(0)->oldStream();
     Model::Stream *ns = new Model::Video((Model::Video&)*os);
     ns->getParameters()->value("codec_name")->setValue("avi");
 
     this->m_currentProject->fileList()->at(1)->getStreamWrappers()->at(0)->setNewStream(ns);
 
 
-    Model::Stream *os2 = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->getOldStream();
+    Model::Stream *os2 = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->oldStream();
     Model::Stream *ns2 = new Model::Audio((Model::Audio&)*os2);
     ns2->getParameters()->value("codec_name")->setValue("flac");
 
@@ -153,7 +153,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
 
 
-    Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->getOldStream();
+    Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->oldStream();
     Model::Stream *ns = new Model::Video((Model::Video&)*os);
     ns->getParameters()->take("codec_name")->setValue("mpeg4");
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->setNewStream(ns);
@@ -308,6 +308,33 @@ void Controller::OCTDispatcher::duplicateProject(int index)
 Controller::TreatmentThread *Controller::OCTDispatcher::getTreatmentThread()
 {
     return this->m_treatmentThread;
+}
+
+bool Controller::OCTDispatcher::checkProjectValidation()
+{
+    bool retVal = true;
+    foreach (Model::File *file, *(m_currentProject->fileList())) {
+        foreach (Model::StreamWrapper *streamW, *(file->getStreamWrappers())) {
+            retVal = retVal && checkStreamValidation(streamW->getRelevantStream());
+        }
+    }
+    return retVal;
+}
+
+bool Controller::OCTDispatcher::checkStreamValidation(Model::Stream *stream)
+{
+    bool retVal = true;
+    switch(stream->getType()){
+        case Model::Stream::VIDEO:
+            retVal = retVal && m_OCPMvalidation->isValidVideo(stream);
+            break;
+        case Model::Stream::AUDIO:
+            retVal = retVal && m_OCPMvalidation->isValidAudio(stream);
+            break;
+        case Model::Stream::SUBTITLE:
+            retVal = retVal && m_OCPMvalidation->isValidSubtitle(stream);
+            break;
+    }
 }
 
 

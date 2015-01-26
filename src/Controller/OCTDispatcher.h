@@ -45,6 +45,7 @@ using namespace std;
 // #include "src/Controller/TreatmentThread.h"
 // #include "src/Controller/Transcoder.h"
 #include "src/Model/Project.h"
+#include "src/Model/Stream.h"
 #include "src/Model/OCPMValidation.h"
 #include "src/View/MainWindow.h"
 // #include "src/View/MainWindow.h"
@@ -63,6 +64,7 @@ namespace Model
 {
 	class Project;
     class OCPMValidation;
+    class Stream;
 }
 namespace View
 {
@@ -249,9 +251,11 @@ namespace Controller
             TreatmentThread *getTreatmentThread();
 
 
-
     public slots:
             void treatProjectNameChanged(QString newName);
+            bool checkProjectValidation();
+            bool checkStreamValidation(Model::Stream *stream);
+
     };
 }
 
