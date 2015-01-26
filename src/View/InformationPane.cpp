@@ -83,35 +83,47 @@ void InformationPane::on_sampleComboBox_currentIndexChanged(int index)
 
 void InformationPane::generateStruct(){
     QScrollArea *scrollArea = new QScrollArea;
-    QVBoxLayout *vLayout = new QVBoxLayout;
+
+
+
+    QHBoxLayout *hLayout = new QHBoxLayout;
+    QVBoxLayout *vLayoutLabel = new QVBoxLayout;
+    QVBoxLayout *vLayoutLineEdit = new QVBoxLayout;
+
     if(this->m_dispatcher->informationMovieStruct() != NULL){
-    qDebug() << this->m_dispatcher->informationMovieStruct()->size();
+        qDebug() << this->m_dispatcher->informationMovieStruct()->size();
 
-    QWidget *widget = new QWidget;
-    for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
+        QWidget *widget = new QWidget;
+        for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
 
-        qDebug() << this->m_dispatcher->informationMovieStruct()->at(i);
-        QString labelName = this->m_dispatcher->informationMovieStruct()->at(i);
-
-        QHBoxLayout *hLayout = new QHBoxLayout;
-        QLabel *label = new QLabel(labelName);
-        label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-        hLayout->addWidget(label);
-        QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Fixed);
-        hLayout->addSpacerItem(spacer);
-
-        QLineEdit *lineEdit = new QLineEdit;
-
-        hLayout->addWidget(lineEdit);
-        vLayout->addItem(hLayout);
-
-    }
-    widget->setLayout(vLayout);
-    scrollArea->setWidget(widget);
+            qDebug() << this->m_dispatcher->informationMovieStruct()->at(i);
+            QString labelName = this->m_dispatcher->informationMovieStruct()->at(i);
 
 
-    ui->verticalLayout_3->addWidget(scrollArea);
-    //ui->verticalLayout_3->addSpacerItem(new QSpacerItem(20,30,QSizePolicy::Minimum, QSizePolicy::Maximum));
+            QLabel *label = new QLabel(labelName);
+            label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+            vLayoutLabel->addWidget(label);
+
+            QLineEdit *lineEdit = new QLineEdit;
+            lineEdit->setObjectName(labelName);
+            lineEdit->setSizePolicy(QSizePolicy::Minimum , QSizePolicy::Minimum );
+            lineEdit->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+            //lineEdit->connect(lineEdit, SIGNAL(textChanged(QString), this->m_dispatcher->getCurrentProject()->, SLOT());
+
+            vLayoutLineEdit->addWidget(lineEdit);
+
+
+
+
+        }
+        hLayout->addItem(vLayoutLabel);
+        hLayout->addItem(vLayoutLineEdit);
+
+        widget->setLayout(hLayout);
+        scrollArea->setWidget(widget);
+        scrollArea->setWidgetResizable(true);
+
+        ui->verticalLayout_3->addWidget(scrollArea);
     }
 
 }
