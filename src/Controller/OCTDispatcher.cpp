@@ -72,8 +72,8 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
                                             m_projects(NULL) ,
                                             m_treatmentThread(NULL) ,
                                             m_transcoder(NULL),
-                                            m_OCPMvalidation(NULL)
-    {
+                                            m_OCPMvalidation(NULL),
+                                            m_informationMovieStruct(NULL){
     //Init Projects
     m_projects = new QList<Model::Project*>();
     //Creation of the Project
@@ -88,6 +88,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_merger= new Merger();
     //ne pas init ici
     //m_exporter= new Exporter();
+    m_informationMovieStruct = Exporter::getInformations();
 
     m_transcoder= new Transcoder();
 

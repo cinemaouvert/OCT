@@ -89,7 +89,8 @@ namespace Controller
             bool sendInformationsToJSON(Model::Project* project);
 
             ~Exporter();
-	};
+            static QStringList* getInformations();
+    };
 }
 
 #endif

@@ -98,5 +98,16 @@ Controller::Exporter::~Exporter()
         delete this->m_Database;;
 }
 
+QStringList* Controller::Exporter::getInformations(){
+    if(Model::Database::getMovieStruct() != NULL){
+        QStringList *qsl = new QStringList(*(Model::Database::getMovieStruct()));
+        qsl->removeOne("affiche");
+        qsl->removeOne("id");
+        return qsl;
+    }else{
+        return NULL;
+    }
+}
+
 
 

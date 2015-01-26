@@ -17,7 +17,7 @@ namespace configOCT {
     const QString ADDRESSTRACKER = "";
 
     //Avec un / à la fin du dépôt
-    const QString DEPOTCOC = "";
+    const QString DEPOTCOC = "http://localhost/CODB-Depot-master/";
 
     #if defined(Q_OS_MAC)
         const QString LINK_UPDATE = NAME + "macos/latest/";
