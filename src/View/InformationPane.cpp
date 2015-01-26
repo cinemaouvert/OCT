@@ -84,19 +84,25 @@ void InformationPane::on_sampleComboBox_currentIndexChanged(int index)
 void InformationPane::generateStruct(){
     QScrollArea *scrollArea = new QScrollArea;
     QVBoxLayout *vLayout = new QVBoxLayout;
-    for(int i = 0; i <= this->m_dispatcher->informationMovieStruct()->size(); i++){
+    qDebug() << this->m_dispatcher->informationMovieStruct()->size();
+
+    for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
+
+        qDebug() << this->m_dispatcher->informationMovieStruct()->at(i);
+        QString labelName = this->m_dispatcher->informationMovieStruct()->at(i);
 
         QHBoxLayout *hLayout = new QHBoxLayout;
-        QLabel *label = new QLabel("");
+        QLabel *label = new QLabel(labelName);
         label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         hLayout->addWidget(label);
         QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Maximum);
-
         hLayout->addSpacerItem(spacer);
+
         QLineEdit *lineEdit = new QLineEdit();
         lineEdit->setAlignment(Qt::AlignLeft);
         hLayout->addWidget(lineEdit);
-        hLayout->addSpacerItem(spacer);
+        QSpacerItem *spacer2 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Maximum);
+        hLayout->addSpacerItem(spacer2);
         vLayout->addItem(hLayout);
 
     }
