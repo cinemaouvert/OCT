@@ -5,6 +5,12 @@
 
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
+#include <QHBoxLayout>
+#include <QScrollArea>
+#include <QLineEdit>
+#include <QLabel>
+#include <QGridLayout>
+#include <QGroupBox>
 
 InformationPane::InformationPane(QWidget *parent) :
     QWidget(parent),
@@ -28,6 +34,7 @@ void InformationPane::setDispatcher(Controller::OCTDispatcher *dispatcher)
     this->m_dispatcher = dispatcher;
 
     refresh();
+    generateStruct();
 }
 
 void InformationPane::refresh(){
@@ -75,5 +82,30 @@ void InformationPane::on_sampleComboBox_currentIndexChanged(int index)
 }
 
 void InformationPane::generateStruct(){
+    QScrollArea *scrollArea = new QScrollArea;
+    QVBoxLayout *vLayout = new QVBoxLayout;
+    for(int i = 0; i <= 15; i++){
+
+        QHBoxLayout *hLayout = new QHBoxLayout;
+        QLabel *label = new QLabel("Nom du label");
+        label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+        hLayout->addWidget(label);
+        QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Maximum);
+
+        hLayout->addSpacerItem(spacer);
+        QLineEdit *lineEdit = new QLineEdit();
+        lineEdit->setAlignment(Qt::AlignLeft);
+        hLayout->addWidget(lineEdit);
+        hLayout->addSpacerItem(spacer);
+        vLayout->addItem(hLayout);
+
+    }
+
+    scrollArea->setLayout(vLayout);
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+
+    ui->verticalLayout_3->addWidget(scrollArea);
+    //ui->verticalLayout_3->addSpacerItem(new QSpacerItem(20,30,QSizePolicy::Minimum, QSizePolicy::Maximum));
+
 
 }
