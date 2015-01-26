@@ -191,7 +191,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_Codec">
               <item>
-               <widget class="QLabel" name="label_Codec">
+               <widget class="QLabel" name="label_AudioCodec">
                 <property name="text">
                  <string>Codec audio :</string>
                 </property>
@@ -211,7 +211,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_Codec">
+               <widget class="QComboBox" name="comboBox_AudioCodec">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -227,6 +227,21 @@
                 <property name="sizeAdjustPolicy">
                  <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
                 </property>
+                <item>
+                 <property name="text">
+                  <string>FLAC</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>AAC</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>MP3</string>
+                 </property>
+                </item>
                </widget>
               </item>
               <item>
@@ -238,7 +253,7 @@
                  <number>0</number>
                 </property>
                 <item>
-                 <widget class="QLabel" name="labelCodec">
+                 <widget class="QLabel" name="label_AudioCodecDefault">
                   <property name="minimumSize">
                    <size>
                     <width>125</width>
@@ -513,17 +528,17 @@
                 </property>
                 <item>
                  <property name="text">
-                  <string>1080p (recommandé)</string>
+                  <string>32 bits</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>720p</string>
+                  <string>24 bits</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>480p</string>
+                  <string>16 bits</string>
                  </property>
                 </item>
                </widget>
