@@ -15,10 +15,10 @@
 		<codecs>
 			<value  preConf="true">flac</value>
 		</codecs>
-		<canals>
+		<chanels>
 			<value  preConf="true">stereo</value>
 			<value>mono</value>
-		</canals>
+		</chanels>
 		<samplingRates>
 			<value  preConf="true">48000</value>
 			<value>96000</value>

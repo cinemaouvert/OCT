@@ -10,7 +10,6 @@
 #include <QDebug>
 #include <typeinfo>
 #include <QResource>
-#include <QXmlQuery>
 
 FilePane::FilePane(QWidget *parent) :
     QWidget(parent),
@@ -225,15 +224,6 @@ void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)
 {
     QFile file(m_preConfigsDir.filePath(arg1).append(".xml"));
     if(file.exists()){
-        file.open(QFile::ReadOnly);
-
-        QXmlQuery query(QXmlQuery::XQuery10);
-        query.setFocus(&file);
-
-        //Get video codec
-        query.setQuery("/oct/video/resolutions/value[@preConf='true']/string()");
-        QString videoCodec;
-        query.evaluateTo(&videoCodec);
-        qDebug() << "codec : " << videoCodec.remove("\n");
+        m_dispatcher->getOCPMValidation()->loadPreConfXML(&file);
     }
 }
