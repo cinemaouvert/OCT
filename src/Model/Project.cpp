@@ -43,7 +43,7 @@ Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileLis
     this->m_attachments = new QList<Model::Attachment*>();
     this->m_informations = new QList<Model::Information*>();
     this->m_fileList = new QList<Model::File*>();
-    this->m_name = "Projet";
+    this->m_name = "Projet.mkv";
 }
 
 Model::Project::~Project()
@@ -248,7 +248,7 @@ QStringList *Model::Project::getMergeCommandLine()
 {
     QStringList *arguments = new QStringList();
    // *arguments << "mkvmerge.exe";
-    *arguments << "-o" << "m_name.mkv";
+    *arguments << "-o" << m_name;
   //  *arguments <<"--title"<<"TITRE";
 
     foreach (Model::File *f, *(fileList())){

@@ -2,6 +2,7 @@
 #include "ui_encodepane.h"
 #include "src/Controller/TreatmentThread.h"
 
+#include <QFileDialog>
 #include <QMouseEvent>
 
 EncodePane::EncodePane(QWidget *parent) :
@@ -81,3 +82,26 @@ void EncodePane::duplicateProject(int index)
 
 
 
+
+void EncodePane::on_pushButton_Encode_clicked()
+{
+    QString filePath = QFileDialog::getExistingDirectory(this,tr("Choisir le chemin"));
+       this->m_dispatcher->getCurrentProject()->setName(filePath.append("/").append(this->m_dispatcher->getCurrentProject()->name()));
+
+
+    m_dispatcher->startTreatment();
+    ui->pushButton_Cancel->setEnabled(true);
+    ui->pushButton_Pause->setEnabled(true);
+}
+
+void EncodePane::on_pushButton_Cancel_clicked()
+{
+    m_dispatcher->stopTreatment();
+    ui->pushButton_Cancel->setEnabled(false);
+    ui->pushButton_Pause->setEnabled(false);
+}
+
+void EncodePane::on_pushButton_Pause_clicked()
+{
+    m_dispatcher->pauseTreatment();
+}

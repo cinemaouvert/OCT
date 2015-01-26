@@ -131,9 +131,9 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->setNewStream(ns2);
 
-
-    this->startTreatment();
 */
+    //this->startTreatment();
+
     /***********************/
     /*****Romain Test *****/
 
@@ -236,10 +236,13 @@ void Controller::OCTDispatcher::startTreatment() {
 
 void Controller::OCTDispatcher::pauseTreatment() {
     if(m_startTreatmentThread != NULL){
-        if(m_startTreatmentThread->isRunning())
-            m_startTreatmentThread->wait(ULONG_MAX);
-        else
+        if(m_startTreatmentThread->isRunning()){
+            qDebug()<< "PAUSE";
+            m_startTreatmentThread->wait();
+        }else{
+            qDebug() << "REPRENDRE";
             m_startTreatmentThread->start();
+        }
     }
 }
 
@@ -250,7 +253,8 @@ void Controller::OCTDispatcher::restartTreatment() {
 void Controller::OCTDispatcher::stopTreatment() {
     if(m_startTreatmentThread != NULL){
         if(m_startTreatmentThread->isRunning())
-            m_startTreatmentThread->quit();
+            m_startTreatmentThread->exit();
+
     }
 }
 
