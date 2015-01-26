@@ -84,8 +84,10 @@ void InformationPane::on_sampleComboBox_currentIndexChanged(int index)
 void InformationPane::generateStruct(){
     QScrollArea *scrollArea = new QScrollArea;
     QVBoxLayout *vLayout = new QVBoxLayout;
+    if(this->m_dispatcher->informationMovieStruct() != NULL){
     qDebug() << this->m_dispatcher->informationMovieStruct()->size();
 
+    QWidget *widget = new QWidget;
     for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
 
         qDebug() << this->m_dispatcher->informationMovieStruct()->at(i);
@@ -95,23 +97,21 @@ void InformationPane::generateStruct(){
         QLabel *label = new QLabel(labelName);
         label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         hLayout->addWidget(label);
-        QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Maximum);
+        QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Fixed);
         hLayout->addSpacerItem(spacer);
 
-        QLineEdit *lineEdit = new QLineEdit();
-        lineEdit->setAlignment(Qt::AlignLeft);
+        QLineEdit *lineEdit = new QLineEdit;
+
         hLayout->addWidget(lineEdit);
-        QSpacerItem *spacer2 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Maximum);
-        hLayout->addSpacerItem(spacer2);
         vLayout->addItem(hLayout);
 
     }
+    widget->setLayout(vLayout);
+    scrollArea->setWidget(widget);
 
-    scrollArea->setLayout(vLayout);
-    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
     ui->verticalLayout_3->addWidget(scrollArea);
     //ui->verticalLayout_3->addSpacerItem(new QSpacerItem(20,30,QSizePolicy::Minimum, QSizePolicy::Maximum));
-
+    }
 
 }
