@@ -133,6 +133,11 @@ namespace Controller
              */
             Controller::Transcoder      *m_transcoder;
 
+            /**
+             * @brief The movie struct.
+             */
+            QStringList *m_informationMovieStruct;
+
         public:
             /**
              * @brief Default constructor.

@@ -24,6 +24,7 @@ public:
     void setDispatcher(Controller::OCTDispatcher *m_dispatcher);
 
     void refresh();
+    void generateStruct();
 private slots:
 
     void on_posterComboBox_currentIndexChanged(int index);

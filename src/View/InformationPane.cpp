@@ -73,3 +73,7 @@ void InformationPane::on_sampleComboBox_currentIndexChanged(int index)
 {
     loadImageToGraphicView(ui->sampleGraphicView,index);
 }
+
+void InformationPane::generateStruct(){
+
+}
