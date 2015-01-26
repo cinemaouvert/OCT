@@ -251,6 +251,8 @@ namespace Controller
             TreatmentThread *getTreatmentThread();
 
 
+            QStringList *informationMovieStruct() const;
+
     public slots:
             void treatProjectNameChanged(QString newName);
             bool checkProjectValidation();
