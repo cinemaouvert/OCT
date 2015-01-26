@@ -1,8 +1,5 @@
 <RCC>
-    <qresource prefix="/preconfigs">
-		<file>resources/preconfig</file>
-	</qresource>
-	<qresource prefix="/recommendation">
-		<file>resources/recommendation</file>
+    <qresource prefix="/ocpm">
+		<file>resources/ocpm</file>
 	</qresource>
 </RCC>

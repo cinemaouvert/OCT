@@ -2,31 +2,31 @@
 <oct>
 	<video>
 		<codecs>
-			<value>h264</value>
+			<value preConf="true" >h264</value>
 		</codecs>
 		<maxRate value="50000" unite="kb/s"/>
 		<resolutions>
-			<value>1920x1080</value>
+			<value preConf="true">1920x1080</value>
 			<value>1280x720</value>
 			<value>854x480</value>
 		</resolutions>
 	</video>
 	<audio>
 		<codecs>
-			<value>flac</value>
+			<value  preConf="true">flac</value>
 		</codecs>
 		<canals>
-			<value>stereo</value>
+			<value  preConf="true">stereo</value>
 			<value>mono</value>
 		</canals>
 		<samplingRates>
-			<value>48000</value>
+			<value  preConf="true">48000</value>
 			<value>96000</value>
 		</samplingRates>
 	</audio>
 	<subtitle>
 		<formats>
-			<value>ass</value>
+			<value preConf="true">ass</value>
 			<value>srt</value>
 		</formats>
 		<encoding value="UTF8" />

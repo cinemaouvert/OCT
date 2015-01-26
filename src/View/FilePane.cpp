@@ -33,7 +33,7 @@ void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
     this->m_dispatcher = dispatcheur;
     connectInterface();
 
-    QResource preconfigs(":/preconfigs/resources/preconfig");
+    QResource preconfigs(":/ocpm/resources/ocpm");
 
     m_preConfigsDir = QDir(preconfigs.absoluteFilePath());
 
@@ -227,17 +227,13 @@ void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)
     if(file.exists()){
         file.open(QFile::ReadOnly);
 
-        QXmlQuery query(QXmlQuery::XPath20);
+        QXmlQuery query(QXmlQuery::XQuery10);
         query.setFocus(&file);
 
         //Get video codec
-        query.setQuery("/oct/video/codec");
+        query.setQuery("/oct/video/resolutions/value[@preConf='true']/string()");
         QString videoCodec;
         query.evaluateTo(&videoCodec);
-       // qDebug() << "codec : " << videoCodec;
-
-
+        qDebug() << "codec : " << videoCodec.remove("\n");
     }
-
-
 }
