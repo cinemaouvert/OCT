@@ -89,6 +89,7 @@ namespace Model
             QString depot() const;
             QString userKey() const;
 
+             static QStringList* getMovieStruct();
     };
 }
 
