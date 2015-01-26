@@ -4,7 +4,7 @@
 		<codecs>
 			<value preConf="true" >h264</value>
 		</codecs>
-		<maxRate value="50000" unite="kb/s"/>
+		<maxRate value="50000"/>
 		<resolutions>
 			<value preConf="true">1920x1080</value>
 			<value>1280x720</value>
@@ -29,6 +29,8 @@
 			<value preConf="true">ass</value>
 			<value>srt</value>
 		</formats>
-		<encoding value="UTF8" />
+		<encodings>
+			<value preConf="true">UTF8</value>
+		</encodings>
 	</subtitle>
 </oct>
