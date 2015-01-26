@@ -257,24 +257,7 @@
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>lineEdit_ExportName</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>FilePane</receiver>
-   <slot>on_LineEdit_Name_Changed()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>650</x>
-     <y>51</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>381</x>
-     <y>130</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>on_LineEdit_Name_Changed()</slot>
  </slots>
