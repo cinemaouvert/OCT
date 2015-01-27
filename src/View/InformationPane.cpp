@@ -93,7 +93,6 @@ void InformationPane::generateStruct(){
         QWidget *widget = new QWidget;
         for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
 
-            qDebug() << this->m_dispatcher->informationMovieStruct()->at(i);
             QString labelName = this->m_dispatcher->informationMovieStruct()->at(i);
             QString lineEditName = labelName;
 
@@ -125,8 +124,8 @@ void InformationPane::generateStruct(){
 void InformationPane::lineEditInformation_textChanged(){
     QLineEdit *lineEdit = (QLineEdit*)sender();
     if(lineEdit->text().size() <= 1){
-        qDebug() << lineEdit->objectName();
         this->m_dispatcher->getCurrentProject()->addOrRemoveInformations(lineEdit->objectName(), "OCPM");
+        this->m_dispatcher->checkProjectValidation();
     }
 }
 
