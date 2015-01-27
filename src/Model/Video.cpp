@@ -85,6 +85,23 @@ Model::Video::Video(QDomNode stream, int uid)
     QString frameRate = Utils::convertFract(nodeFrameRate.nodeValue());
     qDebug() << frameRate;
 
+    //-----------------------BPS------------------------//   //!\\  A CONVERTIR
+    QDomNodeList nodeListBps = stream.toElement().elementsByTagName("tag");
+    QString bps;
+    if(! nodeListBps.isEmpty()){
+        int i = 0;
+        bool bpsFinded = false;
+        while(!bpsFinded && i< nodeListBps.size()){
+            qDebug() << i;
+            QDomNode nodeBps = nodeListBps.item(i);
+                if(nodeBps.attributes().namedItem("key").nodeValue() == "BPS"){
+                    bps = Utils::bpsToKbps(nodeBps.attributes().namedItem("value").nodeValue());
+                    bpsFinded = true;
+                    qDebug() << bps;
+                }
+            i++;
+        }
+    }
     //-----------------------VIDEO-BUILD------------------------//
     this->m_uID = QString::number(uid);
     this->m_default = false;
@@ -115,6 +132,13 @@ Model::Video::Video(QDomNode stream, int uid)
     Parameter *pFrameRate = Video::getStaticParameter("r_frame_rate");
     pFrameRate->setValue(frameRate);
     this->setParameter("r_frame_rate",pFrameRate);
+
+    if(!bps.isNull()){
+        Parameter *pBps = Video::getStaticParameter("bitRate");
+        pBps->setValue(bps);
+        this->setParameter("bitRate",pBps);
+
+    }
 
 }
 
@@ -180,7 +204,7 @@ void Model::Video::initStaticParameters()
     Parameter *frameRate = new Parameter("-r","This is the frame rate (in frame by second)","%1");
     m_staticParameters.insert("r_frame_rate",frameRate);
 
-    Parameter *averageBitRate= new Parameter("-b:v %1 -bufsize %1","This is the average bit rate","");
+    Parameter *averageBitRate= new Parameter("","This is the average bit rate","-b:v %1 -bufsize %1");
     m_staticParameters.insert("bitRate",averageBitRate);
 
     Parameter *filter= new Parameter("-filter:v","This is the video filter can be (yadif for deinterlace, ))","%1");
