@@ -236,6 +236,44 @@ void FilePane::refresh()
     ui->tableView_ImportFile->setSpan(k+2, 1, 1, 6);
 
     sim->sort(0);
+
+    QStandardItem* item;
+    //capture par défaut
+    if(true){
+        item = new QStandardItem(i_ok,"capture par default");
+    }
+    else{
+        item = new QStandardItem(i_nok,"capture par default");
+    }
+    sim->appendRow(item);
+
+    //affiche
+    if(true){
+        item = new QStandardItem(i_ok,"affiche");
+    }
+    else{
+        item = new QStandardItem(i_nok,"affiche");
+    }
+    sim->appendRow(item);
+
+    //pack communication
+    if(true){
+        item = new QStandardItem(i_ok,"pack communication");
+    }
+    else{
+        item = new QStandardItem(i_nok,"pack communication");
+    }
+    sim->appendRow(item);
+
+    //Champs informations renseigné
+    if(true){
+        item = new QStandardItem(i_ok,"Champs informations renseigné");
+    }
+    else{
+        item = new QStandardItem(i_nok,"Champs informations renseigné:   x champs manquant");
+    }
+    sim->appendRow(item);
+
     ui->listView_Export->setModel(sim);
     ui->listView_Export->setItemDelegate(md);
 }
