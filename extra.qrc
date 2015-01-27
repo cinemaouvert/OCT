@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/ocpm">
-		<file>resources/ocpm</file>
-	</qresource>
+        <file>resources/ocpm</file>
+    </qresource>
 </RCC>

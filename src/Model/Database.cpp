@@ -37,6 +37,9 @@ using namespace std;
 #include <QEventLoop>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QFile>
+#include <QCoreApplication>
+#include <QDir>
 
 #include "src/configOCT.h"
 
@@ -115,15 +118,35 @@ QStringList* Model::Database::getMovieStruct() {
     QVariant statusCodeV = -1;
     QStringList *movieStructList = NULL;
 
+    QFile file(qApp->applicationDirPath() + QDir::separator() +"struct.json");
+
     if (reply->error() == QNetworkReply::NoError){
         statusCodeV = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
         QByteArray movieStruct = reply->readAll();
-        QJsonDocument qjd;
-        qjd = QJsonDocument::fromJson(movieStruct);
-        QJsonObject qjo = qjd.object();
-        movieStructList = new QStringList(qjo.keys());
+
+        if (file.open(QIODevice::WriteOnly)){
+            QTextStream out(&file);
+            out << movieStruct;
+            file.close();
+        }
+
+        movieStructList = createStruct(movieStruct);
+    }else{
+        if (file.open(QIODevice::ReadOnly)){
+            movieStructList = createStruct(file.readAll());
+            file.close();
+        }
     }
     reply->deleteLater();
 
+    return movieStructList;
+}
+
+QStringList* Model::Database::createStruct(QByteArray movieStruct){
+    QStringList *movieStructList = NULL;
+    QJsonDocument qjd;
+    qjd = QJsonDocument::fromJson(movieStruct);
+    QJsonObject qjo = qjd.object();
+    movieStructList = new QStringList(qjo.keys());
     return movieStructList;
 }

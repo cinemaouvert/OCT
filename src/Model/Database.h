@@ -53,6 +53,11 @@ namespace Model
              */
             QString m_depot;
 
+            /**
+             * @brief create StringList from JSOn
+             */
+            static QStringList *createStruct(QByteArray movieStruct);
+
         public:
             /**
              * @brief Constructor.
@@ -89,7 +94,8 @@ namespace Model
             QString depot() const;
             QString userKey() const;
 
-             static QStringList* getMovieStruct();
+            static QStringList* getMovieStruct();
+
     };
 }
 
