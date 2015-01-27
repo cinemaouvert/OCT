@@ -82,6 +82,16 @@ void Model::Stream::setDefault(bool d)
 {
     m_default = d;
 }
+
+QString Stream::name() const
+{
+    return m_name;
+}
+
+void Stream::setName(const QString &name)
+{
+    m_name = name;
+}
 Model::Stream::~Stream()
 {
     if (this->m_parameters != NULL)
