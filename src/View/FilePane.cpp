@@ -14,6 +14,9 @@
 #include <QXmlQuery>
 #include <QStandardItemModel>
 
+// ========================================================================== //
+// == CONSTRUCTORS AND DESTRUCTORS ========================================== //
+// ========================================================================== //
 FilePane::FilePane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FilePane)
@@ -30,6 +33,15 @@ FilePane::FilePane(QWidget *parent) :
 
 }
 
+FilePane::~FilePane()
+{
+    if(ui) delete ui;
+    if(m_model) delete m_model;
+}
+
+// ========================================================================== //
+// == ACCESSORS AND MUTATORS ================================================ //
+// ========================================================================== //
 void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
 {
     this->m_dispatcher = dispatcheur;
@@ -49,21 +61,9 @@ void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
 
 }
 
-FilePane::~FilePane()
-{
-    if(ui) delete ui;
-    if(m_model) delete m_model;
-}
-
-void FilePane::on_pushButton_AddFile_clicked()
-{
-    QStringList filePaths = QFileDialog::getOpenFileNames(this,tr("Open"));
-    foreach (QString filePath, filePaths) {
-        this->m_dispatcher->addFile(filePath);
-    }
-}
-
-
+// ========================================================================== //
+// == CLASS METHODS ========================================================= //
+// ========================================================================== //
 void FilePane::refresh()
 {
     QIcon i_ok = QIcon(":/icons/resources/glyphicons/glyphicons_206_ok_2.png");
@@ -278,6 +278,27 @@ void FilePane::refresh()
     ui->listView_Export->setItemDelegate(md);
 }
 
+void FilePane::splitterNoCollapsing() {
+    ui->splitter->setChildrenCollapsible(false);
+    ui->splitter_2->setChildrenCollapsible(false);
+}
+
+// ========================================================================== //
+// == EVENT METHODS ========================================================= //
+// ========================================================================== //
+void FilePane::connectInterface()
+{
+    connect(ui->lineEdit_ExportName, SIGNAL(textChanged(QString)), m_dispatcher, SLOT(treatProjectNameChanged(QString)));
+}
+
+void FilePane::on_pushButton_AddFile_clicked()
+{
+    QStringList filePaths = QFileDialog::getOpenFileNames(this,tr("Open"));
+    foreach (QString filePath, filePaths) {
+        this->m_dispatcher->addFile(filePath);
+    }
+}
+
 void FilePane::on_pushButton_DeleteFile_clicked()
 {
     QStringList names = m_model->stringList();
@@ -288,24 +309,6 @@ void FilePane::on_pushButton_DeleteFile_clicked()
             this->m_dispatcher->removeFile(filePath);
         }
     }
-}
-
-void FilePane::splitterNoCollapsing() {
-    ui->splitter->setChildrenCollapsible(false);
-    ui->splitter_2->setChildrenCollapsible(false);
-}
-
-void FilePane::connectInterface()
-{
-    connect(this, SIGNAL(projectNameChanged(QString)), m_dispatcher, SLOT(treatProjectNameChanged(QString)));
-}
-
-
-
-void FilePane::on_lineEdit_ExportName_textChanged(const QString &arg1)
-{
-    emit projectNameChanged(arg1);
-
 }
 
 void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)
