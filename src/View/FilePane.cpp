@@ -133,17 +133,17 @@ void FilePane::refresh()
     foreach(Model::File *f , *(this->m_dispatcher->getCurrentProject()->fileList())){
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
 
-            if(sw->getOldStream()->getType() == Model::Stream::VIDEO){
+            if(sw->oldStream()->getType() == Model::Stream::VIDEO){
                 i++;
-                m->setItem(i,0,tr("piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
-                Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
+                m->setItem(i,0,tr("piste: %2 : %1").arg(f->getName()).arg(sw->oldStream()->getUID()));
+                Model::Parameter *p = sw->oldStream()->getParameters()->find("codec_name").value();
                 m->setItem(i,1,p->value());
-                out_tView = "Flux video " + sw->getOldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
+                out_tView = "Flux video " + sw->oldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
-                p = sw->getOldStream()->getParameters()->find("r_frame_rate").value();
+                p = sw->oldStream()->getParameters()->find("r_frame_rate").value();
                 m->setItem(i,2,p->value());
 
-                p = sw->getOldStream()->getParameters()->find("resolution").value();
+                p = sw->oldStream()->getParameters()->find("resolution").value();
                 m->setItem(i,3,p->value());
                 out_tView = out_tView + " - résolution " + p->value().remove("scale=");
 
@@ -163,20 +163,20 @@ void FilePane::refresh()
 
 
             }
-            else if(sw->getOldStream()->getType() == Model::Stream::AUDIO){
+            else if(sw->oldStream()->getType() == Model::Stream::AUDIO){
                 j++;
-                m->setItem(j,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
-                Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
+                m->setItem(j,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->oldStream()->getUID()));
+                Model::Parameter *p = sw->oldStream()->getParameters()->find("codec_name").value();
                 m->setItem(j,1,p->value());
-                out_tView = "Piste Audio " + sw->getOldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
+                out_tView = "Piste Audio " + sw->oldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
-                p = sw->getOldStream()->getParameters()->find("sample_rate").value();
+                p = sw->oldStream()->getParameters()->find("sample_rate").value();
                 m->setItem(j,2,p->value());
 
-                p = sw->getOldStream()->getParameters()->find("resolution").value();
+                p = sw->oldStream()->getParameters()->find("resolution").value();
                 m->setItem(j,3,p->value());
 
-                p = sw->getOldStream()->getParameters()->find("channels").value();
+                p = sw->oldStream()->getParameters()->find("channels").value();
                 m->setItem(j,4,p->value());
 
                 m->setItem(j,5,QString("OK"));
@@ -193,12 +193,13 @@ void FilePane::refresh()
                 }
                 sim->appendRow(item);
             }
-            else if(sw->getOldStream()->getType() == Model::Stream::SUBTITLE){
+            else if(sw->oldStream()->getType() == Model::Stream::SUBTITLE){
                 k++;
-                m->setItem(k,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
-                Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
+                m->setItem(k,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->oldStream()->getUID()));
+                Model::Parameter *p = sw->oldStream()->getParameters()->find("codec_name").value();
                 m->setItem(k,1,p->value());                
-                out_tView = "sous titre " + sw->getOldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
+                out_tView = "sous titre " + sw->oldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
+
 
                 m->setItem(k,4,QString("OK"));
 
@@ -273,15 +274,6 @@ void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)
 {
     QFile file(m_preConfigsDir.filePath(arg1).append(".xml"));
     if(file.exists()){
-        file.open(QFile::ReadOnly);
-
-        QXmlQuery query(QXmlQuery::XQuery10);
-        query.setFocus(&file);
-
-        //Get video codec
-        query.setQuery("/oct/video/resolutions/value[@preConf='true']/string()");
-        QString videoCodec;
-        query.evaluateTo(&videoCodec);
-        qDebug() << "codec : " << videoCodec.remove("\n");
+        m_dispatcher->getOCPMValidation()->loadPreConfXML(&file);
     }
 }

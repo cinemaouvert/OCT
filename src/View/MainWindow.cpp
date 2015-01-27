@@ -41,15 +41,15 @@ void View::MainWindow::refresh()
 
     foreach (Model::File *file, *(m_dispatcher->getCurrentProject()->fileList())) {
         foreach (Model::StreamWrapper *streamW, *(file->getStreamWrappers())) {
-            switch (streamW->getOldStream()->getType()) {
+            switch (streamW->oldStream()->getType()) {
                 case Model::Stream::AUDIO:
-                    ui->tabWidgetAudio->addTab(new AudioPane(file,streamW->getOldStream()),file->getName() + " piste : " +streamW->getOldStream()->getUID());
+                    ui->tabWidgetAudio->addTab(new AudioPane(file,streamW->oldStream()),file->getName() + " piste : " +streamW->oldStream()->getUID());
                     break;
                 case Model::Stream::VIDEO:
-                    ui->tabWidgetVideo->addTab(new VideoPane(file,streamW->getOldStream()),file->getName() + " piste : " +streamW->getOldStream()->getUID());
+                    ui->tabWidgetVideo->addTab(new VideoPane(file,streamW->oldStream()),file->getName() + " piste : " +streamW->oldStream()->getUID());
                     break;
                 case Model::Stream::SUBTITLE:
-                    ui->tabWidgetSubtitle->addTab(new SubtitlePane(file,streamW->getOldStream()),file->getName() + " piste : " +streamW->getOldStream()->getUID());
+                    ui->tabWidgetSubtitle->addTab(new SubtitlePane(file,streamW->oldStream()),file->getName() + " piste : " +streamW->oldStream()->getUID());
                     break;
                 default:
 

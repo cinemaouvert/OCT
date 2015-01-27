@@ -98,7 +98,7 @@ namespace Model
              * @brief Accessor on the m_oldStream member.
              * @return The m_oldStream member pointer value.
              */
-            Model::Stream* getOldStream();
+            Model::Stream* getRelevantStream();
 
 
             /**

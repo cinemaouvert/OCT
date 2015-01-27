@@ -15,8 +15,6 @@ VideoPane::VideoPane(QWidget *parent) :
     m_player->setRenderer(ui->videoWidget);
 
     ui->videoWidget->show();
-
-
 }
 
 VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
@@ -90,7 +88,8 @@ void VideoPane::loadFile(QString filepath)
     connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
     connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
     connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
-
+    // On x264 codec selection show the x264 settings in the associated groupBox.
+    connect(ui->comboBox_Codec, SIGNAL(activated(QString)), SLOT(on_comboBox_Codec_activated(QString)));
 }
 
 
@@ -138,4 +137,19 @@ void VideoPane::on_timeStart_timeChanged(const QTime &time)
 void VideoPane::on_timeStop_timeChanged(const QTime &time)
 {
     ui->stopSlider->setValue(QTime(0,0).msecsTo(time));
+}
+
+///
+/// \brief VideoPane::on_Codec_Selected
+/// \param codec Input codec selected
+///
+void VideoPane::on_comboBox_Codec_activated(QString codec)
+{
+    // if the codec selected is the x264 codec, show the groupBox settings
+    // associated to the x264 codec.
+    if ( codec.compare("H264 (x264)") == 0 ) {
+        ui->groupBox_x264Settings->show();
+    } else {
+        ui->groupBox_x264Settings->hide();
+    }
 }

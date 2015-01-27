@@ -23,8 +23,8 @@ AudioPane::AudioPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
 }
 
 void AudioPane::fillAudioCodecComboBox() {
-    QStringList list = (QStringList() << "AAC" << "MP1" << "MP2" << "MP3" << "FLAC");
-    ui->comboBox_Codec->addItems( list );
+    QStringList list = (QStringList() << "FLAC" << "AAC" << "MP1" << "MP2" << "MP3");
+    ui->comboBox_AudioCodec->addItems( list );
 }
 
 AudioPane::~AudioPane()

@@ -35,6 +35,8 @@ using namespace std;
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
 #include <QEventLoop>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include "src/configOCT.h"
 
@@ -96,4 +98,32 @@ int Model::Database::sendRequest(QByteArray jsonString) {
     return statusCodeV.toInt();
 }
 
+QStringList* Model::Database::getMovieStruct() {
+    QUrl url(configOCT::DEPOTCOC + "?movie=&structure");
+    QNetworkRequest request(url);
 
+    request.setRawHeader("User-Agent", configOCT::NAME.toStdString().c_str());
+    request.setRawHeader("Content-Type", "application/json");
+
+    QNetworkAccessManager *networkManager = new QNetworkAccessManager();
+
+    QEventLoop loop;
+    QNetworkReply* reply = networkManager->get(request);
+    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
+
+    QVariant statusCodeV = -1;
+    QStringList *movieStructList = NULL;
+
+    if (reply->error() == QNetworkReply::NoError){
+        statusCodeV = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+        QByteArray movieStruct = reply->readAll();
+        QJsonDocument qjd;
+        qjd = QJsonDocument::fromJson(movieStruct);
+        QJsonObject qjo = qjd.object();
+        movieStructList = new QStringList(qjo.keys());
+    }
+    reply->deleteLater();
+
+    return movieStructList;
+}

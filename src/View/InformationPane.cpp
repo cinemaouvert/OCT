@@ -5,6 +5,12 @@
 
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
+#include <QHBoxLayout>
+#include <QScrollArea>
+#include <QLineEdit>
+#include <QLabel>
+#include <QGridLayout>
+#include <QGroupBox>
 
 InformationPane::InformationPane(QWidget *parent) :
     QWidget(parent),
@@ -28,6 +34,7 @@ void InformationPane::setDispatcher(Controller::OCTDispatcher *dispatcher)
     this->m_dispatcher = dispatcher;
 
     refresh();
+    generateStruct();
 }
 
 void InformationPane::refresh(){
@@ -72,4 +79,50 @@ void InformationPane::loadImageToGraphicView(QGraphicsView *graphV,int index){
 void InformationPane::on_sampleComboBox_currentIndexChanged(int index)
 {
     loadImageToGraphicView(ui->sampleGraphicView,index);
+}
+
+void InformationPane::generateStruct(){
+    QScrollArea *scrollArea = new QScrollArea;
+
+    QHBoxLayout *hLayout = new QHBoxLayout;
+    QVBoxLayout *vLayoutLabel = new QVBoxLayout;
+    QVBoxLayout *vLayoutLineEdit = new QVBoxLayout;
+
+    if(this->m_dispatcher->informationMovieStruct() != NULL){
+        qDebug() << this->m_dispatcher->informationMovieStruct()->size();
+
+        QWidget *widget = new QWidget;
+        for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
+
+            qDebug() << this->m_dispatcher->informationMovieStruct()->at(i);
+            QString labelName = this->m_dispatcher->informationMovieStruct()->at(i);
+
+            QLabel *label = new QLabel(labelName.replace("_", " "));
+            label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+            vLayoutLabel->addWidget(label);
+
+            QLineEdit *lineEdit = new QLineEdit;
+            lineEdit->setObjectName(labelName);
+            lineEdit->setSizePolicy(QSizePolicy::Minimum , QSizePolicy::Minimum );
+            lineEdit->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+            lineEdit->connect(lineEdit, SIGNAL(editingFinished()), this, SLOT(lineEditInformation_textChanged()));
+
+            vLayoutLineEdit->addWidget(lineEdit);
+        }
+        hLayout->addItem(vLayoutLabel);
+        hLayout->addItem(vLayoutLineEdit);
+
+        widget->setLayout(hLayout);
+        scrollArea->setWidget(widget);
+        scrollArea->setWidgetResizable(true);
+
+        ui->verticalLayout_3->addWidget(scrollArea);
+    }
+
+}
+
+void InformationPane::lineEditInformation_textChanged(){
+    QLineEdit *lineEdit = (QLineEdit*)sender();
+
+    qDebug() << lineEdit->objectName() +" valeur : " + lineEdit->text();
 }

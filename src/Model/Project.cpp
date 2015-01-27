@@ -43,7 +43,7 @@ Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileLis
     this->m_attachments = new QList<Model::Attachment*>();
     this->m_informations = new QList<Model::Information*>();
     this->m_fileList = new QList<Model::File*>();
-    this->m_name = "Projet";
+    this->m_name = "Projet.mkv";
 }
 
 Model::Project::~Project()
@@ -248,7 +248,7 @@ QStringList *Model::Project::getMergeCommandLine()
 {
     QStringList *arguments = new QStringList();
    // *arguments << "mkvmerge.exe";
-    *arguments << "-o" << "m_name.mkv";
+    *arguments << "-o" << m_name;
   //  *arguments <<"--title"<<"TITRE";
 
     foreach (Model::File *f, *(fileList())){
@@ -274,7 +274,7 @@ int Model::Project::nbVideo() const
     int cpt = 0;
     foreach(Model::File *f , *(this->m_fileList)){
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
-            Model::Video* v = dynamic_cast<Model::Video*>(sw->getOldStream());
+            Model::Video* v = dynamic_cast<Model::Video*>(sw->oldStream());
             if(v !=0)
                 cpt++;
         }
@@ -287,7 +287,7 @@ int Model::Project::nbAudio() const
     int cpt = 0;
     foreach(Model::File *f , *(this->m_fileList)){
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
-            Model::Audio* a = dynamic_cast<Model::Audio*>(sw->getOldStream());
+            Model::Audio* a = dynamic_cast<Model::Audio*>(sw->oldStream());
             if(a !=0)
                 cpt++;
         }
@@ -300,7 +300,7 @@ int Model::Project::nbSub() const
     int cpt = 0;
     foreach(Model::File *f , *(this->m_fileList)){
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
-            Model::Subtitle* s = dynamic_cast<Model::Subtitle*>(sw->getOldStream());
+            Model::Subtitle* s = dynamic_cast<Model::Subtitle*>(sw->oldStream());
             if(s !=0)
                 cpt++;
         }

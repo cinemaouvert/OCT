@@ -49,7 +49,8 @@ SOURCES += src/main.cpp\
     src/View/VideoPlayer.cpp \
     src/View/ParametersDialog.cpp \
     src/View/QueueListView.cpp \
-    src/View/MyDelegate.cpp
+    src/View/MyDelegate.cpp \
+    src/Model/OCPMValidation.cpp
 
 HEADERS  += \
     src/Controller/Exporter.h \
@@ -84,7 +85,8 @@ HEADERS  += \
     src/View/VideoPlayer.h \
     src/View/ParametersDialog.h \
     src/View/QueueListView.h \
-    src/View/MyDelegate.h
+    src/View/MyDelegate.h \
+    src/Model/OCPMValidation.h
 
 FORMS    += \
     src/View/mainwindow.ui \

@@ -62,16 +62,19 @@ using namespace std;
 #include <src/View/FilePane.h>
 #include <src/View/EncodePane.h>
 
+
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_mainWindow(NULL) ,
     m_settings(NULL) ,
-                                            m_streamLoader(NULL) ,
-                                            m_updater(NULL) ,
+    m_streamLoader(NULL) ,
+    m_updater(NULL) ,
                                             m_merger(NULL) ,
                                             m_exporter(NULL) ,
                                             m_projects(NULL) ,
                                             m_treatmentThread(NULL) ,
-                                            m_transcoder(NULL)  {
+                                            m_transcoder(NULL),
+                                            m_OCPMvalidation(NULL),
+                                            m_informationMovieStruct(NULL){
     //Init Projects
     m_projects = new QList<Model::Project*>();
     //Creation of the Project
@@ -86,10 +89,14 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_merger= new Merger();
     //ne pas init ici
     //m_exporter= new Exporter();
+    m_informationMovieStruct = Exporter::getInformations();
 
     m_transcoder= new Transcoder();
 
     m_treatmentThread= new TreatmentThread(m_projects,m_transcoder,m_merger,m_exporter);
+
+    m_OCPMvalidation = new Model::OCPMValidation(this);
+
 
     //Initialisation of the parameters lists
     Model::Video::initStaticParameters();
@@ -111,22 +118,22 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     addFile("C:\\Users\\Thibaud\\Downloads\\dom.srt");
     addFile("C:\\Users\\Thibaud\\Downloads\\2838-etoiles-fin-fond-univers-WallFizz.jpg");
 
-    Model::Stream *os = this->m_currentProject->fileList()->at(1)->getStreamWrappers()->at(0)->getOldStream();
+    Model::Stream *os = this->m_currentProject->fileList()->at(1)->getStreamWrappers()->at(0)->oldStream();
     Model::Stream *ns = new Model::Video((Model::Video&)*os);
     ns->getParameters()->value("codec_name")->setValue("avi");
 
     this->m_currentProject->fileList()->at(1)->getStreamWrappers()->at(0)->setNewStream(ns);
 
 
-    Model::Stream *os2 = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->getOldStream();
+    Model::Stream *os2 = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->oldStream();
     Model::Stream *ns2 = new Model::Audio((Model::Audio&)*os2);
     ns2->getParameters()->value("codec_name")->setValue("flac");
 
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->setNewStream(ns2);
 
-
-    this->startTreatment();
 */
+    //this->startTreatment();
+
     /***********************/
     /*****Romain Test *****/
 
@@ -147,7 +154,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
 
 
-    Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->getOldStream();
+    Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->oldStream();
     Model::Stream *ns = new Model::Video((Model::Video&)*os);
     ns->getParameters()->take("codec_name")->setValue("mpeg4");
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->setNewStream(ns);
@@ -164,6 +171,21 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
 
     /***********************/
+}
+
+Controller::OCTDispatcher::~OCTDispatcher()
+{
+    if(m_currentProject) delete m_currentProject  ;
+    if(m_mainWindow) delete m_mainWindow  ;
+    if(m_settings) delete m_settings  ;
+    if(m_streamLoader) delete m_streamLoader   ;
+    if(m_updater) delete m_updater  ;
+    if(m_merger) delete m_merger  ;
+    if(m_exporter) delete  m_exporter ;
+    if(m_projects) delete  m_projects ;
+    if(m_treatmentThread) delete  m_treatmentThread ;
+    if(m_transcoder) delete m_transcoder  ;
+    if(m_OCPMvalidation) delete  m_OCPMvalidation ;
 }
 
 void Controller::OCTDispatcher::addFile(QString filePath) {
@@ -214,10 +236,13 @@ void Controller::OCTDispatcher::startTreatment() {
 
 void Controller::OCTDispatcher::pauseTreatment() {
     if(m_startTreatmentThread != NULL){
-        if(m_startTreatmentThread->isRunning())
-            m_startTreatmentThread->wait(ULONG_MAX);
-        else
+        if(m_startTreatmentThread->isRunning()){
+            qDebug()<< "PAUSE";
+            m_startTreatmentThread->wait();
+        }else{
+            qDebug() << "REPRENDRE";
             m_startTreatmentThread->start();
+        }
     }
 }
 
@@ -228,7 +253,8 @@ void Controller::OCTDispatcher::restartTreatment() {
 void Controller::OCTDispatcher::stopTreatment() {
     if(m_startTreatmentThread != NULL){
         if(m_startTreatmentThread->isRunning())
-            m_startTreatmentThread->quit();
+            m_startTreatmentThread->exit();
+
     }
 }
 
@@ -267,6 +293,11 @@ QList<Model::Project *> *Controller::OCTDispatcher::getProjects()
     return this->m_projects;
 }
 
+Model::OCPMValidation *Controller::OCTDispatcher::getOCPMValidation()
+{
+    return this->m_OCPMvalidation;
+}
+
 void Controller::OCTDispatcher::setCurrentProjectIndex(int index)
 {
     m_currentProject = m_projects->at(index);
@@ -282,6 +313,38 @@ void Controller::OCTDispatcher::duplicateProject(int index)
 Controller::TreatmentThread *Controller::OCTDispatcher::getTreatmentThread()
 {
     return this->m_treatmentThread;
+}
+
+bool Controller::OCTDispatcher::checkProjectValidation()
+{
+    bool retVal = true;
+    foreach (Model::File *file, *(m_currentProject->fileList())) {
+        foreach (Model::StreamWrapper *streamW, *(file->getStreamWrappers())) {
+            retVal = retVal && checkStreamValidation(streamW->getRelevantStream());
+        }
+    }
+    return retVal;
+}
+
+bool Controller::OCTDispatcher::checkStreamValidation(Model::Stream *stream)
+{
+    bool retVal = true;
+    switch(stream->getType()){
+        case Model::Stream::VIDEO:
+            retVal = retVal && m_OCPMvalidation->isValidVideo(stream);
+            break;
+        case Model::Stream::AUDIO:
+            retVal = retVal && m_OCPMvalidation->isValidAudio(stream);
+            break;
+        case Model::Stream::SUBTITLE:
+            retVal = retVal && m_OCPMvalidation->isValidSubtitle(stream);
+            break;
+    }
+}
+
+bool Controller::OCTDispatcher::checkInformationValidation()
+{
+    //this->getCurrentProject()->informations()
 }
 
 
@@ -300,6 +363,11 @@ void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &v
 QVariant Controller::OCTDispatcher::getSetting(QString key)
 {
     return m_settings->value(key);
+}
+
+QStringList *Controller::OCTDispatcher::informationMovieStruct() const
+{
+    return m_informationMovieStruct;
 }
 
 

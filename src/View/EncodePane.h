@@ -29,6 +29,12 @@ private slots:
     void initProgressBar(int);
     void passedProgressStep();
 
+    void on_pushButton_Encode_clicked();
+
+    void on_pushButton_Cancel_clicked();
+
+    void on_pushButton_Pause_clicked();
+
 private:
     Ui::EncodePane *ui;
     Controller::OCTDispatcher *m_dispatcher;
