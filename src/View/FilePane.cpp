@@ -61,6 +61,7 @@ void FilePane::on_pushButton_AddFile_clicked()
     foreach (QString filePath, filePaths) {
         this->m_dispatcher->addFile(filePath);
     }
+    m_dispatcher->checkProjectValidation();
 }
 
 
@@ -288,6 +289,7 @@ void FilePane::on_pushButton_DeleteFile_clicked()
             this->m_dispatcher->removeFile(filePath);
         }
     }
+    m_dispatcher->checkProjectValidation();
 }
 
 void FilePane::splitterNoCollapsing() {

@@ -112,9 +112,9 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     /****** TRY YOUR WORK IN HERE **********/
 
     /*****Thibaud Test *****/
-
-   /* addFile("H:\\Media\\movie1.mkv");
+/*
     addFile("H:\\Media\\movie2.mkv");
+    addFile("H:\\Media\\movie1.mkv");
     addFile("C:\\Users\\Thibaud\\Downloads\\dom.srt");
     addFile("C:\\Users\\Thibaud\\Downloads\\2838-etoiles-fin-fond-univers-WallFizz.jpg");
 
@@ -130,8 +130,8 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     ns2->getParameters()->value("codec_name")->setValue("flac");
 
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->setNewStream(ns2);
-*/
 
+*/
 
     /***********************/
     /*****Romain Test *****/
@@ -322,6 +322,9 @@ bool Controller::OCTDispatcher::checkProjectValidation()
             retVal = retVal && checkStreamValidation(streamW->getRelevantStream());
         }
     }
+    retVal = retVal && checkInformationValidation();
+
+    m_mainWindow->setOCPMState(retVal);
     return retVal;
 }
 
@@ -343,7 +346,9 @@ bool Controller::OCTDispatcher::checkStreamValidation(Model::Stream *stream)
 
 bool Controller::OCTDispatcher::checkInformationValidation()
 {
-    //this->getCurrentProject()->informations()
+    if(!(Exporter::getInformations()) || !(this->getCurrentProject()->informations()))
+        return false;
+    return Exporter::getInformations()->size() == this->getCurrentProject()->informations()->size();
 }
 
 
