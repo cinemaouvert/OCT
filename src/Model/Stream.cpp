@@ -83,12 +83,12 @@ void Model::Stream::setDefault(bool d)
     m_default = d;
 }
 
-QString Stream::name() const
+QString Model::Stream::name() const
 {
     return m_name;
 }
 
-void Stream::setName(const QString &name)
+void Model::Stream::setName(const QString &name)
 {
     m_name = name;
 }

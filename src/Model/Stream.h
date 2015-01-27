@@ -60,6 +60,11 @@ namespace Model
             QString m_uID;
 
             /**
+             * @brief m_name
+             */
+            QString m_name;
+
+            /**
              * @brief m_default
              */
             bool m_default;
@@ -112,6 +117,8 @@ namespace Model
             virtual void setDefault(bool d);
 
             virtual int getType()=0;
+            QString name() const;
+            void setName(const QString &name);
     };
 
 
