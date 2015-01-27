@@ -33,7 +33,6 @@ using namespace std;
 
 #include "src/Model/Project.h"
 #include "src/Model/Attachment.h"
-#include "src/Model/Information.h"
 #include "Subtitle.h"
 #include <QXmlStreamWriter>
 #include <QFile>
@@ -143,8 +142,13 @@ void Model::Project::addInformations(QString key, QString value)
     if(m_informations == NULL)
         this->m_informations = new QMap<QString, QString>;
 
-    if(!this->m_informations->contains(key))
-        this->m_informations->insert(key, value);
+    this->m_informations->insert(key, value);
+}
+
+void Model::Project::removeInformations(QString key)
+{
+    if(m_informations == NULL)
+        this->m_informations->remove(key);
 }
 
 void Model::Project::addOrRemoveInformations(QString key, QString value){

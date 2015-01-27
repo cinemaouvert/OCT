@@ -189,6 +189,7 @@ Controller::OCTDispatcher::~OCTDispatcher()
 }
 
 void Controller::OCTDispatcher::addFile(QString filePath) {
+    this->m_currentProject->generateInformationToXML();
     QMimeDatabase db;
     QMimeType mime = db.mimeTypeForFile(filePath);
     if(mime.name().contains("video") || mime.name().contains("audio") || mime.name().contains("subrip") || mime.name().contains("ssa") || mime.name().contains("ass")){
