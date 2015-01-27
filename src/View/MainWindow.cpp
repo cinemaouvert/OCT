@@ -125,6 +125,7 @@ void View::MainWindow::on_tabWidget_currentChanged(int index)
     switch (index) {
     case 0:
         ui->labelStatus1->setStyleSheet(activeStyle);
+        ui->tab_files->refresh();
         break;
     case 1:
         ui->labelStatus3->setStyleSheet(activeStyle);

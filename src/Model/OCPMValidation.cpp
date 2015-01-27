@@ -151,7 +151,7 @@ bool Model::OCPMValidation::isValidSubtitle(Model::Stream *stream)
 
     Parameter *paramEncode = stream->getParameters()->value("charEncode");
     if(!paramEncode)
-        return false;
+        return retval; // return the value of param codec util we find a way to find he subtitle encoding
     QString encoding = paramEncode->value();
     retval = retval && m_validationAudioSamplingRate.contains(encoding,Qt::CaseInsensitive);
 

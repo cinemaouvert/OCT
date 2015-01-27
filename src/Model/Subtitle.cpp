@@ -66,7 +66,7 @@ Model::Subtitle::Subtitle(QDomNode stream, int uid)
     QString isDefault = disposition.attributes().namedItem("default").nodeValue();
     qDebug() << isDefault;
     //-----------------------ENCODE------------------------//
-
+    // TODO FIND A WAY TO FIND ENCODING
     //-----------------------SUBTITLE-BUILD------------------------//
     this->m_uID = QString::number(uid);
     this->m_parameters = new QMap<QString,Parameter*>();
