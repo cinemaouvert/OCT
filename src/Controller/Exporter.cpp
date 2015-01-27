@@ -34,7 +34,6 @@ using namespace std;
 #include "src/Controller/OCTDispatcher.h"
 #include "src/Model/Database.h"
 #include "src/Model/Project.h"
-#include "src/Model/Information.h"
 #include "src/configOCT.h"
 
 Controller::Exporter::Exporter(QString userKey, QString depot) : m_Database(NULL) {
