@@ -328,7 +328,7 @@ bool Controller::OCTDispatcher::checkProjectValidation()
             retVal = retVal && checkStreamValidation(streamW->getRelevantStream());
         }
     }
-    retVal = retVal && checkInformationValidation();
+    retVal = retVal && checkInformationValidation() == 0;
 
     m_mainWindow->setOCPMState(retVal);
     return retVal;
@@ -350,11 +350,11 @@ bool Controller::OCTDispatcher::checkStreamValidation(Model::Stream *stream)
     }
 }
 
-bool Controller::OCTDispatcher::checkInformationValidation()
+int Controller::OCTDispatcher::checkInformationValidation()
 {
-    if(!(Exporter::getInformations()) || !(this->getCurrentProject()->informations()))
-        return false;
-    return Exporter::getInformations()->size() == this->getCurrentProject()->informations()->size();
+    if(!m_informationMovieStruct || !(this->getCurrentProject()->informations()))
+        return -1;
+    return m_informationMovieStruct->size() - this->getCurrentProject()->informations()->size();
 }
 
 

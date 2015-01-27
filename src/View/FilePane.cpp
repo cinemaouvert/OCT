@@ -140,24 +140,24 @@ void FilePane::refresh()
     foreach(Model::File *f , *(this->m_dispatcher->getCurrentProject()->fileList())){
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
 
-            if(sw->oldStream()->getType() == Model::Stream::VIDEO){
+            if(sw->getRelevantStream()->getType() == Model::Stream::VIDEO){
                 i++;
-                m->setItem(i,0,tr("piste: %2 : %1").arg(f->getName()).arg(sw->oldStream()->getUID()));
-                Model::Parameter *p = sw->oldStream()->getParameters()->find("codec_name").value();
+                m->setItem(i,0,tr("piste: %2 : %1").arg(f->getName()).arg(sw->getRelevantStream()->getUID()));
+                Model::Parameter *p = sw->getRelevantStream()->getParameters()->find("codec_name").value();
                 m->setItem(i,1,p->value());
-                out_tView = "Flux video " + sw->oldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
+                out_tView = "Flux video " + sw->getRelevantStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
-                p = sw->oldStream()->getParameters()->find("r_frame_rate").value();
+                p = sw->getRelevantStream()->getParameters()->find("r_frame_rate").value();
                 m->setItem(i,2,p->value());
 
-                p = sw->oldStream()->getParameters()->find("resolution").value();
+                p = sw->getRelevantStream()->getParameters()->find("resolution").value();
                 m->setItem(i,3,p->value().remove("scale="));
                 out_tView = out_tView + " - résolution " + p->value().remove("scale=");
 
                 ui->tableView_ImportFile->setSpan(i, 4, 1, 5);
 
                 QStandardItem* item;
-                if(true){
+                if(this->m_dispatcher->checkStreamValidation(sw->getRelevantStream())){
                     item = new QStandardItem(i_ok,out_tView);
                     m->setItem(i,4,QString("OK"));
                 }
@@ -170,27 +170,27 @@ void FilePane::refresh()
 
 
             }
-            else if(sw->oldStream()->getType() == Model::Stream::AUDIO){
+            else if(sw->getRelevantStream()->getType() == Model::Stream::AUDIO){
                 j++;
-                m->setItem(j,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->oldStream()->getUID()));
-                Model::Parameter *p = sw->oldStream()->getParameters()->find("codec_name").value();
+                m->setItem(j,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getRelevantStream()->getUID()));
+                Model::Parameter *p = sw->getRelevantStream()->getParameters()->find("codec_name").value();
                 m->setItem(j,1,p->value());
-                out_tView = "Piste Audio " + sw->oldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
+                out_tView = "Piste Audio " + sw->getRelevantStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
-                p = sw->oldStream()->getParameters()->find("sample_rate").value();
+                p = sw->getRelevantStream()->getParameters()->find("sample_rate").value();
                 m->setItem(j,2,p->value());
 
-                p = sw->oldStream()->getParameters()->find("resolution").value();
+                p = sw->getRelevantStream()->getParameters()->find("resolution").value();
                 m->setItem(j,3,p->value());
 
-                p = sw->oldStream()->getParameters()->find("channels").value();
+                p = sw->getRelevantStream()->getParameters()->find("channels").value();
                 m->setItem(j,4,p->value());
 
                 m->setItem(j,5,QString("OK"));
 
 
                 QStandardItem* item;
-                if(true){
+                if(this->m_dispatcher->checkStreamValidation(sw->getRelevantStream())){
                     item = new QStandardItem(i_ok,out_tView);
                     m->setItem(j,5,QString("OK"));
                 }
@@ -200,18 +200,18 @@ void FilePane::refresh()
                 }
                 sim->appendRow(item);
             }
-            else if(sw->oldStream()->getType() == Model::Stream::SUBTITLE){
+            else if(sw->getRelevantStream()->getType() == Model::Stream::SUBTITLE){
                 k++;
-                m->setItem(k,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->oldStream()->getUID()));
-                Model::Parameter *p = sw->oldStream()->getParameters()->find("codec_name").value();
+                m->setItem(k,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getRelevantStream()->getUID()));
+                Model::Parameter *p = sw->getRelevantStream()->getParameters()->find("codec_name").value();
                 m->setItem(k,1,p->value());                
-                out_tView = "sous titre " + sw->oldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
+                out_tView = "sous titre " + sw->getRelevantStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
 
                 m->setItem(k,4,QString("OK"));
 
                 QStandardItem* item;
-                if(true){
+                if(this->m_dispatcher->checkStreamValidation(sw->getRelevantStream())){
                     item = new QStandardItem(i_ok,out_tView);
                     m->setItem(k,4,QString("OK"));
                 }
@@ -265,19 +265,21 @@ void FilePane::refresh()
 
     //pack communication
     if(true){
-        item = new QStandardItem(i_ok,"pack communication");
+        item = new QStandardItem(i_ok,tr("pack communication"));
     }
     else{
-        item = new QStandardItem(i_nok,"pack communication");
+        item = new QStandardItem(i_nok,tr("pack communication"));
     }
     sim->appendRow(item);
 
     //Champs informations renseigné
-    if(true){
-        item = new QStandardItem(i_ok,"Champs informations renseigné");
+    int difInfo = this->m_dispatcher->checkInformationValidation();
+
+    if(difInfo == 0){
+        item = new QStandardItem(i_ok,tr("Champs informations renseigné"));
     }
     else{
-        item = new QStandardItem(i_nok,"Champs informations renseigné:   x champs manquant");
+        item = new QStandardItem(i_nok,tr("Champs informations renseigné:   ")+ difInfo +tr(" champs manquant"));
     }
     sim->appendRow(item);
 

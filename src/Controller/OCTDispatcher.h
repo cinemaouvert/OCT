@@ -257,7 +257,7 @@ namespace Controller
             void treatProjectNameChanged(QString newName);
             bool checkProjectValidation();
             bool checkStreamValidation(Model::Stream *stream);
-            bool checkInformationValidation();
+            int checkInformationValidation();
 
     };
 }
