@@ -32,7 +32,7 @@
          <height>708</height>
         </rect>
        </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
@@ -861,7 +861,7 @@
                <item>
                 <widget class="QLabel" name="label_Quality">
                  <property name="text">
-                  <string>Qualité :</string>
+                  <string>Qualité (0 = lossless) :</string>
                  </property>
                 </widget>
                </item>
@@ -1500,11 +1500,17 @@
       </widget>
      </widget>
      <widget class="QGroupBox" name="groupBoxMainVideoPane">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="title">
        <string/>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
         <widget class="QSplitter" name="splitter_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1570,6 +1576,12 @@
           </layout>
          </widget>
          <widget class="QGroupBox" name="groupBox_VideoPlayerMain">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="title">
            <string/>
           </property>
@@ -1666,6 +1678,24 @@
             <layout class="QHBoxLayout" name="horizontalLayout_EntryPointA">
              <item>
               <widget class="QLabel" name="label_EntryPointA">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>0</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Point d'entrée (A)</string>
                </property>
@@ -1673,6 +1703,18 @@
              </item>
              <item>
               <widget class="QSlider" name="startSlider">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -1680,6 +1722,18 @@
              </item>
              <item>
               <widget class="QTimeEdit" name="timeStart">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="displayFormat">
                 <string>hh:mm:ss:z</string>
                </property>
@@ -1691,6 +1745,18 @@
             <layout class="QHBoxLayout" name="horizontalLayout_EntryPointB">
              <item>
               <widget class="QLabel" name="label_EntryPointB">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Point de sortie (B)</string>
                </property>
@@ -1698,6 +1764,18 @@
              </item>
              <item>
               <widget class="QSlider" name="stopSlider">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -1705,6 +1783,18 @@
              </item>
              <item>
               <widget class="QTimeEdit" name="timeStop">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="displayFormat">
                 <string>hh:mm:ss:z</string>
                </property>

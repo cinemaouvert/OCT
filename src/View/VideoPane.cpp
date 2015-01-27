@@ -88,8 +88,6 @@ void VideoPane::connectInterface()
     connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
     connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
     connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
-    // On x264 codec selection show the x264 settings in the associated groupBox.
-    connect(ui->comboBox_Codec, SIGNAL(activated(QString)), SLOT(on_comboBox_Codec_activated(QString)));
 }
 
 void VideoPane::updateSlider()
@@ -150,7 +148,6 @@ void VideoPane::on_startSlider_sliderMoved(int position)
     }else{
         ui->startSlider->setValue(ui->stopSlider->value());
     }
-
 }
 
 void VideoPane::on_timeStart_timeChanged(const QTime &time)
