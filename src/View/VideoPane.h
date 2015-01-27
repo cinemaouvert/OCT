@@ -58,14 +58,13 @@ private slots:
 
     void updateSlider();
 
-
-
     void on_timeStart_timeChanged(const QTime &time);
 
     void on_timeStop_timeChanged(const QTime &time);
 
-
     void on_comboBox_Codec_activated(QString codec);
+
+    void on_horizontalSlider_VideoQuality_valueChanged();
 
 private:
     Ui::VideoPane *ui;
@@ -75,6 +74,7 @@ private:
     Model::Stream *m_stream;
 
     // Class methods
+    void connectInterface();
     void loadFile(QString filepath);
 };
 

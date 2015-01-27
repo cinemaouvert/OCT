@@ -3,6 +3,9 @@
 
 #include <AVPlayer.h>
 
+// ========================================================================== //
+// == CONSTRUCTORS AND DESTRUCTORS ========================================== //
+// ========================================================================== //
 VideoPane::VideoPane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VideoPane),
@@ -43,6 +46,62 @@ VideoPane::~VideoPane()
     if(m_player) delete m_player;
 }
 
+// ========================================================================== //
+// == CLASS METHODS ========================================================= //
+// ========================================================================== //
+void VideoPane::seek(int pos)
+{
+    if (!m_player->isPlaying())
+        return;
+    m_player->seek(pos*1000LL); // to msecs
+}
+
+void VideoPane::loadFile(QString filepath)
+{
+    m_player->load(filepath,false);
+
+    ui->startSlider->setMaximum(m_player->duration());
+    ui->stopSlider->setMaximum(m_player->duration());
+    ui->stopSlider->setValue(m_player->duration());
+
+    ui->timeStop->setTime(QTime(0,0).addMSecs(m_player->duration()));
+    ui->timeStop->setMaximumTime(QTime(0,0).addMSecs(m_player->duration()));
+
+    ui->timeStart->setMaximumTime(QTime(0,0).addMSecs(m_player->duration()));
+
+    ui->timeSlider->setMaximum(m_player->duration());
+    // HorizontalSlider for x264 quality setting initialization
+    ui->horizontalSlider_VideoQuality->setMaximum(50);
+    ui->horizontalSlider_VideoQuality->setMinimum(0);
+    ui->horizontalSlider_VideoQuality->setValue(0);
+    // QpinBox for x264 quality setting initialization
+    ui->spinBox_Quality->setMaximum(50);
+    ui->spinBox_Quality->setMinimum(0);
+    ui->spinBox_Quality->setValue(0);
+
+    this->connectInterface();
+}
+
+void VideoPane::connectInterface()
+{
+    connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
+    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
+    // On x264 codec selection show the x264 settings in the associated groupBox.
+    connect(ui->comboBox_Codec, SIGNAL(activated(QString)), SLOT(on_comboBox_Codec_activated(QString)));
+}
+
+void VideoPane::updateSlider()
+{
+    ui->timeSlider->setRange(0, int(m_player->duration()/1000LL));
+    ui->timeSlider->setValue(int(m_player->position()/1000LL));
+    ui->timeLabel->setText(QTime(0,0).addMSecs(m_player->position()).toString("hh:mm:ss"));
+}
+
+// ========================================================================== //
+// == EVENT METHODS ========================================================= //
+// ========================================================================== //
 void VideoPane::on_playButton_clicked()
 {
     m_player->setStartPosition(ui->startSlider->value());
@@ -72,26 +131,6 @@ void VideoPane::on_stopButton_clicked()
     ui->timeLabel->setText(QTime(0,0).toString("hh:mm:ss"));
 }
 
-void VideoPane::loadFile(QString filepath)
-{
-    m_player->load(filepath,false);
-
-    ui->startSlider->setMaximum(m_player->duration());
-    ui->stopSlider->setMaximum(m_player->duration());
-    ui->stopSlider->setValue(m_player->duration());
-    ui->timeStop->setTime(QTime(0,0).addMSecs(m_player->duration()));
-    ui->timeStop->setMaximumTime(QTime(0,0).addMSecs(m_player->duration()));
-    ui->timeStart->setMaximumTime(QTime(0,0).addMSecs(m_player->duration()));
-    ui->timeSlider->setMaximum(m_player->duration());
-
-    connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
-    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
-    connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
-    connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
-    // On x264 codec selection show the x264 settings in the associated groupBox.
-    connect(ui->comboBox_Codec, SIGNAL(activated(QString)), SLOT(on_comboBox_Codec_activated(QString)));
-}
-
 
 void VideoPane::on_stopSlider_sliderMoved(int position)
 {
@@ -114,21 +153,6 @@ void VideoPane::on_startSlider_sliderMoved(int position)
 
 }
 
-
-void VideoPane::seek(int pos)
-{
-    if (!m_player->isPlaying())
-        return;
-    m_player->seek(pos*1000LL); // to msecs
-}
-
-void VideoPane::updateSlider()
-{
-    ui->timeSlider->setRange(0, int(m_player->duration()/1000LL));
-    ui->timeSlider->setValue(int(m_player->position()/1000LL));
-    ui->timeLabel->setText(QTime(0,0).addMSecs(m_player->position()).toString("hh:mm:ss"));
-}
-
 void VideoPane::on_timeStart_timeChanged(const QTime &time)
 {
     ui->startSlider->setValue(QTime(0,0).msecsTo(time));
@@ -139,10 +163,6 @@ void VideoPane::on_timeStop_timeChanged(const QTime &time)
     ui->stopSlider->setValue(QTime(0,0).msecsTo(time));
 }
 
-///
-/// \brief VideoPane::on_Codec_Selected
-/// \param codec Input codec selected
-///
 void VideoPane::on_comboBox_Codec_activated(QString codec)
 {
     // if the codec selected is the x264 codec, show the groupBox settings
@@ -152,4 +172,9 @@ void VideoPane::on_comboBox_Codec_activated(QString codec)
     } else {
         ui->groupBox_x264Settings->hide();
     }
+}
+
+void VideoPane::on_horizontalSlider_VideoQuality_valueChanged()
+{
+    ui->spinBox_Quality->setValue(ui->horizontalSlider_VideoQuality->value());
 }
