@@ -48,7 +48,8 @@ SOURCES += src/main.cpp\
     src/View/MyModel.cpp \
     src/View/VideoPlayer.cpp \
     src/View/ParametersDialog.cpp \
-    src/View/QueueListView.cpp
+    src/View/QueueListView.cpp \
+    src/View/MyDelegate.cpp
 
 HEADERS  += \
     src/Controller/Exporter.h \
@@ -82,7 +83,8 @@ HEADERS  += \
     src/View/MyModel.h \
     src/View/VideoPlayer.h \
     src/View/ParametersDialog.h \
-    src/View/QueueListView.h
+    src/View/QueueListView.h \
+    src/View/MyDelegate.h
 
 FORMS    += \
     src/View/mainwindow.ui \

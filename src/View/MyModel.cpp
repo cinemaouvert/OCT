@@ -48,6 +48,7 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
                 return QIcon(":/icons/resources/glyphicons/glyphicons_153_unchecked.png");
             }
        }
+       return QVariant();
     }else if(role == Qt::DisplayRole){
         if(index.column()==4 || index.column()==5){
             if(m_array[index.row()][index.column()] == "OK" || m_array[index.row()][index.column()] == "NOK"){

@@ -1,6 +1,7 @@
 #include "FilePane.h"
 #include "ui_filepane.h"
 #include "MyModel.h"
+#include "MyDelegate.h"
 
 #include "src/Model/Attachment.h"
 #include "src/Model/StreamWrapper.h"
@@ -11,6 +12,7 @@
 #include <typeinfo>
 #include <QResource>
 #include <QXmlQuery>
+#include <QStandardItemModel>
 
 FilePane::FilePane(QWidget *parent) :
     QWidget(parent),
@@ -64,6 +66,12 @@ void FilePane::on_pushButton_AddFile_clicked()
 
 void FilePane::refresh()
 {
+    QIcon i_ok = QIcon(":/icons/resources/glyphicons/glyphicons_206_ok_2.png");
+    QIcon i_nok = QIcon(":/icons/resources/glyphicons/glyphicons_207_remove_2.png");
+    MyDelegate *md = new MyDelegate();
+    QStandardItemModel* sim;
+    sim = new QStandardItemModel(this);
+
     //////REFRESH FIELDS/////
     ui->lineEdit_ExportName->setText(this->m_dispatcher->getCurrentProject()->name());
 
@@ -92,7 +100,6 @@ void FilePane::refresh()
     int k = 2 + j + nbAudio;
     MyModel *m = new MyModel( 8 + nbVideo + nbAudio + nbSub, 6 , nbVideo , nbAudio , nbSub);
     ui->tableView_ImportFile->setModel(m);
-
     m->setItem(0,0,tr("Video"));
     m->setItem(1,0,tr("Nom"));
     m->setItem(1,1,tr("Codec"));
@@ -121,7 +128,7 @@ void FilePane::refresh()
     ui->tableView_ImportFile->setSpan(2+nbVideo, 0, 1, 6);
     ui->tableView_ImportFile->setSpan(4+nbVideo+nbAudio, 0, 1, 6);
     ui->tableView_ImportFile->setSpan(5+nbVideo+nbAudio, 4, 1, 5);
-
+    QString out_tView = "";
 
     foreach(Model::File *f , *(this->m_dispatcher->getCurrentProject()->fileList())){
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
@@ -131,15 +138,29 @@ void FilePane::refresh()
                 m->setItem(i,0,tr("piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
                 Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
                 m->setItem(i,1,p->value());
+                out_tView = "Flux video " + sw->getOldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
                 p = sw->getOldStream()->getParameters()->find("r_frame_rate").value();
                 m->setItem(i,2,p->value());
 
                 p = sw->getOldStream()->getParameters()->find("resolution").value();
                 m->setItem(i,3,p->value());
+                out_tView = out_tView + " - résolution " + p->value().remove("scale=");
 
-                m->setItem(i,4,QString("OK"));
                 ui->tableView_ImportFile->setSpan(i, 4, 1, 5);
+
+                QStandardItem* item;
+                if(true){
+                    item = new QStandardItem(i_ok,out_tView);
+                    m->setItem(i,4,QString("OK"));
+                }
+                else{
+                    item = new QStandardItem(i_nok,out_tView);
+                    m->setItem(i,4,QString("OK"));
+                }
+                sim->appendRow(item);
+
+
 
             }
             else if(sw->getOldStream()->getType() == Model::Stream::AUDIO){
@@ -147,6 +168,7 @@ void FilePane::refresh()
                 m->setItem(j,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
                 Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
                 m->setItem(j,1,p->value());
+                out_tView = "Piste Audio " + sw->getOldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
                 p = sw->getOldStream()->getParameters()->find("sample_rate").value();
                 m->setItem(j,2,p->value());
@@ -159,14 +181,37 @@ void FilePane::refresh()
 
                 m->setItem(j,5,QString("OK"));
 
+
+                QStandardItem* item;
+                if(true){
+                    item = new QStandardItem(i_ok,out_tView);
+                    m->setItem(j,5,QString("OK"));
+                }
+                else{
+                    item = new QStandardItem(i_nok,out_tView);
+                    m->setItem(j,5,QString("OK"));
+                }
+                sim->appendRow(item);
             }
             else if(sw->getOldStream()->getType() == Model::Stream::SUBTITLE){
                 k++;
                 m->setItem(k,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getOldStream()->getUID()));
                 Model::Parameter *p = sw->getOldStream()->getParameters()->find("codec_name").value();
-                m->setItem(k,1,p->value());
+                m->setItem(k,1,p->value());                
+                out_tView = "sous titre " + sw->getOldStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
                 m->setItem(k,4,QString("OK"));
+
+                QStandardItem* item;
+                if(true){
+                    item = new QStandardItem(i_ok,out_tView);
+                    m->setItem(k,4,QString("OK"));
+                }
+                else{
+                    item = new QStandardItem(i_nok,out_tView);
+                    m->setItem(k,4,QString("OK"));
+                }
+                sim->appendRow(item);
 
                 ui->tableView_ImportFile->setSpan(k, 4, 1, 5);
             }
@@ -189,6 +234,9 @@ void FilePane::refresh()
     ui->tableView_ImportFile->setSpan(k+1, 1, 1, 6);
     ui->tableView_ImportFile->setSpan(k+2, 1, 1, 6);
 
+    sim->sort(0);
+    ui->listView_Export->setModel(sim);
+    ui->listView_Export->setItemDelegate(md);
 }
 
 void FilePane::on_pushButton_DeleteFile_clicked()
