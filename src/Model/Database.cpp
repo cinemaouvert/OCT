@@ -123,11 +123,12 @@ QStringList* Model::Database::getMovieStruct() {
     if (reply->error() == QNetworkReply::NoError){
         statusCodeV = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
         QByteArray movieStruct = reply->readAll();
-
-        if (file.open(QIODevice::WriteOnly)){
-            QTextStream out(&file);
-            out << movieStruct;
-            file.close();
+        if(statusCodeV == 200){
+            if (file.open(QIODevice::WriteOnly)){
+                QTextStream out(&file);
+                out << movieStruct;
+                file.close();
+            }
         }
 
         movieStructList = createStruct(movieStruct);
