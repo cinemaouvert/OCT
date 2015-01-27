@@ -86,7 +86,7 @@ namespace Controller
              * @param Project
              * @return 1 if ok, 0 else.
              */
-            bool sendInformationsToJSON(Model::Project* project);
+            bool sendInformationsToJSON(Model::Project* project, QString url_magnet);
 
             ~Exporter();
             static QStringList* getInformations();
