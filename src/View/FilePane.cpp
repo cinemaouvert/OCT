@@ -26,6 +26,13 @@ FilePane::FilePane(QWidget *parent) :
   //  ui->tableView_ImportFile->setAlternatingRowColors(true);
     ui->tableView_ImportFile->horizontalHeader()->setStretchLastSection(true);
     ui->tableView_ImportFile->resizeColumnsToContents();
+    ui->listView_ImportFile->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->listView_Export->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  //  ui->listView_Export->setAlternatingRowColors(true);
+
+    ui->listView_Export->setFocusPolicy(Qt::NoFocus);
+
+
     ui->comboBox_Preconfig->clear();
 
 }
@@ -145,7 +152,7 @@ void FilePane::refresh()
                 m->setItem(i,2,p->value());
 
                 p = sw->oldStream()->getParameters()->find("resolution").value();
-                m->setItem(i,3,p->value());
+                m->setItem(i,3,p->value().remove("scale="));
                 out_tView = out_tView + " - résolution " + p->value().remove("scale=");
 
                 ui->tableView_ImportFile->setSpan(i, 4, 1, 5);
