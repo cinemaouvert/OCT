@@ -20,6 +20,7 @@ InformationPane::InformationPane(QWidget *parent) :
     ui->setupUi(this);
     m_model = new QStringListModel(this);
     ui->treeView_Files->setModel(m_model);
+    ui->treeView_Files->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->treeView_Files->header()->setVisible(false);
 }
 
