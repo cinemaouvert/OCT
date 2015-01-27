@@ -66,6 +66,8 @@ private slots:
 
     void on_horizontalSlider_VideoQuality_valueChanged();
 
+    void on_spinBox_Quality_valueChanged();
+
 private:
     Ui::VideoPane *ui;
     QtAV::AVPlayer *m_player;

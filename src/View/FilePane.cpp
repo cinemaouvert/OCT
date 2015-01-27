@@ -236,13 +236,17 @@ void FilePane::refresh()
     }
 
     //Champs informations renseigné
-    int difInfo = this->m_dispatcher->checkInformationValidation();
+
+    int curInfo = -1;
     int totInfo = -1;
+
+    if(this->m_dispatcher->informationMovieStruct())
+        totInfo = this->m_dispatcher->informationMovieStruct()->size();
     if(this->m_dispatcher->getCurrentProject()->informations())
-        totInfo = this->m_dispatcher->getCurrentProject()->informations()->size();
+        curInfo = this->m_dispatcher->getCurrentProject()->informations()->size();
 
     m->setItem(k+1,0,tr("Champs d'informations"));
-    m->setItem(k+1,1, QString::number(difInfo) + tr(" champ remplie sur ") + QString::number(totInfo));
+    m->setItem(k+1,1, QString::number(curInfo) + tr(" champ remplie sur ") + QString::number(totInfo));
     m->setItem(k+2,0,tr("Pieces Jointes"));
     m->setItem(k+2,1,QString::number(this->m_dispatcher->getCurrentProject()->attachments()->size()));
 
@@ -280,12 +284,13 @@ void FilePane::refresh()
     sim->appendRow(item);
 
 
-
+    //Champs informations renseigné
+    int difInfo = this->m_dispatcher->checkInformationValidation();
     if(difInfo == 0){
         item = new QStandardItem(i_ok,tr("Champs informations renseigné"));
     }
     else{
-        item = new QStandardItem(i_nok,tr("Champs informations renseigné:   ")+ difInfo +tr(" champs manquant"));
+        item = new QStandardItem(i_nok,tr("Champs informations renseigné: ")+ QString::number(difInfo) +tr(" champs manquant"));
     }
     sim->appendRow(item);
 

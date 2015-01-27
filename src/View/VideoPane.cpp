@@ -71,11 +71,11 @@ void VideoPane::loadFile(QString filepath)
 
     ui->timeSlider->setMaximum(m_player->duration());
     // HorizontalSlider for x264 quality setting initialization
-    ui->horizontalSlider_VideoQuality->setMaximum(50);
+    ui->horizontalSlider_VideoQuality->setMaximum(51);
     ui->horizontalSlider_VideoQuality->setMinimum(0);
     ui->horizontalSlider_VideoQuality->setValue(0);
     // QpinBox for x264 quality setting initialization
-    ui->spinBox_Quality->setMaximum(50);
+    ui->spinBox_Quality->setMaximum(51);
     ui->spinBox_Quality->setMinimum(0);
     ui->spinBox_Quality->setValue(0);
 
@@ -174,4 +174,9 @@ void VideoPane::on_comboBox_Codec_activated(QString codec)
 void VideoPane::on_horizontalSlider_VideoQuality_valueChanged()
 {
     ui->spinBox_Quality->setValue(ui->horizontalSlider_VideoQuality->value());
+}
+
+void VideoPane::on_spinBox_Quality_valueChanged()
+{
+    ui->horizontalSlider_VideoQuality->setValue(ui->spinBox_Quality->value());
 }
