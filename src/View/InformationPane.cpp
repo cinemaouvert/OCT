@@ -123,8 +123,11 @@ void InformationPane::generateStruct(){
 
 void InformationPane::lineEditInformation_textChanged(){
     QLineEdit *lineEdit = (QLineEdit*)sender();
-    if(lineEdit->text().size() <= 1){
-        this->m_dispatcher->getCurrentProject()->addOrRemoveInformations(lineEdit->objectName(), "OCPM");
+    if(lineEdit->text().size() == 0){
+        this->m_dispatcher->getCurrentProject()->removeInformations(lineEdit->objectName());
+        this->m_dispatcher->checkProjectValidation();
+    }else if(lineEdit->text().size() <= 1){
+        this->m_dispatcher->getCurrentProject()->addInformations(lineEdit->objectName(), "OCPM");
         this->m_dispatcher->checkProjectValidation();
     }
 }

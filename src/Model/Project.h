@@ -224,10 +224,10 @@ namespace Model
              */
             int nbSub() const;
             /**
-             * @brief add or remove information to the current project.
+             * @brief remove information to the current project.
              * @param key
              */
-            void addOrRemoveInformations(QString key, QString value);
+            void removeInformations(QString key);
     };
 }
 
