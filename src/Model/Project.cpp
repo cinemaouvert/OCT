@@ -47,12 +47,9 @@ Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileLis
 
 Model::Project::~Project()
 {
-    if(this->m_attachments != NULL)
-        delete this->m_attachments;
-    if(this->m_fileList != NULL)
-        delete this->m_fileList;
-    if(this->m_informations != NULL)
-        delete this->m_informations;
+    if(this->m_attachments)     delete this->m_attachments;
+    if(this->m_fileList)        delete this->m_fileList;
+    if(this->m_informations)    delete this->m_informations;
 }
 
 Model::Project &Model::Project::operator=(const Model::Project &project)
