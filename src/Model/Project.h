@@ -36,14 +36,12 @@ using namespace std;
 #include <QList>
 
 // #include "src/Model/Attachment.h"
-#include "src/Model/Information.h"
 #include "src/Model/Serializable.h"
 #include "src/Model/File.h"
 
 namespace Model
 {
 	class Attachment;
-	class Information;
 	// class Serializable;
 	class Project;
     class File;

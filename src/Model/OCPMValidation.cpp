@@ -100,15 +100,24 @@ void Model::OCPMValidation::loadPreConfXML(QFile *file)
 bool Model::OCPMValidation::isValidVideo(Model::Stream *stream)
 {
     bool retval = true;
-
     QString codec = stream->getParameters()->value("codec_name")->value();
     retval = retval && m_validationVideoCodec.contains(codec,Qt::CaseInsensitive);
 
-    QString bitRate = stream->getParameters()->value("bitRate")->value().remove("*-bufsize ");
+    if(!retval)
+        return retval;
+
+    Parameter *bitRateParam = stream->getParameters()->value("bitRate");
+    if(!bitRateParam)
+        return false;
+    QString bitRate = bitRateParam->value().remove("*-bufsize ");
     QString maxBitRate = m_validationVideoMaxRate.at(0);
     retval = retval && (bitRate.toInt() <= maxBitRate.toInt());
 
+    if(!retval)
+        return retval;
+
     QString resolution = stream->getParameters()->value("resolution")->value().remove("scale=");
+    qDebug() << "RESOLUTION ::::::::::::  " << resolution;
     retval = retval && m_validationVideoResolution.contains(resolution,Qt::CaseInsensitive);
 
     return retval;

@@ -113,8 +113,8 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     /*****Thibaud Test *****/
 /*
-    addFile("H:\\Media\\movie1.mkv");
     addFile("H:\\Media\\movie2.mkv");
+    addFile("H:\\Media\\movie1.mkv");
     addFile("C:\\Users\\Thibaud\\Downloads\\dom.srt");
     addFile("C:\\Users\\Thibaud\\Downloads\\2838-etoiles-fin-fond-univers-WallFizz.jpg");
 
@@ -132,7 +132,6 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->setNewStream(ns2);
 
 */
-    //this->startTreatment();
 
     /***********************/
     /*****Romain Test *****/
@@ -238,7 +237,7 @@ void Controller::OCTDispatcher::pauseTreatment() {
     if(m_startTreatmentThread != NULL){
         if(m_startTreatmentThread->isRunning()){
             qDebug()<< "PAUSE";
-            m_startTreatmentThread->wait();
+            m_startTreatmentThread->msleep(30000);
         }else{
             qDebug() << "REPRENDRE";
             m_startTreatmentThread->start();
@@ -253,7 +252,7 @@ void Controller::OCTDispatcher::restartTreatment() {
 void Controller::OCTDispatcher::stopTreatment() {
     if(m_startTreatmentThread != NULL){
         if(m_startTreatmentThread->isRunning())
-            m_startTreatmentThread->exit();
+            m_startTreatmentThread->terminate();
 
     }
 }
@@ -323,6 +322,9 @@ bool Controller::OCTDispatcher::checkProjectValidation()
             retVal = retVal && checkStreamValidation(streamW->getRelevantStream());
         }
     }
+    retVal = retVal && checkInformationValidation();
+
+    m_mainWindow->setOCPMState(retVal);
     return retVal;
 }
 
@@ -344,7 +346,9 @@ bool Controller::OCTDispatcher::checkStreamValidation(Model::Stream *stream)
 
 bool Controller::OCTDispatcher::checkInformationValidation()
 {
-    //this->getCurrentProject()->informations()
+    if(!(Exporter::getInformations()) || !(this->getCurrentProject()->informations()))
+        return false;
+    return Exporter::getInformations()->size() == this->getCurrentProject()->informations()->size();
 }
 
 

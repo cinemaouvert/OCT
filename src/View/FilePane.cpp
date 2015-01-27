@@ -29,6 +29,13 @@ FilePane::FilePane(QWidget *parent) :
   //  ui->tableView_ImportFile->setAlternatingRowColors(true);
     ui->tableView_ImportFile->horizontalHeader()->setStretchLastSection(true);
     ui->tableView_ImportFile->resizeColumnsToContents();
+    ui->listView_ImportFile->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->listView_Export->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  //  ui->listView_Export->setAlternatingRowColors(true);
+
+    ui->listView_Export->setFocusPolicy(Qt::NoFocus);
+
+
     ui->comboBox_Preconfig->clear();
 
 }
@@ -144,7 +151,7 @@ void FilePane::refresh()
                 m->setItem(i,2,p->value());
 
                 p = sw->oldStream()->getParameters()->find("resolution").value();
-                m->setItem(i,3,p->value());
+                m->setItem(i,3,p->value().remove("scale="));
                 out_tView = out_tView + " - résolution " + p->value().remove("scale=");
 
                 ui->tableView_ImportFile->setSpan(i, 4, 1, 5);
@@ -278,7 +285,8 @@ void FilePane::refresh()
     ui->listView_Export->setItemDelegate(md);
 }
 
-void FilePane::splitterNoCollapsing() {
+void FilePane::splitterNoCollapsing()
+{
     ui->splitter->setChildrenCollapsible(false);
     ui->splitter_2->setChildrenCollapsible(false);
 }
@@ -291,14 +299,6 @@ void FilePane::connectInterface()
     connect(ui->lineEdit_ExportName, SIGNAL(textChanged(QString)), m_dispatcher, SLOT(treatProjectNameChanged(QString)));
 }
 
-void FilePane::on_pushButton_AddFile_clicked()
-{
-    QStringList filePaths = QFileDialog::getOpenFileNames(this,tr("Open"));
-    foreach (QString filePath, filePaths) {
-        this->m_dispatcher->addFile(filePath);
-    }
-}
-
 void FilePane::on_pushButton_DeleteFile_clicked()
 {
     QStringList names = m_model->stringList();
@@ -309,6 +309,16 @@ void FilePane::on_pushButton_DeleteFile_clicked()
             this->m_dispatcher->removeFile(filePath);
         }
     }
+    m_dispatcher->checkProjectValidation();
+}
+
+void FilePane::on_pushButton_AddFile_clicked()
+{
+    QStringList filePaths = QFileDialog::getOpenFileNames(this,tr("Open"));
+    foreach (QString filePath, filePaths) {
+        this->m_dispatcher->addFile(filePath);
+    }
+    m_dispatcher->checkProjectValidation();
 }
 
 void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)

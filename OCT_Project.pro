@@ -29,7 +29,6 @@ SOURCES += src/main.cpp\
     src/Model/Audio.cpp \
     src/Model/Database.cpp \
     src/Model/File.cpp \
-    src/Model/Information.cpp \
     src/Model/Parameter.cpp \
     src/Model/Project.cpp \
     src/Model/Stream.cpp \
@@ -64,7 +63,6 @@ HEADERS  += \
     src/Model/Audio.h \
     src/Model/Database.h \
     src/Model/File.h \
-    src/Model/Information.h \
     src/Model/Parameter.h \
     src/Model/Project.h \
     src/Model/Serializable.h \

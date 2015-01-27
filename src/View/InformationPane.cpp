@@ -20,6 +20,7 @@ InformationPane::InformationPane(QWidget *parent) :
     ui->setupUi(this);
     m_model = new QStringListModel(this);
     ui->treeView_Files->setModel(m_model);
+    ui->treeView_Files->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->treeView_Files->header()->setVisible(false);
 }
 
@@ -92,7 +93,6 @@ void InformationPane::generateStruct(){
         QWidget *widget = new QWidget;
         for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
 
-            qDebug() << this->m_dispatcher->informationMovieStruct()->at(i);
             QString labelName = this->m_dispatcher->informationMovieStruct()->at(i);
             QString lineEditName = labelName;
 
@@ -124,8 +124,8 @@ void InformationPane::generateStruct(){
 void InformationPane::lineEditInformation_textChanged(){
     QLineEdit *lineEdit = (QLineEdit*)sender();
     if(lineEdit->text().size() <= 1){
-        qDebug() << lineEdit->objectName();
         this->m_dispatcher->getCurrentProject()->addOrRemoveInformations(lineEdit->objectName(), "OCPM");
+        this->m_dispatcher->checkProjectValidation();
     }
 }
 

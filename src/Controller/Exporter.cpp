@@ -34,7 +34,6 @@ using namespace std;
 #include "src/Controller/OCTDispatcher.h"
 #include "src/Model/Database.h"
 #include "src/Model/Project.h"
-#include "src/Model/Information.h"
 #include "src/configOCT.h"
 
 Controller::Exporter::Exporter(QString userKey, QString depot) : m_Database(NULL) {
@@ -70,22 +69,24 @@ QString Controller::Exporter::createTorrentFile(QString filepath, QString nomTor
     return nomTorrent;
 }
 
-bool Controller::Exporter::sendInformationsToJSON(Model::Project* project)
+bool Controller::Exporter::sendInformationsToJSON(Model::Project* project, QString url_magnet)
 {
     bool send = false;
     if(project != NULL){
         if(project->informations() != NULL){
             QByteArray  json = "{\"key_user\":\"" + m_Database->userKey().toUtf8()+ "\",\"quick\":\"off\"";
             QMap<QString, QString>::const_iterator i = project->informations()->constBegin();
-             while (i != project->informations()->constEnd()) {
-                 json += "\"" + i.key() + "\":\"" + i.value() +"\",";
-                 ++i;
-             }
+            while (i != project->informations()->constEnd()) {
+                json += "\"" + i.key() + "\":\"" + i.value() +"\",";
+                ++i;
+            }
+            json += "\"url_magnet:\"\""+ url_magnet +"\"";
+
             json.remove(json.size()-1, 1); // Supprime la dernière virgule
             json += "}";
             int res = this->m_Database->sendRequest(json);
             if(res == 200){
-                send = true;
+            send = true;
             }
         }
     }
