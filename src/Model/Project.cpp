@@ -145,12 +145,6 @@ void Model::Project::addInformations(QString key, QString value)
     this->m_informations->insert(key, value);
 }
 
-void Model::Project::removeInformations(QString key)
-{
-    if(m_informations == NULL)
-        this->m_informations->remove(key);
-}
-
 void Model::Project::addOrRemoveInformations(QString key, QString value){
     if(m_informations != NULL){
         if(this->m_informations->contains(key))

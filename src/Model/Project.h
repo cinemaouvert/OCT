@@ -228,7 +228,6 @@ namespace Model
              * @param key
              */
             void addOrRemoveInformations(QString key, QString value);
-            void removeInformations(QString key);
     };
 }
 
