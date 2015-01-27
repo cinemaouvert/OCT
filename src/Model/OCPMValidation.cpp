@@ -143,10 +143,16 @@ bool Model::OCPMValidation::isValidSubtitle(Model::Stream *stream)
 {
     bool retval = true;
 
-    QString codec = stream->getParameters()->value("codec_name")->value();
+    Parameter *paramCodec = stream->getParameters()->value("codec_name");
+    if(!paramCodec)
+        return false;
+    QString codec = paramCodec->value();
     retval = retval && m_validationSubtitleFormat.contains(codec,Qt::CaseInsensitive);
 
-    QString encoding = stream->getParameters()->value("charEncode")->value();
+    Parameter *paramEncode = stream->getParameters()->value("charEncode");
+    if(!paramEncode)
+        return false;
+    QString encoding = paramEncode->value();
     retval = retval && m_validationAudioSamplingRate.contains(encoding,Qt::CaseInsensitive);
 
     return retval;
