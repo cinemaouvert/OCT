@@ -131,6 +131,12 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->setNewStream(ns2);
 
+    Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->oldStream();
+    Model::Stream *ns = new Model::Video((Model::Video&)*os);
+    ns->getParameters()->value("resolution")->setValue("1920x1080");
+
+    this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->setNewStream(ns);
+
 */
 
     /***********************/
