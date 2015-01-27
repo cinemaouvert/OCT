@@ -342,6 +342,11 @@ bool Controller::OCTDispatcher::checkStreamValidation(Model::Stream *stream)
     }
 }
 
+bool Controller::OCTDispatcher::checkInformationValidation()
+{
+    //this->getCurrentProject()->informations()
+}
+
 
 
 void Controller::OCTDispatcher::treatProjectNameChanged(QString newName)

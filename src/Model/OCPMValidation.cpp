@@ -104,11 +104,11 @@ bool Model::OCPMValidation::isValidVideo(Model::Stream *stream)
     QString codec = stream->getParameters()->value("codec_name")->value();
     retval = retval && m_validationVideoCodec.contains(codec,Qt::CaseInsensitive);
 
-    QString bitRate = stream->getParameters()->value("bitRate")->value();
+    QString bitRate = stream->getParameters()->value("bitRate")->value().remove("*-bufsize ");
     QString maxBitRate = m_validationVideoMaxRate.at(0);
     retval = retval && (bitRate.toInt() <= maxBitRate.toInt());
 
-    QString resolution = stream->getParameters()->value("resolution")->value();
+    QString resolution = stream->getParameters()->value("resolution")->value().remove("scale=");
     retval = retval && m_validationVideoResolution.contains(resolution,Qt::CaseInsensitive);
 
     return retval;
