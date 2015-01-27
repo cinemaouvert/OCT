@@ -89,23 +89,23 @@ void InformationPane::generateStruct(){
     QVBoxLayout *vLayoutLineEdit = new QVBoxLayout;
 
     if(this->m_dispatcher->informationMovieStruct() != NULL){
-        qDebug() << this->m_dispatcher->informationMovieStruct()->size();
-
         QWidget *widget = new QWidget;
         for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
 
             qDebug() << this->m_dispatcher->informationMovieStruct()->at(i);
             QString labelName = this->m_dispatcher->informationMovieStruct()->at(i);
+            QString lineEditName = labelName;
 
             QLabel *label = new QLabel(labelName.replace("_", " "));
             label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
             vLayoutLabel->addWidget(label);
 
             QLineEdit *lineEdit = new QLineEdit;
-            lineEdit->setObjectName(labelName);
+            lineEdit->setObjectName(lineEditName);
             lineEdit->setSizePolicy(QSizePolicy::Minimum , QSizePolicy::Minimum );
             lineEdit->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-            lineEdit->connect(lineEdit, SIGNAL(editingFinished()), this, SLOT(lineEditInformation_textChanged()));
+            lineEdit->connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(lineEditInformation_textChanged()));
+            lineEdit->connect(lineEdit, SIGNAL(editingFinished()), this, SLOT(lineEditInformation_editingFinished()));
 
             vLayoutLineEdit->addWidget(lineEdit);
         }
@@ -123,6 +123,14 @@ void InformationPane::generateStruct(){
 
 void InformationPane::lineEditInformation_textChanged(){
     QLineEdit *lineEdit = (QLineEdit*)sender();
+    if(lineEdit->text().size() <= 1){
+        qDebug() << lineEdit->objectName();
+        this->m_dispatcher->getCurrentProject()->addOrRemoveInformations(lineEdit->objectName(), "OCPM");
+    }
+}
 
-    qDebug() << lineEdit->objectName() +" valeur : " + lineEdit->text();
+void InformationPane::lineEditInformation_editingFinished(){
+    QLineEdit *lineEdit = (QLineEdit*)sender();
+    if(lineEdit->text().size() > 0)
+        this->m_dispatcher->getCurrentProject()->addInformations(lineEdit->objectName(), lineEdit->text());
 }

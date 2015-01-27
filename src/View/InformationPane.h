@@ -25,8 +25,10 @@ public:
 
     void refresh();
     void generateStruct();
+
 public slots:
     void lineEditInformation_textChanged();
+    void lineEditInformation_editingFinished();
 private slots:
 
     void on_posterComboBox_currentIndexChanged(int index);

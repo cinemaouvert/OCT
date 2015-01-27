@@ -80,7 +80,8 @@ namespace Model
             /**
              * @brief List of Information associated with the current Project object.
              */
-            QList<Model::Information*> *m_informations;
+            //QList<Model::Information*> *m_informations;
+            QMap<QString, QString> *m_informations;
 
             /**
              * @brief List of File associated with the current Project object.
@@ -150,13 +151,13 @@ namespace Model
              * @brief Accessor on the information list member.
              * @return The information list member pointer value.
              */
-            QList<Model::Information *> *informations() const;
+            QMap<QString, QString> *informations() const;
 
             /**
              * @brief This method add an information list to the current information list member.
              * @param information The information list to add.
              */
-            void addInformations(Model::Information *information);
+            void addInformations(QString key, QString value);
 
             /**
              * @brief Accessor on the create magnet boolean member.
@@ -224,6 +225,11 @@ namespace Model
              * @return The number of subtitle stream.
              */
             int nbSub() const;
+            /**
+             * @brief add or remove information to the current project.
+             * @param key
+             */
+            void addOrRemoveInformations(QString key, QString value);
     };
 }
 

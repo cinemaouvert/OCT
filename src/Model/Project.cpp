@@ -41,7 +41,7 @@ using namespace std;
 Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileList(NULL)
 {
     this->m_attachments = new QList<Model::Attachment*>();
-    this->m_informations = new QList<Model::Information*>();
+    this->m_informations =  new QMap<QString, QString>;
     this->m_fileList = new QList<Model::File*>();
     this->m_name = "Projet.mkv";
 }
@@ -85,11 +85,12 @@ Model::Project &Model::Project::operator=(const Model::Project &project)
             m_attachments->push_back(p);
         }
 
-        m_informations = new QList<Model::Information*>();
-        for(int i = 0; i < project.m_informations->size(); i++){
-            Model::Information *p = new Model::Information(*project.m_informations->at(i));
-            m_informations->push_back(p);
-        }
+        m_informations = new QMap<QString, QString>;
+        QMap<QString, QString>::const_iterator i = project.m_informations->constBegin();
+         while (i != project.m_informations->constEnd()) {
+             m_informations->insert(i.key(), i.value());
+             ++i;
+         }
     }
     return *this;
 }
@@ -112,11 +113,12 @@ Model::Project::Project(const Model::Project &project)
         m_attachments->push_back(p);
     }
 
-    m_informations = new QList<Model::Information*>();
-    for(int i = 0; i < project.m_informations->size(); i++){
-        Model::Information *p = new Model::Information(*project.m_informations->at(i));
-        m_informations->push_back(p);
-    }
+    m_informations = new QMap<QString, QString>;
+    QMap<QString, QString>::const_iterator i = project.m_informations->constBegin();
+     while (i != project.m_informations->constEnd()) {
+         m_informations->insert(i.key(), i.value());
+         ++i;
+     }
 }
 
 void Model::Project::load() {
@@ -136,12 +138,22 @@ void Model::Project::addFileToList(Model::File *file)
     this->m_fileList->push_back(file);
 }
 
-void Model::Project::addInformations(Model::Information *information)
+void Model::Project::addInformations(QString key, QString value)
 {
     if(m_informations == NULL)
-        this->m_informations = new QList<Model::Information*>();
+        this->m_informations = new QMap<QString, QString>;
 
-    this->m_informations->push_back(information);
+    if(!this->m_informations->contains(key))
+        this->m_informations->insert(key, value);
+}
+
+void Model::Project::addOrRemoveInformations(QString key, QString value){
+    if(m_informations != NULL){
+        if(this->m_informations->contains(key))
+            this->m_informations->remove(key);
+        else
+            this->m_informations->insert(key, value);
+    }
 }
 
 void Model::Project::addAttachment(Model::Attachment *attachment)
@@ -190,7 +202,7 @@ QList<Model::File *> *Model::Project::fileList() const
     return m_fileList;
 }
 
-QList<Model::Information *> *Model::Project::informations() const
+QMap<QString, QString> *Model::Project::informations() const
 {
     return m_informations;
 }
@@ -232,10 +244,11 @@ void Model::Project::generateInformationToXML()
         writer.writeStartDocument("1.0");
         writer.writeStartElement("Informations");
 
-        for (int i = 0; i < m_informations->size(); i++) {
-            Information *info = m_informations->at(i);
-            writer.writeTextElement(info->name(), info->value());
-        }
+        QMap<QString, QString>::const_iterator i = m_informations->constBegin();
+         while (i != m_informations->constEnd()) {
+             writer.writeTextElement(i.key(), i.value());
+             ++i;
+         }
 
         writer.writeEndElement();
         writer.writeEndDocument();
