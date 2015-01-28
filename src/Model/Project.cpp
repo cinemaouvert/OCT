@@ -260,6 +260,9 @@ QStringList *Model::Project::getMergeCommandLine()
         foreach(Model::StreamWrapper *sw, *(f->getStreamWrappers())){
             if(sw->oldStream()->isDefault())
                 *arguments << "--default-track" << sw->oldStream()->getUID(); //////////////////getNew
+
+            if(sw->oldStream()->name() !="")
+                *arguments << "--track-name" << sw->oldStream()->name();
         }
         *arguments <<f->getFilePath();
     }
