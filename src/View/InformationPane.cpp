@@ -43,16 +43,16 @@ void InformationPane::refresh(){
     ui->sampleComboBox->clear();
     ui->posterComboBox->clear();
     picturesList.clear();
-    picturesList.append("");
-    ui->sampleComboBox->addItem(QIcon(),"");
-    ui->posterComboBox->addItem(QIcon(),"");
+    picturesList.append(tr("Aucun"));
+    ui->sampleComboBox->addItem(QIcon(),tr("Aucun"));
+    ui->posterComboBox->addItem(QIcon(),tr("Aucun"));
     foreach (Model::Attachment *attachment, *(m_dispatcher->getCurrentProject()->attachments())) {
         QStringList filepath = attachment->filepath().split("/");
         QString fileName = filepath.at(filepath.size()-1);
         list.append(fileName);
         if(fileName.contains(".jpg") || fileName.contains(".jpeg") || fileName.contains(".png") || fileName.contains(".gif")){
-            ui->sampleComboBox->addItem(QIcon(),attachment->filepath());
-            ui->posterComboBox->addItem(QIcon(),attachment->filepath());
+            ui->sampleComboBox->addItem(QIcon(),fileName);
+            ui->posterComboBox->addItem(QIcon(),fileName);
             picturesList.append(attachment->filepath());
         }
 
@@ -68,14 +68,18 @@ void InformationPane::on_posterComboBox_currentIndexChanged(int index)
 {
     if(index > 0){
         loadImageToGraphicView(ui->posterGraphicsView,index);
-        QFile file(ui->posterComboBox->itemText(index));
+        QFile file(picturesList.at(index));
         if(file.open(QIODevice::ReadOnly)){
             QByteArray dataImage = file.readAll().toBase64();
             this->m_dispatcher->getCurrentProject()->addInformations("affiche", dataImage);
+            this->m_dispatcher->checkProjectValidation();
         }
-
     }else{
-        this->m_dispatcher->getCurrentProject()->removeInformations("affiche");
+        if(this->m_dispatcher->getCurrentProject()->informations()->contains("affiche")){
+            this->m_dispatcher->getCurrentProject()->removeInformations("affiche");
+            this->m_dispatcher->checkProjectValidation();
+            ui->posterGraphicsView->setScene(NULL);
+        }
     }
 }
 

@@ -328,7 +328,7 @@ bool Controller::OCTDispatcher::checkProjectValidation()
             retVal = retVal && checkStreamValidation(streamW->getRelevantStream());
         }
     }
-    retVal = retVal && checkInformationValidation() == 0;
+    retVal = retVal && (checkInformationValidation() == 0) && checkPosterValidation();
 
     m_mainWindow->setOCPMState(retVal);
     return retVal;
@@ -356,6 +356,15 @@ int Controller::OCTDispatcher::checkInformationValidation()
     if(!m_informationMovieStruct || !(this->getCurrentProject()->informations()))
         return -1;
     return m_informationMovieStruct->size() - this->getCurrentProject()->informations()->size();
+}
+
+bool Controller::OCTDispatcher::checkPosterValidation()
+{
+    if(this->getCurrentProject()->informations() == NULL){
+        return false;
+    }else{
+        return this->getCurrentProject()->informations()->contains("affiche");
+    }
 }
 
 void Controller::OCTDispatcher::audioChanged(Model::File *file,Model::Audio *stream, QString parameterName, QString value)
