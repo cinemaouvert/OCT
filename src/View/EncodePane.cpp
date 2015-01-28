@@ -1,8 +1,3 @@
-#include "EncodePane.h"
-#include "ui_encodepane.h"
-#include "src/Controller/TreatmentThread.h"
-
-#include <QFileDialog>
 /**********************************************************************************
  * This file is part of Open Cinema Transcoder (OCT).
  *
@@ -31,8 +26,16 @@
  * along with Open Cinema Transcoder. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************************/
 
+#include "EncodePane.h"
+#include "ui_encodepane.h"
+#include "src/Controller/TreatmentThread.h"
+
+#include <QFileDialog>
 #include <QMouseEvent>
 
+// ========================================================================== //
+// == CONSTRUCTORS AND DESTRUCTORS ========================================== //
+// ========================================================================== //
 EncodePane::EncodePane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::EncodePane)
@@ -45,6 +48,15 @@ EncodePane::EncodePane(QWidget *parent) :
     m_currentSteps = 0;
 }
 
+EncodePane::~EncodePane()
+{
+    if(ui) delete ui;
+    if(m_modelProjectList) delete m_modelProjectList;
+}
+
+// ========================================================================== //
+// == ACCESSORS AND MUTATORS ================================================ //
+// ========================================================================== //
 void EncodePane::setDispatcher(Controller::OCTDispatcher *dispatcher)
 {
     this->m_dispatcher = dispatcher;
@@ -52,19 +64,16 @@ void EncodePane::setDispatcher(Controller::OCTDispatcher *dispatcher)
     connectInterface();
 }
 
-
-EncodePane::~EncodePane()
-{
-    if(ui) delete ui;
-    if(m_modelProjectList) delete m_modelProjectList;
-}
-
+// ========================================================================== //
+// == CLASS METHODS ========================================================= //
+// ========================================================================== //
 void EncodePane::refresh()
 {
 
 }
 
-void EncodePane::refreshProjectPane(){
+void EncodePane::refreshProjectPane()
+{
     QStringList list;
     foreach (Model::Project *project, *(m_dispatcher->getProjects())) {
         list << project->name();
@@ -72,28 +81,10 @@ void EncodePane::refreshProjectPane(){
     m_modelProjectList->setStringList(list);
 }
 
-void EncodePane::on_newProjectButton_clicked()
-{
-    m_dispatcher->addToQueue();
-    refreshProjectPane();
-}
-
-void EncodePane::initProgressBar(int progressMax)
-{
-    m_progressMax = progressMax;
-    ui->progressBar_Encoding->setValue(0);
-}
-
 void EncodePane::passedProgressStep()
 {
     m_currentSteps ++;
     ui->progressBar_Encoding->setValue((int)((float)((float)m_currentSteps/(float)m_progressMax)*100));
-}
-
-void EncodePane::connectInterface()
-{
-    connect(m_dispatcher->getTreatmentThread(),SIGNAL(initProgress(int)),this,SLOT(initProgressBar(int)));
-    connect(m_dispatcher->getTreatmentThread(),SIGNAL(passedStep()),this,SLOT(passedProgressStep()));
 }
 
 void EncodePane::changeCurrentProject(int index)
@@ -107,9 +98,26 @@ void EncodePane::duplicateProject(int index)
     refreshProjectPane();
 }
 
+// ========================================================================== //
+// == EVENT METHODS ========================================================= //
+// ========================================================================== //
+void EncodePane::connectInterface()
+{
+    connect(m_dispatcher->getTreatmentThread(),SIGNAL(initProgress(int)),this,SLOT(initProgressBar(int)));
+    connect(m_dispatcher->getTreatmentThread(),SIGNAL(passedStep()),this,SLOT(passedProgressStep()));
+}
 
+void EncodePane::on_newProjectButton_clicked()
+{
+    m_dispatcher->addToQueue();
+    refreshProjectPane();
+}
 
-
+void EncodePane::initProgressBar(int progressMax)
+{
+    m_progressMax = progressMax;
+    ui->progressBar_Encoding->setValue(0);
+}
 
 void EncodePane::on_pushButton_Encode_clicked()
 {

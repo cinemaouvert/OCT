@@ -45,7 +45,7 @@ private slots:
 
 private:
     Ui::FilePane *ui;
-    Controller::OCTDispatcher * m_dispatcher;
+    Controller::OCTDispatcher *m_dispatcher;
     QStringListModel *m_model;
     QStringList list;
     QDir m_preConfigsDir;

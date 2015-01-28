@@ -90,8 +90,6 @@ private:
     /// \brief Connect the interface to the model through the OCTdispatcher.
     ///
     void connectInterface();
-
-protected:
 };
 
 #endif // ENCODEPANE_H

@@ -60,7 +60,22 @@ AudioPane::~AudioPane()
 // ========================================================================== //
 // == CLASS METHODS ========================================================= //
 // ========================================================================== //
-void AudioPane::fillAudioCodecComboBox() {
+void AudioPane::fillAudioCodecComboBox()
+{
     QStringList list = (QStringList() << "FLAC" << "AAC" << "MP1" << "MP2" << "MP3");
     ui->comboBox_AudioCodec->addItems( list );
+}
+
+void AudioPane::connectInterface() {
+    connect( this, SIGNAL( audioCodecChanged( Model::File *, Model::Stream *, QString, QString ) ),
+             m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
+}
+
+void AudioPane::on_lineEdit_Name_textChanged( QString name ) {
+    this->m_stream->setName( name );
+}
+
+void AudioPane::on_comboBox_AudioCodec_activated(const QString &arg1)
+{
+    emit audioCodecChanged(m_file, m_stream, Model::Stream::CODEC_NAME, arg1);
 }

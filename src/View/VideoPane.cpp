@@ -176,7 +176,7 @@ void VideoPane::on_horizontalSlider_VideoQuality_valueChanged()
     ui->spinBox_Quality->setValue(ui->horizontalSlider_VideoQuality->value());
 }
 
-void VideoPane::on_spinBox_Quality_valueChanged()
+void VideoPane::on_spinBox_Quality_valueChanged(int value)
 {
-    ui->horizontalSlider_VideoQuality->setValue(ui->spinBox_Quality->value());
+    ui->horizontalSlider_VideoQuality->setValue( value );
 }

@@ -33,6 +33,7 @@
 
 #include "src/Model/File.h"
 #include "src/Model/Stream.h"
+#include "src/Controller/OCTDispatcher.h"
 
 namespace Ui {
 class AudioPane;
@@ -51,14 +52,33 @@ public:
     ~AudioPane();
 
     ///
+    /// \brief Set the OCTDispatcher
+    /// \param dispatcher
+    ///
+    void setDispatcher(Controller::OCTDispatcher *dispatcher);
+
+    ///
     /// \brief Initialize the corresponding comboBox with a set of known audio codec.
     ///
     void fillAudioCodecComboBox();
 
 private:
     Ui::AudioPane *ui;
+    Controller::OCTDispatcher *m_dispatcher;
     Model::File *m_file;
     Model::Stream *m_stream;
+
+    ///
+    /// \brief Connect the interface to the model through the OCTdispatcher.
+    ///
+    void connectInterface();
+
+private slots:
+    void on_lineEdit_Name_textChanged( QString name );
+    void on_comboBox_AudioCodec_activated(const QString &arg1);
+
+signals:
+    void audioCodecChanged( Model::File *, Model::Stream *, QString, QString );
 };
 
 #endif // AUDIOPANE_H
