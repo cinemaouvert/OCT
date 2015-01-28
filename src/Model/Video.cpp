@@ -78,22 +78,37 @@ Model::Video::Video(QDomNode stream, int uid)
     QString frameRate = Utils::convertFract(nodeFrameRate.nodeValue());
 
     //-----------------------BPS------------------------//   //!\\  A CONVERTIR
-    QDomNodeList nodeListBps = stream.toElement().elementsByTagName("tag");
+    QDomNodeList nodeListTag = stream.toElement().elementsByTagName("tag");
     QString bps;
-    if(! nodeListBps.isEmpty()){
+    if(! nodeListTag.isEmpty()){
         int i = 0;
         bool bpsFinded = false;
-        while(!bpsFinded && i< nodeListBps.size()){
-            QDomNode nodeBps = nodeListBps.item(i);
-                if(nodeBps.attributes().namedItem("key").nodeValue() == "BPS"){
-                    bps = Utils::bpsToKbps(nodeBps.attributes().namedItem("value").nodeValue());
+        while(!bpsFinded && i< nodeListTag.size()){
+            QDomNode node = nodeListTag.item(i);
+                if(node.attributes().namedItem("key").nodeValue() == "BPS"){
+                    bps = Utils::bpsToKbps(node.attributes().namedItem("value").nodeValue());
                     bpsFinded = true;
+                }
+            i++;
+        }
+    }
+    //-----------------------TITLE------------------------//
+    QString titre ="";
+    if(! nodeListTag.isEmpty()){
+        int i = 0;
+        bool titreFinded = false;
+        while(!titreFinded && i< nodeListTag.size()){
+            QDomNode node = nodeListTag.item(i);
+                if(node.attributes().namedItem("key").nodeValue() == "title"){
+                    titre = node.attributes().namedItem("value").nodeValue();
+                    titreFinded = true;
                 }
             i++;
         }
     }
     //-----------------------VIDEO-BUILD------------------------//
     this->m_uID = QString::number(uid);
+    this->m_name = titre;
     this->m_default = false;
     this->m_additionalCommand = QString();
     this->m_parameters = new QMap<QString,Parameter*>();
