@@ -348,6 +348,7 @@ bool Controller::OCTDispatcher::checkStreamValidation(Model::Stream *stream)
             retVal = retVal && m_OCPMvalidation->isValidSubtitle(stream);
             break;
     }
+    return retVal;
 }
 
 int Controller::OCTDispatcher::checkInformationValidation()
@@ -357,17 +358,22 @@ int Controller::OCTDispatcher::checkInformationValidation()
     return m_informationMovieStruct->size() - this->getCurrentProject()->informations()->size();
 }
 
-void Controller::OCTDispatcher::audioChanged(Model::Audio *stream,QString UID, QString parameterName, QString value)
+void Controller::OCTDispatcher::audioChanged(Model::File *file,Model::Audio *stream, QString parameterName, QString value)
+{
+    foreach (Model::StreamWrapper *sW, *(file->getStreamWrappers())) {
+        if(sW->oldStream() == stream){
+
+            return;
+        }
+    }
+}
+
+void Controller::OCTDispatcher::videoChanged(Model::File *file,Model::Video *stream, QString parameterName, QString value)
 {
 
 }
 
-void Controller::OCTDispatcher::videoChanged(Model::Video *stream,QString UID, QString parameterName, QString value)
-{
-
-}
-
-void Controller::OCTDispatcher::subtitleChanged(Model::Subtitle *stream,QString UID, QString parameterName, QString value)
+void Controller::OCTDispatcher::subtitleChanged(Model::File *file,Model::Subtitle *stream, QString parameterName, QString value)
 {
 
 }

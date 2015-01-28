@@ -41,17 +41,14 @@ Model::Subtitle::Subtitle(){
 
 Model::Subtitle::Subtitle(QDomNode stream, int uid)
 {
-    qDebug() << "Subtitle";
     QDomNamedNodeMap tab = stream.attributes();
     //-----------------------CODEC-NAME------------------------//
     QDomNode nodeCodecName = tab.namedItem("codec_name");
     QString codecName = nodeCodecName.nodeValue();
     if (codecName == "subrip")
         codecName = "srt";
-    qDebug() << codecName;
     //-----------------------LANGUAGE------------------------//
     QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
-    qDebug() << tagList.count();
     QString tagKey ="";
     int i = 0;
     while(tagKey != "language" && i<tagList.count()){
@@ -64,7 +61,6 @@ Model::Subtitle::Subtitle(QDomNode stream, int uid)
     //-----------------------IS-DEFAULT------------------------//
     QDomNode disposition = stream.toElement().elementsByTagName("disposition").item(0);
     QString isDefault = disposition.attributes().namedItem("default").nodeValue();
-    qDebug() << isDefault;
     //-----------------------ENCODE------------------------//
     // TODO FIND A WAY TO FIND ENCODING
     //-----------------------SUBTITLE-BUILD------------------------//

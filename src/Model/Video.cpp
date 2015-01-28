@@ -46,15 +46,12 @@ Model::Video::Video(){
 
 Model::Video::Video(QDomNode stream, int uid)
 {
-    qDebug() << "video";
     QDomNamedNodeMap tab = stream.attributes();
     //-----------------------CODEC-NAME------------------------//
     QDomNode nodeCodecName = tab.namedItem("codec_name");
     QString codecName = nodeCodecName.nodeValue();
-    qDebug() << codecName;
     //-----------------------LANGUAGE------------------------//
     QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
-    qDebug() << tagList.count();
 
     QString tagKey ="";
     int i = 0;
@@ -68,22 +65,17 @@ Model::Video::Video(QDomNode stream, int uid)
     //-----------------------IS-DEFAULT------------------------//
     QDomNode disposition = stream.toElement().elementsByTagName("disposition").item(0);
     QString isDefault = disposition.attributes().namedItem("default").nodeValue();
-    qDebug() << isDefault;
     //-----------------------RESOLUTION------------------------//
     QDomNode nodeWidth = tab.namedItem("width");
     QString width = nodeWidth.nodeValue();
-    qDebug() << width;
 
     QDomNode nodeHeight = tab.namedItem("height");
     QString height = nodeHeight.nodeValue();
-    qDebug() << height;
 
     QString resolution = width + "x" + height;
-    qDebug() << resolution;
     //-----------------------FRAME-RATE------------------------//   //!\\  A CONVERTIR
     QDomNode nodeFrameRate = tab.namedItem("r_frame_rate");
     QString frameRate = Utils::convertFract(nodeFrameRate.nodeValue());
-    qDebug() << frameRate;
 
     //-----------------------BPS------------------------//   //!\\  A CONVERTIR
     QDomNodeList nodeListBps = stream.toElement().elementsByTagName("tag");
@@ -92,12 +84,10 @@ Model::Video::Video(QDomNode stream, int uid)
         int i = 0;
         bool bpsFinded = false;
         while(!bpsFinded && i< nodeListBps.size()){
-            qDebug() << i;
             QDomNode nodeBps = nodeListBps.item(i);
                 if(nodeBps.attributes().namedItem("key").nodeValue() == "BPS"){
                     bps = Utils::bpsToKbps(nodeBps.attributes().namedItem("value").nodeValue());
                     bpsFinded = true;
-                    qDebug() << bps;
                 }
             i++;
         }
