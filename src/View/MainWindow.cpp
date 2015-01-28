@@ -41,15 +41,22 @@ void View::MainWindow::refresh()
 
     foreach (Model::File *file, *(m_dispatcher->getCurrentProject()->fileList())) {
         foreach (Model::StreamWrapper *streamW, *(file->getStreamWrappers())) {
+            QWidget *s;
             switch (streamW->oldStream()->getType()) {
                 case Model::Stream::AUDIO:
-                    ui->tabWidgetAudio->addTab(new AudioPane(file,streamW->oldStream()),file->getName() + " piste : " +streamW->oldStream()->getUID());
+                    s = new AudioPane(file,streamW->oldStream());
+                    ui->tabWidgetAudio->addTab(s,file->getName() + " piste : " +streamW->oldStream()->getUID());
+                    ((AudioPane*)s)->setDispatcher(m_dispatcher);
                     break;
                 case Model::Stream::VIDEO:
-                    ui->tabWidgetVideo->addTab(new VideoPane(file,streamW->oldStream()),file->getName() + " piste : " +streamW->oldStream()->getUID());
+                    s = new VideoPane(file,streamW->oldStream());
+                    ui->tabWidgetVideo->addTab(s,file->getName() + " piste : " +streamW->oldStream()->getUID());
+                    ((VideoPane*)s)->setDispatcher(m_dispatcher);
                     break;
                 case Model::Stream::SUBTITLE:
-                    ui->tabWidgetSubtitle->addTab(new SubtitlePane(file,streamW->oldStream()),file->getName() + " piste : " +streamW->oldStream()->getUID());
+                    s = new SubtitlePane(file,streamW->oldStream());
+                    ui->tabWidgetSubtitle->addTab(s,file->getName() + " piste : " +streamW->oldStream()->getUID());
+                    ((SubtitlePane*)s)->setDispatcher(m_dispatcher);
                     break;
                 default:
 

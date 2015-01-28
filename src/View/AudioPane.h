@@ -64,9 +64,10 @@ public:
 
 private:
     Ui::AudioPane *ui;
-    Controller::OCTDispatcher *m_dispatcher;
     Model::File *m_file;
     Model::Stream *m_stream;
+    Controller::OCTDispatcher *m_dispatcher;
+
 
     ///
     /// \brief Connect the interface to the model through the OCTdispatcher.

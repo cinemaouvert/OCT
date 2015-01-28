@@ -13,7 +13,8 @@ SubtitlePane::SubtitlePane(QWidget *parent) :
     m_file(NULL),
     m_stream(NULL),
     m_player(NULL),
-    m_model(NULL)
+    m_model(NULL),
+    m_dispatcher(NULL)
 {
     ui->setupUi(this);
 }
@@ -46,11 +47,21 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
 
 }
 
+void SubtitlePane::setDispatcher(Controller::OCTDispatcher *dispatcher)
+{
+    m_dispatcher = dispatcher;
+    connectInterface();
+}
+
 SubtitlePane::~SubtitlePane()
 {
     if(ui) delete ui;
     if(m_player) delete m_player;
     if(m_model) delete m_model;
+}
+
+void SubtitlePane::connectInterface(){
+
 }
 
 void SubtitlePane::on_playButton_clicked()

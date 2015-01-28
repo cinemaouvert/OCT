@@ -10,7 +10,8 @@ VideoPane::VideoPane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VideoPane),
     m_player(NULL),
-    m_file(NULL)
+    m_file(NULL),
+    m_dispatcher(NULL)
 {
     ui->setupUi(this);
 
@@ -39,6 +40,11 @@ VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     m_player->setVideoStream(this->m_streamId);
 }
 
+void VideoPane::setDispatcher(Controller::OCTDispatcher *dispatcher)
+{
+    m_dispatcher = dispatcher;
+    connectInterface();
+}
 
 VideoPane::~VideoPane()
 {

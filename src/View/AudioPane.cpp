@@ -36,7 +36,8 @@ AudioPane::AudioPane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AudioPane),
     m_file(NULL),
-    m_stream(NULL)
+    m_stream(NULL),
+    m_dispatcher(NULL)
 {
     ui->setupUi(this);
     fillAudioCodecComboBox();
@@ -55,6 +56,12 @@ AudioPane::AudioPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
 AudioPane::~AudioPane()
 {
     delete ui;
+}
+
+void AudioPane::setDispatcher(Controller::OCTDispatcher *dispatcher)
+{
+    m_dispatcher = dispatcher;
+    connectInterface();
 }
 
 // ========================================================================== //

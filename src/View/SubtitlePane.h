@@ -8,6 +8,7 @@
 
 #include "src/Model/File.h"
 #include "src/Model/Stream.h"
+#include "src/Controller/OCTDispatcher.h"
 
 #include "MyModel.h"
 
@@ -24,6 +25,7 @@ public:
     explicit SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *parent = 0);
     ~SubtitlePane();
 
+    void setDispatcher(Controller::OCTDispatcher *dispatcher);
 public slots:
     void seek(int);
 
@@ -41,11 +43,11 @@ private:
     Model::Stream *m_stream;
     QtAV::AVPlayer *m_player;
     QStandardItemModel *m_model;
-
+    Controller::OCTDispatcher *m_dispatcher;
     void loadFile(QString filepath);
 
 
-
+    void connectInterface();
     void parseSubtitleFile();
 };
 

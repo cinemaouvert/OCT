@@ -8,6 +8,7 @@
 
 #include "src/Model/File.h"
 #include "src/Model/Stream.h"
+#include "src/Controller/OCTDispatcher.h"
 
 namespace Ui {
 class VideoPane;
@@ -22,6 +23,7 @@ public:
     explicit VideoPane(Model::File *file,Model::Stream *s,QWidget *parent = 0);
     ~VideoPane();
 
+    void setDispatcher(Controller::OCTDispatcher *dispatcher);
 public slots:
     void seek(int);
 
@@ -52,6 +54,7 @@ private:
     Model::File *m_file;
     int m_streamId;
     Model::Stream *m_stream;
+    Controller::OCTDispatcher *m_dispatcher;
 
     // Class methods
     void connectInterface();
