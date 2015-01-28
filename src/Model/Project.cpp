@@ -252,17 +252,16 @@ void Model::Project::generateInformationToXML()
 QStringList *Model::Project::getMergeCommandLine()
 {
     QStringList *arguments = new QStringList();
-   // *arguments << "mkvmerge.exe";
     *arguments << "-o" << m_name;
-  //  *arguments <<"--title"<<"TITRE";
 
     foreach (Model::File *f, *(fileList())){
         foreach(Model::StreamWrapper *sw, *(f->getStreamWrappers())){
             if(sw->getRelevantStream()->isDefault())
                 *arguments << "--default-track" << sw->getRelevantStream()->getUID();
 
-            if(sw->getRelevantStream()->name() !="")
-                *arguments << "--track-name" << sw->getRelevantStream()->name();
+            // Not really nice but it works
+            if(sw->oldStream()->name() !="")
+                *arguments << "--track-name" << sw->oldStream()->name();
         }
         *arguments <<f->getFilePath();
     }
