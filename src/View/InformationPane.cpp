@@ -43,13 +43,16 @@ void InformationPane::refresh(){
     ui->sampleComboBox->clear();
     ui->posterComboBox->clear();
     picturesList.clear();
+    picturesList.append("");
+    ui->sampleComboBox->addItem(QIcon(),"");
+    ui->posterComboBox->addItem(QIcon(),"");
     foreach (Model::Attachment *attachment, *(m_dispatcher->getCurrentProject()->attachments())) {
         QStringList filepath = attachment->filepath().split("/");
         QString fileName = filepath.at(filepath.size()-1);
         list.append(fileName);
         if(fileName.contains(".jpg") || fileName.contains(".jpeg") || fileName.contains(".png") || fileName.contains(".gif")){
-            ui->sampleComboBox->addItem(QIcon(),fileName);
-            ui->posterComboBox->addItem(QIcon(),fileName);
+            ui->sampleComboBox->addItem(QIcon(),attachment->filepath());
+            ui->posterComboBox->addItem(QIcon(),attachment->filepath());
             picturesList.append(attachment->filepath());
         }
 
@@ -63,7 +66,17 @@ void InformationPane::refresh(){
 
 void InformationPane::on_posterComboBox_currentIndexChanged(int index)
 {
-    loadImageToGraphicView(ui->posterGraphicsView,index);
+    if(index > 0){
+        loadImageToGraphicView(ui->posterGraphicsView,index);
+        QFile file(ui->posterComboBox->itemText(index));
+        if(file.open(QIODevice::ReadOnly)){
+            QByteArray dataImage = file.readAll().toBase64();
+            this->m_dispatcher->getCurrentProject()->addInformations("affiche", dataImage);
+        }
+
+    }else{
+        this->m_dispatcher->getCurrentProject()->removeInformations("affiche");
+    }
 }
 
 void InformationPane::loadImageToGraphicView(QGraphicsView *graphV,int index){
@@ -79,7 +92,8 @@ void InformationPane::loadImageToGraphicView(QGraphicsView *graphV,int index){
 
 void InformationPane::on_sampleComboBox_currentIndexChanged(int index)
 {
-    loadImageToGraphicView(ui->sampleGraphicView,index);
+    if(index > 0)
+        loadImageToGraphicView(ui->sampleGraphicView,index);
 }
 
 void InformationPane::generateStruct(){
@@ -94,20 +108,22 @@ void InformationPane::generateStruct(){
         for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
 
             QString labelName = this->m_dispatcher->informationMovieStruct()->at(i);
-            QString lineEditName = labelName;
+            if(labelName.compare("affiche") != 0){
+                QString lineEditName = labelName;
 
-            QLabel *label = new QLabel(labelName.replace("_", " "));
-            label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-            vLayoutLabel->addWidget(label);
+                QLabel *label = new QLabel(labelName.replace("_", " "));
+                label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+                vLayoutLabel->addWidget(label);
 
-            QLineEdit *lineEdit = new QLineEdit;
-            lineEdit->setObjectName(lineEditName);
-            lineEdit->setSizePolicy(QSizePolicy::Minimum , QSizePolicy::Minimum );
-            lineEdit->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-            lineEdit->connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(lineEditInformation_textChanged()));
-            lineEdit->connect(lineEdit, SIGNAL(editingFinished()), this, SLOT(lineEditInformation_editingFinished()));
+                QLineEdit *lineEdit = new QLineEdit;
+                lineEdit->setObjectName(lineEditName);
+                lineEdit->setSizePolicy(QSizePolicy::Minimum , QSizePolicy::Minimum );
+                lineEdit->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+                lineEdit->connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(lineEditInformation_textChanged()));
+                lineEdit->connect(lineEdit, SIGNAL(editingFinished()), this, SLOT(lineEditInformation_editingFinished()));
 
-            vLayoutLineEdit->addWidget(lineEdit);
+                vLayoutLineEdit->addWidget(lineEdit);
+            }
         }
         hLayout->addItem(vLayoutLabel);
         hLayout->addItem(vLayoutLineEdit);
