@@ -225,7 +225,7 @@ void Model::Video::initStaticParameters()
     m_staticParameters.insert(Model::Stream::VIDEO_CROP,crop);
 }
 
-int Model::Video::getType()
+int Model::Video::getType() const
 {
     return Stream::VIDEO;
 }

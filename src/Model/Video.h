@@ -98,6 +98,7 @@ namespace Model
              */
             Video& operator=(const Video& o);
 
+
             /**
              * @brief Accessor on the static parameter list.
              * @param key Key to search for the corresponding entry.
@@ -110,7 +111,9 @@ namespace Model
              */
             static void initStaticParameters();
 
-            int getType();
+            int getType() const;
+
+
 	};
 }
 

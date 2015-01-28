@@ -180,7 +180,7 @@ void Model::Audio::initMetaType()
     qMetaTypeId<Model::Audio>();
 }
 
-int Model::Audio::getType()
+int Model::Audio::getType() const
 {
     return Stream::AUDIO;
 }

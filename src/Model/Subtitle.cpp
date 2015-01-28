@@ -146,7 +146,7 @@ void Model::Subtitle::initStaticParameters()
 
 }
 
-int Model::Subtitle::getType()
+int Model::Subtitle::getType() const
 {
     return Stream::SUBTITLE;
 }

@@ -33,6 +33,10 @@ using namespace std;
 #include "src/Model/StreamWrapper.h"
 #include "src/Model/Serializable.h"
 
+#include "Audio.h"
+#include "Subtitle.h"
+#include "Video.h"
+
 #include <QDebug>
 
 const QString Model::Stream::CODEC_NAME = "codec_name";
@@ -59,7 +63,7 @@ QString Model::Stream::getUID() {
     return this->m_uID;
 }
 
-QMap<QString, Model::Parameter *> *Model::Stream::getParameters()
+QMap<QString, Model::Parameter *> *Model::Stream::getParameters() const
 {
     return this->m_parameters;
 }
@@ -107,6 +111,26 @@ QString Model::Stream::name() const
 void Model::Stream::setName(const QString &name)
 {
     m_name = name;
+}
+
+bool Model::Stream::operator==(const Model::Stream &s)
+{
+    if(s.getType() == getType()){
+        bool retVal = true;
+        retVal = retVal && (s.name() == name());
+        foreach (QString key, getParameters()->keys()) {
+            if(s.getParameters()->contains(key)){
+                if(getParameters()->value(key)->value() != s.getParameters()->value(key)->value()){
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+        return retVal;
+    }
+    return false;
+
 }
 Model::Stream::~Stream()
 {

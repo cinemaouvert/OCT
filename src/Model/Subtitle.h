@@ -103,7 +103,7 @@ namespace Model
              */
             static void initStaticParameters();
 
-            int getType();
+            int getType() const;
 	};
 }
 

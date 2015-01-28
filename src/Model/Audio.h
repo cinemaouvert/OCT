@@ -98,7 +98,7 @@ namespace Model
 
             static void initMetaType();
 
-            int getType();
+            int getType() const;
 
 	};
     QDataStream & operator <<(QDataStream  &out, const Model::Audio  &valeur);

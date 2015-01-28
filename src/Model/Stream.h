@@ -97,7 +97,7 @@ namespace Model
              * @brief Accessor for the parameters member.
              * @return The parameters member value.
              */
-            virtual QMap<QString,Parameter*> *getParameters();
+            virtual QMap<QString,Parameter*> *getParameters() const;
 
             /**
              * @brief Accessor for the command list.
@@ -116,7 +116,7 @@ namespace Model
             virtual bool isDefault() const;
             virtual void setDefault(bool d);
 
-            virtual int getType()=0;
+            virtual int getType() const =0;
             QString name() const;
             void setName(const QString &name);
 			
@@ -135,6 +135,8 @@ namespace Model
 			static const QString AUDIO_SAMPLE_RATE;
 			static const QString AUDIO_CHANNELS;
 			static const QString SUBTITLE_CHAR_ENCODE;
+
+            bool operator==(const Stream& s);
 
     };
 
