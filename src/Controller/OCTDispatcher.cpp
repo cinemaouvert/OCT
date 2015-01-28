@@ -370,7 +370,7 @@ bool Controller::OCTDispatcher::checkPosterValidation()
 void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream *stream,QString parameterName, QString value)
 {
     foreach (Model::StreamWrapper *sW, *(file->getStreamWrappers())) {
-        if(sW->oldStream() == stream){
+        if(*(sW->oldStream()) == *stream){
             if(sW->newStream() == NULL){
                 switch(stream->getType()){
                     case Model::Stream::VIDEO:
