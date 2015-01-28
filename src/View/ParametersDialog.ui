@@ -76,6 +76,32 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="mkTorrentLabel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Chemin vers mkTorrent :</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="magentLinkLabel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Chemin vers magentLink :</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -221,6 +247,34 @@
              <height>23</height>
             </size>
            </property>
+           <property name="text">
+            <string>Changer</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLineEdit" name="magentLinkTextEdit"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="magentLinkButton">
+           <property name="text">
+            <string>Changer</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLineEdit" name="mkTorrentTextEdit"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="mkTorrentButton">
            <property name="text">
             <string>Changer</string>
            </property>

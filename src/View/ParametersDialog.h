@@ -27,6 +27,10 @@ private slots:
 
     void on_buttonBox_accepted();
 
+    void on_magentLinkButton_clicked();
+
+    void on_mkTorrentButton_clicked();
+
 private:
     Ui::ParametersDialog *ui;
     QString getExecutablePath();
