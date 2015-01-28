@@ -163,7 +163,7 @@ void FilePane::refresh()
                 }
                 else{
                     item = new QStandardItem(i_nok,out_tView);
-                    m->setItem(i,4,QString("OK"));
+                    m->setItem(i,4,QString("NOK"));
                 }
                 sim->appendRow(item);
 
@@ -186,8 +186,6 @@ void FilePane::refresh()
                 p = sw->getRelevantStream()->getParameters()->find("channels").value();
                 m->setItem(j,4,p->value());
 
-                m->setItem(j,5,QString("OK"));
-
 
                 QStandardItem* item;
                 if(this->m_dispatcher->checkStreamValidation(sw->getRelevantStream())){
@@ -196,7 +194,7 @@ void FilePane::refresh()
                 }
                 else{
                     item = new QStandardItem(i_nok,out_tView);
-                    m->setItem(j,5,QString("OK"));
+                    m->setItem(j,5,QString("NOK"));
                 }
                 sim->appendRow(item);
             }
@@ -208,7 +206,6 @@ void FilePane::refresh()
                 out_tView = "sous titre " + sw->getRelevantStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
 
-                m->setItem(k,4,QString("OK"));
 
                 QStandardItem* item;
                 if(this->m_dispatcher->checkStreamValidation(sw->getRelevantStream())){
@@ -217,7 +214,7 @@ void FilePane::refresh()
                 }
                 else{
                     item = new QStandardItem(i_nok,out_tView);
-                    m->setItem(k,4,QString("OK"));
+                    m->setItem(k,4,QString("NOK"));
                 }
                 sim->appendRow(item);
 
