@@ -119,6 +119,23 @@ namespace Model
             virtual int getType()=0;
             QString name() const;
             void setName(const QString &name);
+			
+			static const QString CODEC_NAME;
+			static const QString LANGUAGE;
+			static const QString DEFAULT;
+			static const QString RESOLUTION;
+			static const QString VIDEO_FORCE_ASPECT;
+			static const QString VIDEO_FRAME_RATE;
+			static const QString VIDEO_AVG_BIT_RATE;
+			static const QString VIDEO_DEINTERLACE;
+			static const QString VIDEO_START_TIME;
+			static const QString VIDEO_STOP_POINT;
+			static const QString VIDEO_CROP;
+			static const QString AUDIO_DELAY;
+			static const QString AUDIO_SAMPLE_RATE;
+			static const QString AUDIO_CHANNELS;
+			static const QString SUBTITLE_CHAR_ENCODE;
+
     };
 
 

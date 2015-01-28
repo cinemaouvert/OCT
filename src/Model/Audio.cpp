@@ -47,31 +47,31 @@ Model::Audio::Audio(QDomNode stream, int uid)
 {
     QDomNamedNodeMap tab = stream.attributes();
     //-----------------------CODEC-NAME------------------------//
-    QDomNode nodeCodecName = tab.namedItem("codec_name");
+    QDomNode nodeCodecName = tab.namedItem(Model::Stream::CODEC_NAME);
     QString codecName = nodeCodecName.nodeValue();
     //-----------------------LANGUAGE------------------------//
     QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
     QString tagKey ="";
     int i = 0;
-    while(tagKey != "language" && i<tagList.count()){
+    while(tagKey != Model::Stream::LANGUAGE && i<tagList.count()){
         tagKey = tagList.at(i).attributes().namedItem("key").nodeValue();
         i++;
     }
     QString language = "";
-    if(tagKey == "language")
+    if(tagKey == Model::Stream::LANGUAGE)
         language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
     //-----------------------SAMPLE-RATE------------------------//
-    QDomNode nodeSampleRate = tab.namedItem("sample_rate");
+    QDomNode nodeSampleRate = tab.namedItem(Model::Stream::AUDIO_SAMPLE_RATE);
     QString SampleRate = nodeSampleRate.nodeValue();
     //-----------------------CHANNELS------------------------//
-    QDomNode nodeChannels = tab.namedItem("channels");
+    QDomNode nodeChannels = tab.namedItem(Model::Stream::AUDIO_CHANNELS);
     QString channels = nodeChannels.nodeValue();
     //-----------------------RESOLUTION------------------------//
     QDomNode nodeBitRate = tab.namedItem("bit_rate");
     QString bitRate = Utils::bpsToKbps(nodeBitRate.nodeValue());
     //-----------------------IS-DEFAULT------------------------//
     QDomNode disposition = stream.toElement().elementsByTagName("disposition").item(0);
-    QString isDefault = disposition.attributes().namedItem("default").nodeValue();
+    QString isDefault = disposition.attributes().namedItem(Model::Stream::DEFAULT).nodeValue();
     //-----------------------TITLE------------------------//
     QString titre ="";
     QDomNodeList nodeListTag = stream.toElement().elementsByTagName("tag");
@@ -96,27 +96,27 @@ Model::Audio::Audio(QDomNode stream, int uid)
     if(isDefault == "1")
         this->m_default = true;
 
-    Parameter *pCodecName = Audio::getStaticParameter("codec_name");
+    Parameter *pCodecName = Audio::getStaticParameter(Model::Stream::CODEC_NAME);
     pCodecName->setValue(codecName);
-    this->setParameter("codec_name",pCodecName);
+    this->setParameter(Model::Stream::CODEC_NAME,pCodecName);
 
     if(language != ""){
-        Parameter *pLanguage = Audio::getStaticParameter("language");
+        Parameter *pLanguage = Audio::getStaticParameter(Model::Stream::LANGUAGE);
         pLanguage->setValue(language);
-        this->setParameter("language",pLanguage);
+        this->setParameter(Model::Stream::LANGUAGE,pLanguage);
     }
 
-    Parameter *pSampleRate = Audio::getStaticParameter("sample_rate");
+    Parameter *pSampleRate = Audio::getStaticParameter(Model::Stream::AUDIO_SAMPLE_RATE);
     pSampleRate->setValue(SampleRate);
-    this->setParameter("sample_rate",pSampleRate);
+    this->setParameter(Model::Stream::AUDIO_SAMPLE_RATE,pSampleRate);
 
-    Parameter *pChannels = Audio::getStaticParameter("channels");
+    Parameter *pChannels = Audio::getStaticParameter(Model::Stream::AUDIO_CHANNELS);
     pChannels->setValue(channels);
-    this->setParameter("channels",pChannels);
+    this->setParameter(Model::Stream::AUDIO_CHANNELS,pChannels);
 
-    Parameter *pBitRate = Audio::getStaticParameter("resolution");
+    Parameter *pBitRate = Audio::getStaticParameter(Model::Stream::RESOLUTION);
     pBitRate->setValue(bitRate);
-    this->setParameter("resolution",pBitRate);
+    this->setParameter(Model::Stream::RESOLUTION,pBitRate);
 }
 
 Model::Audio::Audio(QString uID) {
@@ -156,22 +156,22 @@ Model::Parameter *Model::Audio::getStaticParameter(QString key)
 void Model::Audio::initStaticParameters()
 {
     Parameter *codecNameParam = new Parameter("-acodec","This is the codec of the audio stream","%1");
-    m_staticParameters.insert("codec_name",codecNameParam);
+    m_staticParameters.insert(Model::Stream::CODEC_NAME,codecNameParam);
 
     Parameter *language = new Parameter("-metadata:s:a:%1","This is the language of the audio stream","language=%1");
-    m_staticParameters.insert("language",language);
+    m_staticParameters.insert(Model::Stream::LANGUAGE,language);
 
     Parameter *delay = new Parameter("-itsoffset","This is the delay of the audio stream","%1");
-    m_staticParameters.insert("delay",delay);
+    m_staticParameters.insert(Model::Stream::AUDIO_DELAY,delay);
 
     Parameter *sampleRate = new Parameter("-ar","This is the sample rate of the audio stream","%1");
-    m_staticParameters.insert("sample_rate",sampleRate);
+    m_staticParameters.insert(Model::Stream::AUDIO_SAMPLE_RATE,sampleRate);
 
     Parameter *channels = new Parameter("-ac","This is the channels of the audio stream","%1");
-    m_staticParameters.insert("channels",channels);
+    m_staticParameters.insert(Model::Stream::AUDIO_CHANNELS,channels);
 
     Parameter *resolution = new Parameter("-ab","This is the resolution of the audio stream","%1k");
-    m_staticParameters.insert("resolution",resolution);
+    m_staticParameters.insert(Model::Stream::RESOLUTION,resolution);
 }
 
 void Model::Audio::initMetaType()

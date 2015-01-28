@@ -100,13 +100,13 @@ void Model::OCPMValidation::loadPreConfXML(QFile *file)
 bool Model::OCPMValidation::isValidVideo(Model::Stream *stream)
 {
     bool retval = true;
-    QString codec = stream->getParameters()->value("codec_name")->value();
+    QString codec = stream->getParameters()->value(Model::Stream::CODEC_NAME)->value();
     retval = retval && m_validationVideoCodec.contains(codec,Qt::CaseInsensitive);
 
     if(!retval)
         return retval;
 
-    Parameter *bitRateParam = stream->getParameters()->value("bitRate");
+    Parameter *bitRateParam = stream->getParameters()->value(Model::Stream::VIDEO_AVG_BIT_RATE);
     if(!bitRateParam)
         return false;
     QString bitRate = bitRateParam->value().remove(QRegExp("[a-zA-Z:\-]")).split(" ").at(1);
@@ -116,7 +116,7 @@ bool Model::OCPMValidation::isValidVideo(Model::Stream *stream)
     if(!retval)
         return retval;
 
-    QString resolution = stream->getParameters()->value("resolution")->value().remove("scale=");
+    QString resolution = stream->getParameters()->value(Model::Stream::RESOLUTION)->value().remove("scale=");
     retval = retval && m_validationVideoResolution.contains(resolution,Qt::CaseInsensitive);
 
     return retval;
@@ -126,13 +126,13 @@ bool Model::OCPMValidation::isValidAudio(Model::Stream *stream)
 {
     bool retval = true;
 
-    QString codec = stream->getParameters()->value("codec_name")->value();
+    QString codec = stream->getParameters()->value(Model::Stream::CODEC_NAME)->value();
     retval = retval && m_validationAudioCodec.contains(codec,Qt::CaseInsensitive);
 
-    QString channels = stream->getParameters()->value("channels")->value();
+    QString channels = stream->getParameters()->value(Model::Stream::AUDIO_CHANNELS)->value();
     retval = retval && m_validationAudioChanel.contains(channels == "1" ? "mono" : "stereo" ,Qt::CaseInsensitive);
 
-    QString samplingRate = stream->getParameters()->value("sample_rate")->value();
+    QString samplingRate = stream->getParameters()->value(Model::Stream::AUDIO_SAMPLE_RATE)->value();
     retval = retval && m_validationAudioSamplingRate.contains(samplingRate,Qt::CaseInsensitive);
 
     return retval;
@@ -143,13 +143,13 @@ bool Model::OCPMValidation::isValidSubtitle(Model::Stream *stream)
 {
     bool retval = true;
 
-    Parameter *paramCodec = stream->getParameters()->value("codec_name");
+    Parameter *paramCodec = stream->getParameters()->value(Model::Stream::CODEC_NAME);
     if(!paramCodec)
         return false;
     QString codec = paramCodec->value();
     retval = retval && m_validationSubtitleFormat.contains(codec,Qt::CaseInsensitive);
 
-    Parameter *paramEncode = stream->getParameters()->value("charEncode");
+    Parameter *paramEncode = stream->getParameters()->value(Model::Stream::SUBTITLE_CHAR_ENCODE);
     if(!paramEncode)
         return retval; // return the value of param codec util we find a way to find he subtitle encoding
     QString encoding = paramEncode->value();

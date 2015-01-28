@@ -143,14 +143,14 @@ void FilePane::refresh()
             if(sw->getRelevantStream()->getType() == Model::Stream::VIDEO){
                 i++;
                 m->setItem(i,0,tr("piste: %2 : %1").arg(f->getName()).arg(sw->getRelevantStream()->getUID()));
-                Model::Parameter *p = sw->getRelevantStream()->getParameters()->find("codec_name").value();
+                Model::Parameter *p = sw->getRelevantStream()->getParameters()->find(Model::Stream::CODEC_NAME).value();
                 m->setItem(i,1,p->value());
                 out_tView = "Flux video " + sw->getRelevantStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
-                p = sw->getRelevantStream()->getParameters()->find("r_frame_rate").value();
+                p = sw->getRelevantStream()->getParameters()->find(Model::Stream::VIDEO_FRAME_RATE).value();
                 m->setItem(i,2,p->value());
 
-                p = sw->getRelevantStream()->getParameters()->find("resolution").value();
+                p = sw->getRelevantStream()->getParameters()->find(Model::Stream::RESOLUTION).value();
                 m->setItem(i,3,p->value().remove("scale="));
                 out_tView = out_tView + " - résolution " + p->value().remove("scale=");
 
@@ -173,17 +173,17 @@ void FilePane::refresh()
             else if(sw->getRelevantStream()->getType() == Model::Stream::AUDIO){
                 j++;
                 m->setItem(j,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getRelevantStream()->getUID()));
-                Model::Parameter *p = sw->getRelevantStream()->getParameters()->find("codec_name").value();
+                Model::Parameter *p = sw->getRelevantStream()->getParameters()->find(Model::Stream::CODEC_NAME).value();
                 m->setItem(j,1,p->value());
                 out_tView = "Piste Audio " + sw->getRelevantStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
-                p = sw->getRelevantStream()->getParameters()->find("sample_rate").value();
+                p = sw->getRelevantStream()->getParameters()->find(Model::Stream::AUDIO_SAMPLE_RATE).value();
                 m->setItem(j,2,p->value());
 
-                p = sw->getRelevantStream()->getParameters()->find("resolution").value();
+                p = sw->getRelevantStream()->getParameters()->find(Model::Stream::RESOLUTION).value();
                 m->setItem(j,3,p->value());
 
-                p = sw->getRelevantStream()->getParameters()->find("channels").value();
+                p = sw->getRelevantStream()->getParameters()->find(Model::Stream::AUDIO_CHANNELS).value();
                 m->setItem(j,4,p->value());
 
 
@@ -201,7 +201,7 @@ void FilePane::refresh()
             else if(sw->getRelevantStream()->getType() == Model::Stream::SUBTITLE){
                 k++;
                 m->setItem(k,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getRelevantStream()->getUID()));
-                Model::Parameter *p = sw->getRelevantStream()->getParameters()->find("codec_name").value();
+                Model::Parameter *p = sw->getRelevantStream()->getParameters()->find(Model::Stream::CODEC_NAME).value();
                 m->setItem(k,1,p->value());                
                 out_tView = "sous titre " + sw->getRelevantStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 

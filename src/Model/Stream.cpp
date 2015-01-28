@@ -35,6 +35,21 @@ using namespace std;
 
 #include <QDebug>
 
+const QString Model::Stream::CODEC_NAME = "codec_name";
+const QString Model::Stream::LANGUAGE = "language";
+const QString Model::Stream::DEFAULT ="default";
+const QString Model::Stream::RESOLUTION ="resolution";
+const QString Model::Stream::VIDEO_FORCE_ASPECT ="forceAspect";
+const QString Model::Stream::VIDEO_FRAME_RATE ="r_frame_rate";
+const QString Model::Stream::VIDEO_AVG_BIT_RATE ="bitRate";
+const QString Model::Stream::VIDEO_DEINTERLACE ="deinterlace";
+const QString Model::Stream::VIDEO_START_TIME ="start_pts";
+const QString Model::Stream::VIDEO_STOP_POINT ="stop_pts";
+const QString Model::Stream::VIDEO_CROP ="crop";
+const QString Model::Stream::AUDIO_DELAY ="delay";
+const QString Model::Stream::AUDIO_SAMPLE_RATE ="sample_rate";
+const QString Model::Stream::AUDIO_CHANNELS = "channels";
+const QString Model::Stream::SUBTITLE_CHAR_ENCODE ="charEncode";
 void Model::Stream::setParameter(QString name, Parameter *value) {
     this->m_parameters->insert(name,value);
 }

@@ -48,23 +48,23 @@ Model::Video::Video(QDomNode stream, int uid)
 {
     QDomNamedNodeMap tab = stream.attributes();
     //-----------------------CODEC-NAME------------------------//
-    QDomNode nodeCodecName = tab.namedItem("codec_name");
+    QDomNode nodeCodecName = tab.namedItem(Model::Stream::CODEC_NAME);
     QString codecName = nodeCodecName.nodeValue();
     //-----------------------LANGUAGE------------------------//
     QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
 
     QString tagKey ="";
     int i = 0;
-    while(tagKey != "language" && i<tagList.count()){
+    while(tagKey != Model::Stream::LANGUAGE && i<tagList.count()){
         tagKey = tagList.at(i).attributes().namedItem("key").nodeValue();
         i++;
     }
     QString language = "";
-    if(tagKey == "language")
+    if(tagKey == Model::Stream::LANGUAGE)
         language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
     //-----------------------IS-DEFAULT------------------------//
     QDomNode disposition = stream.toElement().elementsByTagName("disposition").item(0);
-    QString isDefault = disposition.attributes().namedItem("default").nodeValue();
+    QString isDefault = disposition.attributes().namedItem(Model::Stream::DEFAULT).nodeValue();
     //-----------------------RESOLUTION------------------------//
     QDomNode nodeWidth = tab.namedItem("width");
     QString width = nodeWidth.nodeValue();
@@ -74,7 +74,7 @@ Model::Video::Video(QDomNode stream, int uid)
 
     QString resolution = width + "x" + height;
     //-----------------------FRAME-RATE------------------------//   //!\\  A CONVERTIR
-    QDomNode nodeFrameRate = tab.namedItem("r_frame_rate");
+    QDomNode nodeFrameRate = tab.namedItem(Model::Stream::VIDEO_FRAME_RATE);
     QString frameRate = Utils::convertFract(nodeFrameRate.nodeValue());
 
     //-----------------------BPS------------------------//   //!\\  A CONVERTIR
@@ -113,35 +113,35 @@ Model::Video::Video(QDomNode stream, int uid)
     this->m_additionalCommand = QString();
     this->m_parameters = new QMap<QString,Parameter*>();
 
-    Parameter *pCodecName = Video::getStaticParameter("codec_name");
+    Parameter *pCodecName = Video::getStaticParameter(Model::Stream::CODEC_NAME);
     pCodecName->setValue(codecName);
-    this->setParameter("codec_name",pCodecName);
+    this->setParameter(Model::Stream::CODEC_NAME,pCodecName);
 
     if(language != ""){
-        Parameter *pLanguage = Video::getStaticParameter("language");
+        Parameter *pLanguage = Video::getStaticParameter(Model::Stream::LANGUAGE);
         pLanguage->setValue(language);
-        this->setParameter("language",pLanguage);
+        this->setParameter(Model::Stream::LANGUAGE,pLanguage);
     }
 
-    Parameter *pDefault = Video::getStaticParameter("default");
+    Parameter *pDefault = Video::getStaticParameter(Model::Stream::DEFAULT);
     pDefault->setValue(isDefault);
-    this->setParameter("default",pDefault);
+    this->setParameter(Model::Stream::DEFAULT,pDefault);
     if(isDefault == "1")
         this->m_default = true;
 
 
-    Parameter *pResolution = Video::getStaticParameter("resolution");
+    Parameter *pResolution = Video::getStaticParameter(Model::Stream::RESOLUTION);
     pResolution->setValue(resolution);
-    this->setParameter("resolution",pResolution);
+    this->setParameter(Model::Stream::RESOLUTION,pResolution);
 
-    Parameter *pFrameRate = Video::getStaticParameter("r_frame_rate");
+    Parameter *pFrameRate = Video::getStaticParameter(Model::Stream::VIDEO_FRAME_RATE);
     pFrameRate->setValue(frameRate);
-    this->setParameter("r_frame_rate",pFrameRate);
+    this->setParameter(Model::Stream::VIDEO_FRAME_RATE,pFrameRate);
 
     if(!bps.isNull()){
-        Parameter *pBps = Video::getStaticParameter("bitRate");
+        Parameter *pBps = Video::getStaticParameter(Model::Stream::VIDEO_AVG_BIT_RATE);
         pBps->setValue(bps);
-        this->setParameter("bitRate",pBps);
+        this->setParameter(Model::Stream::VIDEO_AVG_BIT_RATE,pBps);
 
     }
 
@@ -191,38 +191,38 @@ Model::Parameter *Model::Video::getStaticParameter(QString key)
 void Model::Video::initStaticParameters()
 {
     Parameter *codecNameParam = new Parameter("-vcodec","This is the codec of the video stream","%1");
-    m_staticParameters.insert("codec_name",codecNameParam);
+    m_staticParameters.insert(Model::Stream::CODEC_NAME,codecNameParam);
 
     Parameter *language = new Parameter("-metadata:s:v:%1","This is the language of the stream","language=%1");
-    m_staticParameters.insert("language",language);
+    m_staticParameters.insert(Model::Stream::LANGUAGE,language);
 
     Parameter *isDefault = new Parameter("-metadata:s:v:%1","This indicates if the stream is tagged as the default one","default-flag=%1");
-    m_staticParameters.insert("default",isDefault);
+    m_staticParameters.insert(Model::Stream::DEFAULT,isDefault);
 
     Parameter *resolution = new Parameter("-vf","This is the resolution of the video stream (AAAxBBB)","scale=%1");
     resolution->SetNoSpaceForNext();
-    m_staticParameters.insert("resolution",resolution);
+    m_staticParameters.insert(Model::Stream::RESOLUTION,resolution);
 
     Parameter *forceAspect = new Parameter("","Enable decreasing or increasing output video width or height if necessary to keep the original aspect ratio. Possible values: disable,decrease,increase","force_original_aspect_ratio=%1");
-    m_staticParameters.insert("forceAspect",forceAspect);
+    m_staticParameters.insert(Model::Stream::VIDEO_FORCE_ASPECT,forceAspect);
 
     Parameter *frameRate = new Parameter("-r","This is the frame rate (in frame by second)","%1");
-    m_staticParameters.insert("r_frame_rate",frameRate);
+    m_staticParameters.insert(Model::Stream::VIDEO_FRAME_RATE,frameRate);
 
     Parameter *averageBitRate= new Parameter("","This is the average bit rate","-b:v %1 -bufsize %1");
-    m_staticParameters.insert("bitRate",averageBitRate);
+    m_staticParameters.insert(Model::Stream::VIDEO_AVG_BIT_RATE,averageBitRate);
 
     Parameter *filter= new Parameter("-filter:v","This is the video filter can be (yadif for deinterlace, ))","%1");
-    m_staticParameters.insert("deinterlace",filter);
+    m_staticParameters.insert(Model::Stream::VIDEO_DEINTERLACE,filter);
 
     Parameter *startPoint= new Parameter("-ss","Start point of the video","%1");
-    m_staticParameters.insert("start_pts",startPoint);
+    m_staticParameters.insert(Model::Stream::VIDEO_START_TIME,startPoint);
 
     Parameter *endPoint= new Parameter("-ss","End point of the video","%1");
-    m_staticParameters.insert("start_pts",endPoint);
+    m_staticParameters.insert(Model::Stream::VIDEO_STOP_POINT,endPoint);
 
     Parameter *crop= new Parameter("-filter:v","Crop the video (w:h:x:y)","%1");
-    m_staticParameters.insert("crop",crop);
+    m_staticParameters.insert(Model::Stream::VIDEO_CROP,crop);
 }
 
 int Model::Video::getType()

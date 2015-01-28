@@ -120,20 +120,20 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     Model::Stream *os = this->m_currentProject->fileList()->at(1)->getStreamWrappers()->at(0)->oldStream();
     Model::Stream *ns = new Model::Video((Model::Video&)*os);
-    ns->getParameters()->value("codec_name")->setValue("avi");
+    ns->getParameters()->value(Model::Stream::CODEC_NAME)->setValue("avi");
 
     this->m_currentProject->fileList()->at(1)->getStreamWrappers()->at(0)->setNewStream(ns);
 
 
     Model::Stream *os2 = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->oldStream();
     Model::Stream *ns2 = new Model::Audio((Model::Audio&)*os2);
-    ns2->getParameters()->value("codec_name")->setValue("flac");
+    ns2->getParameters()->value(Model::Stream::CODEC_NAME)->setValue("flac");
 
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(1)->setNewStream(ns2);
 
     Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->oldStream();
     Model::Stream *ns = new Model::Video((Model::Video&)*os);
-    ns->getParameters()->value("resolution")->setValue("1920x1080");
+    ns->getParameters()->value(Model::Stream::RESOLUTION)->setValue("1920x1080");
 
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->setNewStream(ns);
 
@@ -161,7 +161,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->oldStream();
     Model::Stream *ns = new Model::Video((Model::Video&)*os);
-    ns->getParameters()->take("codec_name")->setValue("mpeg4");
+    ns->getParameters()->take(Model::Stream::CODEC_NAME)->setValue("mpeg4");
     this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->setNewStream(ns);
 
 
