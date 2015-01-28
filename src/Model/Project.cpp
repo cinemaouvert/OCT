@@ -258,11 +258,11 @@ QStringList *Model::Project::getMergeCommandLine()
 
     foreach (Model::File *f, *(fileList())){
         foreach(Model::StreamWrapper *sw, *(f->getStreamWrappers())){
-            if(sw->oldStream()->isDefault())
-                *arguments << "--default-track" << sw->oldStream()->getUID(); //////////////////getNew
+            if(sw->getRelevantStream()->isDefault())
+                *arguments << "--default-track" << sw->getRelevantStream()->getUID();
 
-            if(sw->oldStream()->name() !="")
-                *arguments << "--track-name" << sw->oldStream()->name();
+            if(sw->getRelevantStream()->name() !="")
+                *arguments << "--track-name" << sw->getRelevantStream()->name();
         }
         *arguments <<f->getFilePath();
     }

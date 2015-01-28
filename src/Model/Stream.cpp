@@ -50,6 +50,7 @@ const QString Model::Stream::AUDIO_DELAY ="delay";
 const QString Model::Stream::AUDIO_SAMPLE_RATE ="sample_rate";
 const QString Model::Stream::AUDIO_CHANNELS = "channels";
 const QString Model::Stream::SUBTITLE_CHAR_ENCODE ="charEncode";
+
 void Model::Stream::setParameter(QString name, Parameter *value) {
     this->m_parameters->insert(name,value);
 }

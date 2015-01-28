@@ -358,25 +358,33 @@ int Controller::OCTDispatcher::checkInformationValidation()
     return m_informationMovieStruct->size() - this->getCurrentProject()->informations()->size();
 }
 
-void Controller::OCTDispatcher::audioChanged(Model::File *file,Model::Audio *stream, QString parameterName, QString value)
+void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream *stream, QString parameterName, QString value)
 {
     foreach (Model::StreamWrapper *sW, *(file->getStreamWrappers())) {
         if(sW->oldStream() == stream){
+            if(sW->newStream() == NULL){
+                switch(stream->getType()){
+                    case Model::Stream::VIDEO:
+                        sW->setNewStream(new Model::Video(*(Model::Video*)(sW->oldStream())));
+                    break;
+                    case Model::Stream::AUDIO:
+                        sW->setNewStream(new Model::Audio(*(Model::Audio*)(sW->oldStream())));
+                    break;
+                    case Model::Stream::SUBTITLE:
+                        sW->setNewStream(new Model::Subtitle(*(Model::Subtitle*)(sW->oldStream())));
+                    break;
+                }
+            }
 
+            Model::Parameter *param = sW->newStream()->getParameters()->value(parameterName);
+            if(param != NULL)
+                param->setValue(value);
             return;
         }
     }
 }
 
-void Controller::OCTDispatcher::videoChanged(Model::File *file,Model::Video *stream, QString parameterName, QString value)
-{
 
-}
-
-void Controller::OCTDispatcher::subtitleChanged(Model::File *file,Model::Subtitle *stream, QString parameterName, QString value)
-{
-
-}
 
 
 
