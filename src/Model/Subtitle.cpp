@@ -63,8 +63,24 @@ Model::Subtitle::Subtitle(QDomNode stream, int uid)
     QString isDefault = disposition.attributes().namedItem("default").nodeValue();
     //-----------------------ENCODE------------------------//
     // TODO FIND A WAY TO FIND ENCODING
+    //-----------------------TITLE------------------------//
+    QString titre ="";
+    QDomNodeList nodeListTag = stream.toElement().elementsByTagName("tag");
+    if(! nodeListTag.isEmpty()){
+        int i = 0;
+        bool titreFinded = false;
+        while(!titreFinded && i< nodeListTag.size()){
+            QDomNode node = nodeListTag.item(i);
+                if(node.attributes().namedItem("key").nodeValue() == "title"){
+                    titre = node.attributes().namedItem("value").nodeValue();
+                    titreFinded = true;
+                }
+            i++;
+        }
+    }
     //-----------------------SUBTITLE-BUILD------------------------//
     this->m_uID = QString::number(uid);
+    this->m_name = titre;
     this->m_parameters = new QMap<QString,Parameter*>();
     this->m_default = false;
     if(isDefault == "1")

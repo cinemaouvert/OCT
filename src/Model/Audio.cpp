@@ -45,15 +45,12 @@ Model::Audio::Audio() {
 
 Model::Audio::Audio(QDomNode stream, int uid)
 {
-    qDebug() << "Audio";
     QDomNamedNodeMap tab = stream.attributes();
     //-----------------------CODEC-NAME------------------------//
     QDomNode nodeCodecName = tab.namedItem("codec_name");
     QString codecName = nodeCodecName.nodeValue();
-    qDebug() << codecName;
     //-----------------------LANGUAGE------------------------//
     QDomNodeList tagList = stream.toElement().elementsByTagName("tag");
-    qDebug() << tagList.count();
     QString tagKey ="";
     int i = 0;
     while(tagKey != "language" && i<tagList.count()){
@@ -66,22 +63,33 @@ Model::Audio::Audio(QDomNode stream, int uid)
     //-----------------------SAMPLE-RATE------------------------//
     QDomNode nodeSampleRate = tab.namedItem("sample_rate");
     QString SampleRate = nodeSampleRate.nodeValue();
-    qDebug() << SampleRate;
     //-----------------------CHANNELS------------------------//
     QDomNode nodeChannels = tab.namedItem("channels");
     QString channels = nodeChannels.nodeValue();
-    qDebug() << channels;
     //-----------------------RESOLUTION------------------------//
     QDomNode nodeBitRate = tab.namedItem("bit_rate");
     QString bitRate = Utils::bpsToKbps(nodeBitRate.nodeValue());
-    qDebug() << bitRate;
     //-----------------------IS-DEFAULT------------------------//
     QDomNode disposition = stream.toElement().elementsByTagName("disposition").item(0);
     QString isDefault = disposition.attributes().namedItem("default").nodeValue();
-    qDebug() << isDefault;
-
+    //-----------------------TITLE------------------------//
+    QString titre ="";
+    QDomNodeList nodeListTag = stream.toElement().elementsByTagName("tag");
+    if(! nodeListTag.isEmpty()){
+        int i = 0;
+        bool titreFinded = false;
+        while(!titreFinded && i< nodeListTag.size()){
+            QDomNode node = nodeListTag.item(i);
+                if(node.attributes().namedItem("key").nodeValue() == "title"){
+                    titre = node.attributes().namedItem("value").nodeValue();
+                    titreFinded = true;
+                }
+            i++;
+        }
+    }
     //-----------------------AUDIO-BUILD------------------------//
     this->m_uID = QString::number(uid);
+    this->m_name = titre;
     this->m_parameters = new QMap<QString,Parameter*>();
     this->m_default = false;
 
