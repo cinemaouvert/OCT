@@ -357,6 +357,21 @@ int Controller::OCTDispatcher::checkInformationValidation()
     return m_informationMovieStruct->size() - this->getCurrentProject()->informations()->size();
 }
 
+void Controller::OCTDispatcher::audioChanged(QString UID, QString parameterName, QString value)
+{
+
+}
+
+void Controller::OCTDispatcher::videoChanged(QString UID, QString parameterName, QString value)
+{
+
+}
+
+void Controller::OCTDispatcher::subtitleChanged(QString UID, QString parameterName, QString value)
+{
+
+}
+
 
 
 void Controller::OCTDispatcher::treatProjectNameChanged(QString newName)

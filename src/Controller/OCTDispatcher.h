@@ -258,6 +258,9 @@ namespace Controller
             bool checkProjectValidation();
             bool checkStreamValidation(Model::Stream *stream);
             int checkInformationValidation();
+            void audioChanged(QString UID, );
+            void videoChanged();
+            void subtitleChanged();
 
     };
 }
