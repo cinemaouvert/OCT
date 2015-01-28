@@ -65,6 +65,9 @@ namespace Model
 	class Project;
     class OCPMValidation;
     class Stream;
+    class Audio;
+    class Video;
+    class Subtitle;
 }
 namespace View
 {
@@ -258,9 +261,9 @@ namespace Controller
             bool checkProjectValidation();
             bool checkStreamValidation(Model::Stream *stream);
             int checkInformationValidation();
-            void audioChanged(QString UID, );
-            void videoChanged();
-            void subtitleChanged();
+            void audioChanged(Model::Audio *stream,QString UID,QString parameterName, QString value);
+            void videoChanged(Model::Video *stream,QString UID,QString parameterName, QString value);
+            void subtitleChanged(Model::Subtitle *stream, QString UID, QString parameterName, QString value);
 
     };
 }
