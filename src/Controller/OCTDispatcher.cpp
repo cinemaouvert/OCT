@@ -369,10 +369,8 @@ bool Controller::OCTDispatcher::checkPosterValidation()
 
 void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream *stream,QString parameterName, QString value)
 {
-    qDebug() << "PARAMETER CHANGED : "<<parameterName <<" VALUE : "<<value;
     foreach (Model::StreamWrapper *sW, *(file->getStreamWrappers())) {
         if(*(sW->oldStream()) == *stream){
-            qDebug() << "DEBUG : old = stream";
             if(sW->newStream() == NULL){
                 switch(stream->getType()){
                     case Model::Stream::VIDEO:
@@ -390,10 +388,9 @@ void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream
             Model::Parameter *param = sW->newStream()->getParameters()->value(parameterName);
             if(param != NULL)
                 param->setValue(value);
+            checkProjectValidation();
             return;
         }
-        qDebug() << "DEBUG : old != stream";
-
     }
 }
 
