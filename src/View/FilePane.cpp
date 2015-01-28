@@ -263,7 +263,7 @@ void FilePane::refresh()
     sim->appendRow(item);
 
     //affiche
-    if(true){
+    if(this->m_dispatcher->checkPosterValidation()){
         item = new QStandardItem(i_ok,"affiche");
     }
     else{

@@ -262,9 +262,8 @@ namespace Controller
             bool checkStreamValidation(Model::Stream *stream);
             int checkInformationValidation();
             bool checkPosterValidation();
-            void audioChanged(Model::File *file,Model::Audio *stream,QString parameterName, QString value);
-            void videoChanged(Model::File *file,Model::Video *stream,QString parameterName, QString value);
-            void subtitleChanged(Model::File *file,Model::Subtitle *stream, QString parameterName, QString value);
+            void parameterChanged(Model::File *file,Model::Stream *stream,QString parameterName, QString value);
+
 
     };
 }

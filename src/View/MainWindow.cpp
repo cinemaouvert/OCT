@@ -82,6 +82,7 @@ void View::MainWindow::setOCPMState(bool isValid)
         ui->labelStatusOKNOK->setStyleSheet("background-color:  rgba(255, 0, 0, 100);border-radius:5px;");
         ui->labelStatusOKNOK->setText("OCPM invalide");
     }
+
 }
 
 FilePane* View::MainWindow::getFilePane()
