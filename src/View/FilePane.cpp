@@ -345,3 +345,10 @@ void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)
         m_dispatcher->getOCPMValidation()->loadPreConfXML(&file);
     }
 }
+
+void FilePane::on_findExport_clicked()
+{
+    QUrl filePath = QFileDialog::getSaveFileName(this, tr("Choisir fichier de sortie"),"",tr("Matroska (*.mkv)"));
+    m_dispatcher->treatProjectNameChanged(filePath.toString());
+    ui->lineEdit_ExportName->setText(filePath.toString());
+}

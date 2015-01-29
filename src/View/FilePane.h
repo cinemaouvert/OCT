@@ -43,6 +43,8 @@ private slots:
 
     void on_comboBox_Preconfig_currentTextChanged(const QString &arg1);
 
+    void on_findExport_clicked();
+
 private:
     Ui::FilePane *ui;
     Controller::OCTDispatcher *m_dispatcher;

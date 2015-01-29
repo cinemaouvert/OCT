@@ -31,6 +31,7 @@
 #include "src/Controller/TreatmentThread.h"
 
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QMouseEvent>
 
 // ========================================================================== //
@@ -121,13 +122,13 @@ void EncodePane::initProgressBar(int progressMax)
 
 void EncodePane::on_pushButton_Encode_clicked()
 {
-    QString filePath = QFileDialog::getExistingDirectory(this,tr("Choisir le chemin"));
-       this->m_dispatcher->getCurrentProject()->setName(filePath.append("/").append(this->m_dispatcher->getCurrentProject()->name()));
-
-
-    m_dispatcher->startTreatment();
-    ui->pushButton_Cancel->setEnabled(true);
-    ui->pushButton_Pause->setEnabled(true);
+    if(m_dispatcher->getCurrentProject()->name() != NULL && m_dispatcher->getCurrentProject()->name() != ""){
+        m_dispatcher->startTreatment();
+        ui->pushButton_Cancel->setEnabled(true);
+        ui->pushButton_Pause->setEnabled(true);
+    }else{
+        QMessageBox::warning(this,tr("Chemin de sortie manquant"),tr("Vous devez saisir un chemin de sortie pour pouvoir encoder(cf. Fichiers)"));
+    }
 }
 
 void EncodePane::on_pushButton_Cancel_clicked()

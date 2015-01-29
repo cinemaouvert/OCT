@@ -42,7 +42,7 @@ Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileLis
     this->m_attachments = new QList<Model::Attachment*>();
     this->m_informations =  new QMap<QString, QString>;
     this->m_fileList = new QList<Model::File*>();
-    this->m_name = "Projet.mkv";
+    this->m_name = "";
 }
 
 Model::Project::~Project()
