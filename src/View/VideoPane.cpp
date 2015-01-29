@@ -88,23 +88,6 @@ void VideoPane::loadFile(QString filepath)
     this->connectPlayer();
 }
 
-void VideoPane::connectPlayer()
-{
-    connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
-    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
-    connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
-    connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
-}
-
-
-void VideoPane::connectInterface()
-{
-    connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
-    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
-    connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
-    connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
-}
-
 void VideoPane::updateSlider()
 {
     ui->timeSlider->setRange(0, int(m_player->duration()/1000LL));
@@ -113,8 +96,25 @@ void VideoPane::updateSlider()
 }
 
 // ========================================================================== //
-// == EVENT METHODS ========================================================= //
+// == EVENT AND SIGNALS METHODS ============================================= //
 // ========================================================================== //
+void VideoPane::connectPlayer() {
+    connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
+    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
+}
+
+void VideoPane::connectInterface() {
+    connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
+    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
+
+    connect( this, SIGNAL( videoParameterChanged( Model::File *, Model::Stream *, QString, QString ) ),
+             m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
+}
+
 void VideoPane::on_playButton_clicked()
 {
     m_player->setStartPosition(ui->startSlider->value());
@@ -175,16 +175,6 @@ void VideoPane::on_timeStop_timeChanged(const QTime &time)
     ui->stopSlider->setValue(QTime(0,0).msecsTo(time));
 }
 
-void VideoPane::on_comboBox_Codec_activated(QString codec) {
-    // if the codec selected is the x264 codec, show the groupBox settings
-    // associated to the x264 codec.
-    if ( codec.compare("H264 (x264)") == 0 ) {
-        ui->groupBox_x264Settings->show();
-    } else {
-        ui->groupBox_x264Settings->hide();
-    }
-}
-
 void VideoPane::on_horizontalSlider_VideoQuality_valueChanged() {
     ui->spinBox_Quality->setValue(ui->horizontalSlider_VideoQuality->value());
 }
@@ -195,4 +185,123 @@ void VideoPane::on_spinBox_Quality_valueChanged(int value) {
 
 void VideoPane::on_lineEdit_TrackName_textChanged(const QString &name) {
     this->m_stream->setName( name );
+}
+
+void VideoPane::on_comboBox_Codec_activated( QString codec ) {
+    // if the codec selected is the x264 codec, show the groupBox settings
+    // associated to the x264 codec.
+    if ( codec.compare("H264 (x264)") == 0 ) {
+        ui->groupBox_x264Settings->show();
+    } else {
+        ui->groupBox_x264Settings->hide();
+    }
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::CODEC_NAME, codec);
+}
+
+void VideoPane::on_comboBox_Langage_activated(const QString &arg) {
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::LANGUAGE, arg);
+}
+
+void VideoPane::on_comboBox_DefaultTrack_activated(const QString &arg) {
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::DEFAULT, arg);
+}
+
+void VideoPane::on_comboBox_VideoSize_activated(const QString &arg) {
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::RESOLUTION, arg);
+}
+
+void VideoPane::on_comboBox_Scale_activated(const QString &arg) {
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_FORCE_ASPECT, arg);
+}
+
+void VideoPane::on_comboBox_BlackStuff_activated(const QString &arg) {
+    // TODO:
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+void VideoPane::on_comboBox_Frames_activated(const QString &arg) {
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_FRAME_RATE, arg);
+}
+
+void VideoPane::on_comboBox_Filter_activated(const QString &arg) {
+    // TODO :
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+void VideoPane::on_lineEdit_OptionsFfmpeg_textChanged(const QString &arg) {
+    // TODO :
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+void VideoPane::on_spinBox_Quality_valueChanged(const QString &arg) {
+    // TODO :
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+void VideoPane::on_lineEdit_AverageBitrate_textChanged(const QString &arg) {
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_AVG_BIT_RATE, arg);
+}
+
+void VideoPane::on_checkBox_clicked( bool checked ) {
+    QString arg = "";
+    checked ? arg = "TRUE" : "FALSE";
+    // TODO :
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+void VideoPane::on_checkBox_2_clicked( bool checked ) {
+    QString arg = "";
+    checked ? arg = "TRUE" : "FALSE";
+    // TODO :
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+void VideoPane::on_comboBox_x264Preset_activated( const QString &arg ) {
+    // TODO :
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+void VideoPane::on_comboBox_x264Tune_activated( const QString &arg ) {
+    // TODO :
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+void VideoPane::on_comboBox_x264Profile_activated( const QString &arg ) {
+    // TODO :
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+void VideoPane::on_comboBox_x264Level_activated( const QString &arg ) {
+    // TODO :
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+void VideoPane::on_spinTop_valueChanged( const QString &arg ) {
+    // TODO :
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , arg);
+}
+
+void VideoPane::on_spinLeft_valueChanged( const QString &arg ) {
+    // TODO :
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , arg);
+}
+
+void VideoPane::on_spinRight_valueChanged( const QString &arg ) {
+    // TODO :
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , arg);
+}
+
+void VideoPane::on_spinBot_valueChanged( const QString &arg ) {
+    // TODO :
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , arg);
+}
+
+void VideoPane::on_timeStart_dateTimeChanged( const QDateTime &dateTime ) {
+    // TODO :
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+void VideoPane::on_timeStop_dateTimeChanged( const QDateTime &dateTime ) {
+    // TODO :
+    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
 }

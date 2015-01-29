@@ -76,7 +76,6 @@ void AudioPane::fillAudioCodecComboBox() {
 // == EVENT ANS SIGNALS METHODS ============================================= //
 // ========================================================================== //
 void AudioPane::connectInterface() {
-    // Connect audioCodecChanged with OCTdispathcer.
     connect( this, SIGNAL( audioParameterChanged( Model::File *, Model::Stream *, QString, QString ) ),
              m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
 }
