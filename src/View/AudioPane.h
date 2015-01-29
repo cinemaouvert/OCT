@@ -73,6 +73,7 @@ private:
     /// \brief Connect the interface to the model through the OCTdispatcher.
     ///
     void connectInterface();
+    void initPane();
 
 private slots:
     void on_lineEdit_Name_textChanged( QString name );
