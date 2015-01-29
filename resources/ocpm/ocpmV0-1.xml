@@ -30,7 +30,7 @@
 			<value>srt</value>
 		</formats>
 		<encodings>
-			<value preConf="true">UTF8</value>
+			<value preConf="true">UTF-8</value>
 		</encodings>
 	</subtitle>
 </oct>

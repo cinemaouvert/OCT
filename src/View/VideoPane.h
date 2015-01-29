@@ -41,7 +41,7 @@ private slots:
     void on_lineEdit_TrackName_textChanged(const QString &name);
     void on_comboBox_Codec_activated(QString codec);
     void on_comboBox_Langage_activated(const QString &arg);
-    void on_comboBox_DefaultTrack_activated(const QString &arg);
+    void on_checkBoxDefaultStream_clicked(bool checked);
     void on_comboBox_VideoSize_activated(const QString &arg);
     void on_comboBox_Scale_activated(const QString &arg);
     // TODO :

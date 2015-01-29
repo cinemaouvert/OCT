@@ -202,7 +202,9 @@ void VideoPane::on_comboBox_Langage_activated(const QString &arg) {
     emit videoParameterChanged(m_file, m_stream, Model::Stream::LANGUAGE, arg);
 }
 
-void VideoPane::on_comboBox_DefaultTrack_activated(const QString &arg) {
+void VideoPane::on_checkBoxDefaultStream_clicked(bool checked)
+{
+    QString arg = checked ? "1" : "0";
     emit videoParameterChanged(m_file, m_stream, Model::Stream::DEFAULT, arg);
 }
 
@@ -211,7 +213,8 @@ void VideoPane::on_comboBox_VideoSize_activated(const QString &arg) {
 }
 
 void VideoPane::on_comboBox_Scale_activated(const QString &arg) {
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_FORCE_ASPECT, arg);
+    //TODO
+    //emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_FORCE_ASPECT, arg);
 }
 
 void VideoPane::on_comboBox_BlackStuff_activated(const QString &arg) {

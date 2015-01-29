@@ -311,32 +311,10 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QComboBox" name="comboBox_DefaultTrack">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
+                <widget class="QCheckBox" name="checkBoxDefaultStream">
+                 <property name="text">
+                  <string/>
                  </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>125</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                 <property name="sizeAdjustPolicy">
-                  <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>Piste1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Piste2</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -1003,13 +981,6 @@
                 <number>0</number>
                </property>
                <item>
-                <widget class="QCheckBox" name="checkBoxEncodage">
-                 <property name="text">
-                  <string>Encodage en deux passes</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <spacer name="horizontalSpacer_13">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -1021,6 +992,13 @@
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBoxEncodage">
+                 <property name="text">
+                  <string>Encodage en deux passes</string>
+                 </property>
+                </widget>
                </item>
                <item>
                 <widget class="QCheckBox" name="checkBoxTurbo">
