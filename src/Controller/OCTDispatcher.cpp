@@ -386,8 +386,20 @@ void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream
             }
 
             Model::Parameter *param = sW->newStream()->getParameters()->value(parameterName);
-            if(param != NULL)
-                param->setValue(value);
+            if(param == NULL){
+                switch(stream->getType()){
+                    case Model::Stream::VIDEO:
+                        param = Model::Video::getStaticParameter(parameterName);
+                    break;
+                    case Model::Stream::AUDIO:
+                        param = Model::Audio::getStaticParameter(parameterName);
+                    break;
+                    case Model::Stream::SUBTITLE:
+                        param = Model::Subtitle::getStaticParameter(parameterName);
+                    break;
+                }
+            }
+            param->setValue(value);
             checkProjectValidation();
             return;
         }
