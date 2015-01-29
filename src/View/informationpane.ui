@@ -66,7 +66,11 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_7">
       <item>
-       <widget class="QTreeView" name="treeView_Files"/>
+       <widget class="QTreeView" name="treeView_Files">
+        <property name="selectionMode">
+         <enum>QAbstractItemView::NoSelection</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

@@ -245,6 +245,9 @@
               <height>100</height>
              </size>
             </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
            </widget>
           </item>
          </layout>
