@@ -37,6 +37,14 @@ private slots:
     void updateSlider();
 
 
+    void on_lineEdit_Name_textChanged(const QString &name);
+
+    void on_comboBox_Langage_activated(const QString &langage);
+
+    void on_comboBox_Format_activated(const QString &format);
+
+    void on_comboBox_Encode_activated(const QString &encode);
+
 private:
     Ui::SubtitlePane *ui;
     Model::File *m_file;
@@ -49,6 +57,8 @@ private:
 
     void connectInterface();
     void parseSubtitleFile();
+signals:
+    void subtitleChanged( Model::File *, Model::Stream *, QString, QString );
 };
 
 #endif // SUBTITLEPANE_H

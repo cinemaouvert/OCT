@@ -60,10 +60,6 @@ SubtitlePane::~SubtitlePane()
     if(m_model) delete m_model;
 }
 
-void SubtitlePane::connectInterface(){
-
-}
-
 void SubtitlePane::on_playButton_clicked()
 {
 
@@ -182,4 +178,30 @@ void SubtitlePane::parseSubtitleFile(){
     m_model->setHorizontalHeaderItem(2,new QStandardItem(tr("Contenu")));
 
     ui->subtitleTableView->setModel(m_model);
+}
+
+void SubtitlePane::connectInterface(){
+    connect( this, SIGNAL( subtitleChanged( Model::File *, Model::Stream *, QString, QString ) ),
+             m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
+}
+
+
+void SubtitlePane::on_lineEdit_Name_textChanged(const QString &name)
+{
+    m_stream->setName(name);
+}
+
+void SubtitlePane::on_comboBox_Langage_activated(const QString &langage)
+{
+    emit subtitleChanged(m_file, m_stream, Model::Stream::LANGUAGE, langage);
+}
+
+void SubtitlePane::on_comboBox_Format_activated(const QString &format)
+{
+    emit subtitleChanged(m_file, m_stream, Model::Stream::CODEC_NAME, format);
+}
+
+void SubtitlePane::on_comboBox_Encode_activated(const QString &encode)
+{
+    emit subtitleChanged(m_file, m_stream, Model::Stream::SUBTITLE_CHAR_ENCODE, encode);
 }
