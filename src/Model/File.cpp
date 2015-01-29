@@ -100,12 +100,12 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
                             cpts++;
                             break;
                 }
-
-                StreamWrapper* theData;
-                theData= new StreamWrapper();
-
-                theData->setOldStream(s);
-                this->m_datas->push_back(theData);
+                if(Model::Stream::getEnumValue(type) != Model::Stream::ATTACHMENT){
+                    StreamWrapper* theData;
+                    theData= new StreamWrapper();
+                    theData->setOldStream(s);
+                    this->m_datas->push_back(theData);
+                }
             }
         }
     }
