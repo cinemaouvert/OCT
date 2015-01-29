@@ -77,19 +77,7 @@ void AudioPane::fillAudioCodecComboBox() {
 // ========================================================================== //
 void AudioPane::connectInterface() {
     // Connect audioCodecChanged with OCTdispathcer.
-    connect( this, SIGNAL( audioCodecChanged( Model::File *, Model::Stream *, QString, QString ) ),
-             m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
-    // Connect audioDelayChanged with OCTdispathcer.
-    connect( this, SIGNAL( audioDelayChanged( Model::File *, Model::Stream *, QString, QString ) ),
-             m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
-    // Connect audioSampleRateChanged with OCTdispathcer.
-    connect( this, SIGNAL( audioSampleRateChanged( Model::File *, Model::Stream *, QString, QString ) ),
-             m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
-    // Connect audioChannelsChanged with OCTdispathcer.
-    connect( this, SIGNAL( audioChannelsChanged( Model::File *, Model::Stream *, QString, QString ) ),
-             m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
-    // Connect audioResolutionChanged with OCTdispathcer.
-    connect( this, SIGNAL( audioResolutionChanged( Model::File *, Model::Stream *, QString, QString ) ),
+    connect( this, SIGNAL( audioParameterChanged( Model::File *, Model::Stream *, QString, QString ) ),
              m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
 }
 
@@ -98,21 +86,21 @@ void AudioPane::on_lineEdit_Name_textChanged( QString name ) {
 }
 
 void AudioPane::on_comboBox_AudioCodec_activated(const QString &arg) {
-    emit audioCodecChanged(m_file, m_stream, Model::Stream::CODEC_NAME, arg);
+    emit audioParameterChanged(m_file, m_stream, Model::Stream::CODEC_NAME, arg);
 }
 
 void AudioPane::on_comboBox_Delay_activated(const QString &arg) {
-    emit audioDelayChanged(m_file, m_stream, Model::Stream::AUDIO_DELAY, arg);
+    emit audioParameterChanged(m_file, m_stream, Model::Stream::AUDIO_DELAY, arg);
 }
 
 void AudioPane::on_comboBox_Sampling_activated(const QString &arg) {
-    emit audioSampleRateChanged(m_file, m_stream, Model::Stream::AUDIO_SAMPLE_RATE, arg);
+    emit audioParameterChanged(m_file, m_stream, Model::Stream::AUDIO_SAMPLE_RATE, arg);
 }
 
 void AudioPane::on_comboBox_Channels_activated(const QString &arg) {
-    emit audioChannelsChanged(m_file, m_stream, Model::Stream::AUDIO_CHANNELS, arg);
+    emit audioParameterChanged(m_file, m_stream, Model::Stream::AUDIO_CHANNELS, arg);
 }
 
 void AudioPane::on_comboBox_Size_activated(const QString &arg) {
-    emit audioResolutionChanged(m_file, m_stream, Model::Stream::RESOLUTION, arg);
+    emit audioParameterChanged(m_file, m_stream, Model::Stream::RESOLUTION, arg);
 }

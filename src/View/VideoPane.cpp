@@ -175,8 +175,7 @@ void VideoPane::on_timeStop_timeChanged(const QTime &time)
     ui->stopSlider->setValue(QTime(0,0).msecsTo(time));
 }
 
-void VideoPane::on_comboBox_Codec_activated(QString codec)
-{
+void VideoPane::on_comboBox_Codec_activated(QString codec) {
     // if the codec selected is the x264 codec, show the groupBox settings
     // associated to the x264 codec.
     if ( codec.compare("H264 (x264)") == 0 ) {
@@ -186,12 +185,14 @@ void VideoPane::on_comboBox_Codec_activated(QString codec)
     }
 }
 
-void VideoPane::on_horizontalSlider_VideoQuality_valueChanged()
-{
+void VideoPane::on_horizontalSlider_VideoQuality_valueChanged() {
     ui->spinBox_Quality->setValue(ui->horizontalSlider_VideoQuality->value());
 }
 
-void VideoPane::on_spinBox_Quality_valueChanged(int value)
-{
+void VideoPane::on_spinBox_Quality_valueChanged(int value) {
     ui->horizontalSlider_VideoQuality->setValue( value );
+}
+
+void VideoPane::on_lineEdit_TrackName_textChanged(const QString &name) {
+    this->m_stream->setName( name );
 }

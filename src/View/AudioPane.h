@@ -84,11 +84,7 @@ private slots:
     void on_comboBox_Size_activated(const QString &arg);
 
 signals:
-    void audioCodecChanged( Model::File *, Model::Stream *, QString, QString );
-    void audioDelayChanged( Model::File *, Model::Stream *, QString, QString );
-    void audioSampleRateChanged( Model::File *, Model::Stream *, QString, QString );
-    void audioChannelsChanged( Model::File *, Model::Stream *, QString, QString );
-    void audioResolutionChanged( Model::File *, Model::Stream *, QString, QString );
+    void audioParameterChanged( Model::File *, Model::Stream *, QString, QString );
 };
 
 #endif // AUDIOPANE_H
