@@ -105,6 +105,24 @@ void VideoPane::connectPlayer() {
     connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
 }
 
+void VideoPane::initPane()
+{
+    /*
+    int ixd ;
+    Model::Parameter *p = m_stream->getParameters()->value(Model::Stream::CODEC_NAME);
+    if(p){
+        QString codec = p->value();
+        ixd = ui->comboBox_Codec->findText(codec.toUpper());
+        if(ixd != -1)
+            ui->comboBox_Codec->setCurrentIndex(ixd);
+        else{
+            ui->comboBox_Codec->insertItem(0,codec);
+            ui->comboBox_Codec->setCurrentIndex(0);
+        }
+        ui->labelCodec->setText(tr("Original: ") + codec);
+    }*/
+}
+
 void VideoPane::connectInterface() {
     connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
     connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));

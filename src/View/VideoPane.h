@@ -83,6 +83,7 @@ private:
     void connectInterface();
     void loadFile(QString filepath);
     void connectPlayer();
+    void initPane();
 
     QString getCropValue();
 };
