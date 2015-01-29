@@ -62,7 +62,7 @@ void Controller::TreatmentThread::initTreatment(){
 void Controller::TreatmentThread::startTreatment() {
     //Init barre avancement
     qDebug() << "start treatment";
-
+    QStringList listToDelete;
     int nbSteps = 0;
     for(int i = 0; i < m_projects->size(); i++){
         Model::Project *p = m_projects->at(i);
@@ -78,6 +78,7 @@ void Controller::TreatmentThread::startTreatment() {
             Model::File *f = p->fileList()->at(j);
             if(f->hasToBeTranscoded()){
                 m_transcoder->transcode(f->getCommandLine());
+                listToDelete.append(f->getFilePath());
             }
             emit passedStep();
         }
@@ -85,6 +86,12 @@ void Controller::TreatmentThread::startTreatment() {
         emit passedStep();
         //m_exporter->createMagnetLink("", p->name());
         //m_exporter->sendInformationsToJSON(p);
+    }
+    foreach (QString filePath, listToDelete) {
+        QFile file(filePath);
+        if(file.exists()){
+            file.remove();
+        }
     }
     qDebug() << "ended treatment";
 }
