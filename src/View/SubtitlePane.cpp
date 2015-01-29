@@ -37,7 +37,7 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
     ui->subtitleTableView->horizontalHeader()->setStretchLastSection(true);
 
     parseSubtitleFile();
-
+    initPane();
     /*
      * TODO : file to load
     this->loadFile(m_file->getFilePath());
@@ -98,6 +98,36 @@ void SubtitlePane::loadFile(QString filepath)
     connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
     connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
 
+}
+
+void SubtitlePane::initPane()
+{
+    int ixd ;
+    Model::Parameter *p = m_stream->getParameters()->value(Model::Stream::CODEC_NAME);
+    if(p){
+        QString codec = p->value();
+        ixd = ui->comboBox_Format->findText(codec.toUpper());
+        if(ixd != -1)
+            ui->comboBox_Format->setCurrentIndex(ixd);
+    }
+    p = NULL;
+    p = m_stream->getParameters()->value(Model::Stream::LANGUAGE);
+    if(p){
+        QString langue = p->value();
+        ixd = ui->comboBox_Langage->findText(langue);
+        if(ixd != -1)
+            ui->comboBox_Langage->setCurrentIndex(ixd);
+    }
+    p = NULL;
+    p = m_stream->getParameters()->value(Model::Stream::SUBTITLE_CHAR_ENCODE);
+    if(p){
+        QString encode = p->value();
+        ixd = ui->comboBox_Encode->findText(encode);
+        if(ixd != -1)
+            ui->comboBox_Encode->setCurrentIndex(ixd);
+    }
+    QString name = m_stream->name();
+    ui->lineEdit_Name->setText(name);
 }
 
 void SubtitlePane::seek(int pos)

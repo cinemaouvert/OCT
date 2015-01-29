@@ -53,7 +53,7 @@ private:
     QStandardItemModel *m_model;
     Controller::OCTDispatcher *m_dispatcher;
     void loadFile(QString filepath);
-
+    void initPane();
 
     void connectInterface();
     void parseSubtitleFile();

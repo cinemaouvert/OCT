@@ -111,6 +111,36 @@
              <property name="sizeAdjustPolicy">
               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
              </property>
+             <item>
+              <property name="text">
+               <string>Allemand</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Anglais</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Arabe</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Francais</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Espagnol</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Italien</string>
+              </property>
+             </item>
             </widget>
            </item>
           </layout>
@@ -154,6 +184,16 @@
              <property name="sizeAdjustPolicy">
               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
              </property>
+             <item>
+              <property name="text">
+               <string>ASS</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>SRT</string>
+              </property>
+             </item>
             </widget>
            </item>
           </layout>
@@ -197,6 +237,21 @@
              <property name="sizeAdjustPolicy">
               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
              </property>
+             <item>
+              <property name="text">
+               <string>UTF-8</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>UTF-16</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>UTF-32</string>
+              </property>
+             </item>
             </widget>
            </item>
           </layout>
