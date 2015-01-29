@@ -85,8 +85,17 @@ void VideoPane::loadFile(QString filepath)
     ui->spinBox_Quality->setMinimum(0);
     ui->spinBox_Quality->setValue(0);
 
-    this->connectInterface();
+    this->connectPlayer();
 }
+
+void VideoPane::connectPlayer()
+{
+    connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
+    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
+}
+
 
 void VideoPane::connectInterface()
 {

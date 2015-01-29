@@ -49,14 +49,14 @@ Model::File::File() {}
 
 Model::File::File(QString filePath, QString info) : m_datas(NULL) {
     this->m_filePath = filePath;
-    QStringList path= filePath.split("\\");
+    QStringList path= filePath.split("/");
     QString finalOutput;
     for(int i = 0 ; i < path.size() ; i++){
         if(i== path.size()-1){
             finalOutput += "transcoded_";
             finalOutput += path.at(i);
         }else{
-            finalOutput += path.at(i) + "\\";
+            finalOutput += path.at(i) + "/";
         }
     }
 

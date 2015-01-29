@@ -59,6 +59,8 @@ private:
     // Class methods
     void connectInterface();
     void loadFile(QString filepath);
+    void connectPlayer();
+
 };
 
 #endif // VIDEOPANE_H
