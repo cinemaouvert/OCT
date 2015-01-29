@@ -64,13 +64,13 @@ void Controller::Updater::checkVersion(){
                this->getInstaller();
        }
     }else{
-        QMessageBox::warning(NULL, tr("Update OCT"), tr("Update unreachable, check your connection"));
+        QMessageBox::warning(NULL, tr("Update OCT"), tr("Update unreachable, maybe website is down or check your connection"));
     };
     reply->deleteLater();
 }
 
 void Controller::Updater::getInstaller(){
-    QNetworkAccessManager manager(this);
+    /*QNetworkAccessManager manager(this);
 
     QFile * file = new QFile ( QString(configOCT::NAME_INSTALLER), this );
     file->open(QIODevice::WriteOnly);
@@ -89,6 +89,6 @@ void Controller::Updater::getInstaller(){
 
     file->close();
     reply->deleteLater();
-
+    */
     QDesktopServices::openUrl(QUrl(this->link));
 }

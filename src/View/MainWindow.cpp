@@ -29,6 +29,7 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
 
     m_settingsW = new ParametersDialog();
     connect(ui->actionPreferences, SIGNAL(triggered()),SLOT(on_OpenSettings()));
+    connect(ui->actionMise_jour, SIGNAL(triggered()),SLOT(on_UpdateVersion()));
 }
 
 void View::MainWindow::refresh()
@@ -158,4 +159,8 @@ void View::MainWindow::on_tabWidget_currentChanged(int index)
 void View::MainWindow::on_OpenSettings()
 {
     m_settingsW->showWithRefresh();
+}
+
+void View::MainWindow::on_UpdateVersion(){
+    m_dispatcher->checkForUpdate();
 }

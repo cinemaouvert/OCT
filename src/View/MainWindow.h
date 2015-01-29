@@ -63,6 +63,7 @@ namespace View
             void on_OpenSettings();
 
 
+            void on_UpdateVersion();
     private:
             /**
              * @brief MainWindow.
