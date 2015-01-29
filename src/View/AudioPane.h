@@ -76,10 +76,19 @@ private:
 
 private slots:
     void on_lineEdit_Name_textChanged( QString name );
-    void on_comboBox_AudioCodec_activated(const QString &arg1);
+
+    void on_comboBox_AudioCodec_activated( const QString &arg );
+    void on_comboBox_Delay_activated( const QString &arg );
+    void on_comboBox_Sampling_activated(const QString &arg);
+    void on_comboBox_Channels_activated(const QString &arg);
+    void on_comboBox_Size_activated(const QString &arg);
 
 signals:
     void audioCodecChanged( Model::File *, Model::Stream *, QString, QString );
+    void audioDelayChanged( Model::File *, Model::Stream *, QString, QString );
+    void audioSampleRateChanged( Model::File *, Model::Stream *, QString, QString );
+    void audioChannelsChanged( Model::File *, Model::Stream *, QString, QString );
+    void audioResolutionChanged( Model::File *, Model::Stream *, QString, QString );
 };
 
 #endif // AUDIOPANE_H

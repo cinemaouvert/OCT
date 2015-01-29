@@ -29,23 +29,16 @@ public slots:
 
 private slots:
     void on_playButton_clicked();
-
     void on_stopButton_clicked();
-
     void on_stopSlider_sliderMoved(int position);
-
     void on_startSlider_sliderMoved(int position);
-
     void updateSlider();
-
     void on_timeStart_timeChanged(const QTime &time);
-
     void on_timeStop_timeChanged(const QTime &time);
 
     void on_comboBox_Codec_activated(QString codec);
 
     void on_horizontalSlider_VideoQuality_valueChanged();
-
     void on_spinBox_Quality_valueChanged( int value );
 
 private:
