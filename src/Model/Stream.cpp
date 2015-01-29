@@ -87,7 +87,13 @@ QStringList *Model::Stream::getCommand()
        if(command.contains("%")){
             command = command.arg(this->getUID());
        }
-       *myStringList << command << value ;
+       if(command != "" && value != "")
+         *myStringList << command << value ;
+       else if(command == "" && value != "")
+         *myStringList << value ;
+       else if(value == "" && command != "")
+         *myStringList << command ;
+
     }
     return myStringList;
 }

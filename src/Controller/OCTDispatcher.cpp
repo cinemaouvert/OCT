@@ -369,6 +369,7 @@ bool Controller::OCTDispatcher::checkPosterValidation()
 
 void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream *stream,QString parameterName, QString value)
 {
+    value = value.toLower();
     foreach (Model::StreamWrapper *sW, *(file->getStreamWrappers())) {
         if(*(sW->oldStream()) == *stream){
             if(sW->newStream() == NULL){

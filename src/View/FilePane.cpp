@@ -27,7 +27,7 @@ FilePane::FilePane(QWidget *parent) :
    // ui->tableView_ImportFile->horizontalHeader()->setVisible(false);
     ui->tableView_ImportFile->verticalHeader()->setVisible(false);
   //  ui->tableView_ImportFile->setAlternatingRowColors(true);
-    ui->tableView_ImportFile->horizontalHeader()->setStretchLastSection(true);
+    //ui->tableView_ImportFile->horizontalHeader()->setStretchLastSection(true);
     ui->tableView_ImportFile->resizeColumnsToContents();
     ui->listView_ImportFile->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->listView_Export->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -222,6 +222,13 @@ void FilePane::refresh()
             }
 
         }
+        ui->tableView_ImportFile->resizeColumnsToContents();
+        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
+        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(1,QHeaderView::ResizeToContents);
+        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(2,QHeaderView::ResizeToContents);
+        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(3,QHeaderView::ResizeToContents);
+        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(4,QHeaderView::ResizeToContents);
+        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(5,QHeaderView::ResizeToContents);
 
     }
 
