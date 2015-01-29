@@ -54,6 +54,11 @@ const QString Model::Stream::AUDIO_DELAY ="delay";
 const QString Model::Stream::AUDIO_SAMPLE_RATE ="sample_rate";
 const QString Model::Stream::AUDIO_CHANNELS = "channels";
 const QString Model::Stream::SUBTITLE_CHAR_ENCODE ="charEncode";
+const QString Model::Stream::VIDEO_H264_PRESET = "h264_preset";
+const QString Model::Stream::VIDEO_H264_QUALITY = "h264_quality";
+const QString Model::Stream::VIDEO_H264_BASELINE = "h264_baseline";
+const QString Model::Stream::VIDEO_H264_LEVEL = "h264_level";
+const QString Model::Stream::VIDEO_H264_TUNE = "h264_tune";
 
 void Model::Stream::setParameter(QString name, Parameter *value) {
     this->m_parameters->insert(name,value);

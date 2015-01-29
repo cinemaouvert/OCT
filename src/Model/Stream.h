@@ -135,6 +135,11 @@ namespace Model
 			static const QString AUDIO_SAMPLE_RATE;
 			static const QString AUDIO_CHANNELS;
 			static const QString SUBTITLE_CHAR_ENCODE;
+            static const QString VIDEO_H264_PRESET;
+            static const QString VIDEO_H264_QUALITY;
+            static const QString VIDEO_H264_BASELINE;
+            static const QString VIDEO_H264_LEVEL;
+            static const QString VIDEO_H264_TUNE;
 
             bool operator==(const Stream& s);
 

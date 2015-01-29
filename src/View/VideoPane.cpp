@@ -234,46 +234,41 @@ void VideoPane::on_lineEdit_OptionsFfmpeg_textChanged(const QString &arg) {
 }
 
 void VideoPane::on_spinBox_Quality_valueChanged(const QString &arg) {
-    // TODO :
-    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_QUALITY , arg);
 }
 
 void VideoPane::on_lineEdit_AverageBitrate_textChanged(const QString &arg) {
     emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_AVG_BIT_RATE, arg);
 }
 
-void VideoPane::on_checkBox_clicked( bool checked ) {
+void VideoPane::on_checkBoxEncodage_clicked( bool checked ) {
     QString arg = "";
-    checked ? arg = "TRUE" : "FALSE";
+    arg = checked ? "TRUE" : "FALSE";
     // TODO :
     // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
 }
 
-void VideoPane::on_checkBox_2_clicked( bool checked ) {
+void VideoPane::on_checkBoxTurbo_clicked( bool checked ) {
     QString arg = "";
-    checked ? arg = "TRUE" : "FALSE";
+    arg = checked ? "TRUE" : "FALSE";
     // TODO :
     // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
 }
 
 void VideoPane::on_comboBox_x264Preset_activated( const QString &arg ) {
-    // TODO :
-    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_PRESET , arg);
 }
 
 void VideoPane::on_comboBox_x264Tune_activated( const QString &arg ) {
-    // TODO :
-    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_TUNE , arg);
 }
 
 void VideoPane::on_comboBox_x264Profile_activated( const QString &arg ) {
-    // TODO :
-    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_BASELINE , arg);
 }
 
 void VideoPane::on_comboBox_x264Level_activated( const QString &arg ) {
-    // TODO :
-    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_LEVEL , arg);
 }
 
 void VideoPane::on_spinTop_valueChanged( const QString &arg ) {
@@ -293,13 +288,11 @@ void VideoPane::on_spinBot_valueChanged( const QString &arg ) {
 }
 
 void VideoPane::on_timeStart_dateTimeChanged( const QDateTime &dateTime ) {
-    // TODO :
-    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_START_TIME, dateTime.toString("hh:mm:ss.z"));
 }
 
 void VideoPane::on_timeStop_dateTimeChanged( const QDateTime &dateTime ) {
-    // TODO :
-    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_STOP_POINT , dateTime.toString("hh:mm:ss.z"));
 }
 
 

@@ -28,8 +28,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>492</width>
-         <height>708</height>
+         <width>525</width>
+         <height>689</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1003,7 +1003,7 @@
                 <number>0</number>
                </property>
                <item>
-                <widget class="QCheckBox" name="checkBox">
+                <widget class="QCheckBox" name="checkBoxEncodage">
                  <property name="text">
                   <string>Encodage en deux passes</string>
                  </property>
@@ -1023,7 +1023,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QCheckBox" name="checkBox_2">
+                <widget class="QCheckBox" name="checkBoxTurbo">
                  <property name="text">
                   <string>Turbo au premier passage</string>
                  </property>

@@ -51,32 +51,21 @@ private slots:
     void on_comboBox_Filter_activated(const QString &arg);
     // TODO :
     void on_lineEdit_OptionsFfmpeg_textChanged(const QString &arg);
-    // TODO :
     void on_spinBox_Quality_valueChanged(const QString &arg);
     void on_lineEdit_AverageBitrate_textChanged(const QString &arg);
     // TODO :
-    void on_checkBox_clicked(bool checked);
+    void on_checkBoxEncodage_clicked(bool checked);
     // TODO :
-    void on_checkBox_2_clicked(bool checked);
-    // TODO :
+    void on_checkBoxTurbo_clicked(bool checked);
     void on_comboBox_x264Preset_activated(const QString &arg);
-    // TODO :
     void on_comboBox_x264Tune_activated(const QString &arg);
-    // TODO :
     void on_comboBox_x264Profile_activated(const QString &arg);
-    // TODO :
     void on_comboBox_x264Level_activated(const QString &arg);
-    // TODO :
     void on_spinTop_valueChanged(const QString &arg);
-    // TODO :
     void on_spinLeft_valueChanged(const QString &arg);
-    // TODO :
     void on_spinRight_valueChanged(const QString &arg);
-    // TODO :
     void on_spinBot_valueChanged(const QString &arg);
-    // TODO :
     void on_timeStart_dateTimeChanged(const QDateTime &dateTime);
-    // TODO :
     void on_timeStop_dateTimeChanged(const QDateTime &dateTime);
 
 signals:

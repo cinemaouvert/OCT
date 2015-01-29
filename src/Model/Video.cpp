@@ -223,6 +223,23 @@ void Model::Video::initStaticParameters()
 
     Parameter *crop= new Parameter("-filter:v","Crop the video (w:h:x:y)","%1");
     m_staticParameters.insert(Model::Stream::VIDEO_CROP,crop);
+
+    Parameter *preset= new Parameter("-preset","Encoding speed and compression radio for h264","%1");
+    m_staticParameters.insert(Model::Stream::VIDEO_H264_PRESET,preset);
+
+    Parameter *h264_quality= new Parameter("-crf","CRF Value for H264 (0->51) 0 is lossless","%1");
+    m_staticParameters.insert(Model::Stream::VIDEO_H264_QUALITY,h264_quality);
+
+    Parameter *h264_profile= new Parameter("-profile:v","Advanced features for h264","%1");
+    m_staticParameters.insert(Model::Stream::VIDEO_H264_BASELINE,h264_profile);
+
+    Parameter *h264_level= new Parameter("-level","Advanced features for h264","%1");
+    m_staticParameters.insert(Model::Stream::VIDEO_H264_LEVEL,h264_level);
+
+    Parameter *h264_tune= new Parameter("-tune","Advanced features for h264","%1");
+    m_staticParameters.insert(Model::Stream::VIDEO_H264_TUNE,h264_tune);
+
+
 }
 
 int Model::Video::getType() const
