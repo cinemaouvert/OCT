@@ -277,23 +277,19 @@ void VideoPane::on_comboBox_x264Level_activated( const QString &arg ) {
 }
 
 void VideoPane::on_spinTop_valueChanged( const QString &arg ) {
-    // TODO :
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , getCropValue());
 }
 
 void VideoPane::on_spinLeft_valueChanged( const QString &arg ) {
-    // TODO :
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , getCropValue());
 }
 
 void VideoPane::on_spinRight_valueChanged( const QString &arg ) {
-    // TODO :
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , getCropValue());
 }
 
 void VideoPane::on_spinBot_valueChanged( const QString &arg ) {
-    // TODO :
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_CROP , getCropValue());
 }
 
 void VideoPane::on_timeStart_dateTimeChanged( const QDateTime &dateTime ) {
@@ -304,4 +300,18 @@ void VideoPane::on_timeStart_dateTimeChanged( const QDateTime &dateTime ) {
 void VideoPane::on_timeStop_dateTimeChanged( const QDateTime &dateTime ) {
     // TODO :
     // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+}
+
+
+QString VideoPane::getCropValue(){
+    QString resolution = m_stream->getParameters()->value(Model::Stream::RESOLUTION)->value();
+    QString width = resolution.split("x").at(0);
+    QString height = resolution.split("x").at(1);
+
+    width = width.remove("scale=");
+
+    width = QString::number((width.toInt() - ui->spinLeft->value()) - ui->spinRight->value());
+    height = QString::number((height.toInt() - ui->spinTop->value()) - ui->spinBot->value());
+
+    return (width + ":" + height + ":" + ui->spinLeft->text() + ":" + ui->spinTop->text());
 }

@@ -95,6 +95,7 @@ private:
     void loadFile(QString filepath);
     void connectPlayer();
 
+    QString getCropValue();
 };
 
 #endif // VIDEOPANE_H
