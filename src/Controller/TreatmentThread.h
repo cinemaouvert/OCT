@@ -119,7 +119,11 @@ namespace Controller
              * @brief This method stop the treatment queue.
              */
             void stopTreatment();
-	};
+            /**
+             * @brief This method restart the treatment queue after a pause.
+             */
+            void restartTreatment();
+    };
 }
 
 #endif

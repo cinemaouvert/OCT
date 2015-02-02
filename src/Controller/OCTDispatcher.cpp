@@ -246,27 +246,20 @@ void Controller::OCTDispatcher::startTreatment() {
 }
 
 void Controller::OCTDispatcher::pauseTreatment() {
-    if(m_startTreatmentThread != NULL){
-        if(m_startTreatmentThread->isRunning()){
-            qDebug()<< "PAUSE";
-            m_startTreatmentThread->msleep(30000);
-        }else{
-            qDebug() << "REPRENDRE";
-            m_startTreatmentThread->start();
-        }
-    }
+    if(m_startTreatmentThread != NULL)
+        m_treatmentThread->pauseTreatment();
+
 }
 
 void Controller::OCTDispatcher::restartTreatment() {
-	throw "Not yet implemented";
+    if(m_startTreatmentThread != NULL)
+        m_treatmentThread->restartTreatment();
 }
 
 void Controller::OCTDispatcher::stopTreatment() {
     if(m_startTreatmentThread != NULL){
         if(m_startTreatmentThread->isRunning())
             m_treatmentThread->stopTreatment();
-           // m_startTreatmentThread->terminate();
-
     }
 }
 

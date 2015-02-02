@@ -123,3 +123,8 @@ void Controller::TreatmentThread::pauseTreatment() {
 void Controller::TreatmentThread::stopTreatment() {
     m_stop = true;
 }
+
+void Controller::TreatmentThread::restartTreatment(){
+    this->m_pause = false;
+    this->startTreatment();
+}

@@ -86,6 +86,8 @@ private:
     int m_progressMax;
     int m_currentSteps;
 
+    int m_pause;
+
     ///
     /// \brief Connect the interface to the model through the OCTdispatcher.
     ///

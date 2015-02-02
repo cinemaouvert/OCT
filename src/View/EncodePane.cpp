@@ -47,6 +47,7 @@ EncodePane::EncodePane(QWidget *parent) :
     ui->listViewProjects->setAlternatingRowColors(true);
     ui->listViewProjects->setEncodePane(this);
     m_currentSteps = 0;
+    m_pause = false;
 }
 
 EncodePane::~EncodePane()
@@ -140,5 +141,11 @@ void EncodePane::on_pushButton_Cancel_clicked()
 
 void EncodePane::on_pushButton_Pause_clicked()
 {
-    m_dispatcher->pauseTreatment();
+    if(m_pause){
+        m_dispatcher->restartTreatment();
+        m_pause = false;
+    }else{
+        m_dispatcher->pauseTreatment();
+        m_pause = true;
+    }
 }
