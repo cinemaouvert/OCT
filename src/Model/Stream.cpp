@@ -93,11 +93,11 @@ QStringList *Model::Stream::getCommand()
             command = command.arg(this->getUID());
        }
        if(command != "" && value != "")
-         *myStringList << command << value ;
+         *myStringList << command.split(" ") << value.split(" ") ;
        else if(command == "" && value != "")
-         *myStringList << value ;
+         *myStringList << value.split(" ") ;
        else if(value == "" && command != "")
-         *myStringList << command ;
+         *myStringList << command.split(" ") ;
 
     }
     return myStringList;
