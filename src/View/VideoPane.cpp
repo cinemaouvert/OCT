@@ -135,18 +135,18 @@ void VideoPane::initVideoScaleList() {
 }
 
 void VideoPane::initVideoBlackStuffList() {
-    m_blackStuffMap.insert( tr( "Oui" ), 1 );
-    m_blackStuffMap.insert( tr( "Non" ), 0 );
+    m_blackStuffMap.insert( tr( "Oui" ), "1" );
+    m_blackStuffMap.insert( tr( "Non" ), "0" );
 
     ui->comboBox_BlackStuff->clear();
     ui->comboBox_BlackStuff->insertItems( 0, m_blackStuffMap.keys() );
 }
 
 void VideoPane::initVideoFramePerSecondList() {
-    m_framePerSecondMap.insert( tr( "30" ), 30 );
-    m_framePerSecondMap.insert( tr( "25" ), 25 );
-    m_framePerSecondMap.insert( tr( "24" ), 24 );
-    m_framePerSecondMap.insert( tr( "20" ), 20 );
+    m_framePerSecondMap.insert( tr( "30" ), "30" );
+    m_framePerSecondMap.insert( tr( "25" ), "25" );
+    m_framePerSecondMap.insert( tr( "24" ), "24" );
+    m_framePerSecondMap.insert( tr( "20" ), "20" );
 
     ui->comboBox_Frames->clear();
     ui->comboBox_Frames->insertItems( 0, m_framePerSecondMap.keys() );
@@ -198,23 +198,23 @@ void VideoPane::initVideox264ProfileList() {
 
 void VideoPane::initVideox264LevelList() {
     m_x264LevelMap.insert( tr( "Auto" ), "auto" );
-    m_x264LevelMap.insert( tr( "1.0" ), 1.0 );
+    m_x264LevelMap.insert( tr( "1.0" ), "1.0" );
     m_x264LevelMap.insert( tr( "1b" ), "1b" );
-    m_x264LevelMap.insert( tr( "1.1" ), 1.1 );
-    m_x264LevelMap.insert( tr( "1.2" ), 1.2 );
-    m_x264LevelMap.insert( tr( "1.3" ), 1.3 );
-    m_x264LevelMap.insert( tr( "2.0" ), 2.0 );
-    m_x264LevelMap.insert( tr( "2.1" ), 2.1 );
-    m_x264LevelMap.insert( tr( "2.2" ), 2.2 );
-    m_x264LevelMap.insert( tr( "3.0" ), 3.0 );
-    m_x264LevelMap.insert( tr( "3.1" ), 3.1 );
-    m_x264LevelMap.insert( tr( "3.2" ), 3.2 );
-    m_x264LevelMap.insert( tr( "4.0" ), 4.0 );
-    m_x264LevelMap.insert( tr( "4.1" ), 4.1 );
-    m_x264LevelMap.insert( tr( "4.2" ), 4.2 );
-    m_x264LevelMap.insert( tr( "5.0" ), 5.0 );
-    m_x264LevelMap.insert( tr( "5.1" ), 5.1 );
-    m_x264LevelMap.insert( tr( "5.2" ), 5.2 );
+    m_x264LevelMap.insert( tr( "1.1" ), "1.1" );
+    m_x264LevelMap.insert( tr( "1.2" ), "1.2" );
+    m_x264LevelMap.insert( tr( "1.3" ), "1.3" );
+    m_x264LevelMap.insert( tr( "2.0" ), "2.0" );
+    m_x264LevelMap.insert( tr( "2.1" ), "2.1" );
+    m_x264LevelMap.insert( tr( "2.2" ), "2.2" );
+    m_x264LevelMap.insert( tr( "3.0" ), "3.0" );
+    m_x264LevelMap.insert( tr( "3.1" ), "3.1" );
+    m_x264LevelMap.insert( tr( "3.2" ), "3.2" );
+    m_x264LevelMap.insert( tr( "4.0" ), "4.0" );
+    m_x264LevelMap.insert( tr( "4.1" ), "4.1" );
+    m_x264LevelMap.insert( tr( "4.2" ), "4.2" );
+    m_x264LevelMap.insert( tr( "5.0" ), "5.0" );
+    m_x264LevelMap.insert( tr( "5.1" ), "5.1" );
+    m_x264LevelMap.insert( tr( "5.2" ), "5.2" );
 
     ui->comboBox_x264Level->clear();
     ui->comboBox_x264Level->insertItems( 0, m_x264LevelMap.keys() );
