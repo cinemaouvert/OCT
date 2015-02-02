@@ -134,36 +134,6 @@
                 <property name="sizeAdjustPolicy">
                  <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                 </property>
-                <item>
-                 <property name="text">
-                  <string>Allemand</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Anglais</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Arabe</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Espagnol</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Français</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Italien</string>
-                 </property>
-                </item>
                </widget>
               </item>
               <item>
@@ -356,16 +326,6 @@
                 <property name="sizeAdjustPolicy">
                  <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                 </property>
-                <item>
-                 <property name="text">
-                  <string>96 kHz (recommandé)</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>48 kHz</string>
-                 </property>
-                </item>
                </widget>
               </item>
               <item>
@@ -432,16 +392,6 @@
                 <property name="sizeAdjustPolicy">
                  <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                 </property>
-                <item>
-                 <property name="text">
-                  <string>Stéréo</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Mono</string>
-                 </property>
-                </item>
                </widget>
               </item>
               <item>
@@ -511,21 +461,6 @@
                 <property name="sizeAdjustPolicy">
                  <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                 </property>
-                <item>
-                 <property name="text">
-                  <string>32 bits</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>24 bits</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>16 bits</string>
-                 </property>
-                </item>
                </widget>
               </item>
               <item>

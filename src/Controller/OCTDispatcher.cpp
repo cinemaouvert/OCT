@@ -228,14 +228,20 @@ void Controller::OCTDispatcher::startTreatment() {
     m_treatmentThread->initTreatment();
 
     m_startTreatmentThread = new QThread();
-
-    connect(m_startTreatmentThread, SIGNAL(started()), m_treatmentThread, SLOT(startTreatment()));
+    m_treatmentThread->moveToThread(m_startTreatmentThread);
+    /*connect(m_startTreatmentThread, SIGNAL(started()), m_treatmentThread, SLOT(startTreatment()));
     connect(m_treatmentThread, SIGNAL(finished()), m_startTreatmentThread, SLOT(quit()));
     //connect(m_transcoder, SIGNAL(finished()), m_transcoder, SLOT(deleteLater()));
 
+    connect(m_startTreatmentThread, SIGNAL(finished()), m_startTreatmentThread, SLOT(deleteLater()));*/
+
+
+    connect(m_startTreatmentThread, SIGNAL(started()), m_treatmentThread, SLOT(startTreatment()));
+    connect(m_treatmentThread, SIGNAL(finished()), m_startTreatmentThread, SLOT(quit()));
+    connect(m_treatmentThread, SIGNAL(finished()), m_treatmentThread, SLOT(deleteLater()));
     connect(m_startTreatmentThread, SIGNAL(finished()), m_startTreatmentThread, SLOT(deleteLater()));
 
-    m_treatmentThread->moveToThread(m_startTreatmentThread);
+
     m_startTreatmentThread->start();
 }
 
@@ -258,7 +264,8 @@ void Controller::OCTDispatcher::restartTreatment() {
 void Controller::OCTDispatcher::stopTreatment() {
     if(m_startTreatmentThread != NULL){
         if(m_startTreatmentThread->isRunning())
-            m_startTreatmentThread->terminate();
+            m_treatmentThread->stopTreatment();
+           // m_startTreatmentThread->terminate();
 
     }
 }

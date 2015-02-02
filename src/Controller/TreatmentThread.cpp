@@ -45,7 +45,6 @@ Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, C
     m_projects(NULL),
     m_projectsOriginal(projects)
 {
-
 }
 
 void Controller::TreatmentThread::initTreatment(){
@@ -57,49 +56,70 @@ void Controller::TreatmentThread::initTreatment(){
         Model::Project *p = new Model::Project(*m_projectsOriginal->at(i));
         m_projects->push_back(p);
     }
+
+    m_stop = false;
+    m_pause = false;
+    m_indexTreatment_i = 0;
+    m_indexTreatment_j = 0;
+    m_listToDelete.clear();
 }
 
 void Controller::TreatmentThread::startTreatment() {
-    //Init barre avancement
+    int start_i = m_indexTreatment_i;
+    int start_j = m_indexTreatment_j;
+
+
     qDebug() << "start treatment";
-    QStringList listToDelete;
     int nbSteps = 0;
     for(int i = 0; i < m_projects->size(); i++){
         Model::Project *p = m_projects->at(i);
         nbSteps += p->fileList()->size();
     }
-    qDebug() << "HERE";
-    emit initProgress(nbSteps+1);
 
-    for(int i = 0; i < m_projects->size(); i++){
+    if(start_i == 0 && start_j == 0)
+        emit initProgress(nbSteps+1);
+
+    for(int i = start_i; i < m_projects->size() && !m_stop && !m_pause; i++){
         Model::Project *p = m_projects->at(i);
-        for(int j = 0; j < p->fileList()->size(); j++){
+        for(int j = start_j; j < p->fileList()->size() && !m_stop && !m_pause; j++){
 
             Model::File *f = p->fileList()->at(j);
             if(f->hasToBeTranscoded()){
                 m_transcoder->transcode(f->getCommandLine());
-                listToDelete.append(f->getFilePath());
+                m_listToDelete.append(f->getFilePath());
             }
+            m_indexTreatment_j = j;
             emit passedStep();
         }
-        QString filepath = m_merger->createMKVFile(p);
-        emit passedStep();
-        //m_exporter->createMagnetLink("", p->name());
-        //m_exporter->sendInformationsToJSON(p);
+
+        if(m_indexTreatment_j == p->fileList()->size()-1){
+            m_indexTreatment_j = 0;
+            QString filepath = m_merger->createMKVFile(p);
+            emit passedStep();
+            //m_exporter->createMagnetLink("", p->name());
+            //m_exporter->sendInformationsToJSON(p);
+            m_indexTreatment_i = i + 1; // Projet fini donc on passe au suivant si il y a pause
+        }else{
+           m_indexTreatment_i = i; //On reste au projet courant
+        }
+
     }
-    foreach (QString filePath, listToDelete) {
-        QFile file(filePath);
-        if(file.exists()){
-            file.remove();
+
+    if(!m_pause){
+        foreach (QString filePath, m_listToDelete) {
+            QFile file(filePath);
+            if(file.exists()){
+                file.remove();
+            }
         }
     }
     qDebug() << "ended treatment";
 }
 
 void Controller::TreatmentThread::pauseTreatment() {
-
+    m_pause = true;
 }
 
 void Controller::TreatmentThread::stopTreatment() {
-
+    m_stop = true;
 }

@@ -91,6 +91,12 @@ namespace Controller
             TreatmentThread(QList<Model::Project*> *projects, Controller::Transcoder *transcoder, Controller::Merger *merger, Controller::Exporter *exporter);
 
             void initTreatment();
+    private:
+            volatile bool m_stop;
+            volatile bool m_pause;
+            int m_indexTreatment_i;
+            int m_indexTreatment_j;
+            QStringList m_listToDelete;
     signals:
             void finished();
             void initProgress(int value);

@@ -28,8 +28,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>525</width>
-         <height>689</height>
+         <width>505</width>
+         <height>685</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -143,16 +143,6 @@
                  <property name="sizeAdjustPolicy">
                   <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>H264 (x264)</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>VP8</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -225,36 +215,6 @@
                  <property name="sizeAdjustPolicy">
                   <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>Allemand</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Anglais</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Arabe</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Français</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Espagnol</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Italien</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -390,21 +350,6 @@
                  <property name="sizeAdjustPolicy">
                   <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>1080p (1920 x 1080)</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>720p (1280 x 720)</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>480p (854 x 480)</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -471,21 +416,6 @@
                  <property name="sizeAdjustPolicy">
                   <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>16:9</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>14:10</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>4:3</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -561,16 +491,6 @@
                  <property name="sizeAdjustPolicy">
                   <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>Oui</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Non</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -643,26 +563,6 @@
                  <property name="sizeAdjustPolicy">
                   <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>30</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>25</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>24</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>20</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -1048,56 +948,6 @@
                    <height>16777215</height>
                   </size>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>Ultrafast</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Super fast</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Very fast</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Faster</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Fast</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Medium</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Slow</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Slower</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Very slow</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Placebo</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -1161,41 +1011,6 @@
                    <height>25</height>
                   </size>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>None</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Film</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Animation</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Grain</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Still image</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>PSNR</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Fast decode</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -1256,26 +1071,6 @@
                    <height>25</height>
                   </size>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>Auto</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Baseline</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Main</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>High</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -1339,96 +1134,6 @@
                    <height>25</height>
                   </size>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>Auto</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>1.0</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>1b</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>1.1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>1.2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>1.3</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>2.0</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>2.1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>2.2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>3.0</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>3.1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>3.2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>4.0</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>4.1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>4.2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>5.0</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>5.1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>5.2</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
