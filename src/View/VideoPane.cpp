@@ -338,7 +338,7 @@ void VideoPane::on_lineEdit_TrackName_textChanged(const QString &name) {
 void VideoPane::on_comboBox_Codec_activated( QString codec ) {
     // if the codec selected is the x264 codec, show the groupBox settings
     // associated to the x264 codec.
-    if ( codec.compare("H264 (x264)") == 0 ) {
+    if ( m_codecMap.value(codec).compare("h264") == 0 ) {
         ui->groupBox_x264Settings->show();
     } else {
         ui->groupBox_x264Settings->hide();
