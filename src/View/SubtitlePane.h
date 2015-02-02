@@ -57,6 +57,11 @@ private:
 
     void connectInterface();
     void parseSubtitleFile();
+
+    QMap<QString,QString> m_languageMap;
+    QMap<QString,QString> m_formatMap;
+    QMap<QString,QString> m_encodingMap;
+    void initLists();
 signals:
     void subtitleChanged( Model::File *, Model::Stream *, QString, QString );
 };

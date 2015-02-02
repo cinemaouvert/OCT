@@ -67,7 +67,12 @@ private:
     Model::File *m_file;
     Model::Stream *m_stream;
     Controller::OCTDispatcher *m_dispatcher;
-
+    QMap<QString, QString> m_languageMap;
+    QMap<QString, QString> m_codecMap;
+    QMap<QString, QString> m_delaiMap;
+    QMap<QString, QString> m_sampleRateMap;
+    QMap<QString, QString> m_chanelsMap;
+    QMap<QString, QString> m_resolutionMap;
 
     ///
     /// \brief Connect the interface to the model through the OCTdispatcher.
@@ -75,6 +80,7 @@ private:
     void connectInterface();
     void initPane();
 
+    void initLists();
 private slots:
     void on_lineEdit_Name_textChanged( QString name );
 

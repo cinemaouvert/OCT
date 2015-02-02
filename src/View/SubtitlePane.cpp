@@ -38,8 +38,8 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
 
 
     parseSubtitleFile();
-    initPane();
     initLists();
+    initPane();
 
     /*
      * TODO : file to load

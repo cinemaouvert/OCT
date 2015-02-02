@@ -52,7 +52,51 @@ AudioPane::AudioPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
 {
     ui->setupUi(this);
     fillAudioCodecComboBox();
+    initLists();
     initPane();
+}
+
+void AudioPane::initLists(){
+    m_languageMap.insert(tr("Allemand"),"al");
+    m_languageMap.insert(tr("Anglais"),"en");
+    m_languageMap.insert(tr("Arabe"),"ar");
+    m_languageMap.insert(tr("Français"),"fr");
+    m_languageMap.insert(tr("Espagnol"),"es");
+    m_languageMap.insert(tr("Italien"),"it");
+
+    ui->comboBox_Langage->clear();
+    ui->comboBox_Langage->insertItems(0,m_languageMap.keys());
+
+    m_codecMap.insert(tr("FLAC"),"flac");
+    m_codecMap.insert(tr("AAC"),"aac");
+    m_codecMap.insert(tr("MP1"),"mp1");
+    m_codecMap.insert(tr("MP2"),"mp2");
+    m_codecMap.insert(tr("MP3"),"mp3");
+
+    ui->comboBox_AudioCodec->clear();
+    ui->comboBox_AudioCodec->insertItems(0,m_codecMap.keys());
+
+    //TODO FILL DELAI
+    //m_delaiMap
+
+    m_sampleRateMap.insert(tr("48 kHz"), "48k");
+    m_sampleRateMap.insert(tr("96 kHz (Recommendé)"),"96k");
+
+    ui->comboBox_Sampling->clear();
+    ui->comboBox_Sampling->insertItems(0,m_sampleRateMap.keys());
+
+    m_chanelsMap.insert(tr("Stéréo"),"2");
+    m_chanelsMap.insert(tr("Mono"),"1");
+
+    ui->comboBox_Channels->clear();
+    ui->comboBox_Channels->insertItems(0,m_chanelsMap.keys());
+
+    m_resolutionMap.insert(tr("16 bits"),"16");
+    m_resolutionMap.insert(tr("24 bits"),"24");
+    m_resolutionMap.insert(tr("35 bits"),"32");
+
+    ui->comboBox_Size->clear();
+    ui->comboBox_Size->insertItems(0,m_resolutionMap.keys());
 }
 
 AudioPane::~AudioPane()
@@ -194,21 +238,21 @@ void AudioPane::on_lineEdit_Name_textChanged( QString name ) {
 }
 
 void AudioPane::on_comboBox_AudioCodec_activated(const QString &arg) {
-    emit audioParameterChanged(m_file, m_stream, Model::Stream::CODEC_NAME, arg);
+    emit audioParameterChanged(m_file, m_stream, Model::Stream::CODEC_NAME, m_codecMap.value(arg));
 }
 
 void AudioPane::on_comboBox_Delay_activated(const QString &arg) {
-    emit audioParameterChanged(m_file, m_stream, Model::Stream::AUDIO_DELAY, arg);
+    emit audioParameterChanged(m_file, m_stream, Model::Stream::AUDIO_DELAY, m_delaiMap.value(arg));
 }
 
 void AudioPane::on_comboBox_Sampling_activated(const QString &arg) {
-    emit audioParameterChanged(m_file, m_stream, Model::Stream::AUDIO_SAMPLE_RATE, arg);
+    emit audioParameterChanged(m_file, m_stream, Model::Stream::AUDIO_SAMPLE_RATE, m_sampleRateMap.value(arg));
 }
 
 void AudioPane::on_comboBox_Channels_activated(const QString &arg) {
-    emit audioParameterChanged(m_file, m_stream, Model::Stream::AUDIO_CHANNELS, arg);
+    emit audioParameterChanged(m_file, m_stream, Model::Stream::AUDIO_CHANNELS, m_chanelsMap.value(arg));
 }
 
 void AudioPane::on_comboBox_Size_activated(const QString &arg) {
-    emit audioParameterChanged(m_file, m_stream, Model::Stream::RESOLUTION, arg);
+    emit audioParameterChanged(m_file, m_stream, Model::Stream::RESOLUTION, m_resolutionMap.value(arg));
 }
