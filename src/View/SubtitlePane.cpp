@@ -36,8 +36,11 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
     ui->subtitleTableView->setAlternatingRowColors(true);
     ui->subtitleTableView->horizontalHeader()->setStretchLastSection(true);
 
+
     parseSubtitleFile();
     initPane();
+    initLists();
+
     /*
      * TODO : file to load
     this->loadFile(m_file->getFilePath());
@@ -45,6 +48,31 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
     player->setVideoStream(this->m_streamId);
     */
 
+}
+
+void SubtitlePane::initLists(){
+    m_languageMap.insert("Allemand","al");
+    m_languageMap.insert("Anglais","en");
+    m_languageMap.insert("Arabe","ar");
+    m_languageMap.insert("Français","fr");
+    m_languageMap.insert("Espagnol","es");
+    m_languageMap.insert("Italien","it");
+
+    m_formatMap.insert("SRT","srt");
+    m_formatMap.insert("ASS","ass");
+
+    m_encodingMap.insert("UTF-8","UTF8");
+    m_encodingMap.insert("UTF-16","UTF16");
+    m_encodingMap.insert("UTF-32","UTF32");
+
+    ui->comboBox_Langage->clear();
+    ui->comboBox_Langage->insertItems(0,m_languageMap.keys());
+
+    ui->comboBox_Encode->clear();
+    ui->comboBox_Encode->insertItems(0,m_encodingMap.keys());
+
+    ui->comboBox_Format->clear();
+    ui->comboBox_Format->insertItems(0,m_formatMap.keys());
 }
 
 void SubtitlePane::setDispatcher(Controller::OCTDispatcher *dispatcher)
@@ -93,10 +121,6 @@ void SubtitlePane::loadFile(QString filepath)
 
     ui->timeSlider->setMaximum(m_player->duration());
 
-    connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
-    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
-    connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
-    connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
 
 }
 
@@ -213,6 +237,11 @@ void SubtitlePane::parseSubtitleFile(){
 void SubtitlePane::connectInterface(){
     connect( this, SIGNAL( subtitleChanged( Model::File *, Model::Stream *, QString, QString ) ),
              m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
+    connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));
+    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
+    connect(m_player, SIGNAL(stopped()), SLOT(on_stopButton_clicked()));
+
 }
 
 
@@ -223,15 +252,15 @@ void SubtitlePane::on_lineEdit_Name_textChanged(const QString &name)
 
 void SubtitlePane::on_comboBox_Langage_activated(const QString &langage)
 {
-    emit subtitleChanged(m_file, m_stream, Model::Stream::LANGUAGE, langage);
+    emit subtitleChanged(m_file, m_stream, Model::Stream::LANGUAGE, m_languageMap.value(langage));
 }
 
 void SubtitlePane::on_comboBox_Format_activated(const QString &format)
 {
-    emit subtitleChanged(m_file, m_stream, Model::Stream::CODEC_NAME, format);
+    emit subtitleChanged(m_file, m_stream, Model::Stream::CODEC_NAME, m_formatMap.value(format));
 }
 
 void SubtitlePane::on_comboBox_Encode_activated(const QString &encode)
 {
-    emit subtitleChanged(m_file, m_stream, Model::Stream::SUBTITLE_CHAR_ENCODE, encode);
+    emit subtitleChanged(m_file, m_stream, Model::Stream::SUBTITLE_CHAR_ENCODE, m_encodingMap.value(encode));
 }
