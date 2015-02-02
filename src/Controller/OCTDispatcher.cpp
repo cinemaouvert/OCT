@@ -246,14 +246,18 @@ void Controller::OCTDispatcher::startTreatment() {
 }
 
 void Controller::OCTDispatcher::pauseTreatment() {
-    if(m_startTreatmentThread != NULL)
+    if(m_startTreatmentThread != NULL){
+        qDebug() << "PAUSE";
         m_treatmentThread->pauseTreatment();
+    }
 
 }
 
 void Controller::OCTDispatcher::restartTreatment() {
-    if(m_startTreatmentThread != NULL)
+    if(m_startTreatmentThread != NULL){
+        qDebug() << "RESTART";
         m_treatmentThread->restartTreatment();
+    }
 }
 
 void Controller::OCTDispatcher::stopTreatment() {
