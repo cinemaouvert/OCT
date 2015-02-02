@@ -40,16 +40,18 @@ VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     m_player->setVideoStream(this->m_streamId);
 }
 
-void VideoPane::setDispatcher(Controller::OCTDispatcher *dispatcher)
-{
-    m_dispatcher = dispatcher;
-    connectInterface();
-}
-
 VideoPane::~VideoPane()
 {
     if(ui) delete ui;
     if(m_player) delete m_player;
+}
+
+// ========================================================================== //
+// == ACCESSORS AND MUTATORS ================================================ //
+// ========================================================================== //
+void VideoPane::setDispatcher(Controller::OCTDispatcher *dispatcher) {
+    m_dispatcher = dispatcher;
+    connectInterface();
 }
 
 // ========================================================================== //
