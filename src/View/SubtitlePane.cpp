@@ -130,7 +130,7 @@ void SubtitlePane::initPane()
     Model::Parameter *p = m_stream->getParameters()->value(Model::Stream::CODEC_NAME);
     if(p){
         QString codec = p->value();
-        ixd = ui->comboBox_Format->findText(codec.toUpper());
+        ixd = ui->comboBox_Format->findText(m_formatMap.key(codec),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_Format->setCurrentIndex(ixd);
         else{
@@ -162,7 +162,7 @@ void SubtitlePane::initPane()
     p = m_stream->getParameters()->value(Model::Stream::SUBTITLE_CHAR_ENCODE);  // TODO //
     if(p){
         QString encode = p->value();
-        ixd = ui->comboBox_Encode->findText(encode);
+        ixd = ui->comboBox_Encode->findText(m_encodingMap.key(encode),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_Encode->setCurrentIndex(ixd);
         else{

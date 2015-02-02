@@ -38,6 +38,7 @@ VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     this->loadFile(m_file->getFilePath());
     this->m_streamId = stream->getUID().toInt();
     m_player->setVideoStream(this->m_streamId);
+    initPane();
 }
 
 VideoPane::~VideoPane()
@@ -241,12 +242,12 @@ void VideoPane::connectPlayer() {
 
 void VideoPane::initPane()
 {
-    /*
+
     int ixd ;
     Model::Parameter *p = m_stream->getParameters()->value(Model::Stream::CODEC_NAME);
     if(p){
         QString codec = p->value();
-        ixd = ui->comboBox_Codec->findText(codec.toUpper());
+        ixd = ui->comboBox_Codec->findText(m_codecMap.key(codec),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_Codec->setCurrentIndex(ixd);
         else{
@@ -254,7 +255,78 @@ void VideoPane::initPane()
             ui->comboBox_Codec->setCurrentIndex(0);
         }
         ui->labelCodec->setText(tr("Original: ") + codec);
-    }*/
+    }
+    p = NULL;
+    p = m_stream->getParameters()->value(Model::Stream::LANGUAGE);
+    if(p){
+        QString langue = p->value().remove("language=");
+        ixd = ui->comboBox_Langage->findText(m_languageMap.key(langue),Qt::MatchExactly);
+        if(ixd != -1)
+            ui->comboBox_Langage->setCurrentIndex(ixd);
+        else{
+            ui->comboBox_Langage->insertItem(0,langue);
+            ui->comboBox_Langage->setCurrentIndex(0);
+        }
+        ui->labelLanguage->setText(tr("Original: ") + langue);
+    }
+    else{
+        ui->comboBox_Langage->insertItem(0,"");
+        ui->comboBox_Langage->setCurrentIndex(0);
+    }
+    p = NULL;
+    p = m_stream->getParameters()->value(Model::Stream::DEFAULT);
+    if(p){
+        QString defaut = p->value();
+        if (defaut == "1")
+            ui->checkBoxDefaultStream->setChecked(true);
+        else
+            ui->checkBoxDefaultStream->setChecked(false);
+    }
+    else
+        ui->checkBoxDefaultStream->setChecked(false);
+
+    p = NULL;
+    p = m_stream->getParameters()->value(Model::Stream::RESOLUTION);
+    if(p){
+        QString scale = p->value().remove("scale=");
+        ixd = ui->comboBox_Scale->findText(m_scaleMap.key(scale),Qt::MatchExactly);
+        if(ixd != -1)
+            ui->comboBox_VideoSize->setCurrentIndex(ixd);
+        else{
+            ui->comboBox_VideoSize->insertItem(0,scale);
+            ui->comboBox_VideoSize->setCurrentIndex(0);
+        }
+        ui->labelSize->setText(tr("Original: ") + scale);
+    }
+    else{
+        ui->comboBox_VideoSize->insertItem(0,"");
+        ui->comboBox_VideoSize->setCurrentIndex(0);
+    }
+
+    p = NULL;
+    p = m_stream->getParameters()->value(Model::Stream::VIDEO_FRAME_RATE);
+    if(p){
+        QString fps = p->value().remove("scale=");
+        ixd = ui->comboBox_Frames->findText(m_framePerSecondMap.key(fps),Qt::MatchExactly);
+        if(ixd != -1)
+            ui->comboBox_Frames->setCurrentIndex(ixd);
+        else{
+            ui->comboBox_Frames->insertItem(0,fps);
+            ui->comboBox_Frames->setCurrentIndex(0);
+        }
+        ui->labelFPS->setText(tr("Original: ") + fps);
+    }
+    else{
+        ui->comboBox_Frames->insertItem(0,"");
+        ui->comboBox_Frames->setCurrentIndex(0);
+    }
+
+    p = NULL;
+    p = m_stream->getParameters()->value(Model::Stream::VIDEO_AVG_BIT_RATE);
+    if(p){
+        QString avgBitRate = p->value().remove("scale=");
+        ui->lineEdit_AverageBitrate->setText(avgBitRate);
+    }
 }
 
 void VideoPane::connectInterface() {

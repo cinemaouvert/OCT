@@ -77,8 +77,8 @@ void AudioPane::initLists() {
     //TODO FILL DELAI
     //m_delaiMap
 
-    m_sampleRateMap.insert(tr("48 kHz"), "48k");
-    m_sampleRateMap.insert(tr("96 kHz (Recommendé)"),"96k");
+    m_sampleRateMap.insert(tr("48 kHz"), "48");
+    m_sampleRateMap.insert(tr("96 kHz (Recommendé)"),"96");
 
     ui->comboBox_Sampling->clear();
     ui->comboBox_Sampling->insertItems(0,m_sampleRateMap.keys());
@@ -130,7 +130,7 @@ void AudioPane::initPane()
     Model::Parameter *p = m_stream->getParameters()->value(Model::Stream::CODEC_NAME);
     if(p){
         QString codec = p->value();
-        ixd = ui->comboBox_AudioCodec->findText(codec.toUpper());
+        ixd = ui->comboBox_AudioCodec->findText(m_codecMap.key(codec),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_AudioCodec->setCurrentIndex(ixd);
         else{
@@ -161,11 +161,7 @@ void AudioPane::initPane()
     p = m_stream->getParameters()->value(Model::Stream::AUDIO_CHANNELS);
     if(p){
         QString chanel = p->value();
-        if(chanel == "1")
-            chanel = "mono";
-        else if(chanel == "2")
-            chanel = "Stéréo";
-        ixd = ui->comboBox_Channels->findText(chanel);
+        ixd = ui->comboBox_Channels->findText(m_chanelsMap.key(chanel),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_Channels->setCurrentIndex(ixd);
         else{
@@ -182,7 +178,7 @@ void AudioPane::initPane()
     p = m_stream->getParameters()->value(Model::Stream::AUDIO_DELAY);
     if(p){
         QString delay = p->value();    // TODO //
-        ixd = ui->comboBox_Delay->findText(delay);
+        ixd = ui->comboBox_Delay->findText(m_delaiMap.key(delay),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_Delay->setCurrentIndex(ixd);
         else{
@@ -199,7 +195,7 @@ void AudioPane::initPane()
     p = m_stream->getParameters()->value(Model::Stream::AUDIO_SAMPLE_RATE);
     if(p){
         QString sampleRate = Utils::bpsToKbps(p->value());  // INT //
-        ixd = ui->comboBox_Sampling->findText(sampleRate,Qt::MatchContains);
+        ixd = ui->comboBox_Sampling->findText(m_sampleRateMap.key(sampleRate),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_Sampling->setCurrentIndex(ixd);
         else{
@@ -216,7 +212,7 @@ void AudioPane::initPane()
     p = m_stream->getParameters()->value(Model::Stream::RESOLUTION);
     if(p){
         QString resolution = p->value(); //TODO//
-        ixd = ui->comboBox_Size->findText(resolution);
+        ixd = ui->comboBox_Size->findText(m_resolutionMap.key(resolution),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_Size->setCurrentIndex(ixd);
         else{
@@ -229,6 +225,9 @@ void AudioPane::initPane()
         ui->comboBox_Size->setCurrentIndex(0);
     }
 
+
+    QString name = m_stream->name();
+    ui->lineEdit_Name->setText(name);
 }
 
 void AudioPane::on_lineEdit_Name_textChanged( QString name ) {
