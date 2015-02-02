@@ -137,6 +137,7 @@ void EncodePane::on_pushButton_Cancel_clicked()
     m_dispatcher->stopTreatment();
     ui->pushButton_Cancel->setEnabled(false);
     ui->pushButton_Pause->setEnabled(false);
+    m_pause = false;
 }
 
 void EncodePane::on_pushButton_Pause_clicked()

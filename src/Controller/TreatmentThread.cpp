@@ -84,6 +84,8 @@ void Controller::TreatmentThread::startTreatment() {
         for(int j = start_j; j < p->fileList()->size() && !m_stop && !m_pause; j++){
 
             Model::File *f = p->fileList()->at(j);
+            int k = 0;
+            //while(k < 100000){ qDebug() << k <<"j : " + QString::number(m_indexTreatment_j); k++;}
             if(f->hasToBeTranscoded()){
                 m_transcoder->transcode(f->getCommandLine());
                 m_listToDelete.append(f->getFilePath());
@@ -122,6 +124,7 @@ void Controller::TreatmentThread::pauseTreatment() {
 
 void Controller::TreatmentThread::stopTreatment() {
     m_stop = true;
+    m_pause = false;
 }
 
 void Controller::TreatmentThread::restartTreatment(){
