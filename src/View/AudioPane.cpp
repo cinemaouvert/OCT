@@ -144,7 +144,7 @@ void AudioPane::initPane()
     p = NULL;
     p = m_stream->getParameters()->value(Model::Stream::LANGUAGE);
     if(p){
-        QString langue = p->value().remove("language=");   // TODO //
+        QString langue = p->value().remove("language=");
         ixd = ui->comboBox_Langage->findText(m_languageMap.key(langue),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_Langage->setCurrentIndex(ixd);

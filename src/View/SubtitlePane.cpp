@@ -133,23 +133,51 @@ void SubtitlePane::initPane()
         ixd = ui->comboBox_Format->findText(codec.toUpper());
         if(ixd != -1)
             ui->comboBox_Format->setCurrentIndex(ixd);
+        else{
+            ui->comboBox_Format->insertItem(0,codec);
+            ui->comboBox_Format->setCurrentIndex(0);
+        }
+
+        ui->label_Format->setText(tr("Original: ") + codec);
     }
+
     p = NULL;
     p = m_stream->getParameters()->value(Model::Stream::LANGUAGE);
     if(p){
-        QString langue = p->value();
-        ixd = ui->comboBox_Langage->findText(langue);
+        QString langue = p->value().remove("language=");
+        ixd = ui->comboBox_Langage->findText(m_languageMap.key(langue),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_Langage->setCurrentIndex(ixd);
+        else{
+            ui->comboBox_Langage->insertItem(0,langue);
+            ui->comboBox_Langage->setCurrentIndex(0);
+        }
+        ui->label_Langage->setText(tr("Original: ") + langue);
+    }
+    else{
+        ui->comboBox_Langage->insertItem(0,"");
+        ui->comboBox_Langage->setCurrentIndex(0);
     }
     p = NULL;
-    p = m_stream->getParameters()->value(Model::Stream::SUBTITLE_CHAR_ENCODE);
+    p = m_stream->getParameters()->value(Model::Stream::SUBTITLE_CHAR_ENCODE);  // TODO //
     if(p){
         QString encode = p->value();
         ixd = ui->comboBox_Encode->findText(encode);
         if(ixd != -1)
             ui->comboBox_Encode->setCurrentIndex(ixd);
+        else{
+            ui->comboBox_Encode->insertItem(0,encode);
+            ui->comboBox_Encode->setCurrentIndex(0);
+        }
+        ui->label_Langage->setText(tr("Original: ") + encode);
     }
+    else{
+        ui->comboBox_Encode->insertItem(0,"");
+        ui->comboBox_Encode->setCurrentIndex(0);
+    }
+
+
+
     QString name = m_stream->name();
     ui->lineEdit_Name->setText(name);
 }
