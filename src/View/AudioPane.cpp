@@ -56,16 +56,15 @@ AudioPane::AudioPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     initPane();
 }
 
-void AudioPane::initLists(){
-    m_languageMap.insert(tr("Allemand"),"al");
-    m_languageMap.insert(tr("Anglais"),"en");
-    m_languageMap.insert(tr("Arabe"),"ar");
-    m_languageMap.insert(tr("Français"),"fr");
-    m_languageMap.insert(tr("Espagnol"),"es");
-    m_languageMap.insert(tr("Italien"),"it");
+void AudioPane::initLists() {
+    m_languageMap.insert( tr( "Allemand" ), "ger" );
+    m_languageMap.insert( tr( "Anglais" ), "eng" );
+    m_languageMap.insert( tr( "Français" ), "fre" );
+    m_languageMap.insert( tr( "Espagnol" ), "spa" );
+    m_languageMap.insert( tr( "Italien" ), "ita" );
 
     ui->comboBox_Langage->clear();
-    ui->comboBox_Langage->insertItems(0,m_languageMap.keys());
+    ui->comboBox_Langage->insertItems( 0, m_languageMap.keys() );
 
     m_codecMap.insert(tr("FLAC"),"flac");
     m_codecMap.insert(tr("AAC"),"aac");

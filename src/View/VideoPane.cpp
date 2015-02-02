@@ -88,6 +88,138 @@ void VideoPane::loadFile(QString filepath)
     this->connectPlayer();
 }
 
+void VideoPane::initVideoLists() {
+    initVideoCodecList();
+    initVideoLanguageList();
+    initVideoResolutionList();
+    initVideoScaleList();
+    initVideoBlackStuffList();
+    initVideoFramePerSecondList();
+    initVideoFilterList();
+    initVideox264PresetList();
+    initVideox264TuneList();
+    initVideox264ProfileList();
+    initVideox264LevelList();
+}
+
+void VideoPane::initVideoCodecList() {
+    m_codecMap.insert( tr( "H264 (Recommandé)" ), "h264" );
+    m_codecMap.insert( tr( "VP8" ), "vp8" );
+
+    ui->comboBox_Codec->clear();
+    ui->comboBox_Codec->insertItems(0,m_codecMap.keys());
+}
+
+void VideoPane::initVideoLanguageList() {
+    m_languageMap.insert( tr( "Allemand" ), "ger" );
+    m_languageMap.insert( tr( "Anglais" ), "eng" );
+    m_languageMap.insert( tr( "Français" ), "fre" );
+    m_languageMap.insert( tr( "Espagnol" ), "spa" );
+    m_languageMap.insert( tr( "Italien" ), "ita" );
+
+    ui->comboBox_Langage->clear();
+    ui->comboBox_Langage->insertItems( 0, m_languageMap.keys() );
+}
+
+void VideoPane::initVideoResolutionList() {
+    m_resolutionMap.insert( tr( "1080p (1920 x 1080)" ), "1920x1080" );
+    m_resolutionMap.insert( tr( "720p (1280 x 720)" ), "1280x720" );
+    m_resolutionMap.insert( tr( "480p (854 x 480)" ), "854x480" );
+
+    ui->comboBox_VideoSize->clear();
+    ui->comboBox_VideoSize->insertItems( 0, m_resolutionMap.keys() );
+}
+
+void VideoPane::initVideoScaleList() {
+    // TODO :
+}
+
+void VideoPane::initVideoBlackStuffList() {
+    m_blackStuffMap.insert( tr( "Oui" ), 1 );
+    m_blackStuffMap.insert( tr( "Non" ), 0 );
+
+    ui->comboBox_BlackStuff->clear();
+    ui->comboBox_BlackStuff->insertItems( 0, m_blackStuffMap.keys() );
+}
+
+void VideoPane::initVideoFramePerSecondList() {
+    m_framePerSecondMap.insert( tr( "30" ), 30 );
+    m_framePerSecondMap.insert( tr( "25" ), 25 );
+    m_framePerSecondMap.insert( tr( "24" ), 24 );
+    m_framePerSecondMap.insert( tr( "20" ), 20 );
+
+    ui->comboBox_Frames->clear();
+    ui->comboBox_Frames->insertItems( 0, m_framePerSecondMap.keys() );
+}
+
+void VideoPane::initVideoFilterList() {
+    // TODO :
+}
+
+void VideoPane::initVideox264PresetList() {
+    m_x264PresetMap.insert( tr( "Ultrafast" ), "ultrafast" );
+    m_x264PresetMap.insert( tr( "Super fast" ), "superfast" );
+    m_x264PresetMap.insert( tr( "Very fast" ), "veryfast" );
+    m_x264PresetMap.insert( tr( "Faster" ), "faster" );
+    m_x264PresetMap.insert( tr( "Fast" ), "fast" );
+    m_x264PresetMap.insert( tr( "Medium" ), "medium" );
+    m_x264PresetMap.insert( tr( "Slow" ), "slow" );
+    m_x264PresetMap.insert( tr( "Slower" ), "Very slow" );
+    m_x264PresetMap.insert( tr( "Very slow" ), "veryslow" );
+    m_x264PresetMap.insert( tr( "Placebo" ), "placebo" );
+
+    ui->comboBox_x264Preset->clear();
+    ui->comboBox_x264Preset->insertItems( 0, m_x264PresetMap.keys() );
+}
+
+void VideoPane::initVideox264TuneList() {
+    m_x264TuneMap.insert( tr( "None" ), "none" );
+    m_x264TuneMap.insert( tr( "Film" ), "film" );
+    m_x264TuneMap.insert( tr( "Animation" ), "animation" );
+    m_x264TuneMap.insert( tr( "Grain" ), "grain" );
+    m_x264TuneMap.insert( tr( "Still image" ), "stillimage" );
+    m_x264TuneMap.insert( tr( "PSNR" ), "psnr" );
+    m_x264TuneMap.insert( tr( "SSIM" ), "ssim" );
+    m_x264TuneMap.insert( tr( "FastDecode" ), "fastdecode" );
+
+    ui->comboBox_x264Tune->clear();
+    ui->comboBox_x264Tune->insertItems( 0, m_x264TuneMap.keys() );
+}
+
+void VideoPane::initVideox264ProfileList() {
+    m_x264ProfileMap.insert( tr( "Auto" ), "auto" );
+    m_x264ProfileMap.insert( tr( "Baseline" ), "baseline" );
+    m_x264ProfileMap.insert( tr( "Main" ), "main" );
+    m_x264ProfileMap.insert( tr( "High" ), "high" );
+
+    ui->comboBox_x264Profile->clear();
+    ui->comboBox_x264Profile->insertItems( 0, m_x264ProfileMap.keys() );
+}
+
+void VideoPane::initVideox264LevelList() {
+    m_x264LevelMap.insert( tr( "Auto" ), "auto" );
+    m_x264LevelMap.insert( tr( "1.0" ), 1.0 );
+    m_x264LevelMap.insert( tr( "1b" ), "1b" );
+    m_x264LevelMap.insert( tr( "1.1" ), 1.1 );
+    m_x264LevelMap.insert( tr( "1.2" ), 1.2 );
+    m_x264LevelMap.insert( tr( "1.3" ), 1.3 );
+    m_x264LevelMap.insert( tr( "2.0" ), 2.0 );
+    m_x264LevelMap.insert( tr( "2.1" ), 2.1 );
+    m_x264LevelMap.insert( tr( "2.2" ), 2.2 );
+    m_x264LevelMap.insert( tr( "3.0" ), 3.0 );
+    m_x264LevelMap.insert( tr( "3.1" ), 3.1 );
+    m_x264LevelMap.insert( tr( "3.2" ), 3.2 );
+    m_x264LevelMap.insert( tr( "4.0" ), 4.0 );
+    m_x264LevelMap.insert( tr( "4.1" ), 4.1 );
+    m_x264LevelMap.insert( tr( "4.2" ), 4.2 );
+    m_x264LevelMap.insert( tr( "5.0" ), 5.0 );
+    m_x264LevelMap.insert( tr( "5.1" ), 5.1 );
+    m_x264LevelMap.insert( tr( "5.2" ), 5.2 );
+
+    ui->comboBox_x264Level->clear();
+    ui->comboBox_x264Level->insertItems( 0, m_x264LevelMap.keys() );
+}
+
 void VideoPane::updateSlider()
 {
     ui->timeSlider->setRange(0, int(m_player->duration()/1000LL));

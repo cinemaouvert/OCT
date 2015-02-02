@@ -67,6 +67,7 @@ private:
     Model::File *m_file;
     Model::Stream *m_stream;
     Controller::OCTDispatcher *m_dispatcher;
+
     QMap<QString, QString> m_languageMap;
     QMap<QString, QString> m_codecMap;
     QMap<QString, QString> m_delaiMap;

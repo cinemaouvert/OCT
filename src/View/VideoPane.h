@@ -79,11 +79,36 @@ private:
     Model::Stream *m_stream;
     Controller::OCTDispatcher *m_dispatcher;
 
+    QMap<QString, QString> m_codecMap;
+    QMap<QString, QString> m_languageMap;
+    QMap<QString, QString> m_resolutionMap;
+    QMap<QString, QString> m_scaleMap;
+    QMap<QString, QString> m_blackStuffMap;
+    QMap<QString, QString> m_framePerSecondMap;
+    QMap<QString, QString> m_filterMap;
+    QMap<QString, QString> m_x264PresetMap;
+    QMap<QString, QString> m_x264TuneMap;
+    QMap<QString, QString> m_x264ProfileMap;
+    QMap<QString, QString> m_x264LevelMap;
+
     // Class methods
     void connectInterface();
     void loadFile(QString filepath);
     void connectPlayer();
     void initPane();
+
+    void initVideoLists();
+    void initVideoCodecList();
+    void initVideoLanguageList();
+    void initVideoResolutionList();
+    void initVideoScaleList();
+    void initVideoBlackStuffList();
+    void initVideoFramePerSecondList();
+    void initVideoFilterList();
+    void initVideox264PresetList();
+    void initVideox264TuneList();
+    void initVideox264ProfileList();
+    void initVideox264LevelList();
 
     QString getCropValue();
 };
