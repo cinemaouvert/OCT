@@ -29,7 +29,7 @@ VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     m_stream(stream)
 {
     ui->setupUi(this);
-
+    initVideoLists();
     m_player = new QtAV::AVPlayer;
     m_player->setRenderer(ui->videoWidget);
 
@@ -343,11 +343,11 @@ void VideoPane::on_comboBox_Codec_activated( QString codec ) {
     } else {
         ui->groupBox_x264Settings->hide();
     }
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::CODEC_NAME, codec);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::CODEC_NAME, m_codecMap.value(codec));
 }
 
 void VideoPane::on_comboBox_Langage_activated(const QString &arg) {
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::LANGUAGE, arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::LANGUAGE, m_languageMap.value(arg));
 }
 
 void VideoPane::on_checkBoxDefaultStream_clicked(bool checked)
@@ -357,7 +357,7 @@ void VideoPane::on_checkBoxDefaultStream_clicked(bool checked)
 }
 
 void VideoPane::on_comboBox_VideoSize_activated(const QString &arg) {
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::RESOLUTION, arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::RESOLUTION, m_resolutionMap.value(arg));
 }
 
 void VideoPane::on_comboBox_Scale_activated(const QString &arg) {
@@ -407,19 +407,19 @@ void VideoPane::on_checkBoxTurbo_clicked( bool checked ) {
 }
 
 void VideoPane::on_comboBox_x264Preset_activated( const QString &arg ) {
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_PRESET , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_PRESET , m_x264PresetMap.value(arg));
 }
 
 void VideoPane::on_comboBox_x264Tune_activated( const QString &arg ) {
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_TUNE , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_TUNE , m_x264TuneMap.value(arg));
 }
 
 void VideoPane::on_comboBox_x264Profile_activated( const QString &arg ) {
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_BASELINE , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_BASELINE , m_x264ProfileMap.value(arg));
 }
 
 void VideoPane::on_comboBox_x264Level_activated( const QString &arg ) {
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_LEVEL , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_LEVEL , m_x264LevelMap.value(arg));
 }
 
 void VideoPane::on_spinTop_valueChanged( const QString &arg ) {
