@@ -151,7 +151,6 @@ void VideoPane::on_playButton_clicked()
     }
 }
 
-
 void VideoPane::on_stopButton_clicked()
 {
     if(m_player->isPlaying()){
@@ -161,7 +160,6 @@ void VideoPane::on_stopButton_clicked()
     ui->timeSlider->setValue(0);
     ui->timeLabel->setText(QTime(0,0).toString("hh:mm:ss"));
 }
-
 
 void VideoPane::on_stopSlider_sliderMoved(int position)
 {
@@ -316,8 +314,7 @@ void VideoPane::on_timeStop_dateTimeChanged( const QDateTime &dateTime ) {
     emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_STOP_POINT , dateTime.toString("hh:mm:ss.z"));
 }
 
-
-QString VideoPane::getCropValue(){
+QString VideoPane::getCropValue() {
     QString resolution = m_stream->getParameters()->value(Model::Stream::RESOLUTION)->value();
     QString width = resolution.split("x").at(0);
     QString height = resolution.split("x").at(1);
