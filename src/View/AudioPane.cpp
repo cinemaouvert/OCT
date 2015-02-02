@@ -149,7 +149,7 @@ void AudioPane::initPane()
         if(ixd != -1)
             ui->comboBox_Langage->setCurrentIndex(ixd);
         else{
-            ui->comboBox_Langage->insertItem(0,"");
+            ui->comboBox_Langage->insertItem(0,langue);
             ui->comboBox_Langage->setCurrentIndex(0);
         }
         ui->labelLanguage->setText(tr("Original: ") + langue);
