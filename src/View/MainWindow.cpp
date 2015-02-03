@@ -19,17 +19,21 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
     m_settingsW(NULL)
 {
     ui->setupUi(this);
-    ui->tab_files->setDispatcher(m_dispatcher);
+    setOCPMState(false);
+    m_settingsW = new ParametersDialog();
+    connect(ui->actionPreferences, SIGNAL(triggered()),SLOT(on_OpenSettings()));
+    connect(ui->actionMise_jour, SIGNAL(triggered()),SLOT(on_UpdateVersion()));
+
     ui->tab_encode->setDispatcher(m_dispatcher);
     ui->tab_infos->setDispatcher(m_dispatcher);
     ui->tabWidgetVideo->clear();
     ui->tabWidgetSubtitle->clear();
     ui->tabWidgetAudio->clear();
-    setOCPMState(false);
+
     ui->tab_files->setMainWindow(this);
-    m_settingsW = new ParametersDialog();
-    connect(ui->actionPreferences, SIGNAL(triggered()),SLOT(on_OpenSettings()));
-    connect(ui->actionMise_jour, SIGNAL(triggered()),SLOT(on_UpdateVersion()));
+    ui->tab_files->setDispatcher(m_dispatcher);
+
+
 }
 
 void View::MainWindow::refresh()
@@ -95,17 +99,18 @@ void View::MainWindow::setOCPMState(bool isValid)
 
 void View::MainWindow::updateReco()
 {
-    if(ui && ui->tabWidgetVideo){
-        qDebug()<< "------------------------------";
-        int i =0;
-        while(this->ui->tabWidgetVideo->widget(i)){
-            ((VideoPane*)this->ui->tabWidgetVideo->widget(i))->applyReco();
-            qDebug()<< i;
-            i++;
+    if(this->ui != NULL){
+        if(ui->tabWidgetVideo != NULL){
+            qDebug()<< "------------------------------";
+            int i =0;
+            while(this->ui->tabWidgetVideo->widget(i)){
+                ((VideoPane*)this->ui->tabWidgetVideo->widget(i))->applyReco();
+                qDebug()<< i;
+                i++;
+            }
         }
 
     }
-
 }
 
 FilePane* View::MainWindow::getFilePane()

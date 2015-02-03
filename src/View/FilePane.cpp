@@ -342,11 +342,12 @@ void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)
 {
     if(arg1 == "None"){
         m_dispatcher->getOCPMValidation()->setExist(false);
-    }else{
+    }else if(arg1 != ""){
         QFile file(m_preConfigsDir.filePath(arg1).append(".xml"));
-        if(file.exists()){
+        if(file.exists() && m_dispatcher != NULL){
             m_dispatcher->getOCPMValidation()->loadPreConfXML(&file);
             this->mainWindow()->updateReco();
+            this->refresh();
         }
     }
 
