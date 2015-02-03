@@ -340,10 +340,16 @@ void FilePane::on_pushButton_AddFile_clicked()
 
 void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)
 {
-    QFile file(m_preConfigsDir.filePath(arg1).append(".xml"));
-    if(file.exists()){
-        m_dispatcher->getOCPMValidation()->loadPreConfXML(&file);
+    if(arg1 == "None"){
+        m_dispatcher->getOCPMValidation()->setExist(false);
+    }else{
+        QFile file(m_preConfigsDir.filePath(arg1).append(".xml"));
+        if(file.exists()){
+            m_dispatcher->getOCPMValidation()->loadPreConfXML(&file);
+            this->mainWindow()->updateReco();
+        }
     }
+
 }
 
 void FilePane::on_findExport_clicked()
@@ -352,3 +358,14 @@ void FilePane::on_findExport_clicked()
     m_dispatcher->treatProjectNameChanged(filePath.toString());
     ui->lineEdit_ExportName->setText(filePath.toString());
 }
+
+View::MainWindow *FilePane::mainWindow() const
+{
+    return m_mainWindow;
+}
+
+void FilePane::setMainWindow(View::MainWindow *mainWindow)
+{
+    m_mainWindow = mainWindow;
+}
+

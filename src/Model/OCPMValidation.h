@@ -22,11 +22,38 @@ namespace Model{
             bool isValidAudio(Stream *stream);
             bool isValidSubtitle(Stream *stream);
 
-        signals:
+            QString recommendedVideoCodec() const;
+            void setRecommendedVideoCodec(const QString &recommendedVideoCodec);
 
-        public slots:
+            QString recommendedVideoMaxRate() const;
+            void setRecommendedVideoMaxRate(const QString &recommendedVideoMaxRate);
 
-        private:
+            QString recommendedVideoResolution() const;
+            void setRecommendedVideoResolution(const QString &recommendedVideoResolution);
+
+            QString recommendedAudioCodec() const;
+            void setRecommendedAudioCodec(const QString &recommendedAudioCodec);
+
+            QString recommendedAudioChanel() const;
+            void setRecommendedAudioChanel(const QString &recommendedAudioChanel);
+
+            QString recommendedAudioSamplingRate() const;
+            void setRecommendedAudioSamplingRate(const QString &recommendedAudioSamplingRate);
+
+            QString recommendedSubtitleFormat() const;
+            void setRecommendedSubtitleFormat(const QString &recommendedSubtitleFormat);
+
+            QString recommendedSubtitleEncoding() const;
+            void setRecommendedSubtitleEncoding(const QString &recommendedSubtitleEncoding);
+
+            bool isExist() const;
+            void setExist(bool value);
+
+    signals:
+
+    public slots:
+
+    private:
             QString m_recommendedVideoCodec;
             QString m_recommendedVideoMaxRate;
             QString m_recommendedVideoResolution;
@@ -47,7 +74,7 @@ namespace Model{
             QStringList m_validationAudioSamplingRate;
             QStringList m_validationSubtitleFormat;
             QStringList m_validationSubtitleEncoding;
-
+            bool exist;
     };
 }
 #endif // __MODEL__OCPMVALIDATION_H

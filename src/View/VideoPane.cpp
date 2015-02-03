@@ -53,6 +53,7 @@ VideoPane::~VideoPane()
 void VideoPane::setDispatcher(Controller::OCTDispatcher *dispatcher) {
     m_dispatcher = dispatcher;
     connectInterface();
+    applyReco();
 }
 
 // ========================================================================== //
@@ -289,7 +290,7 @@ void VideoPane::initPane()
     p = m_stream->getParameters()->value(Model::Stream::RESOLUTION);
     if(p){
         QString scale = p->value().remove("scale=");
-        ixd = ui->comboBox_Scale->findText(m_scaleMap.key(scale),Qt::MatchExactly);
+        ixd = ui->comboBox_VideoSize->findText(m_resolutionMap.key(scale),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_VideoSize->setCurrentIndex(ixd);
         else{
@@ -328,6 +329,32 @@ void VideoPane::initPane()
         ui->lineEdit_AverageBitrate->setText(avgBitRate);
     }
 }
+
+void VideoPane::applyReco()
+{
+        if(this->m_dispatcher->getOCPMValidation()->isExist()){
+
+        QString codec= this->m_dispatcher->getOCPMValidation()->recommendedVideoCodec();
+        QString rate= this->m_dispatcher->getOCPMValidation()->recommendedVideoMaxRate();
+        QString resolution= this->m_dispatcher->getOCPMValidation()->recommendedVideoResolution();
+
+        int ixd = ui->comboBox_Codec->findText(m_codecMap.key(codec),Qt::MatchExactly);
+        if(ixd != -1){
+            ui->comboBox_Codec->setCurrentIndex(ixd);
+            emit(on_comboBox_Codec_activated(m_codecMap.key(codec)));
+        }
+
+        ui->lineEdit_AverageBitrate->setText(rate);
+        emit(on_lineEdit_AverageBitrate_textChanged(rate));
+
+        ixd = ui->comboBox_VideoSize->findText(m_resolutionMap.key(resolution),Qt::MatchExactly);
+        if(ixd != -1){
+            ui->comboBox_VideoSize->setCurrentIndex(ixd);
+            emit(on_comboBox_VideoSize_activated(m_resolutionMap.key(resolution)));
+        }
+    }
+}
+
 
 void VideoPane::connectInterface() {
     connect(ui->timeSlider, SIGNAL(sliderMoved(int)), SLOT(seek(int)));

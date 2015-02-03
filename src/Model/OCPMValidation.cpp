@@ -94,6 +94,7 @@ void Model::OCPMValidation::loadPreConfXML(QFile *file)
 
     file->close();
     loadValidationXML(file);
+    this->exist = true;
 }
 
 
@@ -158,4 +159,94 @@ bool Model::OCPMValidation::isValidSubtitle(Model::Stream *stream)
     return retval;
 
 }
+bool Model::OCPMValidation::isExist() const
+{
+    return exist;
+}
+
+void Model::OCPMValidation::setExist(bool value)
+{
+    exist = value;
+}
+
+QString Model::OCPMValidation::recommendedSubtitleEncoding() const
+{
+    return m_recommendedSubtitleEncoding;
+}
+
+void Model::OCPMValidation::setRecommendedSubtitleEncoding(const QString &recommendedSubtitleEncoding)
+{
+    m_recommendedSubtitleEncoding = recommendedSubtitleEncoding;
+}
+
+QString Model::OCPMValidation::recommendedSubtitleFormat() const
+{
+    return m_recommendedSubtitleFormat;
+}
+
+void Model::OCPMValidation::setRecommendedSubtitleFormat(const QString &recommendedSubtitleFormat)
+{
+    m_recommendedSubtitleFormat = recommendedSubtitleFormat;
+}
+
+QString Model::OCPMValidation::recommendedAudioSamplingRate() const
+{
+    return m_recommendedAudioSamplingRate;
+}
+
+void Model::OCPMValidation::setRecommendedAudioSamplingRate(const QString &recommendedAudioSamplingRate)
+{
+    m_recommendedAudioSamplingRate = recommendedAudioSamplingRate;
+}
+
+QString Model::OCPMValidation::recommendedAudioChanel() const
+{
+    return m_recommendedAudioChanel;
+}
+
+void Model::OCPMValidation::setRecommendedAudioChanel(const QString &recommendedAudioChanel)
+{
+    m_recommendedAudioChanel = recommendedAudioChanel;
+}
+
+QString Model::OCPMValidation::recommendedAudioCodec() const
+{
+    return m_recommendedAudioCodec;
+}
+
+void Model::OCPMValidation::setRecommendedAudioCodec(const QString &recommendedAudioCodec)
+{
+    m_recommendedAudioCodec = recommendedAudioCodec;
+}
+
+QString Model::OCPMValidation::recommendedVideoResolution() const
+{
+    return m_recommendedVideoResolution;
+}
+
+void Model::OCPMValidation::setRecommendedVideoResolution(const QString &recommendedVideoResolution)
+{
+    m_recommendedVideoResolution = recommendedVideoResolution;
+}
+
+QString Model::OCPMValidation::recommendedVideoMaxRate() const
+{
+    return m_recommendedVideoMaxRate;
+}
+
+void Model::OCPMValidation::setRecommendedVideoMaxRate(const QString &recommendedVideoMaxRate)
+{
+    m_recommendedVideoMaxRate = recommendedVideoMaxRate;
+}
+
+QString Model::OCPMValidation::recommendedVideoCodec() const
+{
+    return m_recommendedVideoCodec;
+}
+
+void Model::OCPMValidation::setRecommendedVideoCodec(const QString &recommendedVideoCodec)
+{
+    m_recommendedVideoCodec = recommendedVideoCodec;
+}
+
 

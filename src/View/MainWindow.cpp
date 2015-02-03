@@ -26,7 +26,7 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
     ui->tabWidgetSubtitle->clear();
     ui->tabWidgetAudio->clear();
     setOCPMState(false);
-
+    ui->tab_files->setMainWindow(this);
     m_settingsW = new ParametersDialog();
     connect(ui->actionPreferences, SIGNAL(triggered()),SLOT(on_OpenSettings()));
     connect(ui->actionMise_jour, SIGNAL(triggered()),SLOT(on_UpdateVersion()));
@@ -89,6 +89,21 @@ void View::MainWindow::setOCPMState(bool isValid)
     }else{
         ui->labelStatusOKNOK->setStyleSheet("background-color:  rgba(255, 0, 0, 100);border-radius:5px;");
         ui->labelStatusOKNOK->setText("OCPM invalide");
+    }
+
+}
+
+void View::MainWindow::updateReco()
+{
+    if(ui && ui->tabWidgetVideo){
+        qDebug()<< "------------------------------";
+        int i =0;
+        while(this->ui->tabWidgetVideo->widget(i)){
+            ((VideoPane*)this->ui->tabWidgetVideo->widget(i))->applyReco();
+            qDebug()<< i;
+            i++;
+        }
+
     }
 
 }

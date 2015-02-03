@@ -24,6 +24,8 @@ public:
     ~VideoPane();
 
     void setDispatcher(Controller::OCTDispatcher *dispatcher);
+    void applyReco();
+
 public slots:
     void seek(int);
 

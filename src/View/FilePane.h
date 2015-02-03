@@ -32,6 +32,9 @@ public:
     void refresh();
     ~FilePane();
 
+    View::MainWindow *mainWindow() const;
+    void setMainWindow(View::MainWindow *myMainWindow);
+
 signals:
     void projectNameChanged(QString newName);
 
@@ -51,7 +54,7 @@ private:
     QStringListModel *m_model;
     QStringList list;
     QDir m_preConfigsDir;
-
+    View::MainWindow *m_mainWindow;
     void addItem(QString name);
     void splitterNoCollapsing();
     void connectInterface();

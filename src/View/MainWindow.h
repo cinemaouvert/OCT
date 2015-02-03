@@ -50,6 +50,7 @@ namespace View
             ~MainWindow();
 
             void setOCPMState(bool isValid);
+            void updateReco();
 
             FilePane* getFilePane();
             EncodePane* getEncodePane();
