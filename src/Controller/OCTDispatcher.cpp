@@ -403,7 +403,9 @@ void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream
                         param = Model::Subtitle::getStaticParameter(parameterName);
                     break;
                 }
+                sW->getRelevantStream()->setParameter(parameterName,param);
             }
+
             param->setValue(value);
             checkProjectValidation();
             return;
