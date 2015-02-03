@@ -324,7 +324,7 @@ void VideoPane::initPane()
     p = NULL;
     p = m_stream->getParameters()->value(Model::Stream::VIDEO_AVG_BIT_RATE);
     if(p){
-        QString avgBitRate = p->value().remove("scale=");
+        QString avgBitRate = p->value().remove("-b:v").remove("-bufsize").split(" ").at(1);
         ui->lineEdit_AverageBitrate->setText(avgBitRate);
     }
 }
