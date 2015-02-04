@@ -61,6 +61,7 @@ public:
     /// \brief Initialize the corresponding comboBox with a set of known audio codec.
     ///
     void fillAudioCodecComboBox();
+    void applyReco();
 
 private:
     Ui::AudioPane *ui;

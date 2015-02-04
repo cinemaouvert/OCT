@@ -332,8 +332,7 @@ void VideoPane::initPane()
 
 void VideoPane::applyReco()
 {
-        if(this->m_dispatcher->getOCPMValidation()->isExist()){
-
+    if(this->m_dispatcher->getOCPMValidation()->isExist()){
         QString codec= this->m_dispatcher->getOCPMValidation()->recommendedVideoCodec();
         QString rate= this->m_dispatcher->getOCPMValidation()->recommendedVideoMaxRate();
         QString resolution= this->m_dispatcher->getOCPMValidation()->recommendedVideoResolution();

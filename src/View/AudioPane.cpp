@@ -106,6 +106,7 @@ void AudioPane::setDispatcher(Controller::OCTDispatcher *dispatcher)
 {
     m_dispatcher = dispatcher;
     connectInterface();
+    applyReco();
 }
 
 // ========================================================================== //
@@ -114,6 +115,33 @@ void AudioPane::setDispatcher(Controller::OCTDispatcher *dispatcher)
 void AudioPane::fillAudioCodecComboBox() {
     QStringList list = (QStringList() << "FLAC" << "AAC" << "MP1" << "MP2" << "MP3");
     ui->comboBox_AudioCodec->addItems( list );
+}
+
+void AudioPane::applyReco()
+{
+    if(this->m_dispatcher->getOCPMValidation()->isExist()){
+        QString codec= this->m_dispatcher->getOCPMValidation()->recommendedAudioCodec();
+        QString chanel= this->m_dispatcher->getOCPMValidation()->recommendedAudioChanel();
+        QString spRate= this->m_dispatcher->getOCPMValidation()->recommendedAudioSamplingRate();
+
+        int ixd = ui->comboBox_AudioCodec->findText(m_codecMap.key(codec),Qt::MatchExactly);
+        if(ixd != -1){
+            ui->comboBox_AudioCodec->setCurrentIndex(ixd);
+            emit(on_comboBox_AudioCodec_activated(m_codecMap.key(codec)));
+        }
+
+        ixd = ui->comboBox_Channels->findText(m_chanelsMap.key(chanel),Qt::MatchExactly);
+        if(ixd != -1){
+            ui->comboBox_Channels->setCurrentIndex(ixd);
+            emit(on_comboBox_Channels_activated(m_chanelsMap.key(chanel)));
+        }
+        // Khz
+        ixd = ui->comboBox_Sampling->findText(m_sampleRateMap.key(spRate),Qt::MatchExactly);
+        if(ixd != -1){
+            ui->comboBox_Sampling->setCurrentIndex(ixd);
+            emit(on_comboBox_Sampling_activated(m_sampleRateMap.key(spRate)));
+        }
+    }
 }
 
 // ========================================================================== //

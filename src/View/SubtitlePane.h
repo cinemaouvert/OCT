@@ -26,6 +26,8 @@ public:
     ~SubtitlePane();
 
     void setDispatcher(Controller::OCTDispatcher *dispatcher);
+    void applyReco();
+
 public slots:
     void seek(int);
 

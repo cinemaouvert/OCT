@@ -101,11 +101,23 @@ void View::MainWindow::updateReco()
 {
     if(this->ui != NULL){
         if(ui->tabWidgetVideo != NULL){
-            qDebug()<< "------------------------------";
             int i =0;
             while(this->ui->tabWidgetVideo->widget(i)){
                 ((VideoPane*)this->ui->tabWidgetVideo->widget(i))->applyReco();
-                qDebug()<< i;
+                i++;
+            }
+        }
+        if(ui->tabWidgetAudio != NULL){
+            int i =0;
+            while(this->ui->tabWidgetAudio->widget(i)){
+                ((AudioPane*)this->ui->tabWidgetAudio->widget(i))->applyReco();
+                i++;
+            }
+        }
+        if(ui->tabWidgetSubtitle != NULL){
+            int i =0;
+            while(this->ui->tabWidgetSubtitle->widget(i)){
+                ((SubtitlePane*)this->ui->tabWidgetSubtitle->widget(i))->applyReco();
                 i++;
             }
         }

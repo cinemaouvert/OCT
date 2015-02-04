@@ -79,6 +79,27 @@ void SubtitlePane::setDispatcher(Controller::OCTDispatcher *dispatcher)
 {
     m_dispatcher = dispatcher;
     connectInterface();
+    applyReco();
+}
+
+void SubtitlePane::applyReco()
+{
+    if(this->m_dispatcher->getOCPMValidation()->isExist()){
+        QString format= this->m_dispatcher->getOCPMValidation()->recommendedSubtitleFormat();
+        QString encoding= this->m_dispatcher->getOCPMValidation()->recommendedSubtitleEncoding();
+
+        int ixd = ui->comboBox_Format->findText(m_formatMap.key(format),Qt::MatchExactly);
+        if(ixd != -1){
+            ui->comboBox_Format->setCurrentIndex(ixd);
+            emit(on_comboBox_Format_activated(m_formatMap.key(format)));
+        }
+/*
+        ixd = ui->comboBox_Encode->findText(m_encodingMap.key(encoding),Qt::MatchExactly);
+        if(ixd != -1){
+            ui->comboBox_Encode->setCurrentIndex(ixd);
+            emit(on_comboBox_Encode_activated(m_encodingMap.key(encoding)));
+        }*/
+    }
 }
 
 SubtitlePane::~SubtitlePane()
