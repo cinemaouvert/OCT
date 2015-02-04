@@ -44,6 +44,7 @@ VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
 VideoPane::~VideoPane()
 {
     if(ui) delete ui;
+    if(m_player) m_player->disconnect();
     if(m_player) delete m_player;
 }
 
