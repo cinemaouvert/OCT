@@ -20,8 +20,8 @@
 			<value>mono</value>
 		</chanels>
 		<samplingRates>
-			<value  preConf="true">48000</value>
-			<value>96000</value>
+			<value  preConf="true">48</value>
+			<value>96</value>
 		</samplingRates>
 	</audio>
 	<subtitle>

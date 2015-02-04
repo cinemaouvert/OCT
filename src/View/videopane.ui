@@ -85,13 +85,13 @@
                   <widget class="QLabel" name="labelName">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -157,13 +157,13 @@
                   <widget class="QLabel" name="labelCodec">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -229,13 +229,13 @@
                   <widget class="QLabel" name="labelLanguage">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -289,13 +289,13 @@
                   <widget class="QLabel" name="labelDefault">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -358,13 +358,13 @@
                   <widget class="QLabel" name="labelSize">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -433,13 +433,13 @@
                   <widget class="QLabel" name="labelScale">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -508,13 +508,13 @@
                   <widget class="QLabel" name="labelBars">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -574,13 +574,13 @@
                   <widget class="QLabel" name="labelFPS">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -646,13 +646,13 @@
                   <widget class="QLabel" name="labelFiltre">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -709,13 +709,13 @@
                   <widget class="QLabel" name="label_OptionsFfmpegDefault">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -859,13 +859,13 @@
                   <widget class="QLabel" name="label_AverageBitrateDefault">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -962,13 +962,13 @@
                   <widget class="QLabel" name="label_x264PresetDefault">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -1022,13 +1022,13 @@
                   <widget class="QLabel" name="label_x264TuneDefault">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -1085,13 +1085,13 @@
                   <widget class="QLabel" name="label_x264ProfileDefault">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -1145,13 +1145,13 @@
                   <widget class="QLabel" name="label_x264LevelDefault">
                    <property name="minimumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>125</width>
                      <height>16777215</height>
                     </size>
                    </property>
