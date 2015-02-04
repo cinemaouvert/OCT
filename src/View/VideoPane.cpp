@@ -18,7 +18,6 @@ VideoPane::VideoPane(QWidget *parent) :
     m_player = new QtAV::AVPlayer;
     m_player->setRenderer(ui->videoWidget);
 
-    ui->videoWidget->show();
 }
 
 VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
@@ -33,7 +32,6 @@ VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     m_player = new QtAV::AVPlayer;
     m_player->setRenderer(ui->videoWidget);
 
-    ui->videoWidget->show();
 
     this->loadFile(m_file->getFilePath());
     this->m_streamId = stream->getUID().toInt();

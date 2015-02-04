@@ -17,6 +17,9 @@ SubtitlePane::SubtitlePane(QWidget *parent) :
     m_dispatcher(NULL)
 {
     ui->setupUi(this);
+    m_player = new QtAV::AVPlayer;
+    m_player->setRenderer(ui->videoWidget);
+
 }
 
 SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *parent) :
@@ -80,6 +83,7 @@ void SubtitlePane::setDispatcher(Controller::OCTDispatcher *dispatcher)
     m_dispatcher = dispatcher;
     connectInterface();
     applyReco();
+
 }
 
 void SubtitlePane::applyReco()
@@ -104,9 +108,10 @@ void SubtitlePane::applyReco()
 
 SubtitlePane::~SubtitlePane()
 {
-    if(ui) delete ui;
     if(m_player) m_player->disconnect();
     if(m_player) delete m_player;
+
+    if(ui) delete ui;
     if(m_model) delete m_model;
 }
 
@@ -140,7 +145,6 @@ void SubtitlePane::on_stopButton_clicked()
 void SubtitlePane::loadFile(QString filepath)
 {
     m_player->load(filepath,false);
-
     ui->timeSlider->setMaximum(m_player->duration());
 
 

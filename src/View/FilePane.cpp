@@ -337,6 +337,7 @@ void FilePane::on_pushButton_AddFile_clicked()
         this->m_dispatcher->addFile(filePath);
     }
     m_dispatcher->checkProjectValidation();
+    this->refresh();
 }
 
 void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)
