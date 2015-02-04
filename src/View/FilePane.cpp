@@ -54,13 +54,14 @@ void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
     this->m_dispatcher = dispatcheur;
     connectInterface();
 
-    QResource preconfigs(":/ocpm/resources/ocpm");
 
-    m_preConfigsDir = QDir(preconfigs.absoluteFilePath());
+
+    m_preConfigsDir = QDir(qApp->applicationDirPath() + QDir::separator() + "ocpm");
 
     if(m_preConfigsDir.isReadable()){
         foreach (QString file, m_preConfigsDir.entryList()) {
-            ui->comboBox_Preconfig->insertItem(0,file.remove(".xml"));
+            if(file != "." && file !="..")
+                ui->comboBox_Preconfig->insertItem(0,file.remove(".xml"));
         }
     }
     ui->comboBox_Preconfig->insertItem(0,tr("None"));
@@ -343,8 +344,10 @@ void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)
     if(arg1 == "None"){
         m_dispatcher->getOCPMValidation()->setExist(false);
     }else if(arg1 != ""){
-        QFile file(m_preConfigsDir.filePath(arg1).append(".xml"));
+        QFile file(m_preConfigsDir.absoluteFilePath(arg1).append(".xml"));
+
         if(file.exists() && m_dispatcher != NULL){
+
             m_dispatcher->getOCPMValidation()->loadPreConfXML(&file);
             this->mainWindow()->updateReco();
             this->refresh();
