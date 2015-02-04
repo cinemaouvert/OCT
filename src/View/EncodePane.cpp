@@ -118,6 +118,7 @@ void EncodePane::on_newProjectButton_clicked()
 void EncodePane::initProgressBar(int progressMax)
 {
     m_progressMax = progressMax;
+    m_currentSteps = 0;
     ui->progressBar_Encoding->setValue(0);
 }
 

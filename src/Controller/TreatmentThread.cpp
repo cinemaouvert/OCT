@@ -76,8 +76,9 @@ void Controller::TreatmentThread::startTreatment() {
         nbSteps += p->fileList()->size();
     }
 
-    if(start_i == 0 && start_j == 0)
+    if(start_i == 0 && start_j == 0){
         emit initProgress(nbSteps+1);
+    }
 
     for(int i = start_i; i < m_projects->size() && !m_stop && !m_pause; i++){
         Model::Project *p = m_projects->at(i);
