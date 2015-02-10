@@ -17,8 +17,7 @@ SubtitlePane::SubtitlePane(QWidget *parent) :
     m_dispatcher(NULL)
 {
     ui->setupUi(this);
-    m_player = new QtAV::AVPlayer;
-    m_player->setRenderer(ui->videoWidget);
+
 
 }
 
