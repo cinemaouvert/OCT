@@ -85,15 +85,16 @@ private:
     void initLists();
 private slots:
     void on_lineEdit_Name_textChanged( QString name );
+    void on_lineEdit_Delay_textChanged( QString delay );
 
     void on_comboBox_AudioCodec_activated( const QString &arg );
-    void on_comboBox_Delay_activated( const QString &arg );
     void on_comboBox_Sampling_activated(const QString &arg);
     void on_comboBox_Channels_activated(const QString &arg);
     void on_comboBox_Size_activated(const QString &arg);
 
 signals:
     void audioParameterChanged( Model::File *, Model::Stream *, QString, QString );
+    void audioMKVParameterChanged(int p, Model::File *, Model::Stream *, QString );
 };
 
 #endif // AUDIOPANE_H

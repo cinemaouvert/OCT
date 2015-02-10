@@ -263,7 +263,7 @@ namespace Controller
             int checkInformationValidation();
             bool checkPosterValidation();
             void parameterChanged(Model::File *file,Model::Stream *stream,QString parameterName, QString value);
-
+            void parameterChangedMKV(int p, Model::File *file,Model::Stream *stream, QString value);
 
     };
 }

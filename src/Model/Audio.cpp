@@ -39,6 +39,8 @@ using namespace std;
 QMap<QString, Model::Parameter *> Model::Audio::m_staticParameters;
 Model::Audio::Audio() {
     m_uID = "";
+    m_delay = "";
+    m_name = "";
     m_default = false;
     this->m_parameters = new QMap<QString,Parameter*>();
 }
@@ -123,6 +125,8 @@ Model::Audio::Audio(QString uID) {
     m_uID = uID;
     this->m_parameters = new QMap<QString,Parameter*>();
     this->m_default = false;
+    m_delay = "";
+    m_name = "";
 }
 
 Model::Audio::Audio(const Audio& a) {
@@ -130,6 +134,8 @@ Model::Audio::Audio(const Audio& a) {
     QMap<QString,Parameter*> *param(a.m_parameters) ;
     this->m_parameters = param;
     this->m_default = a.m_default;
+    m_delay = a.m_delay;
+    m_name = a.m_name;
 }
 
 Model::Audio& Model::Audio::operator=(const Audio& a) {
@@ -138,6 +144,8 @@ Model::Audio& Model::Audio::operator=(const Audio& a) {
         QMap<QString,Parameter*> *param(a.m_parameters) ;
         this->m_parameters = param;
         this->m_default = a.m_default;
+        m_delay = a.m_delay;
+        m_name = a.m_name;
     }
     return *this;
 }

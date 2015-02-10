@@ -147,6 +147,16 @@ bool Model::Stream::operator==(const Model::Stream &s)
     return false;
 
 }
+
+QString Model::Stream::delay() const
+{
+    return m_delay;
+}
+
+void Model::Stream::setDelay(QString delay)
+{
+    m_delay = delay;
+}
 Model::Stream::~Stream()
 {
     if (this->m_parameters != NULL)

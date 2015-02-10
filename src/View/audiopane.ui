@@ -247,23 +247,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_Delay">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>125</width>
-                  <height>25</height>
-                 </size>
-                </property>
-                <property name="sizeAdjustPolicy">
-                 <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-                </property>
-               </widget>
+               <widget class="QLineEdit" name="lineEdit_Delay"/>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayoutDelay">

@@ -413,6 +413,33 @@ void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream
     }
 }
 
+void Controller::OCTDispatcher::parameterChangedMKV(int p, Model::File *file, Model::Stream *stream, QString value)
+{
+    foreach (Model::StreamWrapper *sW, *(file->getStreamWrappers())) {
+        if(*(sW->oldStream()) == *stream){
+          /*  if(sW->newStream() == NULL){
+                switch(stream->getType()){
+                    case Model::Stream::VIDEO:
+                        sW->setNewStream(new Model::Video(*(Model::Video*)(sW->oldStream())));
+                    break;
+                    case Model::Stream::AUDIO:
+                        sW->setNewStream(new Model::Audio(*(Model::Audio*)(sW->oldStream())));
+                    break;
+                    case Model::Stream::SUBTITLE:
+                        sW->setNewStream(new Model::Subtitle(*(Model::Subtitle*)(sW->oldStream())));
+                    break;
+                }
+            }*/
+            if(p == 1){
+                sW->getRelevantStream()->setDelay(value);
+            }
+            else if (p == 2){
+                sW->getRelevantStream()->setName(value);
+            }
+        }
+    }
+}
+
 
 
 

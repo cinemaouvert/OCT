@@ -259,9 +259,19 @@ QStringList *Model::Project::getMergeCommandLine()
             if(sw->getRelevantStream()->isDefault())
                 *arguments << "--default-track" << sw->getRelevantStream()->getUID();
 
-            // Not really nice but it works
-            if(sw->oldStream()->name() !="")
-                *arguments << "--track-name" << sw->oldStream()->name();
+            if(sw->getRelevantStream()->name() !=""){
+                *arguments << "--track-name" << sw->getRelevantStream()->name();
+            }
+
+            qDebug() << "-----------------------";
+            qDebug() << sw->getRelevantStream()->delay();
+            if(sw->getRelevantStream()->delay() !=""){
+                QString a =sw->getRelevantStream()->getUID();
+                QString b = ":";
+                QString c = sw->getRelevantStream()->delay();
+                QString sync = a+b+c;
+                *arguments << "--sync" << sync;
+            }
         }
         *arguments <<f->getFilePath();
     }

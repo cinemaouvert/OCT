@@ -70,6 +70,10 @@ namespace Model
             bool m_default;
 
             /**
+             * @brief m_default
+             */
+            QString m_delay;
+            /**
              * @brief List of parameter associated with the stream.
              */
             QMap<QString,Parameter*> *m_parameters;
@@ -145,6 +149,8 @@ namespace Model
 
             bool operator==(const Stream& s);
 
+            QString delay() const;
+            void setDelay(QString delay);
     };
 
 

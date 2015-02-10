@@ -46,14 +46,15 @@ AudioPane::AudioPane(QWidget *parent) :
 
 AudioPane::AudioPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::AudioPane),
-    m_file(file),
-    m_stream(stream)
+    ui(new Ui::AudioPane)
 {
+    this->m_file = file;
+    this->m_stream = stream;
     ui->setupUi(this);
     fillAudioCodecComboBox();
     initLists();
     initPane();
+
 }
 
 void AudioPane::initLists() {
@@ -150,6 +151,9 @@ void AudioPane::applyReco()
 void AudioPane::connectInterface() {
     connect( this, SIGNAL( audioParameterChanged( Model::File *, Model::Stream *, QString, QString ) ),
              m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
+
+    connect( this, SIGNAL( audioMKVParameterChanged(int, Model::File *, Model::Stream *, QString ) ),
+             m_dispatcher, SLOT( parameterChangedMKV(int, Model::File *, Model::Stream *, QString ) ) );
 }
 
 void AudioPane::initPane()
@@ -202,22 +206,6 @@ void AudioPane::initPane()
         ui->comboBox_Channels->setCurrentIndex(0);
     }
 
-    p = NULL;
-    p = m_stream->getParameters()->value(Model::Stream::AUDIO_DELAY);
-    if(p){
-        QString delay = p->value();    // TODO //
-        ixd = ui->comboBox_Delay->findText(m_delaiMap.key(delay),Qt::MatchExactly);
-        if(ixd != -1)
-            ui->comboBox_Delay->setCurrentIndex(ixd);
-        else{
-            ui->comboBox_Delay->insertItem(0,delay);
-            ui->comboBox_Delay->setCurrentIndex(0);
-        }
-        ui->labelChannels->setText(tr("Original: ") + delay);
-    }else{
-        ui->comboBox_Delay->insertItem(0,"");
-        ui->comboBox_Delay->setCurrentIndex(0);
-    }
 
     p = NULL;
     p = m_stream->getParameters()->value(Model::Stream::AUDIO_SAMPLE_RATE);
@@ -259,15 +247,16 @@ void AudioPane::initPane()
 }
 
 void AudioPane::on_lineEdit_Name_textChanged( QString name ) {
-    this->m_stream->setName( name );
+    emit audioMKVParameterChanged(2,m_file, m_stream, name);
+}
+
+void AudioPane::on_lineEdit_Delay_textChanged(QString delay)
+{
+    emit audioMKVParameterChanged(1,m_file, m_stream, delay);
 }
 
 void AudioPane::on_comboBox_AudioCodec_activated(const QString &arg) {
     emit audioParameterChanged(m_file, m_stream, Model::Stream::CODEC_NAME, m_codecMap.value(arg));
-}
-
-void AudioPane::on_comboBox_Delay_activated(const QString &arg) {
-    emit audioParameterChanged(m_file, m_stream, Model::Stream::AUDIO_DELAY, m_delaiMap.value(arg));
 }
 
 void AudioPane::on_comboBox_Sampling_activated(const QString &arg) {
