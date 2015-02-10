@@ -492,8 +492,7 @@ void VideoPane::on_comboBox_Filter_activated(const QString &arg) {
 }
 
 void VideoPane::on_lineEdit_OptionsFfmpeg_textChanged(const QString &arg) {
-    // TODO :
-    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::EXTRA_CMD , arg);
 }
 
 void VideoPane::on_spinBox_Quality_valueChanged(const QString &arg) {

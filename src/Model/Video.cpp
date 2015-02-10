@@ -241,6 +241,9 @@ void Model::Video::initStaticParameters()
     Parameter *h264_tune= new Parameter("-tune","Advanced features for h264","%1");
     m_staticParameters.insert(Model::Stream::VIDEO_H264_TUNE,h264_tune);
 
+    Parameter *extraCmd= new Parameter("","Extra command from the user","%1");
+    m_staticParameters.insert(Model::Stream::EXTRA_CMD,extraCmd);
+
 
 }
 
