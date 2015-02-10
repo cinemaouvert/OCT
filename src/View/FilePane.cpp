@@ -25,18 +25,18 @@ FilePane::FilePane(QWidget *parent) :
     m_model = new QStringListModel(this);
     splitterNoCollapsing();
    // ui->tableView_ImportFile->horizontalHeader()->setVisible(false);
-    ui->tableView_ImportFile->verticalHeader()->setVisible(false);
+    ui->tableViewImportFile->verticalHeader()->setVisible(false);
   //  ui->tableView_ImportFile->setAlternatingRowColors(true);
     //ui->tableView_ImportFile->horizontalHeader()->setStretchLastSection(true);
-    ui->tableView_ImportFile->resizeColumnsToContents();
-    ui->listView_ImportFile->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->listView_Export->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableViewImportFile->resizeColumnsToContents();
+    ui->listViewImportFile->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->listViewExport->setEditTriggers(QAbstractItemView::NoEditTriggers);
   //  ui->listView_Export->setAlternatingRowColors(true);
 
-    ui->listView_Export->setFocusPolicy(Qt::NoFocus);
+    ui->listViewExport->setFocusPolicy(Qt::NoFocus);
 
 
-    ui->comboBox_Preconfig->clear();
+    ui->comboBoxPreconfig->clear();
 
 }
 
@@ -61,11 +61,11 @@ void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
     if(m_preConfigsDir.isReadable()){
         foreach (QString file, m_preConfigsDir.entryList()) {
             if(file != "." && file !="..")
-                ui->comboBox_Preconfig->insertItem(0,file.remove(".xml"));
+                ui->comboBoxPreconfig->insertItem(0,file.remove(".xml"));
         }
     }
-    ui->comboBox_Preconfig->insertItem(0,tr("None"));
-    ui->comboBox_Preconfig->setCurrentIndex(0);
+    ui->comboBoxPreconfig->insertItem(0,tr("None"));
+    ui->comboBoxPreconfig->setCurrentIndex(0);
 
 }
 
@@ -81,7 +81,7 @@ void FilePane::refresh()
     sim = new QStandardItemModel(this);
 
     //////REFRESH FIELDS/////
-    ui->lineEdit_ExportName->setText(this->m_dispatcher->getCurrentProject()->name());
+    ui->lineEditExportName->setText(this->m_dispatcher->getCurrentProject()->name());
 
 
     ///////////////////////////////ListView2/////////////////////////////////////////
@@ -97,7 +97,7 @@ void FilePane::refresh()
         names << name.at(name.length()-1);
     }
     m_model->setStringList(names);
-    ui->listView_ImportFile->setModel(m_model);
+    ui->listViewImportFile->setModel(m_model);
 
     //////////////////////////////TableView////////////////////////////////////////////
     int nbVideo = this->m_dispatcher->getCurrentProject()->nbVideo();
@@ -107,7 +107,7 @@ void FilePane::refresh()
     int j = 3 + nbVideo;
     int k = 2 + j + nbAudio;
     MyModel *m = new MyModel( 8 + nbVideo + nbAudio + nbSub, 6 , nbVideo , nbAudio , nbSub);
-    ui->tableView_ImportFile->setModel(m);
+    ui->tableViewImportFile->setModel(m);
     m->setItem(0,0,tr("Video"));
     m->setItem(1,0,tr("Nom"));
     m->setItem(1,1,tr("Codec"));
@@ -130,12 +130,12 @@ void FilePane::refresh()
     m->setItem(k,3,tr("IPS"));
     m->setItem(k,4,tr("Supporté"));
 
-    ui->tableView_ImportFile->clearSpans();
-    ui->tableView_ImportFile->setSpan(0, 0, 1, 6);
-    ui->tableView_ImportFile->setSpan(1, 4, 1, 5);
-    ui->tableView_ImportFile->setSpan(2+nbVideo, 0, 1, 6);
-    ui->tableView_ImportFile->setSpan(4+nbVideo+nbAudio, 0, 1, 6);
-    ui->tableView_ImportFile->setSpan(5+nbVideo+nbAudio, 4, 1, 5);
+    ui->tableViewImportFile->clearSpans();
+    ui->tableViewImportFile->setSpan(0, 0, 1, 6);
+    ui->tableViewImportFile->setSpan(1, 4, 1, 5);
+    ui->tableViewImportFile->setSpan(2+nbVideo, 0, 1, 6);
+    ui->tableViewImportFile->setSpan(4+nbVideo+nbAudio, 0, 1, 6);
+    ui->tableViewImportFile->setSpan(5+nbVideo+nbAudio, 4, 1, 5);
     QString out_tView = "";
 
     foreach(Model::File *f , *(this->m_dispatcher->getCurrentProject()->fileList())){
@@ -155,7 +155,7 @@ void FilePane::refresh()
                 m->setItem(i,3,p->value().remove("scale="));
                 out_tView = out_tView + " - résolution " + p->value().remove("scale=");
 
-                ui->tableView_ImportFile->setSpan(i, 4, 1, 5);
+                ui->tableViewImportFile->setSpan(i, 4, 1, 5);
 
                 QStandardItem* item;
                 if(this->m_dispatcher->checkStreamValidation(sw->getRelevantStream())){
@@ -219,17 +219,17 @@ void FilePane::refresh()
                 }
                 sim->appendRow(item);
 
-                ui->tableView_ImportFile->setSpan(k, 4, 1, 5);
+                ui->tableViewImportFile->setSpan(k, 4, 1, 5);
             }
 
         }
-        ui->tableView_ImportFile->resizeColumnsToContents();
-        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
-        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(1,QHeaderView::ResizeToContents);
-        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(2,QHeaderView::ResizeToContents);
-        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(3,QHeaderView::ResizeToContents);
-        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(4,QHeaderView::ResizeToContents);
-        ui->tableView_ImportFile->horizontalHeader()->setSectionResizeMode(5,QHeaderView::ResizeToContents);
+        ui->tableViewImportFile->resizeColumnsToContents();
+        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
+        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(1,QHeaderView::ResizeToContents);
+        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(2,QHeaderView::ResizeToContents);
+        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(3,QHeaderView::ResizeToContents);
+        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(4,QHeaderView::ResizeToContents);
+        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(5,QHeaderView::ResizeToContents);
 
     }
 
@@ -255,8 +255,8 @@ void FilePane::refresh()
     m->setItem(k+2,0,tr("Pieces Jointes"));
     m->setItem(k+2,1,QString::number(this->m_dispatcher->getCurrentProject()->attachments()->size()));
 
-    ui->tableView_ImportFile->setSpan(k+1, 1, 1, 6);
-    ui->tableView_ImportFile->setSpan(k+2, 1, 1, 6);
+    ui->tableViewImportFile->setSpan(k+1, 1, 1, 6);
+    ui->tableViewImportFile->setSpan(k+2, 1, 1, 6);
 
     sim->sort(0);
 
@@ -299,14 +299,13 @@ void FilePane::refresh()
     }
     sim->appendRow(item);
 
-    ui->listView_Export->setModel(sim);
-    ui->listView_Export->setItemDelegate(md);
+    ui->listViewExport->setModel(sim);
+    ui->listViewExport->setItemDelegate(md);
 }
 
 void FilePane::splitterNoCollapsing()
 {
     ui->splitter->setChildrenCollapsible(false);
-    ui->splitter_2->setChildrenCollapsible(false);
 }
 
 // ========================================================================== //
@@ -314,14 +313,14 @@ void FilePane::splitterNoCollapsing()
 // ========================================================================== //
 void FilePane::connectInterface()
 {
-    connect(ui->lineEdit_ExportName, SIGNAL(textChanged(QString)), m_dispatcher, SLOT(treatProjectNameChanged(QString)));
+    connect(ui->lineEditExportName, SIGNAL(textChanged(QString)), m_dispatcher, SLOT(treatProjectNameChanged(QString)));
 }
 
-void FilePane::on_pushButton_DeleteFile_clicked()
+void FilePane::on_pushButtonDeleteFile_clicked()
 {
     QStringList names = m_model->stringList();
     if (names.size() != 0){
-        QModelIndexList indexes = ui->listView_ImportFile->selectionModel()->selectedIndexes();
+        QModelIndexList indexes = ui->listViewImportFile->selectionModel()->selectedIndexes();
         if(indexes.size() != 0){
             QString filePath = list.at(indexes.at(0).row());
             this->m_dispatcher->removeFile(filePath);
@@ -330,7 +329,7 @@ void FilePane::on_pushButton_DeleteFile_clicked()
     m_dispatcher->checkProjectValidation();
 }
 
-void FilePane::on_pushButton_AddFile_clicked()
+void FilePane::on_pushButtonAddFile_clicked()
 {
     QStringList filePaths = QFileDialog::getOpenFileNames(this,tr("Open"));
     foreach (QString filePath, filePaths) {
@@ -340,7 +339,7 @@ void FilePane::on_pushButton_AddFile_clicked()
     this->refresh();
 }
 
-void FilePane::on_comboBox_Preconfig_currentTextChanged(const QString &arg1)
+void FilePane::on_comboBoxPreconfig_currentTextChanged(const QString &arg1)
 {
     if(arg1 == "None"){
         m_dispatcher->getOCPMValidation()->setExist(false);
@@ -361,7 +360,7 @@ void FilePane::on_findExport_clicked()
 {
     QUrl filePath = QFileDialog::getSaveFileName(this, tr("Choisir fichier de sortie"),"",tr("Matroska (*.mkv)"));
     m_dispatcher->treatProjectNameChanged(filePath.toString());
-    ui->lineEdit_ExportName->setText(filePath.toString());
+    ui->lineEditExportName->setText(filePath.toString());
 }
 
 View::MainWindow *FilePane::mainWindow() const

@@ -39,12 +39,12 @@ signals:
     void projectNameChanged(QString newName);
 
 private slots:
-    void on_pushButton_AddFile_clicked();
-    void on_pushButton_DeleteFile_clicked();
+    void on_pushButtonAddFile_clicked();
+    void on_pushButtonDeleteFile_clicked();
 
-    //void on_lineEdit_ExportName_textChanged(const QString &arg1);
+    //void on_lineEditExportName_textChanged(const QString &arg1);
 
-    void on_comboBox_Preconfig_currentTextChanged(const QString &arg1);
+    void on_comboBoxPreconfig_currentTextChanged(const QString &arg1);
 
     void on_findExport_clicked();
 
