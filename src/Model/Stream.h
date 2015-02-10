@@ -140,6 +140,8 @@ namespace Model
             static const QString VIDEO_H264_BASELINE;
             static const QString VIDEO_H264_LEVEL;
             static const QString VIDEO_H264_TUNE;
+            static const QString VIDEO_SCALE;
+
 
             bool operator==(const Stream& s);
 

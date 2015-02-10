@@ -86,7 +86,7 @@ Model::Video::Video(QDomNode stream, int uid)
         while(!bpsFinded && i< nodeListTag.size()){
             QDomNode node = nodeListTag.item(i);
                 if(node.attributes().namedItem("key").nodeValue() == "BPS"){
-                    bps = Utils::bpsToKbps(node.attributes().namedItem("value").nodeValue());
+                    bps = node.attributes().namedItem("value").nodeValue();
                     bpsFinded = true;
                 }
             i++;
@@ -200,11 +200,13 @@ void Model::Video::initStaticParameters()
     m_staticParameters.insert(Model::Stream::DEFAULT,isDefault);
 
     Parameter *resolution = new Parameter("-vf","This is the resolution of the video stream (AAAxBBB)","scale=%1");
-    resolution->SetNoSpaceForNext();
     m_staticParameters.insert(Model::Stream::RESOLUTION,resolution);
 
     Parameter *forceAspect = new Parameter("","Enable decreasing or increasing output video width or height if necessary to keep the original aspect ratio. Possible values: disable,decrease,increase","force_original_aspect_ratio=%1");
     m_staticParameters.insert(Model::Stream::VIDEO_FORCE_ASPECT,forceAspect);
+
+    Parameter *scale = new Parameter("-aspect","","%1");
+    m_staticParameters.insert(Model::Stream::VIDEO_SCALE,scale);
 
     Parameter *frameRate = new Parameter("-r","This is the frame rate (in frame by second)","%1");
     m_staticParameters.insert(Model::Stream::VIDEO_FRAME_RATE,frameRate);

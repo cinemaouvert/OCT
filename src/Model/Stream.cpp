@@ -59,6 +59,7 @@ const QString Model::Stream::VIDEO_H264_QUALITY = "h264_quality";
 const QString Model::Stream::VIDEO_H264_BASELINE = "h264_baseline";
 const QString Model::Stream::VIDEO_H264_LEVEL = "h264_level";
 const QString Model::Stream::VIDEO_H264_TUNE = "h264_tune";
+const QString Model::Stream::VIDEO_SCALE = "scale";
 
 void Model::Stream::setParameter(QString name, Parameter *value) {
     this->m_parameters->insert(name,value);
@@ -96,8 +97,11 @@ QStringList *Model::Stream::getCommand()
          *myStringList << command.split(" ") << value.split(" ") ;
        else if(command == "" && value != "")
          *myStringList << value.split(" ") ;
-       else if(value == "" && command != "")
-         *myStringList << command.split(" ") ;
+       else if(value == "" && command != ""){
+           if(command != "-filter:v"){
+                *myStringList << command.split(" ") ;
+           }
+       }
 
     }
     return myStringList;

@@ -134,7 +134,12 @@ void VideoPane::initVideoResolutionList() {
 }
 
 void VideoPane::initVideoScaleList() {
-    // TODO :
+    m_scaleMap.insert( tr("1:1"), "1:1");
+    m_scaleMap.insert( tr("4:3"), "4:3");
+    m_scaleMap.insert( tr("16:9"), "16:9");
+
+    ui->comboBox_Scale->clear();
+    ui->comboBox_Scale->insertItems(0,m_scaleMap.keys());
 }
 
 void VideoPane::initVideoBlackStuffList() {
@@ -156,7 +161,12 @@ void VideoPane::initVideoFramePerSecondList() {
 }
 
 void VideoPane::initVideoFilterList() {
-    // TODO :
+    m_filterMap.insert(tr("Desentrelacement"),"yadif");
+    m_filterMap.insert(tr("None"),"");
+
+    ui->comboBox_Filter->clear();
+    ui->comboBox_Filter->insertItems(0,m_filterMap.keys());
+    ui->comboBox_Filter->setCurrentText(tr("None"));
 }
 
 void VideoPane::initVideox264PresetList() {
@@ -460,8 +470,12 @@ void VideoPane::on_comboBox_VideoSize_activated(const QString &arg) {
 }
 
 void VideoPane::on_comboBox_Scale_activated(const QString &arg) {
-    //TODO
-    //emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_FORCE_ASPECT, arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_SCALE, m_scaleMap.value(arg));
+    QStringList list = arg.split(":");
+    if(list.size()==2){
+        m_player->renderer()->setOutAspectRatioMode(QtAV::VideoRenderer::CustomAspectRation );
+        m_player->renderer()->setOutAspectRatio((list.at(0).toFloat() / list.at(1).toFloat()));
+    }
 }
 
 void VideoPane::on_comboBox_BlackStuff_activated(const QString &arg) {
@@ -474,8 +488,7 @@ void VideoPane::on_comboBox_Frames_activated(const QString &arg) {
 }
 
 void VideoPane::on_comboBox_Filter_activated(const QString &arg) {
-    // TODO :
-    // emit videoParameterChanged(m_file, m_stream, Model::Stream:: _____ , arg);
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_DEINTERLACE , m_filterMap.value(arg));
 }
 
 void VideoPane::on_lineEdit_OptionsFfmpeg_textChanged(const QString &arg) {

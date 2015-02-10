@@ -62,7 +62,7 @@ Model::Audio::Audio(QDomNode stream, int uid)
         language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
     //-----------------------SAMPLE-RATE------------------------//
     QDomNode nodeSampleRate = tab.namedItem(Model::Stream::AUDIO_SAMPLE_RATE);
-    QString SampleRate = Utils::bpsToKbps(nodeSampleRate.nodeValue());
+    QString SampleRate = nodeSampleRate.nodeValue();
     //-----------------------CHANNELS------------------------//
     QDomNode nodeChannels = tab.namedItem(Model::Stream::AUDIO_CHANNELS);
     QString channels = nodeChannels.nodeValue();
@@ -170,7 +170,7 @@ void Model::Audio::initStaticParameters()
     Parameter *channels = new Parameter("-ac","This is the channels of the audio stream","%1");
     m_staticParameters.insert(Model::Stream::AUDIO_CHANNELS,channels);
 
-    Parameter *resolution = new Parameter("-ab","This is the resolution of the audio stream","%1k");
+    Parameter *resolution = new Parameter("-b:a","This is the resolution of the audio stream","%1k");
     m_staticParameters.insert(Model::Stream::RESOLUTION,resolution);
 }
 

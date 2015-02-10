@@ -67,7 +67,7 @@ void AudioPane::initLists() {
     ui->comboBox_Langage->insertItems( 0, m_languageMap.keys() );
 
     m_codecMap.insert(tr("FLAC"),"flac");
-    m_codecMap.insert(tr("AAC"),"aac");
+    m_codecMap.insert(tr("AAC"),"aac -strict experimental");
     m_codecMap.insert(tr("MP2"),"mp2");
     m_codecMap.insert(tr("MP3"),"mp3");
 
@@ -77,8 +77,8 @@ void AudioPane::initLists() {
     //TODO FILL DELAI
     //m_delaiMap
 
-    m_sampleRateMap.insert(tr("48 kHz"), "48");
-    m_sampleRateMap.insert(tr("96 kHz (Recommendé)"),"96");
+    m_sampleRateMap.insert(tr("48 kHz"), "48000");
+    m_sampleRateMap.insert(tr("96 kHz (Recommendé)"),"96000");
 
     ui->comboBox_Sampling->clear();
     ui->comboBox_Sampling->insertItems(0,m_sampleRateMap.keys());
