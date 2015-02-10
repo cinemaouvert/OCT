@@ -555,5 +555,7 @@ QString VideoPane::getCropValue() {
     width = QString::number((width.toInt() - ui->spinLeft->value()) - ui->spinRight->value());
     height = QString::number((height.toInt() - ui->spinTop->value()) - ui->spinBot->value());
 
+    m_player->renderer()->setRegionOfInterest(ui->spinLeft->text().toInt(),ui->spinTop->text().toInt(),width.toInt(),height.toInt());
+
     return (width + ":" + height + ":" + ui->spinLeft->text() + ":" + ui->spinTop->text());
 }

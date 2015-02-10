@@ -62,7 +62,7 @@ Model::Audio::Audio(QDomNode stream, int uid)
         language = tagList.at(i-1).attributes().namedItem("value").nodeValue();
     //-----------------------SAMPLE-RATE------------------------//
     QDomNode nodeSampleRate = tab.namedItem(Model::Stream::AUDIO_SAMPLE_RATE);
-    QString SampleRate = nodeSampleRate.nodeValue();
+    QString SampleRate = Utils::bpsToKbps(nodeSampleRate.nodeValue());
     //-----------------------CHANNELS------------------------//
     QDomNode nodeChannels = tab.namedItem(Model::Stream::AUDIO_CHANNELS);
     QString channels = nodeChannels.nodeValue();

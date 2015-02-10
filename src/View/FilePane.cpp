@@ -181,7 +181,7 @@ void FilePane::refresh()
                 p = sw->getRelevantStream()->getParameters()->find(Model::Stream::AUDIO_SAMPLE_RATE).value();
                 m->setItem(j,2,p->value());
 
-                p = sw->getRelevantStream()->getParameters()->find(Model::Stream::RESOLUTION).value();
+                p = sw->getRelevantStream()->getParameters()->find(Model::Stream::RESOLUTION).value();                
                 m->setItem(j,3,p->value());
 
                 p = sw->getRelevantStream()->getParameters()->find(Model::Stream::AUDIO_CHANNELS).value();

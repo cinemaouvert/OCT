@@ -222,7 +222,7 @@ void AudioPane::initPane()
     p = NULL;
     p = m_stream->getParameters()->value(Model::Stream::AUDIO_SAMPLE_RATE);
     if(p){
-        QString sampleRate = Utils::bpsToKbps(p->value());  // INT //
+        QString sampleRate = p->value();  // INT //
         ixd = ui->comboBox_Sampling->findText(m_sampleRateMap.key(sampleRate),Qt::MatchExactly);
         if(ixd != -1)
             ui->comboBox_Sampling->setCurrentIndex(ixd);
