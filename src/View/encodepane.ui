@@ -15,30 +15,30 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_MainEncodingPane">
+    <layout class="QHBoxLayout" name="horizontalLayoutMainEncodingPane">
      <property name="leftMargin">
       <number>0</number>
      </property>
      <item>
-      <widget class="QGroupBox" name="groupBox_FormEncoding">
+      <widget class="QGroupBox" name="groupBoxFormEncoding">
        <property name="title">
         <string/>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_ExportOCPM">
+         <layout class="QHBoxLayout" name="horizontalLayoutTorrentSoftware">
           <property name="leftMargin">
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="label_ExportOCPM">
+           <widget class="QLabel" name="labelTorrentSoftware">
             <property name="text">
-             <string>Exportation OCPM :</string>
+             <string>Logiciel torrent</string>
             </property>
            </widget>
           </item>
           <item>
-           <spacer name="horizontalSpacer">
+           <spacer name="horizontalSpacerTorrentSoftware">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -51,84 +51,57 @@
            </spacer>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_ExportOCPM">
+           <widget class="QLineEdit" name="lineEditTorrentSoftware">
             <property name="minimumSize">
              <size>
               <width>125</width>
               <height>25</height>
              </size>
             </property>
-            <property name="sizeAdjustPolicy">
-             <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-            </property>
            </widget>
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_ExportTorrent">
           <item>
-           <widget class="QLabel" name="label_ExportTorrent">
+           <widget class="QPushButton" name="pushButtonTorrentSoftware">
+            <property name="minimumSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
             <property name="text">
-             <string>Exportation torrent :</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBox_ExportTorrent">
-            <property name="minimumSize">
-             <size>
-              <width>125</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="sizeAdjustPolicy">
-             <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+             <string>...</string>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_FilePrint">
+         <layout class="QHBoxLayout" name="horizontalLayoutFilePrint">
           <item>
-           <widget class="QLabel" name="label_FilePrint">
+           <widget class="QLabel" name="labelFilePrint">
             <property name="text">
              <string>Empreinte du fichier :</string>
             </property>
            </widget>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_FilePrint">
+           <layout class="QVBoxLayout" name="verticalLayoutFilePrint">
             <item>
-             <widget class="QRadioButton" name="radioButton_SHA1">
+             <widget class="QRadioButton" name="radioButtonSHA1">
               <property name="text">
                <string>SHA1</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButton_MD5SUM">
+             <widget class="QRadioButton" name="radioButtonMD5SUM">
               <property name="text">
                <string>MD5SUM</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButton_None">
+             <widget class="QRadioButton" name="radioButtonNoneFilePrint">
               <property name="text">
                <string>Aucun</string>
               </property>
@@ -137,7 +110,7 @@
            </layout>
           </item>
           <item>
-           <spacer name="horizontalSpacer_3">
+           <spacer name="horizontalSpacerFilePrint">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -152,16 +125,16 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_SendSheet">
+         <layout class="QHBoxLayout" name="horizontalLayoutSendSheetToDB">
           <item>
-           <widget class="QLabel" name="label_SendSheet">
+           <widget class="QCheckBox" name="checkBoxSendSheetToDB">
             <property name="text">
-             <string>Envoie de la fiche après empaquetage du fichier :</string>
+             <string>Envoie de la fiche après empaquetage du fichier</string>
             </property>
            </widget>
           </item>
           <item>
-           <spacer name="horizontalSpacer_4">
+           <spacer name="horizontalSpacerSendSheetToDB">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -173,189 +146,26 @@
             </property>
            </spacer>
           </item>
-          <item>
-           <widget class="QComboBox" name="comboBox_SendSheet">
-            <property name="minimumSize">
-             <size>
-              <width>125</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="sizeAdjustPolicy">
-             <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item>
-         <widget class="QGroupBox" name="groupBox_Account">
-          <property name="title">
-           <string/>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_Creditentials">
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="label_Account">
-               <property name="text">
-                <string>Compte :</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_Login">
-               <property name="text">
-                <string>Jean Moulin</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_FilmTitle">
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="label_FilmTitle">
-               <property name="text">
-                <string>Films :</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_6">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QComboBox" name="comboBox_FilmTitle">
-               <property name="minimumSize">
-                <size>
-                 <width>125</width>
-                 <height>25</height>
-                </size>
-               </property>
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_RemoteDB">
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="label_RemoteDB">
-               <property name="text">
-                <string>Master :</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_7">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QComboBox" name="comboBox_RemoteDB">
-               <property name="minimumSize">
-                <size>
-                 <width>125</width>
-                 <height>25</height>
-                </size>
-               </property>
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_ShareTorrent">
-          <property name="bottomMargin">
-           <number>0</number>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
           </property>
-          <item>
-           <widget class="QCheckBox" name="checkBox_ShareTorrent">
-            <property name="text">
-             <string>Mise en partage du fichier torrent avec :</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_8">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBox_ShareTorrent">
-            <property name="minimumSize">
-             <size>
-              <width>125</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="sizeAdjustPolicy">
-             <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         </spacer>
         </item>
        </layout>
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox_EncodingLog">
+      <widget class="QGroupBox" name="groupBoxEncodingLog">
        <property name="title">
         <string/>
        </property>
