@@ -40,6 +40,7 @@ using namespace std;
 #include <QFile>
 #include <QCoreApplication>
 #include <QDir>
+#include <QMap>
 
 #include "src/configOCT.h"
 
@@ -141,6 +142,49 @@ QStringList* Model::Database::getMovieStruct() {
     reply->deleteLater();
 
     return movieStructList;
+}
+
+QMap<QString, QString>* Model::Database::getMovieByTitle(QString title) {
+    QUrl url(this->m_depot + "?resolver="+ this->m_depot +"&movie&title="+title+"&key_user="+ this->m_userKey);
+    QNetworkRequest request(url);
+
+    request.setRawHeader("User-Agent", configOCT::NAME.toStdString().c_str());
+    request.setRawHeader("Content-Type", "application/json");
+
+    QNetworkAccessManager *networkManager = new QNetworkAccessManager();
+
+    QEventLoop loop;
+    QNetworkReply* reply = networkManager->get(request);
+    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
+
+    QVariant statusCodeV = -1;
+    QMap<QString, QString> *movieData = NULL;
+
+    if (reply->error() == QNetworkReply::NoError){
+        statusCodeV = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+        QByteArray movieStruct = reply->readAll();
+
+        movieData = createMovie(movieStruct);
+    }
+    reply->deleteLater();
+
+    return movieData;
+}
+
+QMap<QString, QString>* Model::Database::createMovie(QByteArray movieStruct){
+    QMap<QString, QString> *movieData = new  QMap<QString, QString>;
+    QJsonDocument qjd;
+    qjd = QJsonDocument::fromJson(movieStruct);
+    QJsonObject qjo = qjd.object();
+
+    QStringList keys = qjo.keys();
+    for(int i = 0; i < qjo.size(); i++){
+        QString key = keys.at(i);
+        movieData->insert(key, qjo.value(key).toString());
+    }
+
+    return movieData;
 }
 
 QStringList* Model::Database::createStruct(QByteArray movieStruct){

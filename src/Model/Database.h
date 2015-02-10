@@ -32,6 +32,7 @@ using namespace std;
 #ifndef __Model__Database_h__
 #define __Model__Database_h__
 #include <QString>
+#include <QMap>
 
 namespace Model
 {
@@ -58,7 +59,11 @@ namespace Model
              */
             static QStringList *createStruct(QByteArray movieStruct);
 
-        public:
+            /**
+             * @brief create Map from json
+             */
+            QMap<QString, QString> *createMovie(QByteArray movieStruct);
+    public:
             /**
              * @brief Constructor.
              * @param userKey The user key to be binded.
@@ -94,8 +99,18 @@ namespace Model
             QString depot() const;
             QString userKey() const;
 
+            /**
+             * @brief This static method to get a movie struct.
+             * @return StringList of keys json.
+             */
             static QStringList* getMovieStruct();
 
+            /**
+             * @brief This method get movie by a title
+             * @param jsonString The json request to be send.
+             * @return The result of the sending.
+             */
+            QMap<QString, QString> *getMovieByTitle(QString title);
     };
 }
 
