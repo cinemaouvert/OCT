@@ -68,7 +68,7 @@ void AudioPane::initLists() {
     ui->comboBox_Langage->insertItems( 0, m_languageMap.keys() );
 
     m_codecMap.insert(tr("FLAC"),"flac");
-    m_codecMap.insert(tr("AAC"),"aac -strict experimental");
+    m_codecMap.insert(tr("AAC"),"aac");
     m_codecMap.insert(tr("MP2"),"mp2");
     m_codecMap.insert(tr("MP3"),"mp3");
 

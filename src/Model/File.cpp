@@ -150,7 +150,23 @@ QStringList *Model::File::getCommandLine()
     foreach (StreamWrapper *sW, *getStreamWrappers()) {
         (*stringList) << *(sW->generateCommandLine());
     }
-    (*stringList) << this->m_outFilePath;
+    if(this->getStreamWrappers()->size()==1){
+        Stream *stream = this->getStreamWrappers()->at(0)->getRelevantStream();
+        if(stream->getType() == Model::Stream::AUDIO){
+            QStringList filename = this->m_outFilePath.split(".");
+            QString newFilename = "";
+            if(filename.size()>1){
+                for(int i =0 ; i <filename.size()-1;i++){
+                    newFilename.append(filename.at(i));
+                }
+                QString codec = stream->getParameters()->value(Stream::CODEC_NAME)->value();
+                this->m_outFilePath = newFilename.append("."+codec);
+                (*stringList) << this->m_outFilePath;
+                return stringList;
+            }
+        }
+    }
+    (*stringList) <<this->m_outFilePath;
     return stringList;
 }
 
