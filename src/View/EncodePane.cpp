@@ -29,7 +29,7 @@
 #include "EncodePane.h"
 #include "ui_encodepane.h"
 #include "src/Controller/TreatmentThread.h"
-
+#include "src/Controller/loggersingleton.h"
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QMouseEvent>
@@ -53,6 +53,8 @@ EncodePane::EncodePane(QWidget *parent) :
 
     m_currentSteps = 0;
     m_pause = false;
+    LoggerSingleton * logger =LoggerSingleton::getInstance();
+    logger->setTextEdit(ui->loggerLabel);
 }
 
 EncodePane::~EncodePane()

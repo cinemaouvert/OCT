@@ -138,21 +138,15 @@
             </spacer>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox_Format">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
+            <widget class="QLabel" name="codecNameLabel">
              <property name="minimumSize">
               <size>
                <width>125</width>
-               <height>25</height>
+               <height>0</height>
               </size>
              </property>
-             <property name="sizeAdjustPolicy">
-              <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+             <property name="text">
+              <string/>
              </property>
             </widget>
            </item>

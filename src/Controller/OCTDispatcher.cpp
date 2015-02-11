@@ -47,6 +47,8 @@ using namespace std;
 #include "src/Model/Subtitle.h"
 #include "src/Model/StreamWrapper.h"
 
+#include "loggersingleton.h"
+
 #include <QProcess>
 #include <QDebug>
 #include <QFile>
@@ -191,6 +193,8 @@ Controller::OCTDispatcher::~OCTDispatcher()
     if(m_treatmentThread) delete  m_treatmentThread ;
     if(m_transcoder) delete m_transcoder  ;
     if(m_OCPMvalidation) delete  m_OCPMvalidation ;
+    LoggerSingleton::destroyInstance();
+
 }
 
 void Controller::OCTDispatcher::addFile(QString filePath) {
@@ -466,3 +470,34 @@ QStringList *Controller::OCTDispatcher::informationMovieStruct() const
 }
 
 
+void Controller::OCTDispatcher::customMessageHandler(QtMsgType type, const QMessageLogContext &context,const QString& msg){
+
+    QString dt = QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss");
+    QString txt = QString("[%1]\n").arg(dt);
+
+
+    switch (type) {
+    case QtDebugMsg:
+        txt += QString("Debug: %1").arg(msg);
+        break;
+
+    case QtWarningMsg:
+        txt += QString("Warning: %1").arg(msg);
+    break;
+    case QtCriticalMsg:
+        txt += QString("Critical: %1").arg(msg);
+    break;
+    case QtFatalMsg:
+        txt += QString("Fatal: %1").arg(msg);
+        abort();
+    }
+
+    QFile outFile("debuglog.txt");
+    outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+    QTextStream ts(&outFile);
+    ts << txt << endl;
+    outFile.close();
+
+
+    LoggerSingleton::getInstance()->writeMessage(txt);
+}

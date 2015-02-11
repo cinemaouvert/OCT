@@ -73,8 +73,6 @@ void SubtitlePane::initLists(){
     ui->comboBox_Encode->clear();
     ui->comboBox_Encode->insertItems(0,m_encodingMap.keys());
 
-    ui->comboBox_Format->clear();
-    ui->comboBox_Format->insertItems(0,m_formatMap.keys());
 }
 
 void SubtitlePane::setDispatcher(Controller::OCTDispatcher *dispatcher)
@@ -91,11 +89,9 @@ void SubtitlePane::applyReco()
         QString format= this->m_dispatcher->getOCPMValidation()->recommendedSubtitleFormat();
         QString encoding= this->m_dispatcher->getOCPMValidation()->recommendedSubtitleEncoding();
 
-        int ixd = ui->comboBox_Format->findText(m_formatMap.key(format),Qt::MatchExactly);
-        if(ixd != -1){
-            ui->comboBox_Format->setCurrentIndex(ixd);
-            emit(on_comboBox_Format_activated(m_formatMap.key(format)));
-        }
+        ui->codecNameLabel->setText(m_formatMap.value(format));
+        if(ui->codecNameLabel->text() == "")
+            ui->codecNameLabel->setText(format);
 /*
         ixd = ui->comboBox_Encode->findText(m_encodingMap.key(encoding),Qt::MatchExactly);
         if(ixd != -1){
@@ -155,15 +151,9 @@ void SubtitlePane::initPane()
     Model::Parameter *p = m_stream->getParameters()->value(Model::Stream::CODEC_NAME);
     if(p){
         QString codec = p->value();
-        ixd = ui->comboBox_Format->findText(m_formatMap.key(codec),Qt::MatchExactly);
-        if(ixd != -1)
-            ui->comboBox_Format->setCurrentIndex(ixd);
-        else{
-            ui->comboBox_Format->insertItem(0,codec);
-            ui->comboBox_Format->setCurrentIndex(0);
-        }
-
-        ui->label_Format->setText(tr("Original: ") + codec);
+        ui->codecNameLabel->setText(m_formatMap.value(codec));
+        if(ui->codecNameLabel->text() == "")
+            ui->codecNameLabel->setText(codec);
     }
 
     p = NULL;

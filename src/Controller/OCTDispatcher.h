@@ -291,6 +291,14 @@ namespace Controller
              */
             QStringList *informationMovieStruct() const;
 
+            /**
+             * @brief customMessageHandler Custom message handler.
+             * @param type Type of the message.
+             * @param context Context of the message.
+             * @param msg Message.
+             */
+            static void customMessageHandler(QtMsgType type, const QMessageLogContext &context,const QString& msg);
+
     public slots:
             /**
              * @brief treatProjectNameChanged Slot queried when the project name has changed.
