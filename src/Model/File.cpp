@@ -86,10 +86,14 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
                 QDomNode nodeCodecType = tab.namedItem("codec_type");
                 QString type = nodeCodecType.nodeValue();
                 Stream *s;
+                bool isimgmjpeg = false;
                 switch (Model::Stream::getEnumValue(type)){
                     case Model::Stream::VIDEO:
-                            s = new Video(stream, cptv);
-                            cptv++;
+                            if(tab.namedItem("avg_frame_rate").nodeValue().compare("0/0") !=0){
+                                s = new Video(stream, cptv);
+                                cptv++;
+                            }else
+                                isimgmjpeg = true;
                             break;
                     case Model::Stream::AUDIO:
                             s = new Audio(stream, cpta);
@@ -100,7 +104,7 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
                             cpts++;
                             break;
                 }
-                if(Model::Stream::getEnumValue(type) != Model::Stream::ATTACHMENT){
+                if(Model::Stream::getEnumValue(type) != Model::Stream::ATTACHMENT && !isimgmjpeg){
                     StreamWrapper* theData;
                     theData= new StreamWrapper();
                     theData->setOldStream(s);
