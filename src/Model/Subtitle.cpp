@@ -135,7 +135,7 @@ Model::Parameter *Model::Subtitle::getStaticParameter(QString key)
 
 void Model::Subtitle::initStaticParameters()
 {
-    Parameter *codecNameParam = new Parameter("","This is the codec of the subtitle stream","");
+    Parameter *codecNameParam = new Parameter("-scodec","This is the codec of the subtitle stream","%1");
     m_staticParameters.insert(Model::Stream::CODEC_NAME,codecNameParam);
 
     Parameter *language = new Parameter("-metadata:s:s:%1","This is the language of the subtitle stream","language=%1");
