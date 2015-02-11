@@ -253,6 +253,7 @@ namespace Controller
 
             TreatmentThread *getTreatmentThread();
 
+            static void customMessageHandler(QtMsgType type, const QMessageLogContext &context,const QString& msg);
 
             QStringList *informationMovieStruct() const;
 
