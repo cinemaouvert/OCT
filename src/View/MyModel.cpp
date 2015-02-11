@@ -47,6 +47,14 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
             }else if(m_array[index.row()][index.column()] == "NOK"){
                 return QIcon(":/icons/resources/glyphicons/glyphicons_153_unchecked.png");
             }
+       }else if(index.column()==0){
+           if(index.row()>0 && index.row() < m_nbVideo+1){
+                return QIcon(":/icons/resources/glyphicons/glyphicons_008_film.png");
+           }else if(index.row()>m_nbVideo+1 && index.row() < m_nbVideo + m_nbAudio +2){
+               return QIcon(":/icons/resources/glyphicons/glyphicons_017_music.png");
+           }else if(index.row() > m_nbVideo + m_nbAudio +2 && index.row() < m_nbVideo + m_nbAudio + m_nbSubtitle +3){
+               return QIcon(":/icons/resources/glyphicons/glyphicons_029_notes_2.png");
+           }
        }
        return QVariant();
     }else if(role == Qt::DisplayRole){
