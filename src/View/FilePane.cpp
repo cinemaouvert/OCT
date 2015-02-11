@@ -102,19 +102,17 @@ void FilePane::refresh() {
     int nbVideo = this->m_dispatcher->getCurrentProject()->nbVideo();
     int nbAudio = this->m_dispatcher->getCurrentProject()->nbAudio();
     int nbSub = this->m_dispatcher->getCurrentProject()->nbSub();
-    int i = 1;
-    int j = 3 + nbVideo;
-    int k = 2 + j + nbAudio;
-    MyModel *m = new MyModel( 8 + nbVideo + nbAudio + nbSub, 6 , nbVideo , nbAudio , nbSub);
+    int i = 0;
+    int j = 1 + nbVideo;
+    int k = 1 + j + nbAudio;
+    MyModel *m = new MyModel(5 + nbVideo + nbAudio + nbSub, 6 , nbVideo , nbAudio , nbSub);
     ui->tableViewImportFile->setModel(m);
-    m->setItem(0, 0, tr("Video"));
-    m->setItem(1, 0, tr("Nom"));
-    m->setItem(1, 1, tr("Codec"));
-    m->setItem(1, 2, tr("IPS"));
-    m->setItem(1, 3, tr("Taille"));
-    m->setItem(1, 4, tr("Supporté"));
+    m->setItem(0, 0, tr("Nom"));
+    m->setItem(0, 1, tr("Codec"));
+    m->setItem(0, 2, tr("IPS"));
+    m->setItem(0, 3, tr("Taille"));
+    m->setItem(0, 4, tr("Supporté"));
 
-    m->setItem(j-1, 0, tr("Audio"));
     m->setItem(j, 0, tr("Nom"));
     m->setItem(j, 1, tr("Codec"));
     m->setItem(j, 2, tr("Echantillonage"));
@@ -122,7 +120,6 @@ void FilePane::refresh() {
     m->setItem(j, 4, tr("Cannaux"));
     m->setItem(j, 5, tr("Supporté"));
 
-    m->setItem(k-1, 0, tr("Sous Titre"));
     m->setItem(k, 0, tr("Nom"));
     m->setItem(k, 1, tr("Format"));
     m->setItem(k, 2, tr("Encodage"));
@@ -130,10 +127,7 @@ void FilePane::refresh() {
     m->setItem(k, 4, tr("Supporté"));
 
     ui->tableViewImportFile->clearSpans();
-    ui->tableViewImportFile->setSpan(0, 0, 1, 6);
     ui->tableViewImportFile->setSpan(1, 4, 1, 5);
-    ui->tableViewImportFile->setSpan(2+nbVideo, 0, 1, 6);
-    ui->tableViewImportFile->setSpan(4+nbVideo+nbAudio, 0, 1, 6);
     ui->tableViewImportFile->setSpan(5+nbVideo+nbAudio, 4, 1, 5);
     QString out_tView = "";
 

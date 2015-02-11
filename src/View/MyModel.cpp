@@ -57,10 +57,10 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
         }
     }else if (role == Qt::BackgroundRole){
 
-        if(     index.row() == 0 || index.row() == 1 ||
-                index.row() == m_nbVideo +2 || index.row() == m_nbVideo+1+2 ||
-                index.row() == m_nbVideo + m_nbAudio +4 || index.row() == m_nbVideo + m_nbAudio +1+4 ||
-                index.row() == m_nbVideo + m_nbAudio + m_nbSubtitle +6 || index.row() == m_nbVideo + m_nbAudio + m_nbSubtitle +1+6
+        if(     index.row() == 0 ||
+                index.row() == m_nbVideo +1 ||
+                index.row() == m_nbVideo + m_nbAudio +2 ||
+                index.row() == m_nbVideo + m_nbAudio + m_nbSubtitle +3 || index.row() == m_nbVideo + m_nbAudio + m_nbSubtitle +4
         ){
             return QColor(QColor(150,150,150,50));
 
