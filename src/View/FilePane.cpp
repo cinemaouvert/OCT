@@ -294,8 +294,10 @@ void FilePane::refresh() {
     }
     sim->appendRow(item);
     // Set encodePane listViewExport model and delegate.
-    EncodePane * encodePane = m_mainWindow->getEncodePane();
-    encodePane->setListViewExport( sim, md );
+    if(m_mainWindow){
+        EncodePane * encodePane = m_mainWindow->getEncodePane();
+        encodePane->setListViewExport( sim, md );
+    }
 }
 
 void FilePane::splitterNoCollapsing()
