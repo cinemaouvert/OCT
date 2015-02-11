@@ -28,12 +28,14 @@ class FilePane : public QWidget
 
 public:
     explicit FilePane(QWidget *parent = 0);
-    void setDispatcher(Controller::OCTDispatcher *dispatcheur);
-    void refresh();
     ~FilePane();
 
     View::MainWindow *mainWindow() const;
     void setMainWindow(View::MainWindow *myMainWindow);
+    void setDispatcher(Controller::OCTDispatcher *dispatcheur);
+
+    void refresh();
+    void refreshListViewImportFile();
 
 signals:
     void projectNameChanged(QString newName);

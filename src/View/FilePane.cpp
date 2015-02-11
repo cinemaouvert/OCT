@@ -2,6 +2,7 @@
 #include "ui_filepane.h"
 #include "MyModel.h"
 #include "MyDelegate.h"
+#include "EncodePane.h"
 
 #include "src/Model/Attachment.h"
 #include "src/Model/StreamWrapper.h"
@@ -24,20 +25,15 @@ FilePane::FilePane(QWidget *parent) :
     ui->setupUi(this);
     m_model = new QStringListModel(this);
     splitterNoCollapsing();
-   // ui->tableView_ImportFile->horizontalHeader()->setVisible(false);
+    // ui->tableView_ImportFile->horizontalHeader()->setVisible(false);
     ui->tableViewImportFile->verticalHeader()->setVisible(false);
-  //  ui->tableView_ImportFile->setAlternatingRowColors(true);
-    //ui->tableView_ImportFile->horizontalHeader()->setStretchLastSection(true);
+    // ui->tableView_ImportFile->setAlternatingRowColors(true);
+    // ui->tableView_ImportFile->horizontalHeader()->setStretchLastSection(true);
     ui->tableViewImportFile->resizeColumnsToContents();
     ui->listViewImportFile->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->listViewExport->setEditTriggers(QAbstractItemView::NoEditTriggers);
-  //  ui->listView_Export->setAlternatingRowColors(true);
-
-    ui->listViewExport->setFocusPolicy(Qt::NoFocus);
-
+    // ui->listView_Export->setAlternatingRowColors(true);
 
     ui->comboBoxPreconfig->clear();
-
 }
 
 FilePane::~FilePane()
@@ -54,8 +50,6 @@ void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
     this->m_dispatcher = dispatcheur;
     connectInterface();
 
-
-
     m_preConfigsDir = QDir(qApp->applicationDirPath() + QDir::separator() + "ocpm");
 
     if(m_preConfigsDir.isReadable()){
@@ -64,7 +58,7 @@ void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
                 ui->comboBoxPreconfig->insertItem(0,file.remove(".xml"));
         }
     }
-    ui->comboBoxPreconfig->insertItem(0,tr("None"));
+    ui->comboBoxPreconfig->insertItem(0, tr("None"));
     ui->comboBoxPreconfig->setCurrentIndex(0);
 
 }
@@ -72,19 +66,7 @@ void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
 // ========================================================================== //
 // == CLASS METHODS ========================================================= //
 // ========================================================================== //
-void FilePane::refresh()
-{
-    QIcon i_ok = QIcon(":/icons/resources/glyphicons/glyphicons_206_ok_2.png");
-    QIcon i_nok = QIcon(":/icons/resources/glyphicons/glyphicons_207_remove_2.png");
-    MyDelegate *md = new MyDelegate();
-    QStandardItemModel* sim;
-    sim = new QStandardItemModel(this);
-
-    //////REFRESH FIELDS/////
-    ui->lineEditExportName->setText(this->m_dispatcher->getCurrentProject()->name());
-
-
-    ///////////////////////////////ListView2/////////////////////////////////////////
+void FilePane::refreshListViewImportFile() {
     QStringList names;
     list.clear();
     foreach(Model::File *f , *(this->m_dispatcher->getCurrentProject()->fileList())){
@@ -98,8 +80,21 @@ void FilePane::refresh()
     }
     m_model->setStringList(names);
     ui->listViewImportFile->setModel(m_model);
+}
 
-    //////////////////////////////TableView////////////////////////////////////////////
+void FilePane::refresh() {
+    QIcon i_ok = QIcon(":/icons/resources/glyphicons/glyphicons_206_ok_2.png");
+    QIcon i_nok = QIcon(":/icons/resources/glyphicons/glyphicons_207_remove_2.png");
+    MyDelegate *md = new MyDelegate();
+    QStandardItemModel* sim = new QStandardItemModel(this);
+
+    //////REFRESH FIELDS/////
+    ui->lineEditExportName->setText(this->m_dispatcher->getCurrentProject()->name());
+
+    ///////////////////////////////ListViewImportFile///////////////////////////
+    refreshListViewImportFile();
+
+    //////////////////////////////TableView/////////////////////////////////////
     int nbVideo = this->m_dispatcher->getCurrentProject()->nbVideo();
     int nbAudio = this->m_dispatcher->getCurrentProject()->nbAudio();
     int nbSub = this->m_dispatcher->getCurrentProject()->nbSub();
@@ -108,27 +103,27 @@ void FilePane::refresh()
     int k = 2 + j + nbAudio;
     MyModel *m = new MyModel( 8 + nbVideo + nbAudio + nbSub, 6 , nbVideo , nbAudio , nbSub);
     ui->tableViewImportFile->setModel(m);
-    m->setItem(0,0,tr("Video"));
-    m->setItem(1,0,tr("Nom"));
-    m->setItem(1,1,tr("Codec"));
-    m->setItem(1,2,tr("IPS"));
-    m->setItem(1,3,tr("Taille"));
-    m->setItem(1,4,tr("Supporté"));
+    m->setItem(0, 0, tr("Video"));
+    m->setItem(1, 0, tr("Nom"));
+    m->setItem(1, 1, tr("Codec"));
+    m->setItem(1, 2, tr("IPS"));
+    m->setItem(1, 3, tr("Taille"));
+    m->setItem(1, 4, tr("Supporté"));
 
-    m->setItem(j-1,0,tr("Audio"));
-    m->setItem(j,0,tr("Nom"));
-    m->setItem(j,1,tr("Codec"));
-    m->setItem(j,2,tr("Echantillonage"));
-    m->setItem(j,3,tr("Profondeur"));
-    m->setItem(j,4,tr("Cannaux"));
-    m->setItem(j,5,tr("Supporté"));
+    m->setItem(j-1, 0, tr("Audio"));
+    m->setItem(j, 0, tr("Nom"));
+    m->setItem(j, 1, tr("Codec"));
+    m->setItem(j, 2, tr("Echantillonage"));
+    m->setItem(j, 3, tr("Profondeur"));
+    m->setItem(j, 4, tr("Cannaux"));
+    m->setItem(j, 5, tr("Supporté"));
 
-    m->setItem(k-1,0,tr("Sous Titre"));
-    m->setItem(k,0,tr("Nom"));
-    m->setItem(k,1,tr("Format"));
-    m->setItem(k,2,tr("Encodage"));
-    m->setItem(k,3,tr("IPS"));
-    m->setItem(k,4,tr("Supporté"));
+    m->setItem(k-1, 0, tr("Sous Titre"));
+    m->setItem(k, 0, tr("Nom"));
+    m->setItem(k, 1, tr("Format"));
+    m->setItem(k, 2, tr("Encodage"));
+    m->setItem(k, 3, tr("IPS"));
+    m->setItem(k, 4, tr("Supporté"));
 
     ui->tableViewImportFile->clearSpans();
     ui->tableViewImportFile->setSpan(0, 0, 1, 6);
@@ -138,8 +133,8 @@ void FilePane::refresh()
     ui->tableViewImportFile->setSpan(5+nbVideo+nbAudio, 4, 1, 5);
     QString out_tView = "";
 
-    foreach(Model::File *f , *(this->m_dispatcher->getCurrentProject()->fileList())){
-        foreach( Model::StreamWrapper *sw, *(f->getDatas())){
+    foreach(Model::File *f, *(this->m_dispatcher->getCurrentProject()->fileList())){
+        foreach( Model::StreamWrapper *sw, *(f->getDatas())) {
 
             if(sw->getRelevantStream()->getType() == Model::Stream::VIDEO){
                 i++;
@@ -203,7 +198,7 @@ void FilePane::refresh()
                 k++;
                 m->setItem(k,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getRelevantStream()->getUID()));
                 Model::Parameter *p = sw->getRelevantStream()->getParameters()->find(Model::Stream::CODEC_NAME).value();
-                m->setItem(k,1,p->value());                
+                m->setItem(k,1,p->value());
                 out_tView = "sous titre " + sw->getRelevantStream()->getUID() + " from "+ f->getName() + " - " + p->value();
 
 
@@ -233,12 +228,14 @@ void FilePane::refresh()
 
     }
 
+    /*
     foreach(Model::Attachment *a , *(this->m_dispatcher->getCurrentProject()->attachments())){
-       /* m->setItem(i,0,QString("attachment"));
+        m->setItem(i,0,QString("attachment"));
         QStringList name = a->filepath().split("/");
         m->setItem(i,1,name.at(name.length()-1));
-        i++;*/
+        i++;
     }
+    //*/
 
     //Champs informations renseigné
 
@@ -298,9 +295,9 @@ void FilePane::refresh()
         item = new QStandardItem(i_nok,tr("Champs informations renseigné: ")+ QString::number(difInfo) +tr(" champs manquant"));
     }
     sim->appendRow(item);
-
-    ui->listViewExport->setModel(sim);
-    ui->listViewExport->setItemDelegate(md);
+    // Set encodePane listViewExport model and delegate.
+    EncodePane * encodePane = m_mainWindow->getEncodePane();
+    encodePane->setListViewExport( sim, md );
 }
 
 void FilePane::splitterNoCollapsing()

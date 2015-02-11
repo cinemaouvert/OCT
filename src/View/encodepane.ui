@@ -161,6 +161,9 @@
           </property>
          </spacer>
         </item>
+        <item>
+         <widget class="QListView" name="listViewExport"/>
+        </item>
        </layout>
       </widget>
      </item>

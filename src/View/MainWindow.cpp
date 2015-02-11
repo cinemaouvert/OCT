@@ -182,6 +182,7 @@ void View::MainWindow::on_tabWidget_currentChanged(int index)
         break;
     case 5:
         ui->labelStatus5->setStyleSheet(activeStyle);
+        ui->tab_files->refresh();
         break;
     default:
         break;

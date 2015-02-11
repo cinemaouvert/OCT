@@ -43,9 +43,14 @@ EncodePane::EncodePane(QWidget *parent) :
 {
     ui->setupUi(this);
     m_modelProjectList = new QStringListModel(this);
+
     ui->listViewProjects->setModel(m_modelProjectList);
     ui->listViewProjects->setAlternatingRowColors(true);
     ui->listViewProjects->setEncodePane(this);
+
+    ui->listViewExport->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->listViewExport->setFocusPolicy(Qt::NoFocus);
+
     m_currentSteps = 0;
     m_pause = false;
 }
@@ -81,6 +86,11 @@ void EncodePane::refreshProjectPane()
         list << project->name();
     }
     m_modelProjectList->setStringList(list);
+}
+
+void EncodePane::setListViewExport( QStandardItemModel * sim, MyDelegate * md ) {
+    ui->listViewExport->setModel( sim );
+    ui->listViewExport->setItemDelegate( md );
 }
 
 void EncodePane::passedProgressStep()

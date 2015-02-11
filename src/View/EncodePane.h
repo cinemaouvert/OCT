@@ -30,8 +30,10 @@
 #define ENCODEPANE_H
 
 #include <QStringListModel>
+#include <QStandardItemModel>
 #include <QWidget>
 
+#include "MyDelegate.h"
 #include <src/Controller/OCTDispatcher.h>
 
 namespace Ui {
@@ -56,6 +58,8 @@ public:
     /// \brief Refresh the project pane.
     ///
     void refreshProjectPane();
+
+    void setListViewExport( QStandardItemModel * sim, MyDelegate * md );
 
     ///
     /// \brief Change the current project.
