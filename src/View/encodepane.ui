@@ -51,12 +51,15 @@
            </spacer>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEditTorrentSoftware">
+           <widget class="QLabel" name="labelTorrentSoftwarePath">
             <property name="minimumSize">
              <size>
               <width>125</width>
               <height>25</height>
              </size>
+            </property>
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>

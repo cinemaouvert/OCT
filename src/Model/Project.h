@@ -66,6 +66,11 @@ namespace Model
             QString m_xmlFilePath;
 
             /**
+             * @brief Path to the torrent software.
+             */
+            QString m_torrentSoftwarePath;
+
+            /**
              * @brief Define whether or not a magnet link is to be created.
              */
             bool m_createMagnet;
@@ -198,6 +203,18 @@ namespace Model
              * @param xmlFilePath New XML file path to replace the current one.
              */
             void setXmlFilePath(const QString &xmlFilePath);
+
+            /**
+             * @brief Accessor on the path of the torrent software.
+             * @return The torrent software path value member.
+             */
+            QString getTorrentSoftwarePath() const;
+
+            /**
+             * @brief Mutator on the path of the torrent software.
+             * @param xmlFilePath New torrent software path to replace the current one.
+             */
+            void setTorrentSoftwarePath(const QString &torrentSoftwarePath);
 
             void generateInformationToXML();
             /**

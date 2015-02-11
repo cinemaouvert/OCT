@@ -224,6 +224,14 @@ void Model::Project::setXmlFilePath(const QString &xmlFilePath)
     m_xmlFilePath = xmlFilePath;
 }
 
+QString Model::Project::getTorrentSoftwarePath() const {
+    return m_torrentSoftwarePath;
+}
+
+void Model::Project::setTorrentSoftwarePath(const QString &torrentSoftwarePath) {
+    m_torrentSoftwarePath = torrentSoftwarePath;
+}
+
 void Model::Project::generateInformationToXML()
 {
     if(m_informations != NULL){

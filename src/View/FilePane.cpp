@@ -64,7 +64,6 @@ void FilePane::setDispatcher(Controller::OCTDispatcher *dispatcheur)
     }
     ui->comboBoxPreconfig->insertItem(0, tr("None"));
     ui->comboBoxPreconfig->setCurrentIndex(0);
-
 }
 
 // ========================================================================== //
@@ -353,8 +352,7 @@ void FilePane::on_comboBoxPreconfig_currentTextChanged(const QString &arg1)
 
 }
 
-void FilePane::on_findExport_clicked()
-{
+void FilePane::on_findExport_clicked() {
     QUrl filePath = QFileDialog::getSaveFileName(this, tr("Choisir fichier de sortie"),"",tr("Matroska (*.mkv)"));
     m_dispatcher->treatProjectNameChanged(filePath.toString());
     ui->lineEditExportName->setText(filePath.toString());
