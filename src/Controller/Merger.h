@@ -53,10 +53,11 @@ namespace Model
 
 namespace Controller
 {
+    /**
+     * @brief The Merger class contains methods creating XML and MKV files.
+     */
 	class Merger
     {
-
-
         public:
 
             /**

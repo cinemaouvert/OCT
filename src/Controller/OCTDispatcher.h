@@ -96,7 +96,7 @@ namespace Controller
             Model::Project              *m_currentProject;
 
             /**
-             * @brief The associated interface.
+             * @brief The associated main window interface.
              */
             View::MainWindow            *m_mainWindow;
 
@@ -126,7 +126,7 @@ namespace Controller
             Controller::Exporter        *m_exporter;
 
             /**
-             * @brief The associated list of project.
+             * @brief The associated list of projects.
              */
             QList<Model::Project*>      *m_projects;
 
@@ -146,7 +146,7 @@ namespace Controller
             QStringList *m_informationMovieStruct;
 
             /**
-              * @brief the model representation of the validation
+              * @brief The model representation of the validation
               */
             Model::OCPMValidation *m_OCPMvalidation;
 
@@ -216,22 +216,22 @@ namespace Controller
 
             /**
              * @brief Add a setting to the current set of settings.
-             * @param key
-             * @param value
+             * @param key The associated key setting.
+             * @param value The associated value to the key.
              */
             void addSetting(const QString &key, const QVariant &value);
 
             /**
              * @brief Get a setting by its key.
-             * @param key
+             * @param key The key.
              * @return The QVariant setting value.
              */
             QVariant getSetting(QString key);
 
             /**
              * @brief Initialize a given setting.
-             * @param key
-             * @param value
+             * @param key The associated key setting.
+             * @param value The associated value to the key.
              */
             void initSetting(const QString &key, const QVariant &value);
 
@@ -240,29 +240,105 @@ namespace Controller
              */
             void initSettings();
 
-
+            /**
+             * @brief getCurrentProject Accessor on the current project member.
+             * @return The current project.
+             */
             Model::Project *getCurrentProject() const;
 
+            /**
+             * @brief getProjects Accessor on the projects member.
+             * @return The projects contained in the dispatcher.
+             */
             QList<Model::Project*> *getProjects();
 
+            /**
+             * @brief getOCPMValidation Accessor on the OCPMValidation member.
+             * @return The OCPMValidation member of the current project.
+             */
             Model::OCPMValidation *getOCPMValidation();
 
+            /**
+             * @brief setCurrentProjectIndex Mutator to select the current project.
+             *
+             * This method allows to specify the current project within the set
+             * of projects contained in the dispatcher.
+             * @param index The index of the project to set as current project.
+             */
             void setCurrentProjectIndex(int index);
 
+            /**
+             * @brief duplicateProject Duplicate the project designed by its index.
+             *
+             * Duplicate the project designed by its index within the set of project
+             * contained in the dispatcher.
+             * @param index The index of the project to duplicate.
+             */
             void duplicateProject(int index);
 
+            /**
+             * @brief getTreatmentThread Accessor on the treatment thread member.
+             * @return The treatment thread member of the dispatcher.
+             */
             TreatmentThread *getTreatmentThread();
 
-
+            /**
+             * @brief informationMovieStruct Accessor on the movie informations.
+             *
+             * Accessor on the movie information structure contained in the
+             * dispatcher.
+             * @return The associated information as a QStringList.
+             */
             QStringList *informationMovieStruct() const;
 
     public slots:
+            /**
+             * @brief treatProjectNameChanged Slot queried when the project name has changed.
+             * @param newName The new project name.
+             */
             void treatProjectNameChanged(QString newName);
+
+            /**
+             * @brief checkProjectValidation Check whether the project is OCPM valid or not.
+             * @return Whether the project is OCPM valid or not.
+             */
             bool checkProjectValidation();
+
+            /**
+             * @brief checkStreamValidation Check whether the stream is OCPM valid or not.
+             * @param stream The stream that is to be checked.
+             * @return Whether the stream is OCPM valid or not.
+             */
             bool checkStreamValidation(Model::Stream *stream);
+
+            /**
+             * @brief checkInformationValidation Check whether the informations are OCPM valid or not.
+             * @return Whether the informations are OCPM valid or not.
+             */
             int checkInformationValidation();
+
+            /**
+             * @brief checkPosterValidation Check whether the poster is OCPM valid or not.
+             * @return Whether the poster is OCPM valid.
+             */
             bool checkPosterValidation();
+
+            /**
+             * @brief parameterChanged Slot registering any interface's parameter modification.
+             * @param file The file affected by the modification.
+             * @param stream The stream affected by the modification.
+             * @param parameterName The parameter's name that has been changed.
+             * @param value The new value associated with the parameter.
+             */
             void parameterChanged(Model::File *file,Model::Stream *stream,QString parameterName, QString value);
+
+            /**
+             * @brief parameterChangedMKV Slot registering any MKV's parameter modification.
+             * @param p
+             * @param file The file affected by the modification.
+             * @param stream The stream affected by the modification.
+             * @param value The new value associated with the parameter.
+             */
             void parameterChangedMKV(int p, Model::File *file,Model::Stream *stream, QString value);
 
     };

@@ -138,7 +138,7 @@ void EncodePane::on_pushButton_Encode_clicked()
         m_dispatcher->startTreatment();
         ui->pushButton_Cancel->setEnabled(true);
         ui->pushButton_Pause->setEnabled(true);
-    }else{
+    } else {
         QMessageBox::warning(this,tr("Chemin de sortie manquant"),tr("Vous devez saisir un chemin de sortie pour pouvoir encoder(cf. Fichiers)"));
     }
 }
@@ -153,10 +153,10 @@ void EncodePane::on_pushButton_Cancel_clicked()
 
 void EncodePane::on_pushButton_Pause_clicked()
 {
-    if(m_pause){
+    if(m_pause) {
         m_dispatcher->restartTreatment();
         m_pause = false;
-    }else{
+    } else {
         m_dispatcher->pauseTreatment();
         m_pause = true;
     }

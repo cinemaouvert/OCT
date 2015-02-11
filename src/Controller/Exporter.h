@@ -52,13 +52,20 @@ namespace Model
 
 namespace Controller
 {
+    /**
+     * @brief The Exporter class
+     *
+     * This class is in charge to connect to the remote database and create
+     * associated torrent file and magnet link.
+     */
 	class Exporter
     {
         private:
             /**
              * @brief This method creates a torrent file to create a magnet link.
-             * @param filepath
-             * @return
+             * @param filepath The filepath to the torrent file.
+             * @param nomTorrent The torrent file name.
+             * @return The final filepath to the torrent file created.
              */
             QString createTorrentFile(QString filepath, QString nomTorrent);
 
@@ -70,7 +77,7 @@ namespace Controller
             Model::Database* m_Database;
 
             /**
-             * @brief constructor to connect database
+             * @brief Constructor to connect database
              */
             Exporter(QString userKey, QString depot);
 
@@ -82,13 +89,19 @@ namespace Controller
             QString createMagnetLink(QString filepath, QString nomTorrent);
 
             /**
-             * @brief This method sends information in json  to the database.
-             * @param Project
+             * @brief This method sends information in json to the database.
+             * @param Project The associated project.
+             * @param url_magnet The associated magnet link url.
              * @return 1 if ok, 0 else.
              */
             bool sendInformationsToJSON(Model::Project* project, QString url_magnet);
 
             ~Exporter();
+
+            /**
+             * @brief Retrieve informations under a QStringList.
+             * @return The QStringList containing the associated informations.
+             */
             static QStringList* getInformations();
     };
 }
