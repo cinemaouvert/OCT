@@ -34,6 +34,10 @@ FilePane::FilePane(QWidget *parent) :
     // ui->listView_Export->setAlternatingRowColors(true);
 
     ui->comboBoxPreconfig->clear();
+    QList<int> sizes;
+    sizes.append(200);
+    sizes.append(800);
+    ui->splitter->setSizes(sizes);
 }
 
 FilePane::~FilePane()
