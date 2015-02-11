@@ -471,20 +471,24 @@ QStringList *Controller::OCTDispatcher::informationMovieStruct() const
 
 
 void Controller::OCTDispatcher::customMessageHandler(QtMsgType type, const QMessageLogContext &context,const QString& msg){
-    QString txt;
+
+    QString dt = QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss");
+    QString txt = QString("[%1]\n").arg(dt);
+
+
     switch (type) {
     case QtDebugMsg:
-        txt = QString("Debug: %1").arg(msg);
+        txt += QString("Debug: %1").arg(msg);
         break;
 
     case QtWarningMsg:
-        txt = QString("Warning: %1").arg(msg);
+        txt += QString("Warning: %1").arg(msg);
     break;
     case QtCriticalMsg:
-        txt = QString("Critical: %1").arg(msg);
+        txt += QString("Critical: %1").arg(msg);
     break;
     case QtFatalMsg:
-        txt = QString("Fatal: %1").arg(msg);
+        txt += QString("Fatal: %1").arg(msg);
         abort();
     }
 

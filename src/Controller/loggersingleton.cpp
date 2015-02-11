@@ -63,7 +63,8 @@ void LoggerSingleton::writeMessage(const QString &message)
     if(_textEdit)
     {
         _mutex.lock();
-        _textEdit->setText(message+"\n"+_textEdit->text());
+        if(_textEdit)
+            _textEdit->setText(message+"\n"+_textEdit->text());
         _mutex.unlock();
     }
 }
