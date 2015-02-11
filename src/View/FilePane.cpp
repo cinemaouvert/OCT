@@ -33,6 +33,10 @@ FilePane::FilePane(QWidget *parent) :
     ui->listViewImportFile->setEditTriggers(QAbstractItemView::NoEditTriggers);
     // ui->listView_Export->setAlternatingRowColors(true);
 
+
+    QFont font("foundation-icons", 14); // << this name is the family name of the font, not the file name
+    ui->tableViewImportFile->setFont(font);
+
     ui->comboBoxPreconfig->clear();
     QList<int> sizes;
     sizes.append(200);
@@ -113,6 +117,8 @@ void FilePane::refresh() {
     m->setItem(0, 4, tr("Supporté"));
 
     m->setItem(j, 0, tr("Nom"));
+    m->setItem(j, 0, QString::fromUtf8("\uf127"));
+
     m->setItem(j, 1, tr("Codec"));
     m->setItem(j, 2, tr("Echantillonage"));
     m->setItem(j, 3, tr("Profondeur"));
