@@ -444,5 +444,6 @@
         <file>resources/glyphicons/simpleLoop.png</file>
         <file>resources/glyphicons/goToBlack.png</file>
         <file>resources/font/foundation-icons/foundation-icons.ttf</file>
+        <file>resources/font/foundation-icons/foundation-icons.svg</file>
     </qresource>
 </RCC>

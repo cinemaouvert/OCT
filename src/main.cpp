@@ -22,7 +22,11 @@ int main(int argc, char *argv[])
 
 
 
-    QFontDatabase::addApplicationFont(":/resources/font/foundation-icons/foundation-icons.ttf");
+    int z = QFontDatabase::addApplicationFont(":/icons/resources/font/foundation-icons/foundation-icons.ttf");
+
+    qDebug() << "font: "<< z;
+     qDebug() << QFontDatabase::applicationFontFamilies(0);
+
 
     return a.exec();
 }

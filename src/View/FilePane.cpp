@@ -34,7 +34,7 @@ FilePane::FilePane(QWidget *parent) :
     // ui->listView_Export->setAlternatingRowColors(true);
 
 
-    QFont font("foundation-icons", 14); // << this name is the family name of the font, not the file name
+    QFont font("fontcustom", 10);
     ui->tableViewImportFile->setFont(font);
 
     ui->comboBoxPreconfig->clear();
@@ -117,8 +117,6 @@ void FilePane::refresh() {
     m->setItem(0, 4, tr("Supporté"));
 
     m->setItem(j, 0, tr("Nom"));
-    m->setItem(j, 0, QString::fromUtf8("\uf127"));
-
     m->setItem(j, 1, tr("Codec"));
     m->setItem(j, 2, tr("Echantillonage"));
     m->setItem(j, 3, tr("Profondeur"));
@@ -158,11 +156,12 @@ void FilePane::refresh() {
                 QStandardItem* item;
                 if(this->m_dispatcher->checkStreamValidation(sw->getRelevantStream())){
                     item = new QStandardItem(i_ok,out_tView);
-                    m->setItem(i,4,QString("OK"));
+
+                    m->setItem(i, 4, QString::fromUtf8("\uf126"));
                 }
                 else{
                     item = new QStandardItem(i_nok,out_tView);
-                    m->setItem(i,4,QString("NOK"));
+                    m->setItem(i, 4, QString::fromUtf8("\uf217"));
                 }
                 sim->appendRow(item);
 
@@ -189,11 +188,11 @@ void FilePane::refresh() {
                 QStandardItem* item;
                 if(this->m_dispatcher->checkStreamValidation(sw->getRelevantStream())){
                     item = new QStandardItem(i_ok,out_tView);
-                    m->setItem(j,5,QString("OK"));
+                    m->setItem(j, 5, QString::fromUtf8("\uf126"));
                 }
                 else{
                     item = new QStandardItem(i_nok,out_tView);
-                    m->setItem(j,5,QString("NOK"));
+                    m->setItem(j, 5, QString::fromUtf8("\uf217"));
                 }
                 sim->appendRow(item);
             }
@@ -209,11 +208,11 @@ void FilePane::refresh() {
                 QStandardItem* item;
                 if(this->m_dispatcher->checkStreamValidation(sw->getRelevantStream())){
                     item = new QStandardItem(i_ok,out_tView);
-                    m->setItem(k,4,QString("OK"));
+                    m->setItem(k, 4, QString::fromUtf8("\uf126"));
                 }
                 else{
                     item = new QStandardItem(i_nok,out_tView);
-                    m->setItem(k,4,QString("NOK"));
+                    m->setItem(k, 4, QString::fromUtf8("\uf217"));
                 }
                 sim->appendRow(item);
 
