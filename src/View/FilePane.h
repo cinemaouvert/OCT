@@ -50,6 +50,8 @@ private slots:
 
     void on_findExport_clicked();
 
+    void on_pushButtonGetInfos_clicked();
+
 private:
     Ui::FilePane *ui;
     Controller::OCTDispatcher *m_dispatcher;

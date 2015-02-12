@@ -478,4 +478,7 @@ void Controller::OCTDispatcher::customMessageHandler(QtMsgType type, const QMess
     LoggerSingleton::getInstance()->writeMessage(txt);
 }
 
+QMap<QString, QString>* Controller::OCTDispatcher::getInformations(QString nameMovie){
+    return NULL;
+}
 

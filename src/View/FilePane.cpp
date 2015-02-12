@@ -372,3 +372,11 @@ void FilePane::setMainWindow(View::MainWindow *mainWindow)
     m_mainWindow = mainWindow;
 }
 
+
+void FilePane::on_pushButtonGetInfos_clicked()
+{
+    this->m_dispatcher->getCurrentProject()->setUserKey(ui->lineEditUserKey->text());
+    this->m_dispatcher->getCurrentProject()->setDepot(ui->lineEditUrlRepository->text());
+
+
+}

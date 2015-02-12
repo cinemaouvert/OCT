@@ -299,6 +299,7 @@ namespace Controller
              */
             static void customMessageHandler(QtMsgType type, const QMessageLogContext &context,const QString& msg);
 
+            QMap<QString, QString> *getInformations(QString nameMovie);
     public slots:
             /**
              * @brief treatProjectNameChanged Slot queried when the project name has changed.
