@@ -234,12 +234,13 @@ void Model::Project::setTorrentSoftwarePath(const QString &torrentSoftwarePath) 
     m_torrentSoftwarePath = torrentSoftwarePath;
 }
 
-void Model::Project::generateInformationToXML()
+QString Model::Project::generateInformationToXML()
 {
     if(m_informations != NULL){
-        QFile file(qApp->applicationDirPath() + QDir::separator() + "infos.xml");
+        this->m_xmlFilePath = qApp->applicationDirPath() + QDir::separator() + "infos.xml";
+        QFile file(this->m_xmlFilePath);
         if (!file.open(QIODevice::WriteOnly)){
-            return;
+            return "";
         }
         QXmlStreamWriter writer(&file);
         writer.setAutoFormatting(true);
@@ -256,7 +257,10 @@ void Model::Project::generateInformationToXML()
         writer.writeEndDocument();
 
         file.close();
+        return this->m_xmlFilePath;
     }
+    return "";
+
 }
 
 QStringList *Model::Project::getMergeCommandLine()
@@ -290,7 +294,7 @@ QStringList *Model::Project::getMergeCommandLine()
         *arguments << "--attach-file" << a->filepath();
     }
 
-    //*arguments <<"--attach-file"<< m_xmlFilePath;
+    *arguments <<"--attach-file"<< this->generateInformationToXML();
 
     qDebug() << *arguments;
     return arguments;
