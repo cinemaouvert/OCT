@@ -273,16 +273,13 @@ QStringList *Model::Project::getMergeCommandLine()
             if(sw->getRelevantStream()->isDefault())
                 *arguments << "--default-track" << sw->getRelevantStream()->getUID();
 
-            if(sw->getRelevantStream()->name() !=""){
-                *arguments << "--track-name" << sw->getRelevantStream()->name();
+            if(sw->oldStream()->name() !=""){
+                *arguments << "--track-name" << sw->oldStream()->name();
             }
-
-            qDebug() << "-----------------------";
-            qDebug() << sw->getRelevantStream()->delay();
-            if(sw->getRelevantStream()->delay() !=""){
-                QString a =sw->getRelevantStream()->getUID();
+            if(sw->oldStream()->delay() !=""){
+                QString a =sw->oldStream()->getUID();
                 QString b = ":";
-                QString c = sw->getRelevantStream()->delay();
+                QString c = sw->oldStream()->delay();
                 QString sync = a+b+c;
                 *arguments << "--sync" << sync;
             }
