@@ -477,19 +477,21 @@ void Controller::OCTDispatcher::customMessageHandler(QtMsgType type, const QMess
 
 
     switch (type) {
-    case QtDebugMsg:
-        txt += QString("Debug: %1").arg(msg);
-        break;
+        case QtDebugMsg:
+            txt += QString("Debug: %1").arg(msg);
+            break;
 
-    case QtWarningMsg:
-        txt += QString("Warning: %1").arg(msg);
-    break;
-    case QtCriticalMsg:
-        txt += QString("Critical: %1").arg(msg);
-    break;
-    case QtFatalMsg:
-        txt += QString("Fatal: %1").arg(msg);
-        abort();
+        case QtWarningMsg:
+            txt += QString("Warning: %1").arg(msg);
+        break;
+        case QtCriticalMsg:
+            txt += QString("Critical: %1").arg(msg);
+        break;
+        case QtFatalMsg:
+            txt += QString("Fatal: %1").arg(msg);
+            abort();
+        default:
+            txt += QString("Other: %1").arg(msg);
     }
 
     QFile outFile("debuglog.txt");

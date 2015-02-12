@@ -55,10 +55,11 @@ namespace View
             FilePane* getFilePane();
             EncodePane* getEncodePane();
             QObjectList getAudioPanes();
-            QObjectList getVideoPanes();
+            QTabWidget *getVideoPane();
             QObjectList getSubtitlePanes();
             InformationPane* getInformationPane();
 
+            QStringList getVideoFileNames();
     private slots:
             void on_tabWidget_currentChanged(int index);
             void on_OpenSettings();
@@ -77,6 +78,8 @@ namespace View
             Controller::OCTDispatcher *m_dispatcher;
 
             ParametersDialog *m_settingsW;
+
+            QStringList m_videoFileNames;
 
 
 

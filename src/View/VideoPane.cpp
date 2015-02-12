@@ -15,8 +15,6 @@ VideoPane::VideoPane(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    m_player = new QtAV::AVPlayer;
-    m_player->setRenderer(ui->videoWidget);
 
 }
 
@@ -33,9 +31,7 @@ VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     m_player->setRenderer(ui->videoWidget);
 
 
-    this->loadFile(m_file->getFilePath());
     this->m_streamId = stream->getUID().toInt();
-    m_player->setVideoStream(this->m_streamId);
     initPane();
 }
 
@@ -53,6 +49,14 @@ void VideoPane::setDispatcher(Controller::OCTDispatcher *dispatcher) {
     m_dispatcher = dispatcher;
     connectInterface();
     applyReco();
+}
+
+Model::File* VideoPane::getFile(){
+    return this->m_file;
+}
+
+Model::Stream *VideoPane::getStream(){
+    return this->m_stream;
 }
 
 // ========================================================================== //
@@ -374,8 +378,17 @@ void VideoPane::connectInterface() {
              m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
 }
 
+void VideoPane::showEvent(QShowEvent * event){
+    QWidget::showEvent(event);
+    if(!m_player->isLoaded()){
+        this->loadFile(m_file->getOriginalFilePath());
+        m_player->setVideoStream(this->m_streamId);
+    }
+}
+
 void VideoPane::on_playButton_clicked()
 {
+
     m_player->setStartPosition(ui->startSlider->value());
     m_player->setStopPosition(ui->stopSlider->value());
 
