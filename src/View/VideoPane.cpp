@@ -378,13 +378,7 @@ void VideoPane::connectInterface() {
              m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
 }
 
-void VideoPane::showEvent(QShowEvent * event){
-    QWidget::showEvent(event);
-    if(!m_player->isLoaded()){
-        this->loadFile(m_file->getOriginalFilePath());
-        m_player->setVideoStream(this->m_streamId);
-    }
-}
+
 
 void VideoPane::on_playButton_clicked()
 {
@@ -583,4 +577,13 @@ QString VideoPane::getCropValue() {
     m_player->renderer()->setRegionOfInterest(ui->spinLeft->text().toInt(),ui->spinTop->text().toInt(),width.toInt(),height.toInt());
 
     return (width + ":" + height + ":" + ui->spinLeft->text() + ":" + ui->spinTop->text());
+}
+
+void VideoPane::on_loadFileStream_clicked()
+{
+    if(!m_player->isLoaded()){
+        this->loadFile(m_file->getOriginalFilePath());
+        m_player->setVideoStream(this->m_streamId);
+    }
+    ui->videoButtons->setEnabled(true);
 }

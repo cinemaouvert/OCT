@@ -45,6 +45,10 @@ void View::MainWindow::refresh()
     ui->tabWidgetAudio->clear();
     m_videoFileNames.clear();
 
+    QList<SubtitlePane*> sPanes;
+    QList<Model::Stream*> vStreams;
+    QList<Model::File*> vFiles;
+
     foreach (Model::File *file, *(m_dispatcher->getCurrentProject()->fileList())) {
         foreach (Model::StreamWrapper *streamW, *(file->getStreamWrappers())) {
             QWidget *s;
@@ -59,16 +63,27 @@ void View::MainWindow::refresh()
                     ui->tabWidgetVideo->addTab(s,file->getName() + " piste : " +streamW->oldStream()->getUID());
                     ((VideoPane*)s)->setDispatcher(m_dispatcher);
                     m_videoFileNames.append(file->getName() + " : stream "+streamW->oldStream()->getUID());
+                    vStreams.append(streamW->oldStream());
+                    vFiles.append(file);
                     break;
                 case Model::Stream::SUBTITLE:
                     s = new SubtitlePane(file,streamW->oldStream(),this);
                     ui->tabWidgetSubtitle->addTab(s,file->getName() + " piste : " +streamW->oldStream()->getUID());
                     ((SubtitlePane*)s)->setDispatcher(m_dispatcher);
+                    sPanes.append((SubtitlePane*)s);
                     break;
                 default:
 
                     break;
             };
+        }
+    }
+
+    foreach (SubtitlePane *sP, sPanes) {
+        int i=0;
+        foreach (Model::Stream *sT, vStreams) {
+            sP->videoStreamAdded(vFiles.at(i),sT);
+            i++;
         }
     }
 

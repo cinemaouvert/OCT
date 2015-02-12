@@ -30,6 +30,7 @@ public:
 
 public slots:
     void seek(int);
+    void videoStreamAdded(Model::File*,Model::Stream*);
 
 private slots:
     void on_playButton_clicked();
@@ -46,6 +47,8 @@ private slots:
     void on_comboBox_Format_activated(const QString &format);
 
     void on_comboBox_Encode_activated(const QString &encode);
+
+    void on_videoVisualisationComboBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::SubtitlePane *ui;

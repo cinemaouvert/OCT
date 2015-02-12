@@ -72,11 +72,11 @@ private slots:
     void on_timeStart_dateTimeChanged(const QDateTime &dateTime);
     void on_timeStop_dateTimeChanged(const QDateTime &dateTime);
 
+    void on_loadFileStream_clicked();
+
 signals:
     void videoParameterChanged( Model::File *, Model::Stream *, QString, QString );
 
-protected:
-    void showEvent(QShowEvent *);
 private:
     Ui::VideoPane *ui;
     QtAV::AVPlayer *m_player;

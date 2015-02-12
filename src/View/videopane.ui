@@ -1292,7 +1292,17 @@
                </widget>
               </item>
               <item>
+               <widget class="QPushButton" name="loadFileStream">
+                <property name="text">
+                 <string>Charger le flux vidéo</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QWidget" name="videoButtons" native="true">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -1318,7 +1328,7 @@
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset resource="../../images.qrc">
+                    <iconset>
                      <normaloff>:/icons/resources/icons/icon_play.png</normaloff>:/icons/resources/icons/icon_play.png</iconset>
                    </property>
                   </widget>
@@ -1329,7 +1339,7 @@
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset resource="../../images.qrc">
+                    <iconset>
                      <normaloff>:/icons/resources/glyphicons/glyphicons_175_stop.png</normaloff>:/icons/resources/glyphicons/glyphicons_175_stop.png</iconset>
                    </property>
                   </widget>
@@ -1506,8 +1516,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../images.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -38,15 +38,11 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
     ui->subtitleTableView->setAlternatingRowColors(true);
     ui->subtitleTableView->horizontalHeader()->setStretchLastSection(true);
 
-
+    ui->videoVisualisationComboBox->addItem("None");
     parseSubtitleFile();
     initLists();
     initPane();
 
-    if(parent != NULL){
-        ui->videoVisualisationComboBox->clear();
-        ui->videoVisualisationComboBox->addItems(((View::MainWindow*)parent)->getVideoFileNames());
-    }
     /*
      * TODO : file to load
     this->loadFile(m_file->getFilePath());
@@ -209,6 +205,11 @@ void SubtitlePane::seek(int pos)
     m_player->seek(pos*1000LL); // to msecs
 }
 
+void SubtitlePane::videoStreamAdded(Model::File *f, Model::Stream *s)
+{
+    ui->videoVisualisationComboBox->addItem(f->getOriginalFilePath() + " stream -> "+s->getUID());
+}
+
 void SubtitlePane::updateSlider()
 {
     ui->timeSlider->setRange(0, int(m_player->duration()/1000LL));
@@ -311,4 +312,14 @@ void SubtitlePane::on_comboBox_Format_activated(const QString &format)
 void SubtitlePane::on_comboBox_Encode_activated(const QString &encode)
 {
     emit subtitleChanged(m_file, m_stream, Model::Stream::SUBTITLE_CHAR_ENCODE, m_encodingMap.value(encode));
+}
+
+void SubtitlePane::on_videoVisualisationComboBox_currentIndexChanged(const QString &arg1)
+{
+    QStringList list = arg1.split(" stream -> ");
+    if(list.size()==2){
+        m_player->stop();
+        loadFile(list.at(0));
+        m_player->setVideoStream(list.at(1).toInt(),true);
+    }
 }
