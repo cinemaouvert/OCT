@@ -39,6 +39,8 @@ using namespace std;
 #include <QDir>
 #include <QCoreApplication>
 
+
+
 Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileList(NULL)
 {
     this->m_attachments = new QList<Model::Attachment*>();
@@ -334,4 +336,24 @@ int Model::Project::nbSub() const
         }
     }
     return cpt;
+}
+
+QString Model::Project::depot() const
+{
+    return m_depot;
+}
+
+void Model::Project::setDepot(const QString &depot)
+{
+    m_depot = depot;
+}
+
+QString Model::Project::userKey() const
+{
+    return m_userKey;
+}
+
+void Model::Project::setUserKey(const QString &userKey)
+{
+    m_userKey = userKey;
 }

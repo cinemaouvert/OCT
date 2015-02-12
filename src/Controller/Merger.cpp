@@ -67,7 +67,8 @@ QString Controller::Merger::createMKVFile(Model::Project *project) {
     qDebug() << myProcess.readAllStandardOutput();
 
     QFile file(project->xmlFilePath());
-    file.remove(project->xmlFilePath());
+    if(file.exists())
+        file.remove();
 
     return "filepath";
 }

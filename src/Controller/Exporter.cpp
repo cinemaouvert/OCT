@@ -94,7 +94,7 @@ bool Controller::Exporter::sendInformationsToJSON(Model::Project* project, QStri
             }
             json += "\"url_magnet:\"\""+ url_magnet +"\"";
 
-            json.remove(json.size()-1, 1); // Supprime la dernière virgule
+            //json.remove(json.size()-1, 1); // Supprime la dernière virgule
             json += "}";
             int res = this->m_Database->sendRequest(json);
             if(res == 200){

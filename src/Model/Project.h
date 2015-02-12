@@ -91,6 +91,9 @@ namespace Model
              */
             QList<Model::File*> *m_fileList;
 
+            QString m_userKey;
+            QString m_depot;
+
         public:
             /**
              * @brief Default constructor.
@@ -245,6 +248,10 @@ namespace Model
              * @param key
              */
             void removeInformations(QString key);
+            QString depot() const;
+            void setDepot(const QString &depot);
+            QString userKey() const;
+            void setUserKey(const QString &userKey);
     };
 }
 
