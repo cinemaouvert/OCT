@@ -56,6 +56,12 @@ namespace Model
 
 namespace Controller
 {
+    /**
+     * @brief The treatment thead controller.
+     *
+     * This class control the encode treatment and allows the user to
+     * start, pause, stop or restart the encoding process.
+     */
     class TreatmentThread : public QObject
 	{
         Q_OBJECT
@@ -79,6 +85,10 @@ namespace Controller
              * @brief The associated projects.
              */
             QList<Model::Project*>      *m_projects;
+
+            /**
+             * @brief The associated original projects.
+             */
             QList<Model::Project*>      *m_projectsOriginal;
 
             /**
@@ -90,16 +100,54 @@ namespace Controller
              */
             TreatmentThread(QList<Model::Project*> *projects, Controller::Transcoder *transcoder, Controller::Merger *merger, Controller::Exporter *exporter);
 
+            /**
+             * @brief This method init the treatment process.
+             */
             void initTreatment();
+
     private:
+            /**
+             * @brief Allows to stop the treatment.
+             */
             volatile bool m_stop;
+
+            /**
+             * @brief Allows to pause the treatment.
+             */
             volatile bool m_pause;
+
+            /**
+             * @brief Index of the current project in the i queue to treat.
+             */
             int m_indexTreatment_i;
+
+            /**
+             * @brief Index of the current project in the j queue to treat.
+             */
             int m_indexTreatment_j;
+
+            /**
+             * @brief List of project to delete from the queue treatment.
+             *
+             * List of the project already treated to delete from the treatment
+             * queue.
+             */
             QStringList m_listToDelete;
     signals:
+            /**
+             * @brief Signals when the treatment queue has been finished to be processed
+             */
             void finished();
+
+            /**
+             * @brief Signals when the treatment queue has been initialized.
+             * @param value
+             */
             void initProgress(int value);
+
+            /**
+             * @brief Signals when a step has been passed in the threatment process.
+             */
             void passedStep();
 
 
@@ -119,6 +167,7 @@ namespace Controller
              * @brief This method stop the treatment queue.
              */
             void stopTreatment();
+
             /**
              * @brief This method restart the treatment queue after a pause.
              */

@@ -70,7 +70,6 @@ namespace Controller
             QString createTorrentFile(QString filepath, QString nomTorrent);
 
         public:
-
             /**
              * @brief The associated database.
              */
@@ -80,6 +79,11 @@ namespace Controller
              * @brief Constructor to connect database
              */
             Exporter(QString userKey, QString depot);
+
+            /**
+             * @brief Destructor.
+             */
+            ~Exporter();
 
             /**
              * @brief This method creates a magnet link to bind a local file in the database.
@@ -95,8 +99,6 @@ namespace Controller
              * @return 1 if ok, 0 else.
              */
             bool sendInformationsToJSON(Model::Project* project, QString url_magnet);
-
-            ~Exporter();
 
             /**
              * @brief Retrieve informations under a QStringList.

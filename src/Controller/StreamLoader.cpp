@@ -33,6 +33,9 @@ using namespace std;
 #include "src/Controller/OCTDispatcher.h"
 #include "src/Model/StreamWrapper.h"
 
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
 QList<QString> Controller::StreamLoader::getDistinctStreams(QString ffmpegStream) {
 	throw "Not yet implemented";
 }

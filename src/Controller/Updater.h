@@ -57,24 +57,37 @@ namespace Controller
 namespace Controller
 {
     /**
-    * @brief Base class for update application
+    * @brief Base class to update the OCT application
     */
     class Updater : public QObject
     {
         public:
+            /**
+             * @brief Constructor
+             * @param parent
+             */
             Updater(QObject *parent = 0);
+
+            /**
+             * @brief Destructor.
+             */
             virtual ~Updater();
+
             /**
             * @brief Compare version software with installer on cinemaouvert.fr
             *
             */
             void checkVersion();
+
         private:
             /**
             * @brief Download installer
-            *
             */
             void getInstaller();
+
+            /**
+             * @brief Link to the installer.
+             */
             QString link;
     };
 

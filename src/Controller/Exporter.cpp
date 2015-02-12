@@ -36,12 +36,25 @@ using namespace std;
 #include "src/Model/Project.h"
 #include "src/configOCT.h"
 
+// ========================================================================== //
+// == Constructor =========================================================== //
+// ========================================================================== //
 Controller::Exporter::Exporter(QString userKey, QString depot) : m_Database(NULL) {
     this->m_Database = new Model::Database(userKey, depot);
 }
 
-QString Controller::Exporter::createMagnetLink(QString filepath, QString nomTorrent) {
+// ========================================================================== //
+// == Destructor ============================================================ //
+// ========================================================================== //
+Controller::Exporter::~Exporter() {
+    if(this->m_Database != NULL)
+        delete this->m_Database;;
+}
 
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
+QString Controller::Exporter::createMagnetLink(QString filepath, QString nomTorrent) {
     QStringList arguments;
         arguments << "-jar" << "OCT.jar" <<createTorrentFile(filepath, nomTorrent);
 
@@ -69,8 +82,7 @@ QString Controller::Exporter::createTorrentFile(QString filepath, QString nomTor
     return nomTorrent;
 }
 
-bool Controller::Exporter::sendInformationsToJSON(Model::Project* project, QString url_magnet)
-{
+bool Controller::Exporter::sendInformationsToJSON(Model::Project* project, QString url_magnet) {
     bool send = false;
     if(project != NULL){
         if(project->informations() != NULL){
@@ -93,12 +105,6 @@ bool Controller::Exporter::sendInformationsToJSON(Model::Project* project, QStri
     return send;
 }
 
-Controller::Exporter::~Exporter()
-{
-    if(this->m_Database != NULL)
-        delete this->m_Database;;
-}
-
 QStringList* Controller::Exporter::getInformations(){
     if(Model::Database::getMovieStruct() != NULL){
         QStringList *qsl = new QStringList(*(Model::Database::getMovieStruct()));
@@ -109,6 +115,5 @@ QStringList* Controller::Exporter::getInformations(){
         return NULL;
     }
 }
-
 
 

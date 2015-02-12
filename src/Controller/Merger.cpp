@@ -34,10 +34,23 @@ using namespace std;
 #include "src/Model/Project.h"
 #include <QProcess>
 
+// ========================================================================== //
+// == Constructor =========================================================== //
+// ========================================================================== //
 Controller::Merger::Merger() : m_settings(NULL) {
      m_settings = new QSettings("CinemaOuvert", "OpenCinemaTranscoder");
 }
 
+// ========================================================================== //
+// == Destructor ============================================================ //
+// ========================================================================== //
+Controller::Merger::~Merger() {
+    delete(m_settings);
+}
+
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
 void Controller::Merger::createXML(Model::Project *project) {
 	throw "Not yet implemented";
 }
@@ -53,10 +66,5 @@ QString Controller::Merger::createMKVFile(Model::Project *project) {
     qDebug() << myProcess.readAllStandardError();
     qDebug() << myProcess.readAllStandardOutput();
     return "filepath";
-}
-
-Controller::Merger::~Merger()
-{
-    delete(m_settings);
 }
 

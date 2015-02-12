@@ -64,7 +64,9 @@ using namespace std;
 #include <src/View/FilePane.h>
 #include <src/View/EncodePane.h>
 
-
+// ========================================================================== //
+// == Constructor =========================================================== //
+// ========================================================================== //
 Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     m_mainWindow(NULL) ,
     m_settings(NULL) ,
@@ -76,7 +78,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
                                             m_treatmentThread(NULL) ,
                                             m_transcoder(NULL),
                                             m_OCPMvalidation(NULL),
-                                            m_informationMovieStruct(NULL){
+                                            m_informationMovieStruct(NULL) {
     //Init Projects
     m_projects = new QList<Model::Project*>();
     //Creation of the Project
@@ -99,7 +101,6 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     m_OCPMvalidation = new Model::OCPMValidation(this);
 
-
     //Initialisation of the parameters lists
     Model::Video::initStaticParameters();
     Model::Audio::initStaticParameters();
@@ -108,8 +109,6 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     //Creation of the view
     m_mainWindow = new View::MainWindow(0,this);
     m_mainWindow->show();
-
-
 
     /****** TRY YOUR WORK IN HERE **********/
 
@@ -158,9 +157,6 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.jpg");
     addFile("C:\\Users\\Moi\\Documents\\GitHub\\build-OCT_Project-Desktop_Qt_5_3_MinGW_32bit-Debug\\test\\test.xml");
 
-
-
-
     Model::Stream *os = this->m_currentProject->fileList()->at(0)->getStreamWrappers()->at(0)->oldStream();
     Model::Stream *ns = new Model::Video((Model::Video&)*os);
     ns->getParameters()->take(Model::Stream::CODEC_NAME)->setValue("mpeg4");
@@ -180,8 +176,10 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     /***********************/
 }
 
-Controller::OCTDispatcher::~OCTDispatcher()
-{
+// ========================================================================== //
+// == Destructor ============================================================ //
+// ========================================================================== //
+Controller::OCTDispatcher::~OCTDispatcher() {
     if(m_currentProject) delete m_currentProject  ;
     if(m_mainWindow) delete m_mainWindow  ;
     if(m_settings) delete m_settings  ;
@@ -194,9 +192,42 @@ Controller::OCTDispatcher::~OCTDispatcher()
     if(m_transcoder) delete m_transcoder  ;
     if(m_OCPMvalidation) delete  m_OCPMvalidation ;
     LoggerSingleton::destroyInstance();
-
 }
 
+// ========================================================================== //
+// == Accessor and mutator methods ========================================== //
+// ========================================================================== //
+Model::Project *Controller::OCTDispatcher::getCurrentProject() const {
+    return this->m_currentProject;
+}
+
+QList<Model::Project *> *Controller::OCTDispatcher::getProjects() {
+    return this->m_projects;
+}
+
+Model::OCPMValidation *Controller::OCTDispatcher::getOCPMValidation() {
+    return this->m_OCPMvalidation;
+}
+
+Controller::TreatmentThread *Controller::OCTDispatcher::getTreatmentThread() {
+    return this->m_treatmentThread;
+}
+
+void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &value) {
+    m_settings->setValue(key, value);
+}
+
+QVariant Controller::OCTDispatcher::getSetting(QString key) {
+    return m_settings->value(key);
+}
+
+QStringList *Controller::OCTDispatcher::informationMovieStruct() const {
+    return m_informationMovieStruct;
+}
+
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
 void Controller::OCTDispatcher::addFile(QString filePath) {
     QMimeDatabase db;
     QMimeType mime = db.mimeTypeForFile(filePath);
@@ -210,11 +241,9 @@ void Controller::OCTDispatcher::addFile(QString filePath) {
         this->m_currentProject->addAttachment(attachement);
     }
     this->m_mainWindow->refresh();
-
 }
 
-void Controller::OCTDispatcher::removeFile(QString filePath)
-{
+void Controller::OCTDispatcher::removeFile(QString filePath) {
     this->m_currentProject->removeFile(filePath);
     this->m_mainWindow->refresh();
 }
@@ -228,23 +257,21 @@ void Controller::OCTDispatcher::load() {
 }
 
 void Controller::OCTDispatcher::startTreatment() {
-
     m_treatmentThread->initTreatment();
 
     m_startTreatmentThread = new QThread();
     m_treatmentThread->moveToThread(m_startTreatmentThread);
-    /*connect(m_startTreatmentThread, SIGNAL(started()), m_treatmentThread, SLOT(startTreatment()));
+    /*
+    connect(m_startTreatmentThread, SIGNAL(started()), m_treatmentThread, SLOT(startTreatment()));
     connect(m_treatmentThread, SIGNAL(finished()), m_startTreatmentThread, SLOT(quit()));
     //connect(m_transcoder, SIGNAL(finished()), m_transcoder, SLOT(deleteLater()));
 
-    connect(m_startTreatmentThread, SIGNAL(finished()), m_startTreatmentThread, SLOT(deleteLater()));*/
-
-
+    connect(m_startTreatmentThread, SIGNAL(finished()), m_startTreatmentThread, SLOT(deleteLater()));
+    //*/
     connect(m_startTreatmentThread, SIGNAL(started()), m_treatmentThread, SLOT(startTreatment()));
     connect(m_treatmentThread, SIGNAL(finished()), m_startTreatmentThread, SLOT(quit()));
     connect(m_treatmentThread, SIGNAL(finished()), m_treatmentThread, SLOT(deleteLater()));
     connect(m_startTreatmentThread, SIGNAL(finished()), m_startTreatmentThread, SLOT(deleteLater()));
-
 
     m_startTreatmentThread->start();
 }
@@ -254,7 +281,6 @@ void Controller::OCTDispatcher::pauseTreatment() {
         qDebug() << "PAUSE";
         m_treatmentThread->pauseTreatment();
     }
-
 }
 
 void Controller::OCTDispatcher::restartTreatment() {
@@ -282,54 +308,37 @@ void Controller::OCTDispatcher::checkForUpdate() {
     m_updater->checkVersion();
 }
 
-void Controller::OCTDispatcher::initSetting(const QString &key, const QVariant &value)
-{
+void Controller::OCTDispatcher::initSetting(const QString &key, const QVariant &value) {
     if(!m_settings->contains(key)){
         addSetting(key,value);
     }
 }
 
-void Controller::OCTDispatcher::initSettings()
-{
+void Controller::OCTDispatcher::initSettings() {
     initSetting("ffmpeg","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
     initSetting("ffprobe","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
     initSetting("mkvToolnix","E:\\M2\\Projet\\Dependances\\mkvtoolnix\\mkvinfo.exe");
 }
 
-Model::Project *Controller::OCTDispatcher::getCurrentProject() const
-{
-    return this->m_currentProject;
-}
-
-QList<Model::Project *> *Controller::OCTDispatcher::getProjects()
-{
-    return this->m_projects;
-}
-
-Model::OCPMValidation *Controller::OCTDispatcher::getOCPMValidation()
-{
-    return this->m_OCPMvalidation;
-}
-
-void Controller::OCTDispatcher::setCurrentProjectIndex(int index)
-{
+void Controller::OCTDispatcher::setCurrentProjectIndex(int index) {
     m_currentProject = m_projects->at(index);
     m_mainWindow->refresh();
 }
 
-void Controller::OCTDispatcher::duplicateProject(int index)
-{
+void Controller::OCTDispatcher::duplicateProject(int index) {
     Model::Project *project = new Model::Project(*(m_projects->at(index)));
     m_projects->append(project);
 }
 
-Controller::TreatmentThread *Controller::OCTDispatcher::getTreatmentThread()
-{
-    return this->m_treatmentThread;
+// ========================================================================== //
+// == Public slot methods =================================================== //
+// ========================================================================== //
+void Controller::OCTDispatcher::treatProjectNameChanged(QString newName) {
+    m_currentProject->setName(newName);
+    m_mainWindow->getEncodePane()->refreshProjectPane();
 }
 
-bool Controller::OCTDispatcher::checkProjectValidation()
-{
+bool Controller::OCTDispatcher::checkProjectValidation() {
     bool retVal = true;
     foreach (Model::File *file, *(m_currentProject->fileList())) {
         foreach (Model::StreamWrapper *streamW, *(file->getStreamWrappers())) {
@@ -342,8 +351,7 @@ bool Controller::OCTDispatcher::checkProjectValidation()
     return retVal;
 }
 
-bool Controller::OCTDispatcher::checkStreamValidation(Model::Stream *stream)
-{
+bool Controller::OCTDispatcher::checkStreamValidation(Model::Stream *stream) {
     bool retVal = true;
     switch(stream->getType()){
         case Model::Stream::VIDEO:
@@ -359,24 +367,21 @@ bool Controller::OCTDispatcher::checkStreamValidation(Model::Stream *stream)
     return retVal;
 }
 
-int Controller::OCTDispatcher::checkInformationValidation()
-{
+int Controller::OCTDispatcher::checkInformationValidation() {
     if(!m_informationMovieStruct || !(this->getCurrentProject()->informations()))
         return -1;
     return m_informationMovieStruct->size() - this->getCurrentProject()->informations()->size();
 }
 
-bool Controller::OCTDispatcher::checkPosterValidation()
-{
-    if(this->getCurrentProject()->informations() == NULL){
+bool Controller::OCTDispatcher::checkPosterValidation() {
+    if(this->getCurrentProject()->informations() == NULL) {
         return false;
-    }else{
+    } else {
         return this->getCurrentProject()->informations()->contains("affiche");
     }
 }
 
-void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream *stream,QString parameterName, QString value)
-{
+void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream *stream,QString parameterName, QString value) {
     value = value.toLower();
     foreach (Model::StreamWrapper *sW, *(file->getStreamWrappers())) {
         if(*(sW->oldStream()) == *stream){
@@ -417,8 +422,7 @@ void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream
     }
 }
 
-void Controller::OCTDispatcher::parameterChangedMKV(int p, Model::File *file, Model::Stream *stream, QString value)
-{
+void Controller::OCTDispatcher::parameterChangedMKV(int p, Model::File *file, Model::Stream *stream, QString value) {
     foreach (Model::StreamWrapper *sW, *(file->getStreamWrappers())) {
         if(*(sW->oldStream()) == *stream){
           /*  if(sW->newStream() == NULL){
@@ -444,49 +448,20 @@ void Controller::OCTDispatcher::parameterChangedMKV(int p, Model::File *file, Mo
     }
 }
 
-
-
-
-
-void Controller::OCTDispatcher::treatProjectNameChanged(QString newName)
-{
-    m_currentProject->setName(newName);
-    m_mainWindow->getEncodePane()->refreshProjectPane();
-}
-
-void Controller::OCTDispatcher::addSetting(const QString &key, const QVariant &value)
-{
-    m_settings->setValue(key, value);
-}
-
-QVariant Controller::OCTDispatcher::getSetting(QString key)
-{
-    return m_settings->value(key);
-}
-
-QStringList *Controller::OCTDispatcher::informationMovieStruct() const
-{
-    return m_informationMovieStruct;
-}
-
-
-void Controller::OCTDispatcher::customMessageHandler(QtMsgType type, const QMessageLogContext &context,const QString& msg){
-
+void Controller::OCTDispatcher::customMessageHandler(QtMsgType type, const QMessageLogContext &context,const QString& msg) {
     QString dt = QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss");
     QString txt = QString("[%1]\n").arg(dt);
-
 
     switch (type) {
     case QtDebugMsg:
         txt += QString("Debug: %1").arg(msg);
         break;
-
     case QtWarningMsg:
         txt += QString("Warning: %1").arg(msg);
-    break;
+        break;
     case QtCriticalMsg:
         txt += QString("Critical: %1").arg(msg);
-    break;
+        break;
     case QtFatalMsg:
         txt += QString("Fatal: %1").arg(msg);
         abort();
@@ -498,6 +473,7 @@ void Controller::OCTDispatcher::customMessageHandler(QtMsgType type, const QMess
     ts << txt << endl;
     outFile.close();
 
-
     LoggerSingleton::getInstance()->writeMessage(txt);
 }
+
+

@@ -34,16 +34,20 @@ using namespace std;
 
 #include <QProcess>
 
-
+// ========================================================================== //
+// == Constructor and destructor ============================================ //
+// ========================================================================== //
 Controller::Transcoder::Transcoder() : m_settings(NULL) {
     m_settings = new QSettings("CinemaOuvert", "OpenCinemaTranscoder");
 }
 
-Controller::Transcoder::~Transcoder()
-{
+Controller::Transcoder::~Transcoder() {
     delete(m_settings);
 }
 
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
 QString Controller::Transcoder::getInfo(QString filePath) {
     QString program = m_settings->value("ffprobe").toString();
     QStringList arguments;
@@ -72,4 +76,5 @@ QString Controller::Transcoder::transcode(QStringList *list) {
     qDebug() << "DEBUG :" << myProcessFFMPEG.readAllStandardOutput();
     return retour;
 }
+
 

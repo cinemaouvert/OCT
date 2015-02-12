@@ -51,6 +51,11 @@ namespace Model
 
 namespace Controller
 {
+    /**
+     * @brief StreamLoader controller.
+     *
+     * This classe parse streams.
+     */
 	class StreamLoader
 	{
         public:
@@ -61,15 +66,15 @@ namespace Controller
 
             /**
              * @brief This method retrieves distinct streams from ffmpeg.
-             * @param ffmpegStream
-             * @return
+             * @param ffmpegStream The ffmpeg stream that is to be parsed.
+             * @return A QList of QString containing the distinct streams.
              */
             QList<QString> getDistinctStreams(QString ffmpegStream);
 
             /**
              * @brief This method parses streams.
-             * @param streamToParse
-             * @return
+             * @param streamToParse The stream that is to be parsed.
+             * @return The StreamWrapper model equivalent once the stream is parsed.
              */
             Model::StreamWrapper* parseStreams(QString streamToParse);
 	};

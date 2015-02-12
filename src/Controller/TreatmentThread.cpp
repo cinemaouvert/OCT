@@ -38,6 +38,9 @@ using namespace std;
 #include "src/Model/Project.h"
 #include "src/configOCT.h"
 
+// ========================================================================== //
+// == Constructor =========================================================== //
+// ========================================================================== //
 Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, Controller::Transcoder *transcoder, Controller::Merger *merger, Controller::Exporter *exporter) :
     m_transcoder(transcoder),
     m_merger(merger),
@@ -47,6 +50,9 @@ Controller::TreatmentThread::TreatmentThread(QList<Model::Project*> *projects, C
 {
 }
 
+// ========================================================================== //
+// == Class method ========================================================== //
+// ========================================================================== //
 void Controller::TreatmentThread::initTreatment(){
     if(this->m_projects != NULL)
         delete this->m_projects;
@@ -64,6 +70,9 @@ void Controller::TreatmentThread::initTreatment(){
     m_listToDelete.clear();
 }
 
+// ========================================================================== //
+// == Public slot methods =================================================== //
+// ========================================================================== //
 void Controller::TreatmentThread::startTreatment() {
     int start_i = m_indexTreatment_i;
     int start_j = m_indexTreatment_j;

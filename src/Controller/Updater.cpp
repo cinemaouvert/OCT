@@ -32,16 +32,19 @@ using namespace std;
 #include "src/Controller/Updater.h"
 #include "src/Controller/OCTDispatcher.h"
 
+// ========================================================================== //
+// == Constructor and destructor ============================================ //
+// ========================================================================== //
 Controller::Updater::Updater(QObject *parent) :
-    QObject(parent)
-{
+    QObject(parent) {
     this->link = configOCT::URL + configOCT::NAME + "/" + configOCT::LINK_UPDATE;
 }
 
-Controller::Updater::~Updater(){
+Controller::Updater::~Updater() {}
 
-}
-
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
 void Controller::Updater::checkVersion(){
     QNetworkAccessManager manager(this);
 
