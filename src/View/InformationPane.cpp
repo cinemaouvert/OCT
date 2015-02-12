@@ -15,7 +15,8 @@
 InformationPane::InformationPane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::InformationPane),
-    m_model(NULL)
+    m_model(NULL),
+    m_scrollArea(NULL)
 {
     ui->setupUi(this);
     m_model = new QStringListModel(this);
@@ -35,7 +36,7 @@ void InformationPane::setDispatcher(Controller::OCTDispatcher *dispatcher)
     this->m_dispatcher = dispatcher;
 
     refresh();
-    generateStruct();
+    generateStruct(NULL);
 }
 
 void InformationPane::refresh(){
@@ -115,9 +116,15 @@ void InformationPane::on_sampleComboBox_currentIndexChanged(int index)
     }*/
 }
 
-void InformationPane::generateStruct(){
-    QScrollArea *scrollArea = new QScrollArea;
+void InformationPane::generateStruct(QMap<QString, QString>* infos){
+    if(m_scrollArea != NULL){
+        QWidget *wd = m_scrollArea->takeWidget();
+        if(wd)
+            delete wd;
+        ui->verticalLayout_3->removeWidget(m_scrollArea);
+    }
 
+    m_scrollArea = new QScrollArea;
     QHBoxLayout *hLayout = new QHBoxLayout;
     QVBoxLayout *vLayoutLabel = new QVBoxLayout;
     QVBoxLayout *vLayoutLineEdit = new QVBoxLayout;
@@ -135,6 +142,12 @@ void InformationPane::generateStruct(){
                 vLayoutLabel->addWidget(label);
 
                 QLineEdit *lineEdit = new QLineEdit;
+                if(infos != NULL && infos->size() > 0){
+                    QString valueMovie = "";
+                    valueMovie = infos->value(lineEditName);
+                    lineEdit->setText(valueMovie);
+                }
+
                 lineEdit->setObjectName(lineEditName);
                 lineEdit->setSizePolicy(QSizePolicy::Minimum , QSizePolicy::Minimum );
                 lineEdit->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
@@ -148,10 +161,10 @@ void InformationPane::generateStruct(){
         hLayout->addItem(vLayoutLineEdit);
 
         widget->setLayout(hLayout);
-        scrollArea->setWidget(widget);
-        scrollArea->setWidgetResizable(true);
+        m_scrollArea->setWidget(widget);
+        m_scrollArea->setWidgetResizable(true);
 
-        ui->verticalLayout_3->addWidget(scrollArea);
+        ui->verticalLayout_3->addWidget(m_scrollArea);
     }
 
 }

@@ -24,7 +24,7 @@ public:
     void setDispatcher(Controller::OCTDispatcher *m_dispatcher);
 
     void refresh();
-    void generateStruct();
+    void generateStruct(QMap<QString, QString>* infos);
 
 public slots:
     void lineEditInformation_textChanged();
@@ -40,6 +40,7 @@ private:
     Controller::OCTDispatcher *m_dispatcher;
     QStringListModel *m_model;
     QStringList picturesList;
+    QScrollArea *m_scrollArea;
 
     void loadImageToGraphicView(QGraphicsView *graphV, int index);
 

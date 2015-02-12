@@ -220,5 +220,5 @@ void View::MainWindow::on_UpdateVersion(){
 }
 
 void View::MainWindow::infosFromBDD(QMap<QString, QString>* infos){
-
+    ui->tab_infos->generateStruct(infos);
 }

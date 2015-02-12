@@ -105,6 +105,7 @@ namespace Controller
              * @return The QStringList containing the associated informations.
              */
             static QStringList* getInformations();
+            QMap<QString, QString> *getMovieInfoByTitle(QString title);
     };
 }
 

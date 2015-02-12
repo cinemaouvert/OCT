@@ -479,6 +479,7 @@ void Controller::OCTDispatcher::customMessageHandler(QtMsgType type, const QMess
 }
 
 void Controller::OCTDispatcher::getInformations(QString nameMovie){
-    this->m_mainWindow->infosFromBDD(NULL);
+    this->m_exporter = new Exporter(this->m_currentProject->userKey(), this->m_currentProject->depot());
+    this->m_mainWindow->infosFromBDD(this->m_exporter->getMovieInfoByTitle(nameMovie));
 }
 

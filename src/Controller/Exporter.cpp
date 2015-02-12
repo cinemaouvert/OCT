@@ -116,4 +116,8 @@ QStringList* Controller::Exporter::getInformations(){
     }
 }
 
+QMap<QString, QString>* Controller::Exporter::getMovieInfoByTitle(QString title){
+    return this->m_Database->getMovieByTitle(title);
+}
+
 
