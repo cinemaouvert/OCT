@@ -60,6 +60,7 @@ namespace View
             InformationPane* getInformationPane();
 
             QStringList getVideoFileNames();
+            void infosFromBDD(QMap<QString, QString> *infos);
     private slots:
             void on_tabWidget_currentChanged(int index);
             void on_OpenSettings();

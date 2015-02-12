@@ -218,3 +218,7 @@ void View::MainWindow::on_OpenSettings()
 void View::MainWindow::on_UpdateVersion(){
     m_dispatcher->checkForUpdate();
 }
+
+void View::MainWindow::infosFromBDD(QMap<QString, QString>* infos){
+
+}
