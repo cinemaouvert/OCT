@@ -141,6 +141,7 @@ namespace Model
             QString getFilePath();
             QList<Model::StreamWrapper *> *getDatas() const;
             bool hasToBeTranscoded();
+            QString getOriginalFilePath();
     };
 }
 

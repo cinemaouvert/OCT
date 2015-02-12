@@ -98,6 +98,21 @@ void InformationPane::on_sampleComboBox_currentIndexChanged(int index)
 {
     if(index > 0)
         loadImageToGraphicView(ui->sampleGraphicView,index);
+   /* if(index > 0){
+        loadImageToGraphicView(ui->sampleGraphicView,index);
+        QFile file(picturesList.at(index));
+        if(file.open(QIODevice::ReadOnly)){
+            QByteArray dataImage = file.readAll().toBase64();
+            this->m_dispatcher->getCurrentProject()->addInformations("capture", dataImage);
+            this->m_dispatcher->checkProjectValidation();
+        }
+    }else{
+        if(this->m_dispatcher->getCurrentProject()->informations()->contains("capture")){
+            this->m_dispatcher->getCurrentProject()->removeInformations("capture");
+            this->m_dispatcher->checkProjectValidation();
+            ui->posterGraphicsView->setScene(NULL);
+        }
+    }*/
 }
 
 void InformationPane::generateStruct(){

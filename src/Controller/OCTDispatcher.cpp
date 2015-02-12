@@ -465,6 +465,8 @@ void Controller::OCTDispatcher::customMessageHandler(QtMsgType type, const QMess
     case QtFatalMsg:
         txt += QString("Fatal: %1").arg(msg);
         abort();
+    default:
+        txt += QString("Other: %1").arg(msg);
     }
 
     QFile outFile("debuglog.txt");

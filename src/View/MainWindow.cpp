@@ -43,23 +43,25 @@ void View::MainWindow::refresh()
     ui->tabWidgetVideo->clear();
     ui->tabWidgetSubtitle->clear();
     ui->tabWidgetAudio->clear();
+    m_videoFileNames.clear();
 
     foreach (Model::File *file, *(m_dispatcher->getCurrentProject()->fileList())) {
         foreach (Model::StreamWrapper *streamW, *(file->getStreamWrappers())) {
             QWidget *s;
             switch (streamW->oldStream()->getType()) {
                 case Model::Stream::AUDIO:
-                    s = new AudioPane(file,streamW->oldStream());
+                    s = new AudioPane(file,streamW->oldStream(),this);
                     ui->tabWidgetAudio->addTab(s,file->getName() + " piste : " +streamW->oldStream()->getUID());
                     ((AudioPane*)s)->setDispatcher(m_dispatcher);
                     break;
                 case Model::Stream::VIDEO:
-                    s = new VideoPane(file,streamW->oldStream());
+                    s = new VideoPane(file,streamW->oldStream(),this);
                     ui->tabWidgetVideo->addTab(s,file->getName() + " piste : " +streamW->oldStream()->getUID());
                     ((VideoPane*)s)->setDispatcher(m_dispatcher);
+                    m_videoFileNames.append(file->getName() + " : stream "+streamW->oldStream()->getUID());
                     break;
                 case Model::Stream::SUBTITLE:
-                    s = new SubtitlePane(file,streamW->oldStream());
+                    s = new SubtitlePane(file,streamW->oldStream(),this);
                     ui->tabWidgetSubtitle->addTab(s,file->getName() + " piste : " +streamW->oldStream()->getUID());
                     ((SubtitlePane*)s)->setDispatcher(m_dispatcher);
                     break;
@@ -72,6 +74,10 @@ void View::MainWindow::refresh()
 
     ui->tab_encode->refresh();
     ui->tab_infos->refresh();
+}
+
+QStringList View::MainWindow::getVideoFileNames(){
+    return m_videoFileNames;
 }
 
 void View::MainWindow::refreshProjectPane()
@@ -140,9 +146,9 @@ QObjectList View::MainWindow::getAudioPanes()
     return ui->tab_sound->children();
 }
 
-QObjectList View::MainWindow::getVideoPanes()
+QTabWidget *View::MainWindow::getVideoPane()
 {
-    return ui->tab_video->children();
+    return NULL;
 }
 
 InformationPane *View::MainWindow::getInformationPane()

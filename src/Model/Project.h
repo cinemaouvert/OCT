@@ -216,7 +216,7 @@ namespace Model
              */
             void setTorrentSoftwarePath(const QString &torrentSoftwarePath);
 
-            void generateInformationToXML();
+            QString generateInformationToXML();
             /**
              * @brief getMergeCommandLine generate the command line
              * @return the arguments of the command line

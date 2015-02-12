@@ -178,6 +178,10 @@ QString Model::File::getName() {
     return this->m_name;
 }
 
+QString Model::File::getOriginalFilePath(){
+    return this->m_filePath;
+}
+
 QString Model::File::getFilePath()
 {
     if(hasToBeTranscoded()){

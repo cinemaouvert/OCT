@@ -1,7 +1,7 @@
 #include "MyModel.h"
 #include "SubtitlePane.h"
 #include "ui_subtitlepane.h"
-
+#include "VideoPane.h"
 #include <QFile>
 #include <QMimeDatabase>
 
@@ -43,6 +43,10 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
     initLists();
     initPane();
 
+    if(parent != NULL){
+        ui->videoVisualisationComboBox->clear();
+        ui->videoVisualisationComboBox->addItems(((View::MainWindow*)parent)->getVideoFileNames());
+    }
     /*
      * TODO : file to load
     this->loadFile(m_file->getFilePath());
@@ -99,6 +103,7 @@ void SubtitlePane::applyReco()
             emit(on_comboBox_Encode_activated(m_encodingMap.key(encoding)));
         }*/
     }
+
 }
 
 SubtitlePane::~SubtitlePane()

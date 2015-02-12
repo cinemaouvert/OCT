@@ -26,6 +26,8 @@ public:
     void setDispatcher(Controller::OCTDispatcher *dispatcher);
     void applyReco();
 
+    Model::File *getFile();
+    Model::Stream *getStream();
 public slots:
     void seek(int);
 
@@ -73,6 +75,8 @@ private slots:
 signals:
     void videoParameterChanged( Model::File *, Model::Stream *, QString, QString );
 
+protected:
+    void showEvent(QShowEvent *);
 private:
     Ui::VideoPane *ui;
     QtAV::AVPlayer *m_player;
