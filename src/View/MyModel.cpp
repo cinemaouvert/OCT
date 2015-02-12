@@ -2,6 +2,9 @@
 #include <QColor>
 #include <qicon.h>
 #include <QDebug>
+#include <QFont>
+#include <QResource>
+#include <QXmlQuery>
 
 MyModel::MyModel( int rows, int columns,int nbVideo ,int  nbAudio ,int  nbSub,QObject *parent ) : QAbstractTableModel( parent )
 {
@@ -33,7 +36,7 @@ Qt::ItemFlags MyModel::flags( const QModelIndex &index ) const
 
 QVariant MyModel::data( const QModelIndex &index, int role ) const
 {
-    if (!index.isValid() || (role != Qt::TextAlignmentRole && role != Qt::BackgroundRole && role != Qt::DecorationRole && role != Qt::DisplayRole)){
+    if (!index.isValid() || (role != Qt::FontRole && role != Qt::TextAlignmentRole && role != Qt::BackgroundRole && role != Qt::DecorationRole && role != Qt::DisplayRole)){
         return QVariant();
     }
 
@@ -41,13 +44,7 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
            return Qt::AlignCenter;
     }
     if(role == Qt::DecorationRole){
-       if(index.column()==4 || index.column()==5){
-            if(m_array[index.row()][index.column()] == "OK"){
-                return QIcon(":/icons/resources/glyphicons/glyphicons_152_check.png");
-            }else if(m_array[index.row()][index.column()] == "NOK"){
-                return QIcon(":/icons/resources/glyphicons/glyphicons_153_unchecked.png");
-            }
-       }else if(index.column()==0){
+       if(index.column()==0){
            if(index.row()>0 && index.row() < m_nbVideo+1){
                 return QIcon(":/icons/resources/glyphicons/glyphicons_008_film.png");
            }else if(index.row()>m_nbVideo+1 && index.row() < m_nbVideo + m_nbAudio +2){
@@ -73,6 +70,16 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
             return QColor(QColor(150,150,150,50));
 
         }
+    }else if (role == Qt::FontRole){
+
+        if(     index.row() == 0 ){
+            QFont font("fontcustom", 15);
+            return font;
+        }
+        else{
+            QFont font("fontcustom", 10);
+            return font;
+        }
     }
     return m_array[index.row()][index.column()];
 }
@@ -89,6 +96,7 @@ QVariant MyModel::headerData( int section, Qt::Orientation orientation, int role
         */
     return QVariant();
 }
+
 
 
 int MyModel::setItem(int row, int col, QString datum) const

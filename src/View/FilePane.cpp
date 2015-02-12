@@ -32,11 +32,11 @@ FilePane::FilePane(QWidget *parent) :
     ui->tableViewImportFile->resizeColumnsToContents();
     ui->listViewImportFile->setEditTriggers(QAbstractItemView::NoEditTriggers);
     // ui->listView_Export->setAlternatingRowColors(true);
-
+/*
 
     QFont font("fontcustom", 10);
     ui->tableViewImportFile->setFont(font);
-
+*/
     ui->comboBoxPreconfig->clear();
     QList<int> sizes;
     sizes.append(200);
@@ -156,7 +156,6 @@ void FilePane::refresh() {
                 QStandardItem* item;
                 if(this->m_dispatcher->checkStreamValidation(sw->getRelevantStream())){
                     item = new QStandardItem(i_ok,out_tView);
-
                     m->setItem(i, 4, QString::fromUtf8("\uf126"));
                 }
                 else{
