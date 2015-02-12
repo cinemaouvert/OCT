@@ -72,7 +72,10 @@ QVariant MyModel::data( const QModelIndex &index, int role ) const
         }
     }else if (role == Qt::FontRole){
 
-        if(     index.row() == 0 ){
+        if( (index.column() ==4 && ((index.row() > 0 && index.row() < m_nbVideo + 1) ||
+                                   ( index.row() > m_nbVideo + m_nbAudio + 2 && index.row() < m_nbVideo + m_nbAudio + m_nbSubtitle +3))) ||
+            (index.column() ==5 && ((index.row() > m_nbVideo +1 && index.row() < m_nbVideo + m_nbAudio +2 )))
+          ){
             QFont font("fontcustom", 15);
             return font;
         }

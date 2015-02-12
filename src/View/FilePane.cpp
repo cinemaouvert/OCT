@@ -131,8 +131,8 @@ void FilePane::refresh() {
     m->setItem(k, 4, tr("Supporté"));
 
     ui->tableViewImportFile->clearSpans();
-    ui->tableViewImportFile->setSpan(1, 4, 1, 5);
-    ui->tableViewImportFile->setSpan(5+nbVideo+nbAudio, 4, 1, 5);
+    ui->tableViewImportFile->setSpan(0, 4, 1, 2);
+    ui->tableViewImportFile->setSpan(2+nbVideo+nbAudio, 4, 1, 2);
     QString out_tView = "";
 
     foreach(Model::File *f, *(this->m_dispatcher->getCurrentProject()->fileList())){
