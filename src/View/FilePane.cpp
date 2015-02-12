@@ -14,6 +14,7 @@
 #include <QResource>
 #include <QXmlQuery>
 #include <QStandardItemModel>
+#include <QMessageBox>
 
 // ========================================================================== //
 // == CONSTRUCTORS AND DESTRUCTORS ========================================== //
@@ -375,8 +376,12 @@ void FilePane::setMainWindow(View::MainWindow *mainWindow)
 
 void FilePane::on_pushButtonGetInfos_clicked()
 {
-    this->m_dispatcher->getCurrentProject()->setUserKey(ui->lineEditUserKey->text());
-    this->m_dispatcher->getCurrentProject()->setDepot(ui->lineEditUrlRepository->text());
+    if(ui->lineEditMovieName->text() != "" && ui->lineEditUserKey->text() != "" && ui->lineEditUrlRepository->text() != ""){
+        this->m_dispatcher->getCurrentProject()->setUserKey(ui->lineEditUserKey->text());
+        this->m_dispatcher->getCurrentProject()->setDepot(ui->lineEditUrlRepository->text());
+        this->m_dispatcher->getInformations(ui->lineEditMovieName->text());
+    }else{
+        QMessageBox::warning(this,tr("Champs nom remplis"),tr("Vous devez saisir le nom du film, la clef utilisateur et le nom du dépôt"));
 
-
+    }
 }
