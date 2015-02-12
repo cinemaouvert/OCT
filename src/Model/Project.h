@@ -93,6 +93,8 @@ namespace Model
 
             QString m_userKey;
             QString m_depot;
+            QString m_affiche;
+            QString m_capture;
 
         public:
             /**
@@ -252,6 +254,10 @@ namespace Model
             void setDepot(const QString &depot);
             QString userKey() const;
             void setUserKey(const QString &userKey);
+            QString capture() const;
+            void setCapture(const QString &capture);
+            QString affiche() const;
+            void setAffiche(const QString &affiche);
     };
 }
 

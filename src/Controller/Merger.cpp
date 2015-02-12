@@ -69,7 +69,12 @@ QString Controller::Merger::createMKVFile(Model::Project *project) {
     QFile file(project->xmlFilePath());
     if(file.exists())
         file.remove();
-
+    QFile affiche("affiche.png");
+    if(affiche.exists())
+        affiche.remove();
+    QFile capture("capture.png");
+    if(capture.exists())
+        capture.remove();
     return "filepath";
 }
 

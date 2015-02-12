@@ -70,6 +70,7 @@ void InformationPane::on_posterComboBox_currentIndexChanged(int index)
     if(index > 0){
         loadImageToGraphicView(ui->posterGraphicsView,index);
         QFile file(picturesList.at(index));
+        this->m_dispatcher->getCurrentProject()->setAffiche(file.fileName());
         if(file.open(QIODevice::ReadOnly)){
             QByteArray dataImage = file.readAll().toBase64();
             this->m_dispatcher->getCurrentProject()->addInformations("affiche", dataImage);
@@ -97,8 +98,11 @@ void InformationPane::loadImageToGraphicView(QGraphicsView *graphV,int index){
 
 void InformationPane::on_sampleComboBox_currentIndexChanged(int index)
 {
-    if(index > 0)
+    if(index > 0){
         loadImageToGraphicView(ui->sampleGraphicView,index);
+        QFile file(picturesList.at(index));
+        this->m_dispatcher->getCurrentProject()->setCapture(file.fileName());
+    }
    /* if(index > 0){
         loadImageToGraphicView(ui->sampleGraphicView,index);
         QFile file(picturesList.at(index));

@@ -38,6 +38,8 @@ using namespace std;
 #include <QFile>
 #include <QDir>
 #include <QCoreApplication>
+#include <QDebug>
+
 
 
 
@@ -62,6 +64,10 @@ Model::Project &Model::Project::operator=(const Model::Project &project)
         m_name = project.m_name;
         m_xmlFilePath = project.m_xmlFilePath;
         m_createMagnet = project.m_createMagnet;
+        m_affiche = project.m_affiche;
+        m_capture = project.m_capture;
+        m_depot = project.m_depot;
+        m_userKey = project.m_userKey;
         //m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
         //m_attachments = new QList<Model::Attachment*>();
         //m_attachments = project.m_attachments;
@@ -100,6 +106,10 @@ Model::Project::Project(const Model::Project &project)
     m_name = project.m_name;
     m_xmlFilePath = project.m_xmlFilePath;
     m_createMagnet = project.m_createMagnet;
+    m_affiche = project.m_affiche;
+    m_capture = project.m_capture;
+    m_depot = project.m_depot;
+    m_userKey = project.m_userKey;
 
     m_fileList = new QList<Model::File*>();
     for(int i = 0; i < project.m_fileList->size(); i++){
@@ -267,9 +277,10 @@ QString Model::Project::generateInformationToXML()
 
 QStringList *Model::Project::getMergeCommandLine()
 {
+
+
     QStringList *arguments = new QStringList();
     *arguments << "-o" << m_name;
-
     foreach (Model::File *f, *(fileList())){
         foreach(Model::StreamWrapper *sw, *(f->getStreamWrappers())){
             if(sw->getRelevantStream()->isDefault())
@@ -288,9 +299,16 @@ QStringList *Model::Project::getMergeCommandLine()
         }
         *arguments <<f->getFilePath();
     }
+    QFile::copy(this->m_affiche,"affiche.png");
+    QFile::copy(this->m_capture,"capture.png");
 
     foreach (Model::Attachment *a, *(attachments())){
-        *arguments << "--attach-file" << a->filepath();
+        if(a->filepath().compare(this->m_affiche) == 0){
+            *arguments << "--attach-file" << "affiche.png";
+        }else if(a->filepath().compare(this->m_capture) == 0){
+            *arguments << "--attach-file" << "capture.png";
+       }else
+            *arguments << "--attach-file" << a->filepath();
     }
 
     *arguments <<"--attach-file"<< this->generateInformationToXML();
@@ -356,4 +374,25 @@ QString Model::Project::userKey() const
 void Model::Project::setUserKey(const QString &userKey)
 {
     m_userKey = userKey;
+}
+
+
+QString Model::Project::capture() const
+{
+    return m_capture;
+}
+
+void Model::Project::setCapture(const QString &capture)
+{
+    m_capture = capture;
+}
+
+QString Model::Project::affiche() const
+{
+    return m_affiche;
+}
+
+void Model::Project::setAffiche(const QString &affiche)
+{
+    m_affiche = affiche;
 }
