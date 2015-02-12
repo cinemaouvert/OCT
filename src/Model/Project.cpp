@@ -36,6 +36,8 @@ using namespace std;
 #include "Subtitle.h"
 #include <QXmlStreamWriter>
 #include <QFile>
+#include <QDir>
+#include <QCoreApplication>
 
 Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileList(NULL)
 {
@@ -235,7 +237,7 @@ void Model::Project::setTorrentSoftwarePath(const QString &torrentSoftwarePath) 
 void Model::Project::generateInformationToXML()
 {
     if(m_informations != NULL){
-        QFile file("infos.xml"); // TODO : changer emplacement du fichier
+        QFile file(qApp->applicationDirPath() + QDir::separator() + "infos.xml");
         if (!file.open(QIODevice::WriteOnly)){
             return;
         }
