@@ -267,15 +267,6 @@ void Controller::OCTDispatcher::load(QString path) {
     file.close();
     //Refresh Information Struct
     this->m_mainWindow->infosFromBDD(NULL);
-    foreach (Model::File *f, *(m_currentProject->fileList())){
-        foreach (Model::StreamWrapper *sw, *(f->getStreamWrappers())) {
-            if(sw->hasToBeTranscoded()){
-                foreach (QString key, sw->getRelevantStream()->getParameters()->keys()) {
-                    parameterChanged(f,sw->getRelevantStream(),key,sw->getRelevantStream()->getParameters()->value(key)->value());
-                }
-            }
-        }
-    }
 }
 
 void Controller::OCTDispatcher::startTreatment() {
