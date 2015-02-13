@@ -125,8 +125,8 @@ Model::Audio::Audio(QString uID) {
     m_uID = uID;
     this->m_parameters = new QMap<QString,Parameter*>();
     this->m_default = false;
-    m_delay = "";
-    m_name = "";
+    this->m_delay = "";
+    this->m_name = "";
 }
 
 Model::Audio::Audio(const Audio& a) {
@@ -134,8 +134,8 @@ Model::Audio::Audio(const Audio& a) {
     QMap<QString,Parameter*> *param(a.m_parameters) ;
     this->m_parameters = param;
     this->m_default = a.m_default;
-    m_delay = a.m_delay;
-    m_name = a.m_name;
+    this->m_delay = a.m_delay;
+    this->m_name = a.m_name;
 }
 
 Model::Audio& Model::Audio::operator=(const Audio& a) {
@@ -144,8 +144,8 @@ Model::Audio& Model::Audio::operator=(const Audio& a) {
         QMap<QString,Parameter*> *param(a.m_parameters) ;
         this->m_parameters = param;
         this->m_default = a.m_default;
-        m_delay = a.m_delay;
-        m_name = a.m_name;
+        this->m_delay = a.m_delay;
+        this->m_name = a.m_name;
     }
     return *this;
 }
@@ -197,6 +197,8 @@ QDataStream &Model::operator >>(QDataStream &in, Model::Audio &valeur)
 {
     in >> valeur.m_uID;
     in >> valeur.m_default;
+    in >> valeur.m_delay;
+    in >> valeur.m_name;
 
     int parametersSize;
     in >> parametersSize;
@@ -213,6 +215,8 @@ QDataStream &Model::operator <<(QDataStream &out, const Model::Audio& valeur)
 {
     out << valeur.m_uID;
     out << valeur.m_default;
+    out << valeur.m_delay;
+    out << valeur.m_name;
 
     out << valeur.m_parameters->size();
     foreach (QString key, valeur.m_parameters->keys()) {

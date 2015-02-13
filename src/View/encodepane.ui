@@ -206,13 +206,6 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_EncodingButtons">
         <item>
-         <widget class="QPushButton" name="newProjectButton">
-          <property name="text">
-           <string>Nouveau projet</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QPushButton" name="pushButton_Encode">
           <property name="text">
            <string>Encoder</string>

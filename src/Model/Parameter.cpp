@@ -125,16 +125,18 @@ QDataStream &Model::operator >>(QDataStream &in, Model::Parameter &valeur)
     in >> valeur.m_description;
     in >> valeur.m_noSpaceForNext;
     in >> valeur.m_value;
-
+    in >> valeur.m_originalValue;
 
     return in;
 }
 QDataStream &Model::operator <<(QDataStream &out, const Model::Parameter& valeur)
 {
-    out << valeur.m_command
-        << valeur.m_description
-        << valeur.m_noSpaceForNext
-        << valeur.m_value;
+    out << valeur.m_command;
+    out << valeur.m_description;
+    out << valeur.m_noSpaceForNext;
+    out << valeur.m_value;
+    out << valeur.m_originalValue;
+
     return out;
 }
 

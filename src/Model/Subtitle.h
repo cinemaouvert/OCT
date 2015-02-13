@@ -53,6 +53,8 @@ namespace Model
              */
             static QMap<QString, Parameter *> m_staticParameters;
 
+            friend QDataStream & operator >>(QDataStream  &in, Subtitle  &valeur);
+            friend QDataStream & operator <<(QDataStream  &out, const Subtitle  &valeur);
 
         public:
             /**
@@ -77,7 +79,7 @@ namespace Model
              * @brief Copy constructor.
              * @param copy The Subtitle object to copy.
              */
-            Subtitle(Subtitle& copy);
+            Subtitle(const Subtitle& copy);
 
             /**
              * @brief Destructor.
@@ -103,8 +105,15 @@ namespace Model
              */
             static void initStaticParameters();
 
+            static void initMetaType();
+
             int getType() const;
 	};
+    QDataStream & operator <<(QDataStream  &out, const Model::Subtitle  &valeur);
+    QDataStream & operator >>(QDataStream  &in, Model::Subtitle &valeur);
+
 }
+Q_DECLARE_METATYPE(Model::Subtitle)
+
 
 #endif

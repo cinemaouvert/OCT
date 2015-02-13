@@ -45,7 +45,9 @@ QList<Model::StreamWrapper *> *Model::File::getDatas() const
     return m_datas;
 }
 
-Model::File::File() {}
+Model::File::File() : m_datas(NULL) {
+    m_datas = new QList<StreamWrapper*>();
+}
 
 Model::File::File(QString filePath, QString info) : m_datas(NULL) {
     this->m_filePath = filePath;
@@ -182,6 +184,12 @@ QString Model::File::getOriginalFilePath(){
     return this->m_filePath;
 }
 
+void Model::File::initMetaType()
+{
+    qRegisterMetaTypeStreamOperators<Model::File>("Model::File");
+    qMetaTypeId<Model::File>();
+}
+
 QString Model::File::getFilePath()
 {
     if(hasToBeTranscoded()){
@@ -202,3 +210,33 @@ bool Model::File::hasToBeTranscoded(){
 
 
 
+
+
+QDataStream &Model::operator <<(QDataStream &out, const Model::File &valeur)
+{
+    out << valeur.m_name;
+    out << valeur.m_filePath;
+    out << valeur.m_outFilePath;
+    out << valeur.m_datas->size();
+    foreach (StreamWrapper *sW, *(valeur.m_datas)) {
+        out << *sW;
+    }
+    return out;
+}
+
+
+QDataStream &Model::operator >>(QDataStream &in, Model::File &valeur)
+{
+    in >> valeur.m_name;
+    in >> valeur.m_filePath;
+    in >> valeur.m_outFilePath;
+    int size;
+    in >> size;
+
+    for(int i = 0 ; i < size; i++){
+        StreamWrapper *sw = new StreamWrapper;
+        in >> *sw;
+        valeur.m_datas->push_back(sw);
+    }
+    return in;
+}

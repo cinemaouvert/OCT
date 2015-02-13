@@ -48,6 +48,9 @@ namespace Model
     class StreamWrapper
     {
         private :
+            friend QDataStream & operator >>(QDataStream  &in, StreamWrapper  &valeur);
+            friend QDataStream & operator <<(QDataStream  &out, const StreamWrapper  &valeur);
+
             /**
              * @brief New stream.
              */
@@ -86,7 +89,7 @@ namespace Model
              * @brief Define if the current Data has to be transcoded.
              * @return 1 if yes, 0 if no.
              */
-            bool hasToBeTranscoded();
+            bool hasToBeTranscoded() const;
 
             /**
              * @brief This method generate the command line associated with the data.
@@ -124,7 +127,14 @@ namespace Model
              * @param The pointer value to modify the m_oldStream member.
              */
             void setOldStream(Model::Stream *oldStream);
+
+            static void initMetaType();
     };
+    QDataStream & operator <<(QDataStream  &out, const Model::StreamWrapper  &valeur);
+    QDataStream & operator >>(QDataStream  &in, Model::StreamWrapper  &valeur);
+
 }
+Q_DECLARE_METATYPE(Model::StreamWrapper)
+
 
 #endif

@@ -101,13 +101,19 @@ Model::Subtitle::Subtitle(QString uid) {
     this->m_parameters = new QMap<QString,Parameter*>();
     this->m_uID = uid;
     this->m_default = false;
+    this->m_delay = "";
+    this->m_name = "";
+
 }
 
-Model::Subtitle::Subtitle(Model::Subtitle& copy) {
+Model::Subtitle::Subtitle(const Model::Subtitle& copy) {
     this->m_uID = copy.m_uID;
     QMap<QString,Parameter*> *param(copy.m_parameters) ;
     this->m_parameters = param;
     this->m_default = copy.m_default;
+    this->m_delay = copy.m_delay;
+    this->m_name = copy.m_name;
+
 }
 
 Model::Subtitle &Model::Subtitle::operator=(const Model::Subtitle &o)
@@ -117,6 +123,9 @@ Model::Subtitle &Model::Subtitle::operator=(const Model::Subtitle &o)
         QMap<QString,Parameter*> *param(o.m_parameters) ;
         this->m_parameters = param;
         this->m_default = o.m_default;
+        this->m_delay = o.m_delay;
+        this->m_name = o.m_name;
+
     }
     return *this;
 }
@@ -146,6 +155,12 @@ void Model::Subtitle::initStaticParameters()
 
 }
 
+void Model::Subtitle::initMetaType()
+{
+    qRegisterMetaTypeStreamOperators<Model::Subtitle>("Model::Subtitle");
+    qMetaTypeId<Model::Subtitle>();
+}
+
 int Model::Subtitle::getType() const
 {
     return Stream::SUBTITLE;
@@ -153,3 +168,39 @@ int Model::Subtitle::getType() const
 
 
 
+
+
+QDataStream &Model::operator <<(QDataStream &out, const Model::Subtitle &valeur)
+{
+    out << valeur.m_uID;
+    out << valeur.m_default;
+    out << valeur.m_delay;
+    out << valeur.m_name;
+
+    out << valeur.m_parameters->size();
+    foreach (QString key, valeur.m_parameters->keys()) {
+        out << key;
+        out << *(valeur.m_parameters->value(key));
+    }
+    return out;
+}
+
+
+QDataStream &Model::operator >>(QDataStream &in, Model::Subtitle &valeur)
+{
+    in >> valeur.m_uID;
+    in >> valeur.m_default;
+    in >> valeur.m_delay;
+    in >> valeur.m_name;
+
+    int parametersSize;
+    in >> parametersSize;
+    for(int i = 0; i < parametersSize ; i++){
+        QString key;
+        Parameter *param = new Parameter();
+        in >> key;
+        in >> *param;
+        valeur.m_parameters->insert(key, param);
+    }
+    return in;
+}

@@ -57,6 +57,10 @@ namespace Model
     class File
 	{
         private:
+
+            friend QDataStream & operator >>(QDataStream  &in, File  &valeur);
+            friend QDataStream & operator <<(QDataStream  &out, const File  &valeur);
+
             /**
              * @brief The name of the file.
              */
@@ -142,7 +146,14 @@ namespace Model
             QList<Model::StreamWrapper *> *getDatas() const;
             bool hasToBeTranscoded();
             QString getOriginalFilePath();
+            static void initMetaType();
     };
+
+    QDataStream & operator <<(QDataStream  &out, const Model::File  &valeur);
+    QDataStream & operator >>(QDataStream  &in, Model::File  &valeur);
+
 }
+Q_DECLARE_METATYPE(Model::File)
+
 
 #endif

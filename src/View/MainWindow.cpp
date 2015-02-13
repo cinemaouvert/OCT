@@ -12,6 +12,9 @@
 #include "src/View/InformationPane.h"
 #include "src/View/EncodePane.h"
 
+#include <QFileDialog>
+#include <QMessageBox>
+
 View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispatcher) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -23,6 +26,9 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
     m_settingsW = new ParametersDialog();
     connect(ui->actionPreferences, SIGNAL(triggered()),SLOT(on_OpenSettings()));
     connect(ui->actionMise_jour, SIGNAL(triggered()),SLOT(on_UpdateVersion()));
+    connect(ui->actionNouveau_projet, SIGNAL(triggered()),SLOT(on_NewProject()));
+    connect(ui->actionSauvegarder_le_projet, SIGNAL(triggered()),SLOT(on_SaveProject()));
+    connect(ui->actionOuvrir_un_projet, SIGNAL(triggered()),SLOT(on_LoadProject()));
 
     ui->tab_encode->setDispatcher(m_dispatcher);
     ui->tab_infos->setDispatcher(m_dispatcher);
@@ -218,6 +224,27 @@ void View::MainWindow::on_OpenSettings()
 void View::MainWindow::on_UpdateVersion(){
     m_dispatcher->checkForUpdate();
 }
+
+void View::MainWindow::on_SaveProject()
+{
+    if(m_dispatcher->getCurrentProject()->name() != "" ){
+        QString savePath = QFileDialog::getSaveFileName(this,tr("Choisir le fichier de sauvegarde"),"",tr("OCT(*.oct)"));
+        m_dispatcher->save(savePath);
+    }else{
+        QMessageBox::warning(this,tr("Sauvegarde impossible"),tr("Votre projet n'a pas de chemin d'export."));
+    }
+}
+
+void View::MainWindow::on_LoadProject(){
+    QString loadPath = QFileDialog::getOpenFileName(this,tr("Choisir le fichier à ouvrir"),"",tr("OCT(*.oct)"));
+    m_dispatcher->load(loadPath);
+    this->getEncodePane()->refreshProjectPane();
+}
+
+void View::MainWindow::on_NewProject(){
+    m_dispatcher->addToQueue();
+}
+
 
 void View::MainWindow::infosFromBDD(QMap<QString, QString>* infos){
     ui->tab_infos->generateStruct(infos);

@@ -177,12 +177,12 @@ namespace Controller
             /**
              * @brief Save the current project.
              */
-            void save();
+            void save(QString path);
 
             /**
              * @brief Load a previously saved project.
              */
-            void load();
+            void load(QString path);
 
             /**
              * @brief Start the transcoding process.

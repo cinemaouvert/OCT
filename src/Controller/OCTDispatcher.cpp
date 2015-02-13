@@ -248,12 +248,23 @@ void Controller::OCTDispatcher::removeFile(QString filePath) {
     this->m_mainWindow->refresh();
 }
 
-void Controller::OCTDispatcher::save() {
-	throw "Not yet implemented";
+void Controller::OCTDispatcher::save(QString path) {
+    QFile file(path);
+    file.open(QIODevice::ReadWrite);
+    QDataStream out(&file);
+    out << *m_currentProject;
+    file.close();
 }
 
-void Controller::OCTDispatcher::load() {
-	throw "Not yet implemented";
+void Controller::OCTDispatcher::load(QString path) {
+    QFile file(path);
+    file.open(QIODevice::ReadWrite);
+    QDataStream in(&file);
+    m_currentProject = new Model::Project;
+    in >> *m_currentProject;
+    m_projects->append(m_currentProject);
+    this->m_mainWindow->refresh();
+    file.close();
 }
 
 void Controller::OCTDispatcher::startTreatment() {

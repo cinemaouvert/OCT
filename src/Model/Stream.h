@@ -53,7 +53,9 @@ namespace Model
 {
     class Stream
 	{
+
         protected:
+
             /**
              * @brief m_uID
              */
@@ -153,7 +155,6 @@ namespace Model
             QString delay() const;
             void setDelay(QString delay);
     };
-
 
 
 }

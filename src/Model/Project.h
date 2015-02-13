@@ -55,6 +55,10 @@ namespace Model
     class Project
 	{
         private:
+
+            friend QDataStream & operator >>(QDataStream  &in, Project  &valeur);
+            friend QDataStream & operator <<(QDataStream  &out, const Project  &valeur);
+
             /**
              * @brief Project name.
              */
@@ -104,7 +108,7 @@ namespace Model
              * @brief Copy constructor.
              * @param project Project object to copy.
              */
-            Project(Project const &project);
+            Project(const Project &project);
 
             /**
              * @brief Affectation operator.
@@ -252,7 +256,14 @@ namespace Model
             void setDepot(const QString &depot);
             QString userKey() const;
             void setUserKey(const QString &userKey);
+
+            static void initMetaType();
     };
+    QDataStream & operator <<(QDataStream  &out, const Model::Project  &valeur);
+    QDataStream & operator >>(QDataStream  &in, Model::Project &valeur);
+
 }
+Q_DECLARE_METATYPE(Model::Project)
+
 
 #endif

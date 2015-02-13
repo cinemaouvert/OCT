@@ -247,7 +247,51 @@ void Model::Video::initStaticParameters()
 
 }
 
+void Model::Video::initMetaType()
+{
+    qRegisterMetaTypeStreamOperators<Model::Video>("Model::Video");
+    qMetaTypeId<Model::Video>();
+}
+
 int Model::Video::getType() const
 {
     return Stream::VIDEO;
+}
+
+
+QDataStream &Model::operator <<(QDataStream &out, const Model::Video &valeur)
+{
+    out << valeur.m_uID;
+    out << valeur.m_default;
+    out << valeur.m_delay;
+    out << valeur.m_name;
+    out << valeur.m_additionalCommand;
+
+    out << valeur.m_parameters->size();
+    foreach (QString key, valeur.m_parameters->keys()) {
+        out << key;
+        out << *(valeur.m_parameters->value(key));
+    }
+    return out;
+}
+
+
+QDataStream &Model::operator >>(QDataStream &in, Model::Video &valeur)
+{
+    in >> valeur.m_uID;
+    in >> valeur.m_default;
+    in >> valeur.m_delay;
+    in >> valeur.m_name;
+    in >> valeur.m_additionalCommand;
+
+    int parametersSize;
+    in >> parametersSize;
+    for(int i = 0; i < parametersSize ; i++){
+        QString key;
+        Parameter *param = new Parameter();
+        in >> key;
+        in >> *param;
+        valeur.m_parameters->insert(key, param);
+    }
+    return in;
 }

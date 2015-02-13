@@ -357,3 +357,81 @@ void Model::Project::setUserKey(const QString &userKey)
 {
     m_userKey = userKey;
 }
+
+void Model::Project::initMetaType()
+{
+    qRegisterMetaTypeStreamOperators<Model::Project>("Model::Project");
+    qMetaTypeId<Model::Project>();
+
+}
+
+
+QDataStream &Model::operator <<(QDataStream &out, const Model::Project &valeur)
+{
+    out << valeur.m_depot;
+    out << valeur.m_createMagnet;
+    out << valeur.m_name;
+    out << valeur.m_torrentSoftwarePath;
+    out << valeur.m_userKey;
+    out << valeur.m_xmlFilePath;
+
+    out << valeur.m_attachments->size();
+    foreach (Attachment *a, *(valeur.m_attachments)) {
+        out << *a;
+    }
+
+    out << valeur.m_fileList->size();
+    foreach (File *f, *(valeur.m_fileList)) {
+        out << *f;
+    }
+
+    out << valeur.m_informations->size();
+    foreach (QString key, valeur.m_informations->keys()) {
+        out << key;
+        out << valeur.m_informations->value(key);
+    }
+    return out;
+}
+
+
+QDataStream &Model::operator >>(QDataStream &in, Model::Project &valeur)
+{
+    in >> valeur.m_depot;
+    in >> valeur.m_createMagnet;
+    in >> valeur.m_name;
+    in >> valeur.m_torrentSoftwarePath;
+    in >> valeur.m_userKey;
+    in >> valeur.m_xmlFilePath;
+
+    int sizeAttachments;
+    in >> sizeAttachments;
+    qDebug() << "Attachment size" << sizeAttachments;
+
+    for(int i=0 ; i<sizeAttachments ; i++){
+        Attachment *a = new Attachment;
+        in >> *a;
+        valeur.m_attachments->push_back(a);
+    }
+
+    int sizeFiles;
+    in >> sizeFiles;
+    qDebug() << "File size" << sizeFiles;
+    for(int i=0 ; i<sizeFiles ; i++){
+        File *f = new File;
+        in >> *f;
+        valeur.m_fileList->push_back(f);
+    }
+
+    int sizeInformation;
+    in >> sizeInformation;
+    qDebug() << "sizeInformation" << sizeInformation;
+
+    for(int i = 0; i < sizeInformation ; i++){
+        QString key;
+        QString value;
+        in >> key;
+        in >> value;
+        valeur.m_informations->insert(key, value);
+    }
+    return in;
+}

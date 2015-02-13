@@ -61,6 +61,10 @@ namespace Model
              */
             static QMap<QString, Parameter *> m_staticParameters;
 
+            friend QDataStream & operator >>(QDataStream  &in, Video  &valeur);
+            friend QDataStream & operator <<(QDataStream  &out, const Video  &valeur);
+
+
         public:
             /**
              * @brief Default constructor.
@@ -111,10 +115,17 @@ namespace Model
              */
             static void initStaticParameters();
 
+            static void initMetaType();
+
             int getType() const;
 
 
 	};
+    QDataStream & operator <<(QDataStream  &out, const Model::Video  &valeur);
+    QDataStream & operator >>(QDataStream  &in, Model::Video &valeur);
+
 }
+Q_DECLARE_METATYPE(Model::Video)
+
 
 #endif
