@@ -112,6 +112,12 @@ void EncodePane::duplicateProject(int index)
     refreshProjectPane();
 }
 
+void EncodePane::closeProject(int index)
+{
+    m_dispatcher->closeProject(index);
+    refreshProjectPane();
+}
+
 // ========================================================================== //
 // == EVENT METHODS ========================================================= //
 // ========================================================================== //

@@ -125,16 +125,6 @@ namespace Model
             virtual ~Project();
 
             /**
-             * @brief Load a project from a previously saved one.
-             */
-            void load();
-
-            /**
-             * @brief Save a project into an XML file.
-             */
-            void save();
-
-            /**
              * @brief Accessor on the name member.
              * @return The name member.
              */

@@ -107,6 +107,8 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
     Model::Subtitle::initStaticParameters();
 
     //Creation of the view
+
+
     m_mainWindow = new View::MainWindow(0,this);
     m_mainWindow->show();
 
@@ -341,6 +343,16 @@ void Controller::OCTDispatcher::setCurrentProjectIndex(int index) {
 void Controller::OCTDispatcher::duplicateProject(int index) {
     Model::Project *project = new Model::Project(*(m_projects->at(index)));
     m_projects->append(project);
+}
+
+void Controller::OCTDispatcher::closeProject(int index)
+{
+    Model::Project *project = m_projects->takeAt(index);
+    if(m_projects->size()==0){
+       addToQueue();
+    }
+    setCurrentProjectIndex(0);
+    delete project;
 }
 
 // ========================================================================== //

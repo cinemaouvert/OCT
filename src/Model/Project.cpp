@@ -131,13 +131,6 @@ Model::Project::Project(const Model::Project &project)
      }
 }
 
-void Model::Project::load() {
-	throw "Not yet implemented";
-}
-
-void Model::Project::save() {
-	throw "Not yet implemented";
-}
 
 
 void Model::Project::addFileToList(Model::File *file)
@@ -380,7 +373,6 @@ void Model::Project::initMetaType()
 {
     qRegisterMetaTypeStreamOperators<Model::Project>("Model::Project");
     qMetaTypeId<Model::Project>();
-
 }
 
 

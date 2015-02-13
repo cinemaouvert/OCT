@@ -23,8 +23,12 @@ void QueueListView::mouseReleaseEvent(QMouseEvent *releaseEvent){
         QMenu contextMenu;
         QAction *charger = new QAction(tr("Charger le projet"), this);
         contextMenu.addAction(charger);
+
         QAction *duplicate = new QAction(tr("Dupliquer le projet"), this);
         contextMenu.addAction(duplicate);
+
+        QAction *close = new QAction(tr("Fermer le projet"), this);
+        contextMenu.addAction(close);
 
         QAction* selectedItem = contextMenu.exec(globalPos);
         if (selectedItem == charger)
@@ -35,6 +39,10 @@ void QueueListView::mouseReleaseEvent(QMouseEvent *releaseEvent){
         }else if(selectedItem == duplicate){
             if(m_encodePane){
                 m_encodePane->duplicateProject(this->selectedIndexes().at(0).row());
+            }
+        }else if(selectedItem == close){
+            if(m_encodePane){
+                m_encodePane->closeProject(this->selectedIndexes().at(0).row());
             }
         }
      }

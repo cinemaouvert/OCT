@@ -277,6 +277,15 @@ namespace Controller
             void duplicateProject(int index);
 
             /**
+             * @brief closeProject Close the project designed by its index.
+             *
+             * Close the project designed by its index within the set of project
+             * contained in the dispatcher.
+             * @param index The index of the project to duplicate.
+             */
+            void closeProject(int index);
+
+            /**
              * @brief getTreatmentThread Accessor on the treatment thread member.
              * @return The treatment thread member of the dispatcher.
              */

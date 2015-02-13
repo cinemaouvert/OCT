@@ -73,6 +73,8 @@ public:
     ///
     void duplicateProject(int index);
 
+    void closeProject(int index);
+
 private slots:
     void on_newProjectButton_clicked();
     void initProgressBar(int);
