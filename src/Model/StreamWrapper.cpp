@@ -105,7 +105,11 @@ Model::StreamWrapper::StreamWrapper(const StreamWrapper& d) {
 Model::StreamWrapper& Model::StreamWrapper::operator=(const StreamWrapper& d) {
     if ( this != &d ) {
         m_oldStream = d.m_oldStream;
-        m_newStream = d.m_newStream;
+        if(d.m_newStream){
+            m_newStream = d.m_newStream;
+        }else{
+            m_newStream = NULL;
+        }
     }
     return *this;
 }
@@ -147,25 +151,27 @@ QDataStream &Model::operator <<(QDataStream &out, const Model::StreamWrapper &va
     out << valeur.m_oldStream->getType();
     qDebug() << "WRITE Stream Type : "<< valeur.m_oldStream->getType();
 
+    qDebug() << " Has to be : " << valeur.hasToBeTranscoded();
     switch (valeur.m_oldStream->getType()) {
         case Stream::AUDIO:
             out << *((Audio*)(valeur.m_oldStream));
             if(valeur.hasToBeTranscoded()){
-                //out << "hasNext";
-                //out << *(Audio*)(valeur.m_newStream);
+                out << QString("hasNext");
+                out << *(Audio*)(valeur.m_newStream);
             }else{
-                //out << "noNext";
+                out << QString("noNext");
             }
             qDebug()<< "WRITE AUDIO";
             break;
 
         case Stream::VIDEO:
             out << *((Video*)(valeur.m_oldStream));
+
             if(valeur.hasToBeTranscoded()){
-                //out << "hasNext";
-                //out << *(Video*)(valeur.m_newStream);
+                out << QString("hasNext");
+                out << *(Video*)(valeur.m_newStream);
             }else{
-                //out << "noNext";
+                out << QString("noNext");
             }
             qDebug()<< "WRITE Video";
 
@@ -174,10 +180,10 @@ QDataStream &Model::operator <<(QDataStream &out, const Model::StreamWrapper &va
         case Stream::SUBTITLE:
             out << *((Subtitle*)(valeur.m_oldStream));
             if(valeur.hasToBeTranscoded()){
-                //out << "hasNext";
-                //out << *(Subtitle*)(valeur.m_newStream);
+                out << QString("hasNext");
+                out << *(Subtitle*)(valeur.m_newStream);
             }else{
-                //out << "noNext";
+                out << QString("noNext");
             }
             qDebug()<< "WRITE Subtitle";
 
@@ -203,12 +209,13 @@ QDataStream &Model::operator >>(QDataStream &in, Model::StreamWrapper &valeur)
             a = new Audio;
             in >> *a;
             valeur.setOldStream(a);
-            /*in >> hasNext;
-            if(hasNext == "hasNext"){
+            in >> hasNext;
+            qDebug() <<"Has to be " << hasNext;
+            if(hasNext == QString("hasNext")){
                 a = new Audio;
                 in >> *a;
                 valeur.setNewStream(a);
-            }*/
+            }
             break;
         case Stream::VIDEO:
             qDebug()<< "READ Video";
@@ -216,12 +223,13 @@ QDataStream &Model::operator >>(QDataStream &in, Model::StreamWrapper &valeur)
             v = new Video;
             in >> *v;
             valeur.setOldStream(v);
-            /*in >> hasNext;
-            if(hasNext == "hasNext"){
+            in >> hasNext;
+            qDebug() <<"Has to be " << hasNext;
+            if(hasNext == QString("hasNext")){
                 v = new Video;
                 in >> *v;
                 valeur.setNewStream(v);
-            }*/
+            }
 
             break;
         case Stream::SUBTITLE:
@@ -230,12 +238,13 @@ QDataStream &Model::operator >>(QDataStream &in, Model::StreamWrapper &valeur)
             s = new Subtitle;
             in >> *s;
             valeur.setOldStream(s);
-            /*in >> hasNext;
-            if(hasNext == "hasNext"){
+            in >> hasNext;
+           qDebug() <<"Has to be " << hasNext;
+            if(hasNext == QString("hasNext")){
                 s = new Subtitle;
                 in >> *s;
                 valeur.setNewStream(s);
-            }*/
+            }
             break;
     }
 

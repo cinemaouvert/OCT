@@ -156,6 +156,7 @@ QStringList *Model::File::getCommandLine()
     foreach (StreamWrapper *sW, *getStreamWrappers()) {
         (*stringList) << *(sW->generateCommandLine());
     }
+    //For audio files
     if(this->getStreamWrappers()->size()==1){
         Stream *stream = this->getStreamWrappers()->at(0)->getRelevantStream();
         if(stream->getType() == Model::Stream::AUDIO){

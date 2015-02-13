@@ -108,11 +108,15 @@ Model::Subtitle::Subtitle(QString uid) {
 
 Model::Subtitle::Subtitle(const Model::Subtitle& copy) {
     this->m_uID = copy.m_uID;
-    QMap<QString,Parameter*> *param(copy.m_parameters) ;
-    this->m_parameters = param;
     this->m_default = copy.m_default;
     this->m_delay = copy.m_delay;
     this->m_name = copy.m_name;
+    m_parameters = new QMap<QString,Parameter*>;
+    QMap<QString,Parameter*>::const_iterator i = copy.m_parameters->constBegin();
+     while (i != copy.m_parameters->constEnd()) {
+         m_parameters->insert(i.key(), new Model::Parameter(*(i.value())));
+         ++i;
+     }
 
 }
 
@@ -120,8 +124,12 @@ Model::Subtitle &Model::Subtitle::operator=(const Model::Subtitle &o)
 {
     if(this != &o){
         this->m_uID = o.m_uID;
-        QMap<QString,Parameter*> *param(o.m_parameters) ;
-        this->m_parameters = param;
+        m_parameters = new QMap<QString,Parameter*>;
+        QMap<QString,Parameter*>::const_iterator i = o.m_parameters->constBegin();
+         while (i != o.m_parameters->constEnd()) {
+             m_parameters->insert(i.key(), new Model::Parameter(*(i.value())));
+             ++i;
+         }
         this->m_default = o.m_default;
         this->m_delay = o.m_delay;
         this->m_name = o.m_name;

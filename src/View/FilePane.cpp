@@ -200,9 +200,10 @@ void FilePane::refresh() {
                 k++;
                 m->setItem(k,0,tr("Piste: %2 : %1").arg(f->getName()).arg(sw->getRelevantStream()->getUID()));
                 Model::Parameter *p = sw->getRelevantStream()->getParameters()->find(Model::Stream::CODEC_NAME).value();
-                m->setItem(k,1,p->value());
-                out_tView = "sous titre " + sw->getRelevantStream()->getUID() + " from "+ f->getName() + " - " + p->value();
-
+                if(p){
+                    m->setItem(k,1,p->value());
+                    out_tView = "sous titre " + sw->getRelevantStream()->getUID() + " from "+ f->getName() + " - " + p->value();
+                }
 
 
                 QStandardItem* item;

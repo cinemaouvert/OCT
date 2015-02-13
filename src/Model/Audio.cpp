@@ -131,18 +131,27 @@ Model::Audio::Audio(QString uID) {
 
 Model::Audio::Audio(const Audio& a) {
     m_uID = a.m_uID;
-    QMap<QString,Parameter*> *param(a.m_parameters) ;
-    this->m_parameters = param;
     this->m_default = a.m_default;
     this->m_delay = a.m_delay;
     this->m_name = a.m_name;
+
+    m_parameters = new QMap<QString,Parameter*>;
+    QMap<QString,Parameter*>::const_iterator i = a.m_parameters->constBegin();
+     while (i != a.m_parameters->constEnd()) {
+         m_parameters->insert(i.key(), new Model::Parameter(*(i.value())));
+         ++i;
+     }
 }
 
 Model::Audio& Model::Audio::operator=(const Audio& a) {
     if ( this != &a ) {
         m_uID = a.m_uID;
-        QMap<QString,Parameter*> *param(a.m_parameters) ;
-        this->m_parameters = param;
+        m_parameters = new QMap<QString,Parameter*>;
+        QMap<QString,Parameter*>::const_iterator i = a.m_parameters->constBegin();
+         while (i != a.m_parameters->constEnd()) {
+             m_parameters->insert(i.key(), new Model::Parameter(*(i.value())));
+             ++i;
+         }
         this->m_default = a.m_default;
         this->m_delay = a.m_delay;
         this->m_name = a.m_name;

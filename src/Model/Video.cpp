@@ -156,8 +156,14 @@ Model::Video::Video(QString uid){
 Model::Video::Video(const Model::Video & copy){
     this->m_uID = copy.m_uID;
     this->m_additionalCommand = QString(copy.m_additionalCommand);
-    this->m_parameters = new QMap<QString,Parameter*>(*(copy.m_parameters));
     this->m_default = copy.m_default;
+
+    m_parameters = new QMap<QString,Parameter*>;
+    QMap<QString,Parameter*>::const_iterator i = copy.m_parameters->constBegin();
+     while (i != copy.m_parameters->constEnd()) {
+         m_parameters->insert(i.key(), new Model::Parameter(*(i.value())));
+         ++i;
+     }
 }
 
 Model::Video &Model::Video::Video::operator=(const Model::Video &o)
@@ -166,8 +172,12 @@ Model::Video &Model::Video::Video::operator=(const Model::Video &o)
         this->m_uID = o.m_uID;
         this->m_default = o.m_default;
         this->m_additionalCommand = o.m_additionalCommand;
-        QMap<QString,Parameter*> *param(o.m_parameters) ;
-        this->m_parameters = param;
+        m_parameters = new QMap<QString,Parameter*>;
+        QMap<QString,Parameter*>::const_iterator i = o.m_parameters->constBegin();
+         while (i != o.m_parameters->constEnd()) {
+             m_parameters->insert(i.key(), new Model::Parameter(*(i.value())));
+             ++i;
+         }
     }
     return *this;
 }

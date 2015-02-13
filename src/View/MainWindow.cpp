@@ -58,23 +58,23 @@ void View::MainWindow::refresh()
     foreach (Model::File *file, *(m_dispatcher->getCurrentProject()->fileList())) {
         foreach (Model::StreamWrapper *streamW, *(file->getStreamWrappers())) {
             QWidget *s;
-            switch (streamW->oldStream()->getType()) {
+            switch (streamW->getRelevantStream()->getType()) {
                 case Model::Stream::AUDIO:
                     s = new AudioPane(file,streamW->oldStream(),this);
-                    ui->tabWidgetAudio->addTab(s,file->getName() + " piste : " +streamW->oldStream()->getUID());
+                    ui->tabWidgetAudio->addTab(s,file->getName() + " piste : " +streamW->getRelevantStream()->getUID());
                     ((AudioPane*)s)->setDispatcher(m_dispatcher);
                     break;
                 case Model::Stream::VIDEO:
                     s = new VideoPane(file,streamW->oldStream(),this);
-                    ui->tabWidgetVideo->addTab(s,file->getName() + " piste : " +streamW->oldStream()->getUID());
+                    ui->tabWidgetVideo->addTab(s,file->getName() + " piste : " +streamW->getRelevantStream()->getUID());
                     ((VideoPane*)s)->setDispatcher(m_dispatcher);
-                    m_videoFileNames.append(file->getName() + " : stream "+streamW->oldStream()->getUID());
-                    vStreams.append(streamW->oldStream());
+                    m_videoFileNames.append(file->getName() + " : stream "+streamW->getRelevantStream()->getUID());
+                    vStreams.append(streamW->getRelevantStream());
                     vFiles.append(file);
                     break;
                 case Model::Stream::SUBTITLE:
                     s = new SubtitlePane(file,streamW->oldStream(),this);
-                    ui->tabWidgetSubtitle->addTab(s,file->getName() + " piste : " +streamW->oldStream()->getUID());
+                    ui->tabWidgetSubtitle->addTab(s,file->getName() + " piste : " +streamW->getRelevantStream()->getUID());
                     ((SubtitlePane*)s)->setDispatcher(m_dispatcher);
                     sPanes.append((SubtitlePane*)s);
                     break;
