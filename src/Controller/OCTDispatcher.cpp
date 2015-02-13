@@ -265,6 +265,8 @@ void Controller::OCTDispatcher::load(QString path) {
     m_projects->append(m_currentProject);
     this->m_mainWindow->refresh();
     file.close();
+    //Refresh Information Struct
+    this->m_mainWindow->infosFromBDD(NULL);
 }
 
 void Controller::OCTDispatcher::startTreatment() {

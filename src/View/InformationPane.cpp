@@ -135,6 +135,7 @@ void InformationPane::generateStruct(QMap<QString, QString>* infos){
 
     if(this->m_dispatcher->informationMovieStruct() != NULL){
         QWidget *widget = new QWidget;
+        QMap<QString, QString>* informationsProjetSave = this->m_dispatcher->getCurrentProject()->informations();
         for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
 
             QString labelName = this->m_dispatcher->informationMovieStruct()->at(i);
@@ -146,6 +147,13 @@ void InformationPane::generateStruct(QMap<QString, QString>* infos){
                 vLayoutLabel->addWidget(label);
 
                 QLineEdit *lineEdit = new QLineEdit;
+
+                if(informationsProjetSave != NULL && informationsProjetSave->size() > 0){
+                    QString valueMovie = "";
+                    valueMovie = informationsProjetSave->value(lineEditName);
+                    lineEdit->setText(valueMovie);
+                }
+
                 if(infos != NULL && infos->size() > 0){
                     QString valueMovie = "";
                     valueMovie = infos->value(lineEditName);
