@@ -32,7 +32,6 @@ public slots:
 private slots:
 
     void on_posterComboBox_currentIndexChanged(int index);
-
     void on_sampleComboBox_currentIndexChanged(int index);
 
 private:

@@ -97,6 +97,8 @@ namespace Model
 
             QString m_userKey;
             QString m_depot;
+            QString m_affiche;
+            QString m_capture;
 
         public:
             /**
@@ -258,6 +260,10 @@ namespace Model
             void setUserKey(const QString &userKey);
 
             static void initMetaType();
+            QString capture() const;
+            void setCapture(const QString &capture);
+            QString affiche() const;
+            void setAffiche(const QString &affiche);
     };
     QDataStream & operator <<(QDataStream  &out, const Model::Project  &valeur);
     QDataStream & operator >>(QDataStream  &in, Model::Project &valeur);
