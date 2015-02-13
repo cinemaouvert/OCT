@@ -229,7 +229,8 @@ void View::MainWindow::on_SaveProject()
 {
     if(m_dispatcher->getCurrentProject()->name() != "" ){
         QString savePath = QFileDialog::getSaveFileName(this,tr("Choisir le fichier de sauvegarde"),"",tr("OCT(*.oct)"));
-        m_dispatcher->save(savePath);
+        if(savePath != "")
+            m_dispatcher->save(savePath);
     }else{
         QMessageBox::warning(this,tr("Sauvegarde impossible"),tr("Votre projet n'a pas de chemin d'export."));
     }
@@ -237,8 +238,10 @@ void View::MainWindow::on_SaveProject()
 
 void View::MainWindow::on_LoadProject(){
     QString loadPath = QFileDialog::getOpenFileName(this,tr("Choisir le fichier à ouvrir"),"",tr("OCT(*.oct)"));
-    m_dispatcher->load(loadPath);
-    this->getEncodePane()->refreshProjectPane();
+    if(loadPath != ""){
+        m_dispatcher->load(loadPath);
+        this->getEncodePane()->refreshProjectPane();
+    }
 }
 
 void View::MainWindow::on_NewProject(){
