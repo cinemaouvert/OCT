@@ -40,76 +40,29 @@ using namespace std;
 #include <QCoreApplication>
 #include <QDebug>
 
-
-
-
-Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileList(NULL)
-{
+// ========================================================================== //
+// == Constructors and destructor =========================================== //
+// ========================================================================== //
+Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileList(NULL) {
     this->m_attachments = new QList<Model::Attachment*>();
     this->m_informations =  new QMap<QString, QString>;
     this->m_fileList = new QList<Model::File*>();
     this->m_name = "";
 }
 
-Model::Project::~Project()
-{
+Model::Project::~Project() {
     if(this->m_attachments)     delete this->m_attachments;
     if(this->m_fileList)        delete this->m_fileList;
     if(this->m_informations)    delete this->m_informations;
 }
 
-Model::Project &Model::Project::operator=(const Model::Project &project)
-{
-    if (this != &project) {
-        m_name = project.m_name;
-        m_xmlFilePath = project.m_xmlFilePath;
-        m_createMagnet = project.m_createMagnet;
-        m_affiche = project.m_affiche;
-        m_capture = project.m_capture;
-        m_depot = project.m_depot;
-        m_userKey = project.m_userKey;
-        //m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
-        //m_attachments = new QList<Model::Attachment*>();
-        //m_attachments = project.m_attachments;
-        //m_informations = new QList<Model::Information*>(*project.m_informations);
-        //m_informations = new QList<Model::Information*>();
-        //m_informations = project.m_informations;
-        //m_fileList = new QList<Model::File*>(*project.m_fileList);
-        //m_fileList = new QList<Model::File*>();
-        //m_fileList = project.m_fileList;
-
-
-        m_fileList = new QList<Model::File*>();
-        for(int i = 0; i < project.m_fileList->size(); i++){
-            Model::File *p = new Model::File(*project.m_fileList->at(i));
-            m_fileList->push_back(p);
-        }
-
-        m_attachments = new QList<Model::Attachment*>();
-        for(int i = 0; i < project.m_attachments->size(); i++){
-            Model::Attachment *p = new Model::Attachment(*project.m_attachments->at(i));
-            m_attachments->push_back(p);
-        }
-
-        m_informations = new QMap<QString, QString>;
-        QMap<QString, QString>::const_iterator i = project.m_informations->constBegin();
-         while (i != project.m_informations->constEnd()) {
-             m_informations->insert(i.key(), i.value());
-             ++i;
-         }
-    }
-    return *this;
-}
-
-Model::Project::Project(const Model::Project &project)
-{
+// ========================================================================== //
+// == Copy constructor ====================================================== //
+// ========================================================================== //
+Model::Project::Project(const Model::Project &project) {
     m_name = project.m_name;
     m_xmlFilePath = project.m_xmlFilePath;
     m_createMagnet = project.m_createMagnet;
-    m_affiche = project.m_affiche;
-    m_capture = project.m_capture;
-    m_depot = project.m_depot;
-    m_userKey = project.m_userKey;
 
     m_fileList = new QList<Model::File*>();
     for(int i = 0; i < project.m_fileList->size(); i++){
@@ -131,40 +84,135 @@ Model::Project::Project(const Model::Project &project)
      }
 }
 
+// ========================================================================== //
+// == Affectation operator ================================================== //
+// ========================================================================== //
+Model::Project &Model::Project::operator=(const Model::Project &project) {
+    if (this != &project) {
+        m_name = project.m_name;
+        m_xmlFilePath = project.m_xmlFilePath;
+        m_createMagnet = project.m_createMagnet;
+        m_affiche = project.m_affiche;
+        m_capture = project.m_capture;
+        m_depot = project.m_depot;
+        m_userKey = project.m_userKey;
+        //m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
+        //m_attachments = new QList<Model::Attachment*>();
+        //m_attachments = project.m_attachments;
+        //m_informations = new QList<Model::Information*>(*project.m_informations);
+        //m_informations = new QList<Model::Information*>();
+        //m_informations = project.m_informations;
+        //m_fileList = new QList<Model::File*>(*project.m_fileList);
+        //m_fileList = new QList<Model::File*>();
+        //m_fileList = project.m_fileList;
 
+        m_fileList = new QList<Model::File*>();
+        for(int i = 0; i < project.m_fileList->size(); i++) {
+            Model::File *p = new Model::File(*project.m_fileList->at(i));
+            m_fileList->push_back(p);
+        }
 
-void Model::Project::addFileToList(Model::File *file)
-{
+        m_attachments = new QList<Model::Attachment*>();
+        for(int i = 0; i < project.m_attachments->size(); i++) {
+            Model::Attachment *p = new Model::Attachment(*project.m_attachments->at(i));
+            m_attachments->push_back(p);
+        }
+
+        m_informations = new QMap<QString, QString>;
+        QMap<QString, QString>::const_iterator i = project.m_informations->constBegin();
+         while (i != project.m_informations->constEnd()) {
+             m_informations->insert(i.key(), i.value());
+             ++i;
+         }
+    }
+    return *this;
+}
+
+// ========================================================================== //
+// == Accessor and mutator methods ========================================== //
+// ========================================================================== //
+QString Model::Project::name() const {
+    return m_name;
+}
+
+void Model::Project::setName(const QString &name) {
+    m_name = name;
+}
+
+QList<Model::File *> *Model::Project::fileList() const {
+    return m_fileList;
+}
+
+QMap<QString, QString> *Model::Project::informations() const {
+    return m_informations;
+}
+
+bool Model::Project::createMagnet() const {
+    return m_createMagnet;
+}
+
+void Model::Project::setCreateMagnet(bool createMagnet) {
+    m_createMagnet = createMagnet;
+}
+
+QList<Model::Attachment *> *Model::Project::attachments() const {
+    return m_attachments;
+}
+
+QString Model::Project::xmlFilePath() const {
+    return m_xmlFilePath;
+}
+
+void Model::Project::setXmlFilePath(const QString &xmlFilePath) {
+    m_xmlFilePath = xmlFilePath;
+}
+
+QString Model::Project::getTorrentSoftwarePath() const {
+    return m_torrentSoftwarePath;
+}
+
+void Model::Project::setTorrentSoftwarePath(const QString &torrentSoftwarePath) {
+    m_torrentSoftwarePath = torrentSoftwarePath;
+}
+
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
+void Model::Project::load() {
+	throw "Not yet implemented";
+}
+
+void Model::Project::save() {
+	throw "Not yet implemented";
+}
+
+void Model::Project::addFileToList(Model::File *file) {
     if(m_fileList == NULL)
         this->m_fileList = new QList<Model::File*>();
 
     this->m_fileList->push_back(file);
 }
 
-void Model::Project::addInformations(QString key, QString value)
-{
+void Model::Project::addInformations(QString key, QString value) {
     if(m_informations == NULL)
         this->m_informations = new QMap<QString, QString>;
 
     this->m_informations->insert(key, value);
 }
 
-void Model::Project::removeInformations(QString key)
-{
+void Model::Project::removeInformations(QString key) {
     if(this->m_informations->contains(key))
         this->m_informations->remove(key);
 }
 
-void Model::Project::addAttachment(Model::Attachment *attachment)
-{
+void Model::Project::addAttachment(Model::Attachment *attachment) {
     if(m_attachments == NULL)
         this->m_attachments = new QList<Model::Attachment*>();
 
     this->m_attachments->push_back(attachment);
 }
 
-void Model::Project::removeFile(QString filePath)
-{
+void Model::Project::removeFile(QString filePath) {
     int i = 0;
     while(i < this->m_fileList->size() && this->m_fileList->at(i)->getFilePath().compare(filePath) !=0 )
         i++;
@@ -186,61 +234,7 @@ void Model::Project::removeFile(QString filePath)
     }
 }
 
-QString Model::Project::name() const
-{
-    return m_name;
-}
-
-void Model::Project::setName(const QString &name)
-{
-    m_name = name;
-}
-
-QList<Model::File *> *Model::Project::fileList() const
-{
-    return m_fileList;
-}
-
-QMap<QString, QString> *Model::Project::informations() const
-{
-    return m_informations;
-}
-
-bool Model::Project::createMagnet() const
-{
-    return m_createMagnet;
-}
-
-void Model::Project::setCreateMagnet(bool createMagnet)
-{
-    m_createMagnet = createMagnet;
-}
-
-QList<Model::Attachment *> *Model::Project::attachments() const
-{
-    return m_attachments;
-}
-
-QString Model::Project::xmlFilePath() const
-{
-    return m_xmlFilePath;
-}
-
-void Model::Project::setXmlFilePath(const QString &xmlFilePath)
-{
-    m_xmlFilePath = xmlFilePath;
-}
-
-QString Model::Project::getTorrentSoftwarePath() const {
-    return m_torrentSoftwarePath;
-}
-
-void Model::Project::setTorrentSoftwarePath(const QString &torrentSoftwarePath) {
-    m_torrentSoftwarePath = torrentSoftwarePath;
-}
-
-QString Model::Project::generateInformationToXML()
-{
+QString Model::Project::generateInformationToXML() {
     if(m_informations != NULL){
         this->m_xmlFilePath = qApp->applicationDirPath() + QDir::separator() + "infos.xml";
         QFile file(this->m_xmlFilePath);
@@ -265,13 +259,9 @@ QString Model::Project::generateInformationToXML()
         return this->m_xmlFilePath;
     }
     return "";
-
 }
 
-QStringList *Model::Project::getMergeCommandLine()
-{
-
-
+QStringList *Model::Project::getMergeCommandLine() {
     QStringList *arguments = new QStringList();
     *arguments << "-o" << m_name;
     foreach (Model::File *f, *(fileList())){
@@ -310,8 +300,7 @@ QStringList *Model::Project::getMergeCommandLine()
     return arguments;
 }
 
-int Model::Project::nbVideo() const
-{
+int Model::Project::nbVideo() const {
     int cpt = 0;
     foreach(Model::File *f , *(this->m_fileList)){
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
@@ -323,8 +312,7 @@ int Model::Project::nbVideo() const
     return cpt;
 }
 
-int Model::Project::nbAudio() const
-{
+int Model::Project::nbAudio() const {
     int cpt = 0;
     foreach(Model::File *f , *(this->m_fileList)){
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
@@ -336,8 +324,7 @@ int Model::Project::nbAudio() const
     return cpt;
 }
 
-int Model::Project::nbSub() const
-{
+int Model::Project::nbSub() const {
     int cpt = 0;
     foreach(Model::File *f , *(this->m_fileList)){
         foreach( Model::StreamWrapper *sw, *(f->getDatas())){
@@ -349,35 +336,28 @@ int Model::Project::nbSub() const
     return cpt;
 }
 
-QString Model::Project::depot() const
-{
+QString Model::Project::depot() const {
     return m_depot;
 }
 
-void Model::Project::setDepot(const QString &depot)
-{
+void Model::Project::setDepot(const QString &depot) {
     m_depot = depot;
 }
 
-QString Model::Project::userKey() const
-{
+QString Model::Project::userKey() const {
     return m_userKey;
 }
 
-void Model::Project::setUserKey(const QString &userKey)
-{
+void Model::Project::setUserKey(const QString &userKey) {
     m_userKey = userKey;
 }
 
-void Model::Project::initMetaType()
-{
+void Model::Project::initMetaType() {
     qRegisterMetaTypeStreamOperators<Model::Project>("Model::Project");
     qMetaTypeId<Model::Project>();
 }
 
-
-QDataStream &Model::operator <<(QDataStream &out, const Model::Project &valeur)
-{
+QDataStream &Model::operator <<(QDataStream &out, const Model::Project &valeur) {
     out << valeur.m_depot;
     out << valeur.m_createMagnet;
     out << valeur.m_name;
@@ -403,9 +383,7 @@ QDataStream &Model::operator <<(QDataStream &out, const Model::Project &valeur)
     return out;
 }
 
-
-QDataStream &Model::operator >>(QDataStream &in, Model::Project &valeur)
-{
+QDataStream &Model::operator >>(QDataStream &in, Model::Project &valeur) {
     in >> valeur.m_depot;
     in >> valeur.m_createMagnet;
     in >> valeur.m_name;
@@ -446,22 +424,20 @@ QDataStream &Model::operator >>(QDataStream &in, Model::Project &valeur)
     return in;
 }
 
-QString Model::Project::capture() const
-{
+QString Model::Project::capture() const {
     return m_capture;
 }
 
-void Model::Project::setCapture(const QString &capture)
-{
+void Model::Project::setCapture(const QString &capture) {
     m_capture = capture;
 }
 
-QString Model::Project::affiche() const
-{
+QString Model::Project::affiche() const {
     return m_affiche;
 }
 
-void Model::Project::setAffiche(const QString &affiche)
-{
+void Model::Project::setAffiche(const QString &affiche) {
     m_affiche = affiche;
 }
+
+

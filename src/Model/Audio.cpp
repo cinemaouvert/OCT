@@ -37,6 +37,10 @@ using namespace std;
 #include <QSettings>
 
 QMap<QString, Model::Parameter *> Model::Audio::m_staticParameters;
+
+// ========================================================================== //
+// == Constructors ========================================================== //
+// ========================================================================== //
 Model::Audio::Audio() {
     m_uID = "";
     m_delay = "";
@@ -45,8 +49,7 @@ Model::Audio::Audio() {
     this->m_parameters = new QMap<QString,Parameter*>();
 }
 
-Model::Audio::Audio(QDomNode stream, int uid)
-{
+Model::Audio::Audio(QDomNode stream, int uid) {
     QDomNamedNodeMap tab = stream.attributes();
     //-----------------------CODEC-NAME------------------------//
     QDomNode nodeCodecName = tab.namedItem(Model::Stream::CODEC_NAME);
@@ -129,6 +132,9 @@ Model::Audio::Audio(QString uID) {
     this->m_name = "";
 }
 
+// ========================================================================== //
+// == Copy constructor ====================================================== //
+// ========================================================================== //
 Model::Audio::Audio(const Audio& a) {
     m_uID = a.m_uID;
     this->m_default = a.m_default;
@@ -143,6 +149,9 @@ Model::Audio::Audio(const Audio& a) {
      }
 }
 
+// ========================================================================== //
+// == Affectation operator ================================================== //
+// ========================================================================== //
 Model::Audio& Model::Audio::operator=(const Audio& a) {
     if ( this != &a ) {
         m_uID = a.m_uID;
@@ -159,19 +168,30 @@ Model::Audio& Model::Audio::operator=(const Audio& a) {
     return *this;
 }
 
+// ========================================================================== //
+// == Destructor ============================================================ //
+// ========================================================================== //
 Model::Audio::~Audio() {
     if (this->m_parameters != NULL)
         delete(this->m_parameters);
 }
 
-Model::Parameter *Model::Audio::getStaticParameter(QString key)
-{
+// ========================================================================== //
+// == Accessor and mutator methods ========================================== //
+// ========================================================================== //
+Model::Parameter *Model::Audio::getStaticParameter(QString key) {
     Parameter *param = new Parameter(*(Audio::m_staticParameters.value(key)));
     return param;
 }
 
-void Model::Audio::initStaticParameters()
-{
+int Model::Audio::getType() const {
+    return Stream::AUDIO;
+}
+
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
+void Model::Audio::initStaticParameters() {
     Parameter *codecNameParam = new Parameter("-acodec","This is the codec of the audio stream","%1");
     m_staticParameters.insert(Model::Stream::CODEC_NAME,codecNameParam);
 
@@ -191,19 +211,15 @@ void Model::Audio::initStaticParameters()
     m_staticParameters.insert(Model::Stream::RESOLUTION,resolution);
 }
 
-void Model::Audio::initMetaType()
-{
+void Model::Audio::initMetaType() {
     qRegisterMetaTypeStreamOperators<Model::Audio>("Model::Audio");
     qMetaTypeId<Model::Audio>();
 }
 
-int Model::Audio::getType() const
-{
-    return Stream::AUDIO;
-}
-
-QDataStream &Model::operator >>(QDataStream &in, Model::Audio &valeur)
-{
+// ========================================================================== //
+// == Serialization ========================================================= //
+// ========================================================================== //
+QDataStream &Model::operator >>(QDataStream &in, Model::Audio &valeur) {
     in >> valeur.m_uID;
     in >> valeur.m_default;
     in >> valeur.m_delay;
@@ -220,8 +236,8 @@ QDataStream &Model::operator >>(QDataStream &in, Model::Audio &valeur)
     }
     return in;
 }
-QDataStream &Model::operator <<(QDataStream &out, const Model::Audio& valeur)
-{
+
+QDataStream &Model::operator <<(QDataStream &out, const Model::Audio& valeur) {
     out << valeur.m_uID;
     out << valeur.m_default;
     out << valeur.m_delay;
@@ -234,8 +250,10 @@ QDataStream &Model::operator <<(QDataStream &out, const Model::Audio& valeur)
     }
     return out;
 }
-QDataStream &Model::operator <<(QDataStream &out, const Model::Audio* valeur)
-{
+
+QDataStream &Model::operator <<(QDataStream &out, const Model::Audio* valeur) {
     out << *valeur;
     return out;
 }
+
+

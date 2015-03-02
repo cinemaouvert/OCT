@@ -41,6 +41,9 @@ namespace Model
 
 namespace Model
 {
+    /**
+     * @brief The Database model class
+     */
 	class Database
     {
         private:
@@ -55,12 +58,12 @@ namespace Model
             QString m_depot;
 
             /**
-             * @brief create StringList from JSOn
+             * @brief create StringList from json.
              */
             static QStringList *createStruct(QByteArray movieStruct);
 
             /**
-             * @brief create Map from json
+             * @brief create Map from json.
              */
             QMap<QString, QString> *createMovie(QByteArray movieStruct);
     public:
@@ -96,7 +99,16 @@ namespace Model
              */
             int sendRequest(QByteArray jsonString);
 
+            /**
+             * @brief Accessor on the member depot.
+             * @return The depot member.
+             */
             QString depot() const;
+
+            /**
+             * @brief Accessor on the member userKey.
+             * @return The userKey member.
+             */
             QString userKey() const;
 
             /**

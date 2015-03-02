@@ -45,7 +45,9 @@ namespace Model
 
 namespace Model
 {
-
+    /**
+     * @brief The Attachment model class
+     */
     class Attachment
     {
         private:
@@ -86,8 +88,16 @@ namespace Model
              * @brief Destructor.
              */
             virtual ~Attachment();
+
+            /**
+             * @brief Accessor on the filepath member.
+             * @return The filepath member.
+             */
             QString filepath() const;
 
+            /**
+             * @brief Initialize meta type data.
+             */
             static void initMetaType();
     };
 

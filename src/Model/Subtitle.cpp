@@ -34,13 +34,16 @@ using namespace std;
 #include <QDebug>
 
 QMap<QString, Model::Parameter *> Model::Subtitle::m_staticParameters;
-Model::Subtitle::Subtitle(){
+
+// ========================================================================== //
+// == Constructors ========================================================== //
+// ========================================================================== //
+Model::Subtitle::Subtitle() {
     this->m_parameters = new QMap<QString,Parameter*>();
     this->m_default = false;
 }
 
-Model::Subtitle::Subtitle(QDomNode stream, int uid)
-{
+Model::Subtitle::Subtitle(QDomNode stream, int uid) {
     QDomNamedNodeMap tab = stream.attributes();
     //-----------------------CODEC-NAME------------------------//
     QDomNode nodeCodecName = tab.namedItem(Model::Stream::CODEC_NAME);
@@ -106,6 +109,9 @@ Model::Subtitle::Subtitle(QString uid) {
 
 }
 
+// ========================================================================== //
+// == Copy constructor ====================================================== //
+// ========================================================================== //
 Model::Subtitle::Subtitle(const Model::Subtitle& copy) {
     this->m_uID = copy.m_uID;
     this->m_default = copy.m_default;
@@ -120,8 +126,10 @@ Model::Subtitle::Subtitle(const Model::Subtitle& copy) {
 
 }
 
-Model::Subtitle &Model::Subtitle::operator=(const Model::Subtitle &o)
-{
+// ========================================================================== //
+// == Affectation operator ================================================== //
+// ========================================================================== //
+Model::Subtitle &Model::Subtitle::operator=(const Model::Subtitle &o) {
     if(this != &o){
         this->m_uID = o.m_uID;
         m_parameters = new QMap<QString,Parameter*>;
@@ -138,20 +146,30 @@ Model::Subtitle &Model::Subtitle::operator=(const Model::Subtitle &o)
     return *this;
 }
 
-Model::Subtitle::~Subtitle()
-{
+// ========================================================================== //
+// == Destructor ============================================================ //
+// ========================================================================== //
+Model::Subtitle::~Subtitle() {
     if (this->m_parameters != NULL)
         delete(this->m_parameters);
 }
 
-Model::Parameter *Model::Subtitle::getStaticParameter(QString key)
-{
+// ========================================================================== //
+// == Accessor and mutator methods ========================================== //
+// ========================================================================== //
+Model::Parameter *Model::Subtitle::getStaticParameter(QString key) {
     Parameter *param = new Parameter(*(Subtitle::m_staticParameters.value(key)));
     return param;
 }
 
-void Model::Subtitle::initStaticParameters()
-{
+int Model::Subtitle::getType() const {
+    return Stream::SUBTITLE;
+}
+
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
+void Model::Subtitle::initStaticParameters() {
     Parameter *codecNameParam = new Parameter("-scodec","This is the codec of the subtitle stream","%1");
     m_staticParameters.insert(Model::Stream::CODEC_NAME,codecNameParam);
 
@@ -163,23 +181,12 @@ void Model::Subtitle::initStaticParameters()
 
 }
 
-void Model::Subtitle::initMetaType()
-{
+void Model::Subtitle::initMetaType() {
     qRegisterMetaTypeStreamOperators<Model::Subtitle>("Model::Subtitle");
     qMetaTypeId<Model::Subtitle>();
 }
 
-int Model::Subtitle::getType() const
-{
-    return Stream::SUBTITLE;
-}
-
-
-
-
-
-QDataStream &Model::operator <<(QDataStream &out, const Model::Subtitle &valeur)
-{
+QDataStream &Model::operator <<(QDataStream &out, const Model::Subtitle &valeur) {
     out << valeur.m_uID;
     out << valeur.m_default;
     out << valeur.m_delay;
@@ -212,3 +219,5 @@ QDataStream &Model::operator >>(QDataStream &in, Model::Subtitle &valeur)
     }
     return in;
 }
+
+

@@ -62,31 +62,79 @@ const QString Model::Stream::VIDEO_H264_TUNE = "h264_tune";
 const QString Model::Stream::VIDEO_SCALE = "scale";
 const QString Model::Stream::EXTRA_CMD = "extraCmd";
 
-void Model::Stream::setParameter(QString name, Parameter *value) {
-    this->m_parameters->insert(name,value);
+// ========================================================================== //
+// == Destructor ============================================================ //
+// ========================================================================== //
+Model::Stream::~Stream() {
+    if (this->m_parameters != NULL)
+        delete(this->m_parameters);
 }
 
+// ========================================================================== //
+// == Accessor and mutator methods ========================================== //
+// ========================================================================== //
 QString Model::Stream::getUID() {
     return this->m_uID;
 }
 
-QMap<QString, Model::Parameter *> *Model::Stream::getParameters() const
-{
+QMap<QString, Model::Parameter *> *Model::Stream::getParameters() const {
     return this->m_parameters;
 }
 
+void Model::Stream::setParameter(QString name, Parameter *value) {
+    this->m_parameters->insert(name,value);
+}
 
-QStringList *Model::Stream::getCommand()
-{
+bool Model::Stream::isDefault() const {
+    return m_default;
+}
+
+void Model::Stream::setDefault(bool d) {
+    m_default = d;
+}
+
+QString Model::Stream::name() const {
+    return m_name;
+}
+
+void Model::Stream::setName(const QString &name) {
+    m_name = name;
+}
+
+QString Model::Stream::delay() const {
+    return m_delay;
+}
+
+void Model::Stream::setDelay(QString delay) {
+    m_delay = delay;
+}
+
+int Model::Stream::getEnumValue(QString type) {
+    if(type == "video") {
+       return 0;
+    } else if(type == "audio") {
+       return 1;
+    } else if(type == "subtitle") {
+       return 2;
+    } else {
+       return 3;
+    }
+}
+
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
+
+QStringList *Model::Stream::getCommand() {
     QStringList *myStringList = new QStringList();
 
-    for(int i = 0; i < this->m_parameters->size();i++){
+    for(int i = 0; i < this->m_parameters->size();i++) {
        Parameter *param = this->m_parameters->values().at(i);
        QString value = param->value();
-       if(value == "aac"){
+       if(value == "aac") {
            value.append(" -strict experimental");
        }
-       while(param->noSpaceForNext() && i < m_parameters->size()-1){
+       while(param->noSpaceForNext() && i < m_parameters->size()-1) {
            if(i < this->m_parameters->size()-1 ){
                 i++;
                 param = this->m_parameters->values().at(i);
@@ -94,15 +142,15 @@ QStringList *Model::Stream::getCommand()
            }
        }
        QString command = param->command();
-       if(command.contains("%")){
+       if(command.contains("%")) {
             command = command.arg(this->getUID());
        }
        if(command != "" && value != "")
          *myStringList << command.split(" ") << value.split(" ") ;
        else if(command == "" && value != "")
          *myStringList << value.split(" ") ;
-       else if(value == "" && command != ""){
-           if(command != "-filter:v"){
+       else if(value == "" && command != "") {
+           if(command != "-filter:v") {
                 *myStringList << command.split(" ") ;
            }
        }
@@ -111,30 +159,8 @@ QStringList *Model::Stream::getCommand()
     return myStringList;
 }
 
-
-bool Model::Stream::isDefault() const
-{
-    return m_default;
-}
-
-void Model::Stream::setDefault(bool d)
-{
-    m_default = d;
-}
-
-QString Model::Stream::name() const
-{
-    return m_name;
-}
-
-void Model::Stream::setName(const QString &name)
-{
-    m_name = name;
-}
-
-bool Model::Stream::operator==(const Model::Stream &s)
-{
-    if(s.getType() == getType()){
+bool Model::Stream::operator==(const Model::Stream &s) {
+    if(s.getType() == getType()) {
         bool retVal = true;
         retVal = retVal && (s.name() == name());
         foreach (QString key, getParameters()->keys()) {
@@ -149,36 +175,6 @@ bool Model::Stream::operator==(const Model::Stream &s)
         return retVal;
     }
     return false;
-
 }
-
-QString Model::Stream::delay() const
-{
-    return m_delay;
-}
-
-void Model::Stream::setDelay(QString delay)
-{
-    m_delay = delay;
-}
-Model::Stream::~Stream()
-{
-    if (this->m_parameters != NULL)
-        delete(this->m_parameters);
-}
-
-int Model::Stream::getEnumValue(QString type)
-{
-    if(type == "video"){
-       return 0;
-    }else if(type == "audio"){
-       return 1;
-    }else if(type == "subtitle"){
-       return 2;
-    }else{
-       return 3;
-    }
-}
-
 
 

@@ -8,10 +8,10 @@
 #include "Project.h"
 #include "Serializable.h"
 
-
-
-void Model::Serializable::initMetaTypes()
-{
+// ========================================================================== //
+// == Class method ========================================================== //
+// ========================================================================== //
+void Model::Serializable::initMetaTypes() {
     Model::Attachment::initMetaType();
     Model::Audio::initMetaType();
     Model::Parameter::initMetaType();

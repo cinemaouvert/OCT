@@ -148,7 +148,6 @@ namespace Model
              */
             void addFileToList(Model::File *file);
 
-
             /**
              * @brief Accessor on the information list member.
              * @return The information list member pointer value.
@@ -215,7 +214,12 @@ namespace Model
              */
             void setTorrentSoftwarePath(const QString &torrentSoftwarePath);
 
+            /**
+             * @brief This method generate an XML to save informations within.
+             * @return The formatted XML under a QString.
+             */
             QString generateInformationToXML();
+
             /**
              * @brief getMergeCommandLine generate the command line
              * @return the arguments of the command line
@@ -239,8 +243,9 @@ namespace Model
              * @return The number of subtitle stream.
              */
             int nbSub() const;
+
             /**
-             * @brief remove information to the current project.
+             * @brief Remove information to the current project.
              * @param key
              */
             void removeInformations(QString key);
@@ -254,6 +259,9 @@ namespace Model
             void setCapture(const QString &capture);
             QString affiche() const;
             void setAffiche(const QString &affiche);
+
+            void load();
+            void save();
     };
     QDataStream & operator <<(QDataStream  &out, const Model::Project  &valeur);
     QDataStream & operator >>(QDataStream  &in, Model::Project &valeur);

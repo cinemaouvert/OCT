@@ -45,10 +45,15 @@ namespace Model
 
 namespace Model
 {
+    /**
+     * @brief The Audio model class.
+     */
 	class Audio: public Model::Stream
     {
-
         private:
+            /**
+             * @brief Paramètres static associés à l'audio.
+             */
             static QMap<QString, Parameter *> m_staticParameters;
 
             friend QDataStream & operator <<(QDataStream  &out, const Audio  &valeur);
@@ -64,13 +69,13 @@ namespace Model
             /**
              * @brief Constructor.
              * @param stream Associated stream.
-             * @param uid
+             * @param uid Associated UID.
              */
             Audio(QDomNode stream, int uid);
 
             /**
              * @brief Constructor.
-             * @param UID
+             * @param UID Associated UID.
              */
             Audio(QString UID);
 
@@ -92,12 +97,27 @@ namespace Model
              */
             virtual ~Audio();
 
-
+            /**
+             * @brief This method return the static audio parameters corresponding to a given key.
+             * @param key Key to discriminate parameters.
+             * @return The audio parameter.
+             */
             static Parameter *getStaticParameter(QString key);
+
+            /**
+             * @brief This method initialize static audio parameters.
+             */
             static void initStaticParameters();
 
+            /**
+             * @brief This method initialize meta data type.
+             */
             static void initMetaType();
 
+            /**
+             * @brief This method return the type of the current stream (Audio here)
+             * @return Audio type.
+             */
             int getType() const;
 
 	};
@@ -107,5 +127,6 @@ namespace Model
 }
 Q_DECLARE_METATYPE(Model::Audio)
 
-
 #endif
+
+

@@ -36,15 +36,9 @@ using namespace std;
 
 #include "Subtitle.h"
 
-
-
-
-
-QList<Model::StreamWrapper *> *Model::File::getDatas() const
-{
-    return m_datas;
-}
-
+// ========================================================================== //
+// == Constructors ========================================================== //
+// ========================================================================== //
 Model::File::File() : m_datas(NULL) {
     m_datas = new QList<StreamWrapper*>();
 }
@@ -117,6 +111,9 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
     }
 }
 
+// ========================================================================== //
+// == Copy constructor ====================================================== //
+// ========================================================================== //
 Model::File::File(const File& f) {
     m_name = f.m_name;
     m_filePath = f.m_filePath;
@@ -129,6 +126,9 @@ Model::File::File(const File& f) {
     }
 }
 
+// ========================================================================== //
+// == Affectation operator ================================================== //
+// ========================================================================== //
 Model::File& Model::File::operator=(const File& f) {
     if ( this != &f ) {
         m_name = f.m_name;
@@ -139,17 +139,44 @@ Model::File& Model::File::operator=(const File& f) {
     return *this;
 }
 
+// ========================================================================== //
+// == Destructor ============================================================ //
+// ========================================================================== //
 Model::File::~File() {
     if(this->m_datas != NULL)
         delete this->m_datas;
+}
+
+// ========================================================================== //
+// == Accessor and mutator methods ========================================== //
+// ========================================================================== //
+QList<Model::StreamWrapper *> *Model::File::getDatas() const {
+    return m_datas;
 }
 
 QList<Model::StreamWrapper*>* Model::File::getStreamWrappers() {
     return m_datas;
 }
 
-QStringList *Model::File::getCommandLine()
-{
+QString Model::File::getName() {
+    return this->m_name;
+}
+
+QString Model::File::getOriginalFilePath(){
+    return this->m_filePath;
+}
+
+QString Model::File::getFilePath() {
+    if(hasToBeTranscoded()){
+       return this->m_outFilePath;
+    }
+    return this->m_filePath;
+}
+
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
+QStringList *Model::File::getCommandLine() {
     QStringList *stringList;
     stringList = new QStringList();
     *stringList << "-i" << this->m_filePath;
@@ -177,29 +204,12 @@ QStringList *Model::File::getCommandLine()
     return stringList;
 }
 
-QString Model::File::getName() {
-    return this->m_name;
-}
-
-QString Model::File::getOriginalFilePath(){
-    return this->m_filePath;
-}
-
-void Model::File::initMetaType()
-{
+void Model::File::initMetaType() {
     qRegisterMetaTypeStreamOperators<Model::File>("Model::File");
     qMetaTypeId<Model::File>();
 }
 
-QString Model::File::getFilePath()
-{
-    if(hasToBeTranscoded()){
-       return this->m_outFilePath;
-    }
-    return this->m_filePath;
-}
-
-bool Model::File::hasToBeTranscoded(){
+bool Model::File::hasToBeTranscoded() {
     foreach (StreamWrapper *data, *getStreamWrappers()) {
         if(data->hasToBeTranscoded()){
             return true;
@@ -208,13 +218,7 @@ bool Model::File::hasToBeTranscoded(){
     return false;
 }
 
-
-
-
-
-
-QDataStream &Model::operator <<(QDataStream &out, const Model::File &valeur)
-{
+QDataStream &Model::operator <<(QDataStream &out, const Model::File &valeur) {
     out << valeur.m_name;
     out << valeur.m_filePath;
     out << valeur.m_outFilePath;
@@ -225,9 +229,7 @@ QDataStream &Model::operator <<(QDataStream &out, const Model::File &valeur)
     return out;
 }
 
-
-QDataStream &Model::operator >>(QDataStream &in, Model::File &valeur)
-{
+QDataStream &Model::operator >>(QDataStream &in, Model::File &valeur) {
     in >> valeur.m_name;
     in >> valeur.m_filePath;
     in >> valeur.m_outFilePath;

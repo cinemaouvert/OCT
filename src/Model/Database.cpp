@@ -44,27 +44,25 @@ using namespace std;
 
 #include "src/configOCT.h"
 
-
-QString Model::Database::depot() const
-{
-    return m_depot;
-}
-
-QString Model::Database::userKey() const
-{
-    return m_userKey;
-}
-
+// ========================================================================== //
+// == Constructor =========================================================== //
+// ========================================================================== //
 Model::Database::Database(QString userKey, QString depot) {
     this->m_userKey = userKey;
     this->m_depot = depot;
 }
 
+// ========================================================================== //
+// == Copy constructor ====================================================== //
+// ========================================================================== //
 Model::Database::Database(const Database& db) {
     m_userKey = db.m_userKey;
     m_depot = db.m_depot;
 }
 
+// ========================================================================== //
+// == Affectation operator ================================================== //
+// ========================================================================== //
 Model::Database& Model::Database::operator=(const Database& db) {
     if ( this != &db ) {
         m_userKey = db.m_userKey;
@@ -73,8 +71,25 @@ Model::Database& Model::Database::operator=(const Database& db) {
     return *this;
 }
 
+// ========================================================================== //
+// == Destructor ============================================================ //
+// ========================================================================== //
 Model::Database::~Database() {}
 
+// ========================================================================== //
+// == Accessor and mutator methods ========================================== //
+// ========================================================================== //
+QString Model::Database::depot() const {
+    return m_depot;
+}
+
+QString Model::Database::userKey() const {
+    return m_userKey;
+}
+
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
 int Model::Database::sendRequest(QByteArray jsonString) {
     QByteArray postDataSize = QByteArray::number(jsonString.size());
 

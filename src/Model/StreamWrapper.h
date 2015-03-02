@@ -45,6 +45,9 @@ namespace Model
 
 namespace Model
 {
+    /**
+     * @brief The StreamWrapper model class
+     */
     class StreamWrapper
     {
         private :
@@ -69,7 +72,7 @@ namespace Model
 
             /**
              * @brief Copy constructor.
-             * @param d
+             * @param d StreamWrapper to copy.
              */
             StreamWrapper(StreamWrapper const& d);
 
@@ -87,7 +90,7 @@ namespace Model
 
             /**
              * @brief Define if the current Data has to be transcoded.
-             * @return 1 if yes, 0 if no.
+             * @return True if yes, False if no.
              */
             bool hasToBeTranscoded() const;
 

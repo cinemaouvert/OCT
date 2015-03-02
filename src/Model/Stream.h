@@ -45,24 +45,25 @@ namespace Model
 	// class Serializable;
 	class Stream;
     class Parameter;
-
-
 }
 
 namespace Model
 {
+    /**
+     * @brief The Stream model class.
+     */
     class Stream
 	{
 
         protected:
 
             /**
-             * @brief m_uID
+             * @brief Represent the associated UID of the stream.
              */
             QString m_uID;
 
             /**
-             * @brief m_name
+             * @brief The name of the current stream.
              */
             QString m_name;
 
@@ -72,9 +73,10 @@ namespace Model
             bool m_default;
 
             /**
-             * @brief m_default
+             * @brief The stream delay.
              */
             QString m_delay;
+
             /**
              * @brief List of parameter associated with the stream.
              */
@@ -94,8 +96,8 @@ namespace Model
             virtual void setParameter(QString name, Parameter *value);
 
             /**
-             * @brief Accessor for the uID member.
-             * @return The uID member value.
+             * @brief Accessor for the UID member.
+             * @return The UID member value.
              */
             virtual QString getUID();
 
@@ -111,19 +113,51 @@ namespace Model
              */
             virtual QStringList *getCommand();
 
-
+            /**
+             * @brief The fileType enumeration.
+             */
             enum fileType{
                 VIDEO = 0,
                 AUDIO = 1,
                 SUBTITLE = 2,
                 ATTACHMENT = 3
             };
+
+            /**
+             * @brief Accessor on the enum value of the given type.
+             * @param type The type to get the corresponding value.
+             * @return The associated value.
+             */
             static int getEnumValue(QString type);
+
+            /**
+             * @brief Accessor on the default boolean member.
+             * @return The default member.
+             */
             virtual bool isDefault() const;
+
+            /**
+             * @brief Mutator on the default boolean member.
+             * @param d The value to replace default member.
+             */
             virtual void setDefault(bool d);
 
+            /**
+             * @brief Accessor on the type of the instanciated stream.
+             * @return The type of the current stream.
+             */
             virtual int getType() const =0;
+
+            /**
+             * @brief Accessor on the name member.
+             * @return The name member.
+             */
             QString name() const;
+
+            /**
+             * @brief Mutator on the name member.
+             * @param name The value to replace the name member.
+             */
             void setName(const QString &name);
 			
 			static const QString CODEC_NAME;
@@ -149,10 +183,23 @@ namespace Model
             static const QString VIDEO_SCALE;
             static const QString EXTRA_CMD;
 
-
+            /**
+             * @brief Equals operator override.
+             * @param s The stream to be compared to the current stream.
+             * @return True if both stream are equals, False otherwise.
+             */
             bool operator==(const Stream& s);
 
+            /**
+             * @brief Accessor on the delay member.
+             * @return The delay member.
+             */
             QString delay() const;
+
+            /**
+             * @brief Mutator on the delay member.
+             * @param delay The delay value to replace the current member.
+             */
             void setDelay(QString delay);
     };
 

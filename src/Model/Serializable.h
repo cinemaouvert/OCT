@@ -41,9 +41,15 @@
 
 
 namespace Model{
+    /**
+     * @brief The Serializable model class.
+     */
     class Serializable
     {
         public:
+            /**
+             * @brief This method initialize the serialization meta type.
+             */
             static void initMetaTypes();
     };
 }

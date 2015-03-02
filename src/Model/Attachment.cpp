@@ -29,12 +29,20 @@
 #include <exception>
 #include "src/Model/Attachment.h"
 
-
-
+// ========================================================================== //
+// == Constructor and destructor ============================================ //
+// ========================================================================== //
 Model::Attachment::Attachment() {
     m_filepath = "";
 }
 
+Model::Attachment::~Attachment() {
+    m_filepath = "";
+}
+
+// ========================================================================== //
+// == Accessor and mutator methods ========================================== //
+// ========================================================================== //
 Model::Attachment::Attachment(QString filepath) {
     m_filepath = filepath;
 }
@@ -50,29 +58,24 @@ Model::Attachment& Model::Attachment::operator=(const Attachment& a) {
     return *this;
 }
 
-Model::Attachment::~Attachment() {
-    m_filepath = "";
-}
-
 QString Model::Attachment::filepath() const {
     return this->m_filepath;
 }
 
-//============================================================================//
-//== Serialization ===========================================================//
-//============================================================================//
+// ========================================================================== //
+// == Serialization ========================================================= //
+// ========================================================================== //
 void Model::Attachment::initMetaType() {
     qRegisterMetaTypeStreamOperators<Model::Attachment>("Model::Attachment");
     qMetaTypeId<Model::Attachment>();
 }
 
-QDataStream &Model::operator >>(QDataStream &in, Model::Attachment &valeur)
-{
+QDataStream &Model::operator >>(QDataStream &in, Model::Attachment &valeur) {
     in >> valeur.m_filepath;
     return in;
 }
-QDataStream &Model::operator <<(QDataStream &out, const Model::Attachment& valeur)
-{
+
+QDataStream &Model::operator <<(QDataStream &out, const Model::Attachment& valeur) {
     out << valeur.m_filepath;
     return out;
 }

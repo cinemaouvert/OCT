@@ -45,6 +45,9 @@ namespace Model
 
 namespace Model
 {
+    /**
+     * @brief The Subtitle model class.
+     */
 	class Subtitle: public Model::Stream
 	{
         private:
@@ -105,8 +108,15 @@ namespace Model
              */
             static void initStaticParameters();
 
+            /**
+             * @brief Initialize meta data type.
+             */
             static void initMetaType();
 
+            /**
+             * @brief Accessor on the type of the stream.
+             * @return Subtitle.
+             */
             int getType() const;
 	};
     QDataStream & operator <<(QDataStream  &out, const Model::Subtitle  &valeur);

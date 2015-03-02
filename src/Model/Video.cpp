@@ -38,14 +38,17 @@ using namespace std;
 
 
 QMap<QString, Model::Parameter *> Model::Video::m_staticParameters;
+
+// ========================================================================== //
+// == Constructors ========================================================== //
+// ========================================================================== //
 Model::Video::Video(){
     m_default = false;
     this->m_parameters = new QMap<QString,Parameter*>();
 
 }
 
-Model::Video::Video(QDomNode stream, int uid)
-{
+Model::Video::Video(QDomNode stream, int uid) {
     QDomNamedNodeMap tab = stream.attributes();
     //-----------------------CODEC-NAME------------------------//
     QDomNode nodeCodecName = tab.namedItem(Model::Stream::CODEC_NAME);
@@ -142,9 +145,7 @@ Model::Video::Video(QDomNode stream, int uid)
         Parameter *pBps = Video::getStaticParameter(Model::Stream::VIDEO_AVG_BIT_RATE);
         pBps->setValue(bps);
         this->setParameter(Model::Stream::VIDEO_AVG_BIT_RATE,pBps);
-
     }
-
 }
 
 Model::Video::Video(QString uid){
@@ -153,6 +154,9 @@ Model::Video::Video(QString uid){
     this->m_default = false;
 }
 
+// ========================================================================== //
+// == Copy constructor ====================================================== //
+// ========================================================================== //
 Model::Video::Video(const Model::Video & copy){
     this->m_uID = copy.m_uID;
     this->m_additionalCommand = QString(copy.m_additionalCommand);
@@ -166,8 +170,10 @@ Model::Video::Video(const Model::Video & copy){
      }
 }
 
-Model::Video &Model::Video::Video::operator=(const Model::Video &o)
-{
+// ========================================================================== //
+// == Affectation operator ================================================== //
+// ========================================================================== //
+Model::Video &Model::Video::Video::operator=(const Model::Video &o) {
     if(this != &o){
         this->m_uID = o.m_uID;
         this->m_default = o.m_default;
@@ -182,24 +188,30 @@ Model::Video &Model::Video::Video::operator=(const Model::Video &o)
     return *this;
 }
 
-
-Model::Video::~Video()
-{
+// ========================================================================== //
+// == Destructor ============================================================ //
+// ========================================================================== //
+Model::Video::~Video() {
     if (this->m_parameters != NULL)
         delete(this->m_parameters);
 }
 
-
-
-Model::Parameter *Model::Video::getStaticParameter(QString key)
-{
-
+// ========================================================================== //
+// == Accessor and mutator methods ========================================== //
+// ========================================================================== //
+Model::Parameter *Model::Video::getStaticParameter(QString key) {
     Parameter *param = new Parameter(*(Video::m_staticParameters.value(key)));
     return param;
 }
 
-void Model::Video::initStaticParameters()
-{
+int Model::Video::getType() const {
+    return Stream::VIDEO;
+}
+
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
+void Model::Video::initStaticParameters() {
     Parameter *codecNameParam = new Parameter("-vcodec","This is the codec of the video stream","%1");
     m_staticParameters.insert(Model::Stream::CODEC_NAME,codecNameParam);
 
@@ -253,24 +265,14 @@ void Model::Video::initStaticParameters()
 
     Parameter *extraCmd= new Parameter("","Extra command from the user","%1");
     m_staticParameters.insert(Model::Stream::EXTRA_CMD,extraCmd);
-
-
 }
 
-void Model::Video::initMetaType()
-{
+void Model::Video::initMetaType() {
     qRegisterMetaTypeStreamOperators<Model::Video>("Model::Video");
     qMetaTypeId<Model::Video>();
 }
 
-int Model::Video::getType() const
-{
-    return Stream::VIDEO;
-}
-
-
-QDataStream &Model::operator <<(QDataStream &out, const Model::Video &valeur)
-{
+QDataStream &Model::operator <<(QDataStream &out, const Model::Video &valeur) {
     out << valeur.m_uID;
     out << valeur.m_default;
     out << valeur.m_delay;
@@ -286,8 +288,7 @@ QDataStream &Model::operator <<(QDataStream &out, const Model::Video &valeur)
 }
 
 
-QDataStream &Model::operator >>(QDataStream &in, Model::Video &valeur)
-{
+QDataStream &Model::operator >>(QDataStream &in, Model::Video &valeur) {
     in >> valeur.m_uID;
     in >> valeur.m_default;
     in >> valeur.m_delay;

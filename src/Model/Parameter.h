@@ -41,6 +41,9 @@ namespace Model
 
 namespace Model
 {
+    /**
+     * @brief The Parameter model class
+     */
     class Parameter
 	{
         private:
@@ -88,8 +91,8 @@ namespace Model
             Parameter(QString cmd,QString desc,QString val);
 
             /**
-             * @brief Constructor.
-             * @param
+             * @brief Copy constructor.
+             * @param Parameter to copy.
              */
             Parameter(const Parameter& copy);
 
@@ -147,6 +150,9 @@ namespace Model
              */
             bool noSpaceForNext();
 
+            /**
+             * @brief Initialize meta data type.
+             */
             static void initMetaType();
 
     };

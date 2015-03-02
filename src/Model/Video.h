@@ -115,8 +115,15 @@ namespace Model
              */
             static void initStaticParameters();
 
+            /**
+             * @brief Initialize meta data type.
+             */
             static void initMetaType();
 
+            /**
+             * @brief Accessor on the type of the stream.
+             * @return Video
+             */
             int getType() const;
 
 

@@ -41,6 +41,7 @@ using namespace std;
 #include "Audio.h"
 #include "Video.h"
 #include "qdebug.h"
+
 namespace Model
 {
 	class StreamWrapper;
@@ -72,7 +73,7 @@ namespace Model
             QString m_filePath;
 
             /**
-             * @brief The output path to the file.
+             * @brief The output path to the processed file.
              */
             QString m_outFilePath;
 
@@ -131,7 +132,6 @@ namespace Model
              */
             QStringList *getCommandLine();
 
-
             /**
              * @brief Accessor on the name member.
              * @return The name member value.
@@ -143,8 +143,23 @@ namespace Model
              * @return The filePath member value.
              */
             QString getFilePath();
+
+            /**
+             * @brief Accessor on the datas member.
+             * @return The datas member.
+             */
             QList<Model::StreamWrapper *> *getDatas() const;
+
+            /**
+             * @brief This method returns whether or not the file has to be transcoded.
+             * @return Whether or not the file has to be transcoded.
+             */
             bool hasToBeTranscoded();
+
+            /**
+             * @brief Accessor on the file path member.
+             * @return The file path member.
+             */
             QString getOriginalFilePath();
             static void initMetaType();
     };

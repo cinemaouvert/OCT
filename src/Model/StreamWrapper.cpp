@@ -38,34 +38,10 @@ using namespace std;
 #include "src/Model/Audio.h"
 #include "src/Model/Subtitle.h"
 
-Model::Stream *Model::StreamWrapper::newStream() const
-{
-    return m_newStream;
-}
-
-void Model::StreamWrapper::setNewStream(Model::Stream *newStream)
-{
-    m_newStream = newStream;
-}
-
-Model::Stream *Model::StreamWrapper::oldStream() const
-{
-    return m_oldStream;
-}
-
-void Model::StreamWrapper::setOldStream(Model::Stream *oldStream)
-{
-    m_oldStream = oldStream;
-}
-
-void Model::StreamWrapper::initMetaType()
-{
-    qRegisterMetaTypeStreamOperators<Model::StreamWrapper>("Model::StreamWrapper");
-    qMetaTypeId<Model::StreamWrapper>();
-}
-
-Model::StreamWrapper::StreamWrapper() : m_oldStream(NULL), m_newStream(NULL) {
-}
+// ========================================================================== //
+// == Constructors ========================================================== //
+// ========================================================================== //
+Model::StreamWrapper::StreamWrapper() : m_oldStream(NULL), m_newStream(NULL) {}
 
 //A tester
 Model::StreamWrapper::StreamWrapper(const StreamWrapper& d) {
@@ -102,6 +78,9 @@ Model::StreamWrapper::StreamWrapper(const StreamWrapper& d) {
     }
 }
 
+// ========================================================================== //
+// == Copy constructor ====================================================== //
+// ========================================================================== //
 Model::StreamWrapper& Model::StreamWrapper::operator=(const StreamWrapper& d) {
     if ( this != &d ) {
         m_oldStream = d.m_oldStream;
@@ -114,6 +93,9 @@ Model::StreamWrapper& Model::StreamWrapper::operator=(const StreamWrapper& d) {
     return *this;
 }
 
+// ========================================================================== //
+// == Destructor ============================================================ //
+// ========================================================================== //
 Model::StreamWrapper::~StreamWrapper() {
     if(this->m_newStream != NULL)
         delete this->m_newStream;
@@ -122,11 +104,45 @@ Model::StreamWrapper::~StreamWrapper() {
         delete this->m_oldStream;
 }
 
-bool Model::StreamWrapper::hasToBeTranscoded() const{
+// ========================================================================== //
+// == Accessor and mutator methods ========================================== //
+// ========================================================================== //
+Model::Stream *Model::StreamWrapper::newStream() const {
+    return m_newStream;
+}
+
+void Model::StreamWrapper::setNewStream(Model::Stream *newStream) {
+    m_newStream = newStream;
+}
+
+Model::Stream *Model::StreamWrapper::oldStream() const {
+    return m_oldStream;
+}
+
+void Model::StreamWrapper::setOldStream(Model::Stream *oldStream) {
+    m_oldStream = oldStream;
+}
+
+bool Model::StreamWrapper::hasToBeTranscoded() const {
     bool res = false;
     if(this->m_newStream != NULL)
         res = true;
     return res;
+}
+
+Model::Stream *Model::StreamWrapper::getRelevantStream() {
+    if(hasToBeTranscoded())
+        return this->m_newStream;
+    else
+        return this->m_oldStream;
+}
+
+// ========================================================================== //
+// == Class methods ========================================================= //
+// ========================================================================== //
+void Model::StreamWrapper::initMetaType() {
+    qRegisterMetaTypeStreamOperators<Model::StreamWrapper>("Model::StreamWrapper");
+    qMetaTypeId<Model::StreamWrapper>();
 }
 
 QStringList* Model::StreamWrapper::generateCommandLine() {
@@ -136,18 +152,7 @@ QStringList* Model::StreamWrapper::generateCommandLine() {
         return this->m_oldStream->getCommand();
 }
 
-Model::Stream *Model::StreamWrapper::getRelevantStream()
-{
-
-    if(hasToBeTranscoded())
-        return this->m_newStream;
-    else
-        return this->m_oldStream;
-
-}
-
-QDataStream &Model::operator <<(QDataStream &out, const Model::StreamWrapper &valeur)
-{
+QDataStream &Model::operator <<(QDataStream &out, const Model::StreamWrapper &valeur) {
     out << valeur.m_oldStream->getType();
     qDebug() << "WRITE Stream Type : "<< valeur.m_oldStream->getType();
 
@@ -193,8 +198,7 @@ QDataStream &Model::operator <<(QDataStream &out, const Model::StreamWrapper &va
 }
 
 
-QDataStream &Model::operator >>(QDataStream &in, Model::StreamWrapper &valeur)
-{
+QDataStream &Model::operator >>(QDataStream &in, Model::StreamWrapper &valeur) {
     int streamType;
     in >>streamType;
     Audio *a;
@@ -250,8 +254,6 @@ QDataStream &Model::operator >>(QDataStream &in, Model::StreamWrapper &valeur)
 
     return in;
 }
-
-
 
 
 
