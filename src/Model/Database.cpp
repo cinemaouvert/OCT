@@ -179,8 +179,9 @@ QMap<QString, QString>* Model::Database::getMovieByTitle(QString title) {
     if (reply->error() == QNetworkReply::NoError){
         statusCodeV = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
         QByteArray movieStruct = reply->readAll();
-
-        movieData = createMovie(movieStruct);
+        if(statusCodeV == 200){
+            movieData = createMovie(movieStruct);
+        }
     }
     reply->deleteLater();
 

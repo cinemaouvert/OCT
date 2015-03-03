@@ -37,7 +37,7 @@ using namespace std;
 // ========================================================================== //
 Controller::Updater::Updater(QObject *parent) :
     QObject(parent) {
-    this->link = configOCT::URL + configOCT::NAME + "/" + configOCT::LINK_UPDATE;
+    this->link = configOCT::URL + "update/" +configOCT::NAME + "/" + configOCT::LINK_UPDATE;
 }
 
 Controller::Updater::~Updater() {}
