@@ -43,11 +43,14 @@ using namespace std;
 // ========================================================================== //
 // == Constructors and destructor =========================================== //
 // ========================================================================== //
+
+
 Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileList(NULL) {
     this->m_attachments = new QList<Model::Attachment*>();
     this->m_informations =  new QMap<QString, QString>;
     this->m_fileList = new QList<Model::File*>();
     this->m_name = "";
+    this->m_sendInfo = false;
 }
 
 Model::Project::~Project() {
@@ -63,6 +66,7 @@ Model::Project::Project(const Model::Project &project) {
     m_name = project.m_name;
     m_xmlFilePath = project.m_xmlFilePath;
     m_createMagnet = project.m_createMagnet;
+    m_sendInfo = project.m_sendInfo;
 
     m_fileList = new QList<Model::File*>();
     for(int i = 0; i < project.m_fileList->size(); i++){
@@ -96,6 +100,7 @@ Model::Project &Model::Project::operator=(const Model::Project &project) {
         m_capture = project.m_capture;
         m_depot = project.m_depot;
         m_userKey = project.m_userKey;
+        m_sendInfo = project.m_sendInfo;
         //m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
         //m_attachments = new QList<Model::Attachment*>();
         //m_attachments = project.m_attachments;
@@ -438,6 +443,16 @@ QString Model::Project::affiche() const {
 
 void Model::Project::setAffiche(const QString &affiche) {
     m_affiche = affiche;
+}
+
+bool Model::Project::sendInfo() const
+{
+    return m_sendInfo;
+}
+
+void Model::Project::setSendInfo(bool sendInfo)
+{
+    m_sendInfo = sendInfo;
 }
 
 

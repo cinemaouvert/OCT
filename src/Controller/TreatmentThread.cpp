@@ -108,9 +108,11 @@ void Controller::TreatmentThread::startTreatment() {
             m_indexTreatment_j = 0;
             QString filepath = m_merger->createMKVFile(p);
             emit passedStep();
+            if(p->sendInfo()){
             //m_exporter = new Controller::Exporter(p->userKey(), p->depot());
             //m_exporter->createMagnetLink(p->name(), p->name());
             //m_exporter->sendInformationsToJSON(p, p->name());
+            }
             m_indexTreatment_i = i + 1; // Projet fini donc on passe au suivant si il y a pause
         }else{
            m_indexTreatment_i = i; //On reste au projet courant

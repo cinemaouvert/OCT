@@ -86,6 +86,8 @@ private slots:
 
     void on_pushButtonTorrentSoftware_clicked();
 
+    void on_checkBoxSendSheetToDB_clicked();
+
 private:
     Ui::EncodePane *ui;
     Controller::OCTDispatcher *m_dispatcher;

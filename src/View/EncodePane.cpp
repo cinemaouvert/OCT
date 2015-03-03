@@ -178,3 +178,9 @@ void EncodePane::on_pushButtonTorrentSoftware_clicked() {
         ui->labelTorrentSoftwarePath->setText( torrentSoftwarePath );
     }
 }
+
+void EncodePane::on_checkBoxSendSheetToDB_clicked()
+{
+    this->m_dispatcher->getCurrentProject()->setSendInfo(!this->m_dispatcher->getCurrentProject()->sendInfo());
+    qDebug() << QString::number(this->m_dispatcher->getCurrentProject()->sendInfo());
+}

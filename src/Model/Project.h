@@ -99,6 +99,7 @@ namespace Model
             QString m_depot;
             QString m_affiche;
             QString m_capture;
+            bool m_sendInfo;
 
         public:
             /**
@@ -262,6 +263,8 @@ namespace Model
 
             void load();
             void save();
+            bool sendInfo() const;
+            void setSendInfo(bool sendInfo);
     };
     QDataStream & operator <<(QDataStream  &out, const Model::Project  &valeur);
     QDataStream & operator >>(QDataStream  &in, Model::Project &valeur);
