@@ -304,10 +304,6 @@ void SubtitlePane::on_comboBox_Langage_activated(const QString &langage)
     emit subtitleChanged(m_file, m_stream, Model::Stream::LANGUAGE, m_languageMap.value(langage));
 }
 
-void SubtitlePane::on_comboBox_Format_activated(const QString &format)
-{
-    emit subtitleChanged(m_file, m_stream, Model::Stream::CODEC_NAME, m_formatMap.value(format));
-}
 
 void SubtitlePane::on_comboBox_Encode_activated(const QString &encode)
 {

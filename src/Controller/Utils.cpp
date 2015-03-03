@@ -52,7 +52,6 @@ QString Utils::convertFract(QString var) {
         if(denomi.toInt()==0)
             return nomi;
         else{
-            qDebug() << "ici! ";
             int fract =  nomi.toInt() / denomi.toInt();
             return QString::number(fract);
         }

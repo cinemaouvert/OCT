@@ -64,7 +64,7 @@ QString Controller::Transcoder::getInfo(QString filePath) {
 }
 
 QString Controller::Transcoder::transcode(QStringList *list) {
-    qDebug() << "DEBUG :" << *list;
+    qDebug() << ("Transcode command :") << *list;
 
     QString ffmpegProgram = m_settings->value("ffmpeg").toString();
     QProcess myProcessFFMPEG;
@@ -72,8 +72,8 @@ QString Controller::Transcoder::transcode(QStringList *list) {
     myProcessFFMPEG.start(ffmpegProgram, *list);
     myProcessFFMPEG.waitForFinished(-1);
     QString retour(myProcessFFMPEG.readAll());
-    qDebug() << "DEBUG :" << myProcessFFMPEG.readAllStandardError();
-    qDebug() << "DEBUG :" << myProcessFFMPEG.readAllStandardOutput();
+    qDebug() << ("ffmpeg output :") << myProcessFFMPEG.readAllStandardError();
+    qDebug() << ("ffmpeg output :") << myProcessFFMPEG.readAllStandardOutput();
     return retour;
 }
 

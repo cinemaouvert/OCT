@@ -44,8 +44,6 @@ private slots:
 
     void on_comboBox_Langage_activated(const QString &langage);
 
-    void on_comboBox_Format_activated(const QString &format);
-
     void on_comboBox_Encode_activated(const QString &encode);
 
     void on_videoVisualisationComboBox_currentIndexChanged(const QString &arg1);

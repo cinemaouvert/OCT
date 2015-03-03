@@ -73,7 +73,6 @@ Model::File::File(QString filePath, QString info) : m_datas(NULL) {
             int cpta = 0;
             int cpts = 0;
             for (int i=0;i<streams.count();i++){
-                qDebug() << "//-----------------------STREAM------------------------//";
                 //-----------------------STREAM------------------------//
                 QDomNode stream = streams.item(i);
                 QDomNamedNodeMap tab = stream.attributes();
