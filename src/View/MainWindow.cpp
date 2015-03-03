@@ -264,5 +264,10 @@ void View::MainWindow::on_NewProject(){
 
 
 void View::MainWindow::infosFromBDD(QMap<QString, QString>* infos){
-    ui->tab_infos->generateStruct(infos);
+    if(infos != NULL){
+        ui->tab_infos->generateStruct(infos);
+        QMessageBox::information(this,tr("Informations pré-remplie"),tr("Les informations pour ce film ont été récupéré"));
+    }else{
+        QMessageBox::warning(this,tr("Récupération information impossible"),tr("Impossible de trouver des informations pour ce film"));
+    }
 }
