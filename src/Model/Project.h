@@ -65,6 +65,11 @@ namespace Model
             QString m_name;
 
             /**
+             * @brief Project save path
+             */
+            QString m_savePath;
+
+            /**
              * @brief Path to the XML file.
              */
             QString m_xmlFilePath;
@@ -244,6 +249,14 @@ namespace Model
              * @return The number of subtitle stream.
              */
             int nbSub() const;
+
+            /**
+             * @brief Accessor for the save path
+             * @return the save path
+             */
+            QString getSavePath();
+
+            void setSavePath(QString path);
 
             /**
              * @brief Remove information to the current project.

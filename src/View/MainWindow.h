@@ -65,6 +65,7 @@ namespace View
             void on_tabWidget_currentChanged(int index);
             void on_OpenSettings();
             void on_SaveProject();
+            void on_SaveProjectSous();
             void on_LoadProject();
             void on_NewProject();
             void on_UpdateVersion();

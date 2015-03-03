@@ -177,7 +177,7 @@ namespace Controller
             /**
              * @brief Save the current project.
              */
-            void save(QString path);
+            void save(QString path = "");
 
             /**
              * @brief Load a previously saved project.

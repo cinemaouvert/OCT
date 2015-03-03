@@ -343,6 +343,16 @@ int Model::Project::nbSub() const {
     return cpt;
 }
 
+QString Model::Project::getSavePath()
+{
+    return this->m_savePath;
+}
+
+void Model::Project::setSavePath(QString path)
+{
+    this->m_savePath = path;
+}
+
 QString Model::Project::depot() const {
     return m_depot;
 }

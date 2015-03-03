@@ -251,6 +251,10 @@ void Controller::OCTDispatcher::removeFile(QString filePath) {
 }
 
 void Controller::OCTDispatcher::save(QString path) {
+    if(path == "")
+        path = m_currentProject->getSavePath();
+    else
+        m_currentProject->setSavePath(path);
     QFile file(path);
     file.open(QIODevice::ReadWrite);
     QDataStream out(&file);
