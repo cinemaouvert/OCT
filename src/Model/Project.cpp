@@ -34,6 +34,8 @@ using namespace std;
 #include "src/Model/Project.h"
 #include "src/Model/Attachment.h"
 #include "Subtitle.h"
+#include "src/configOCT.h"
+
 #include <QXmlStreamWriter>
 #include <QFile>
 #include <QDir>
@@ -363,6 +365,7 @@ void Model::Project::initMetaType() {
 }
 
 QDataStream &Model::operator <<(QDataStream &out, const Model::Project &valeur) {
+    out << configOCT::VERSION;
     out << valeur.m_depot;
     out << valeur.m_createMagnet;
     out << valeur.m_name;
@@ -389,6 +392,8 @@ QDataStream &Model::operator <<(QDataStream &out, const Model::Project &valeur) 
 }
 
 QDataStream &Model::operator >>(QDataStream &in, Model::Project &valeur) {
+    int octVersion;
+    in >> octVersion;
     in >> valeur.m_depot;
     in >> valeur.m_createMagnet;
     in >> valeur.m_name;
@@ -423,6 +428,7 @@ QDataStream &Model::operator >>(QDataStream &in, Model::Project &valeur) {
         in >> value;
         valeur.m_informations->insert(key, value);
     }
+
     return in;
 }
 
