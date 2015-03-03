@@ -84,8 +84,6 @@ private slots:
     void on_pushButton_Cancel_clicked();
     void on_pushButton_Pause_clicked();
 
-    void on_pushButtonTorrentSoftware_clicked();
-
 private:
     Ui::EncodePane *ui;
     Controller::OCTDispatcher *m_dispatcher;

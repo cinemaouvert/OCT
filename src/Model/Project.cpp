@@ -296,7 +296,7 @@ QStringList *Model::Project::getMergeCommandLine() {
 
     *arguments <<"--attach-file"<< this->generateInformationToXML();
 
-    qDebug() << *arguments;
+    qDebug() << "Merge command : " << *arguments;
     return arguments;
 }
 
@@ -393,7 +393,6 @@ QDataStream &Model::operator >>(QDataStream &in, Model::Project &valeur) {
 
     int sizeAttachments;
     in >> sizeAttachments;
-    qDebug() << "Attachment size" << sizeAttachments;
 
     for(int i=0 ; i<sizeAttachments ; i++){
         Attachment *a = new Attachment;
@@ -403,7 +402,6 @@ QDataStream &Model::operator >>(QDataStream &in, Model::Project &valeur) {
 
     int sizeFiles;
     in >> sizeFiles;
-    qDebug() << "File size" << sizeFiles;
     for(int i=0 ; i<sizeFiles ; i++){
         File *f = new File;
         in >> *f;
@@ -412,7 +410,6 @@ QDataStream &Model::operator >>(QDataStream &in, Model::Project &valeur) {
 
     int sizeInformation;
     in >> sizeInformation;
-    qDebug() << "sizeInformation" << sizeInformation;
 
     for(int i = 0; i < sizeInformation ; i++){
         QString key;

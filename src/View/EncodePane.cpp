@@ -33,6 +33,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QMouseEvent>
+#include <QProcess>
 
 // ========================================================================== //
 // == CONSTRUCTORS AND DESTRUCTORS ========================================== //
@@ -170,11 +171,3 @@ void EncodePane::on_pushButton_Pause_clicked()
     }
 }
 
-void EncodePane::on_pushButtonTorrentSoftware_clicked() {
-    Model::Project * currentProject = m_dispatcher->getCurrentProject();
-    if( currentProject != NULL ) {
-        QString torrentSoftwarePath = QFileDialog::getOpenFileName(this,tr("Open"),"",tr("Executable (*.exe)"));
-        currentProject->setTorrentSoftwarePath( torrentSoftwarePath );
-        ui->labelTorrentSoftwarePath->setText( torrentSoftwarePath );
-    }
-}
