@@ -31,6 +31,7 @@ private slots:
 
     void on_mkTorrentButton_clicked();
 
+
 private:
     Ui::ParametersDialog *ui;
     QString getExecutablePath();

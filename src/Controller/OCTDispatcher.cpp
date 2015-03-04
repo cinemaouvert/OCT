@@ -52,8 +52,10 @@ using namespace std;
 #include <QProcess>
 #include <QDebug>
 #include <QFile>
+#include <QTranslator>
 //#include <QIODEVICE>
 #include <QMimeDatabase>
+#include <QApplication>
 
 #include <src/Model/Attachment.h>
 #include <src/Model/Audio.h>
@@ -108,6 +110,14 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
 
     //Creation of the view
 
+    QTranslator *translator = new QTranslator();
+    QString translationFile = "oct_";
+    translationFile += m_settings->value("language").toString();
+
+    if(translationFile != "oct_"){
+        translator->load(translationFile, qApp->applicationDirPath()+QDir::separator()+"languages");
+        qApp->installTranslator(translator);
+    }
 
     m_mainWindow = new View::MainWindow(0,this);
     m_mainWindow->show();

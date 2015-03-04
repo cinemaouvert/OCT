@@ -17,6 +17,8 @@ CONFIG += av
 TARGET = OCT_Project
 TEMPLATE = app
 
+TRANSLATIONS = oct_fr.ts
+
 SOURCES += src/main.cpp\
     src/Controller/Exporter.cpp \
     src/Controller/Merger.cpp \
