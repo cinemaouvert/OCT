@@ -558,10 +558,17 @@ void VideoPane::on_spinBot_valueChanged( const QString &arg ) {
 
 void VideoPane::on_timeStart_dateTimeChanged( const QDateTime &dateTime ) {
     emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_START_TIME, dateTime.toString("hh:mm:ss.z"));
+    on_timeStop_dateTimeChanged(ui->timeStop->dateTime());
 }
 
 void VideoPane::on_timeStop_dateTimeChanged( const QDateTime &dateTime ) {
-    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_STOP_POINT , dateTime.toString("hh:mm:ss.z"));
+    QDateTime final = dateTime;
+    final = final.addMSecs(-ui->timeStart->time().msec());
+    final = final.addSecs(-ui->timeStart->time().second());
+    final = final.addSecs(-(ui->timeStart->time().minute()*60));
+    final = final.addSecs(-(ui->timeStart->time().hour()*60*60));
+    qDebug() << final.toString("hh:mm:ss.z");
+    emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_STOP_POINT , final.toString("hh:mm:ss.z"));
 }
 
 QString VideoPane::getCropValue() {

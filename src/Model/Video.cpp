@@ -242,7 +242,7 @@ void Model::Video::initStaticParameters() {
     Parameter *startPoint= new Parameter("-ss","Start point of the video","%1");
     m_staticParameters.insert(Model::Stream::VIDEO_START_TIME,startPoint);
 
-    Parameter *endPoint= new Parameter("-ss","End point of the video","%1");
+    Parameter *endPoint= new Parameter("-t","duration of the video","%1");
     m_staticParameters.insert(Model::Stream::VIDEO_STOP_POINT,endPoint);
 
     Parameter *crop= new Parameter("-filter:v","Crop the video (w:h:x:y)","%1");
