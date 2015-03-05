@@ -134,7 +134,7 @@ void InformationPane::generateStruct(QMap<QString, QString>* infos){
         for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
 
             QString labelName = this->m_dispatcher->informationMovieStruct()->at(i);
-            if(labelName.compare("affiche") != 0){
+            if(labelName.compare("affiche") != 0 && labelName.compare("capture") != 0){
                 QString lineEditName = labelName;
 
                 QLabel *label = new QLabel(labelName.replace("_", " "));
