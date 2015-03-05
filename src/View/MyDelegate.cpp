@@ -17,12 +17,13 @@ void MyDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, co
     QStyleOptionViewItem myOption2 = option;
     myOption2.displayAlignment = Qt::AlignRight ;
     QRect rect(option.rect.width()-20,option.rect.top(),20,20);
+    QLine line(0,option.rect.top(),option.rect.width(),option.rect.top());
 
 
-     drawDecoration(painter, option, rect, iconPixmap);
+    drawDisplay(painter, myOption, myOption.rect, text);
+    drawDecoration(painter, option, rect, iconPixmap);
 
-        drawDisplay(painter, myOption, myOption.rect, text);
-        drawFocus(painter, myOption, myOption.rect);
+    drawFocus(painter, myOption, myOption.rect);
 
 
 }

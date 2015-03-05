@@ -309,6 +309,7 @@ namespace Controller
             static void customMessageHandler(QtMsgType type, const QMessageLogContext &context,const QString& msg);
 
             void getInformations(QString nameMovie);
+
     public slots:
             /**
              * @brief treatProjectNameChanged Slot queried when the project name has changed.
@@ -336,10 +337,22 @@ namespace Controller
             int checkInformationValidation();
 
             /**
+             * @brief checkCaptureValidation Check whether the communication pack is OCPM valid or not.
+             * @return Whether the communication pack is OCPM valid.
+             */
+            bool checkCommunicationValidation();
+
+            /**
              * @brief checkPosterValidation Check whether the poster is OCPM valid or not.
              * @return Whether the poster is OCPM valid.
              */
             bool checkPosterValidation();
+
+            /**
+             * @brief checkCaptureValidation Check whether the capture is OCPM valid or not.
+             * @return Whether the capture is OCPM valid.
+             */
+            bool checkCaptureValidation();
 
             /**
              * @brief parameterChanged Slot registering any interface's parameter modification.

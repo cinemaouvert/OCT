@@ -50,6 +50,7 @@ EncodePane::EncodePane(QWidget *parent) :
 
     ui->listViewExport->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->listViewExport->setFocusPolicy(Qt::NoFocus);
+    ui->listViewExport->setSelectionMode(QAbstractItemView::NoSelection);
 
     m_currentSteps = 0;
     m_pause = false;

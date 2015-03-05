@@ -262,7 +262,7 @@ void FilePane::refresh() {
 
     QStandardItem* item;
     //capture par défaut
-    if(true){
+    if(this->m_dispatcher->checkCaptureValidation()){
         item = new QStandardItem(i_ok,"capture par default");
     }
     else{
@@ -280,7 +280,7 @@ void FilePane::refresh() {
     sim->appendRow(item);
 
     //pack communication
-    if(true){
+    if(this->m_dispatcher->checkCommunicationValidation()){
         item = new QStandardItem(i_ok,tr("pack communication"));
     }
     else{

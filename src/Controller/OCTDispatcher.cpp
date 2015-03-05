@@ -384,7 +384,7 @@ bool Controller::OCTDispatcher::checkProjectValidation() {
             retVal = retVal && checkStreamValidation(streamW->getRelevantStream());
         }
     }
-    retVal = retVal && (checkInformationValidation() == 0) && checkPosterValidation();
+    retVal = retVal && (checkInformationValidation() == 0) && checkCommunicationValidation() ;
 
     m_mainWindow->setOCPMState(retVal);
     return retVal;
@@ -406,10 +406,17 @@ bool Controller::OCTDispatcher::checkStreamValidation(Model::Stream *stream) {
     return retVal;
 }
 
+
+
+
 int Controller::OCTDispatcher::checkInformationValidation() {
     if(!m_informationMovieStruct || !(this->getCurrentProject()->informations()))
         return -1;
     return m_informationMovieStruct->size() - this->getCurrentProject()->informations()->size();
+}
+
+bool Controller::OCTDispatcher::checkCommunicationValidation() {
+    return checkPosterValidation() && checkCaptureValidation();
 }
 
 bool Controller::OCTDispatcher::checkPosterValidation() {
@@ -417,6 +424,14 @@ bool Controller::OCTDispatcher::checkPosterValidation() {
         return false;
     } else {
         return this->getCurrentProject()->informations()->contains("affiche");
+    }
+}
+
+bool Controller::OCTDispatcher::checkCaptureValidation() {
+    if(this->getCurrentProject()->informations() == NULL) {
+        return false;
+    } else {
+        return this->getCurrentProject()->informations()->contains("capture");
     }
 }
 
