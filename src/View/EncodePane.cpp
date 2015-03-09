@@ -174,6 +174,22 @@ void EncodePane::on_pushButton_Pause_clicked()
 void EncodePane::on_checkBoxSendSheetToDB_clicked()
 {
     this->m_dispatcher->getCurrentProject()->setSendInfo(!this->m_dispatcher->getCurrentProject()->sendInfo());
-    qDebug() << QString::number(this->m_dispatcher->getCurrentProject()->sendInfo());
 }
 
+void EncodePane::on_radioButtonSHA1_clicked()
+{
+    m_dispatcher->getCurrentProject()->setMd5(false);
+    m_dispatcher->getCurrentProject()->setSha1(true);
+}
+
+void EncodePane::on_radioButtonMD5SUM_clicked()
+{
+    m_dispatcher->getCurrentProject()->setMd5(true);
+    m_dispatcher->getCurrentProject()->setSha1(false);
+}
+
+void EncodePane::on_radioButtonNoneFilePrint_clicked()
+{
+    m_dispatcher->getCurrentProject()->setMd5(false);
+    m_dispatcher->getCurrentProject()->setSha1(false);
+}

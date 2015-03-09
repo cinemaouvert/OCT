@@ -37,6 +37,7 @@ using namespace std;
 #include "src/Controller/OCTDispatcher.h"
 #include "src/Model/Project.h"
 #include "src/configOCT.h"
+#include "src/Controller/Utils.h"
 
 // ========================================================================== //
 // == Constructor =========================================================== //
@@ -106,13 +107,19 @@ void Controller::TreatmentThread::startTreatment() {
 
         if(m_indexTreatment_j == p->fileList()->size()-1){
             m_indexTreatment_j = 0;
-            QString filepath = m_merger->createMKVFile(p);
-            emit passedStep();
+            m_merger->createMKVFile(p);
+
+            m_exporter = new Controller::Exporter(p->userKey(), p->depot());
+            QString magnet = m_exporter->createMagnetLink(p->name(), p->name());
             if(p->sendInfo()){
-            //m_exporter = new Controller::Exporter(p->userKey(), p->depot());
-            //m_exporter->createMagnetLink(p->name(), p->name());
-            //m_exporter->sendInformationsToJSON(p, p->name());
+                if(p->getMd5())
+                    p->addInformations("md5", Utils::md5File(p->name()));
+                if(p->getSha1())
+                    p->addInformations("sha1", Utils::sha1File(p->name()));
+
+            //m_exporter->sendInformationsToJSON(p, magnet);
             }
+            emit passedStep();
             m_indexTreatment_i = i + 1; // Projet fini donc on passe au suivant si il y a pause
         }else{
            m_indexTreatment_i = i; //On reste au projet courant

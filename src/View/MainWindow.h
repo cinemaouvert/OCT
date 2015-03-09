@@ -69,6 +69,7 @@ namespace View
             void on_LoadProject();
             void on_NewProject();
             void on_UpdateVersion();
+            void on_viewTorrent();
     private:
             /**
              * @brief MainWindow.

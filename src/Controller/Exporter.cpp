@@ -29,6 +29,7 @@
 #include <exception>
 using namespace std;
 #include <QProcess>
+#include <QDir>
 
 #include "src/Controller/Exporter.h"
 #include "src/Controller/OCTDispatcher.h"
@@ -56,29 +57,41 @@ Controller::Exporter::~Exporter() {
 // ========================================================================== //
 QString Controller::Exporter::createMagnetLink(QString filepath, QString nomTorrent) {
     QStringList arguments;
-        arguments << "-jar" << "OCT.jar" <<createTorrentFile(filepath, nomTorrent);
+        arguments << "-jar" << "OCT.jar" <<createTorrentFile(filepath, filepath);
 
     QProcess myProcess;
     myProcess.start("java", arguments);
     myProcess.waitForFinished();
     QString retour(myProcess.readAllStandardOutput());
+    qDebug() << retour;
     return retour;
 }
 
 QString Controller::Exporter::createTorrentFile(QString filepath, QString nomTorrent) {
+    nomTorrent = nomTorrent.remove(".mkv");
     nomTorrent.append(".torrent");
+
+
+     //   arguments << "-v" << "-p" << "-a" << configOCT::ADDRESSTRACKER << "-o" << nomTorrent << filepath;
+
+    QStringList name = nomTorrent.split("/");
+    nomTorrent = name.at(name.size()-1);
+    nomTorrent = "torrent\\"+nomTorrent;
     QStringList arguments;
-        arguments << "-v" << "-p" << "-a" << configOCT::ADDRESSTRACKER << "-o" << nomTorrent << filepath;
+    arguments << "-v" << "-p" << "-a" << configOCT::ADDRESSTRACKER << "-o" << nomTorrent << filepath;
 
     QString program = "mktorrent";
     #if defined(Q_OS_WIN)
+
+
         program = "mktorrent.exe";
     #endif
 
     QProcess myProcess;
     myProcess.start(program, arguments);
     myProcess.waitForFinished();
-   // QString retour(myProcess.readAllStandardOutput());
+    QString retour(myProcess.readAllStandardOutput());
+    qDebug()<<retour;
     return nomTorrent;
 }
 

@@ -14,7 +14,7 @@ namespace configOCT {
     // c = number for the small changement
     const QString VERSION = "v0.0.1";
 
-    const QString ADDRESSTRACKER = "";
+    const QString ADDRESSTRACKER = "CinemaOuvert";
 
     //Avec un / à la fin du dépôt
     const QString DEPOTCOC = "http://localhost/CODB-Depot-master/";

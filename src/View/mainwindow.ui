@@ -334,7 +334,7 @@ border-radius:5px;</string>
      <x>0</x>
      <y>0</y>
      <width>974</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="nativeMenuBar">
@@ -373,9 +373,16 @@ border-radius:5px;</string>
     <addaction name="actionMise_jour"/>
     <addaction name="actionA_propos"/>
    </widget>
+   <widget class="QMenu" name="menuTorrents">
+    <property name="title">
+     <string>Torrents</string>
+    </property>
+    <addaction name="actionVoir_les_torrents"/>
+   </widget>
    <addaction name="menuFichiers"/>
    <addaction name="menuEditions"/>
    <addaction name="menuConfiguration"/>
+   <addaction name="menuTorrents"/>
    <addaction name="menuAide"/>
   </widget>
   <action name="actionNouveau_projet">
@@ -441,6 +448,11 @@ border-radius:5px;</string>
   <action name="actionA_propos">
    <property name="text">
     <string>A propos</string>
+   </property>
+  </action>
+  <action name="actionVoir_les_torrents">
+   <property name="text">
+    <string>Voir les torrents</string>
    </property>
   </action>
  </widget>

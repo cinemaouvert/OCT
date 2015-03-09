@@ -58,6 +58,15 @@ namespace Model
 
             friend QDataStream & operator >>(QDataStream  &in, Project  &valeur);
             friend QDataStream & operator <<(QDataStream  &out, const Project  &valeur);
+            /**
+             * @brief need md5 hash.
+             */
+            bool m_md5;
+
+            /**
+             * @brief need sha1 hash.
+             */
+            bool m_sha1;
 
             /**
              * @brief Project name.
@@ -278,6 +287,10 @@ namespace Model
             void save();
             bool sendInfo() const;
             void setSendInfo(bool sendInfo);
+            bool getSha1() const;
+            void setSha1(bool value);
+            bool getMd5() const;
+            void setMd5(bool value);
     };
     QDataStream & operator <<(QDataStream  &out, const Model::Project  &valeur);
     QDataStream & operator >>(QDataStream  &in, Model::Project &valeur);

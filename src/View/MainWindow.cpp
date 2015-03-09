@@ -14,6 +14,7 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QDesktopServices>
 
 View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispatcher) :
     QMainWindow(parent),
@@ -30,6 +31,7 @@ View::MainWindow::MainWindow(QWidget *parent,Controller::OCTDispatcher *theDispa
     connect(ui->actionSauvegarder_le_projet, SIGNAL(triggered()),SLOT(on_SaveProject()));
     connect(ui->actionSauvegarder_sous, SIGNAL(triggered()),SLOT(on_SaveProjectSous()));
     connect(ui->actionOuvrir_un_projet, SIGNAL(triggered()),SLOT(on_LoadProject()));
+    connect(ui->actionVoir_les_torrents, SIGNAL(triggered()),SLOT(on_viewTorrent()));
 
     ui->tab_encode->setDispatcher(m_dispatcher);
     ui->tab_infos->setDispatcher(m_dispatcher);
@@ -270,4 +272,8 @@ void View::MainWindow::infosFromBDD(QMap<QString, QString>* infos){
     }else{
         QMessageBox::warning(this,tr("Récupération information impossible"),tr("Impossible de trouver des informations pour ce film"));
     }
+}
+
+void View::MainWindow::on_viewTorrent(){
+    QDesktopServices::openUrl("file:///"+qApp->applicationDirPath()+ "/torrent");
 }

@@ -46,13 +46,14 @@ using namespace std;
 // == Constructors and destructor =========================================== //
 // ========================================================================== //
 
-
 Model::Project::Project() : m_attachments (NULL),m_informations(NULL), m_fileList(NULL) {
     this->m_attachments = new QList<Model::Attachment*>();
     this->m_informations =  new QMap<QString, QString>;
     this->m_fileList = new QList<Model::File*>();
     this->m_name = "";
     this->m_sendInfo = false;
+    this->m_md5 = false;
+    this->m_sha1 = false;
 }
 
 Model::Project::~Project() {
@@ -69,6 +70,8 @@ Model::Project::Project(const Model::Project &project) {
     m_xmlFilePath = project.m_xmlFilePath;
     m_createMagnet = project.m_createMagnet;
     m_sendInfo = project.m_sendInfo;
+    m_md5 = project.m_md5;
+    m_sha1 = project.m_sha1;
 
     m_fileList = new QList<Model::File*>();
     for(int i = 0; i < project.m_fileList->size(); i++){
@@ -103,6 +106,8 @@ Model::Project &Model::Project::operator=(const Model::Project &project) {
         m_depot = project.m_depot;
         m_userKey = project.m_userKey;
         m_sendInfo = project.m_sendInfo;
+        m_md5 = project.m_md5;
+        m_sha1 = project.m_sha1;
         //m_attachments = new QList<Model::Attachment*>(*project.m_attachments);
         //m_attachments = new QList<Model::Attachment*>();
         //m_attachments = project.m_attachments;
@@ -182,6 +187,26 @@ void Model::Project::setTorrentSoftwarePath(const QString &torrentSoftwarePath) 
     m_torrentSoftwarePath = torrentSoftwarePath;
 }
 
+bool Model::Project::getSha1() const
+{
+    return m_sha1;
+}
+
+void Model::Project::setSha1(bool value)
+{
+    m_sha1 = value;
+}
+
+bool Model::Project::getMd5() const
+{
+    return m_md5;
+}
+
+void Model::Project::setMd5(bool value)
+{
+    m_md5 = value;
+}
+
 // ========================================================================== //
 // == Class methods ========================================================= //
 // ========================================================================== //
@@ -243,7 +268,7 @@ void Model::Project::removeFile(QString filePath) {
 
 QString Model::Project::generateInformationToXML() {
     if(m_informations != NULL){
-        this->m_xmlFilePath = qApp->applicationDirPath() + QDir::separator() + "infos.xml";
+        this->m_xmlFilePath = QDir::toNativeSeparators(qApp->applicationDirPath() + "\\infos\\" + "infos.xml");
         QFile file(this->m_xmlFilePath);
         if (!file.open(QIODevice::WriteOnly)){
             return "";

@@ -86,6 +86,12 @@ private slots:
 
     void on_checkBoxSendSheetToDB_clicked();
 
+    void on_radioButtonSHA1_clicked();
+
+    void on_radioButtonMD5SUM_clicked();
+
+    void on_radioButtonNoneFilePrint_clicked();
+
 private:
     Ui::EncodePane *ui;
     Controller::OCTDispatcher *m_dispatcher;

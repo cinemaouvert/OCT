@@ -344,9 +344,12 @@ void Controller::OCTDispatcher::initSetting(const QString &key, const QVariant &
 }
 
 void Controller::OCTDispatcher::initSettings() {
-    initSetting("ffmpeg","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffmpeg.exe");
-    initSetting("ffprobe","E:\\M2\\Projet\\Dependances\\ffmpeg-20141020-git-b5583fc-win64-static\\bin\\ffprobe.exe");
-    initSetting("mkvToolnix","E:\\M2\\Projet\\Dependances\\mkvtoolnix\\mkvinfo.exe");
+    #if defined(Q_OS_WIN)
+        initSetting("ffmpeg",qApp->applicationDirPath() +"/ffmpeg-20150129-git-4155f2d-win64-static/bin/ffmpeg.exe");
+        initSetting("ffprobe",qApp->applicationDirPath() +"/ffmpeg-20150129-git-4155f2d-win64-static/bin/ffprobe.exe");
+        initSetting("mkvToolnix",qApp->applicationDirPath() +"/mkvtoolnix/mkvinfo.exe");
+    #endif
+
 }
 
 void Controller::OCTDispatcher::setCurrentProjectIndex(int index) {
