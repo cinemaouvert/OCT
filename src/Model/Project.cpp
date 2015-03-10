@@ -72,6 +72,8 @@ Model::Project::Project(const Model::Project &project) {
     m_sendInfo = project.m_sendInfo;
     m_md5 = project.m_md5;
     m_sha1 = project.m_sha1;
+    m_affiche = project.m_affiche;
+    m_capture = project.m_capture;
 
     m_fileList = new QList<Model::File*>();
     for(int i = 0; i < project.m_fileList->size(); i++){
@@ -314,19 +316,25 @@ QStringList *Model::Project::getMergeCommandLine() {
         }
         *arguments <<f->getFilePath();
     }
-    QFile::copy(this->m_affiche,"affiche.png");
-    QFile::copy(this->m_capture,"capture.png");
+
+    qDebug() << " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "<<this->m_affiche;
+    if(this->m_affiche != "")
+        QFile::copy(this->m_affiche,"affiche.png");
+    if(this->m_capture != "")
+        QFile::copy(this->m_capture,"capture.png");
 
     foreach (Model::Attachment *a, *(attachments())){
         if(a->filepath().compare(this->m_affiche) == 0){
             *arguments << "--attach-file" << "affiche.png";
         }else if(a->filepath().compare(this->m_capture) == 0){
             *arguments << "--attach-file" << "capture.png";
-       }else
+        }else
             *arguments << "--attach-file" << a->filepath();
     }
 
-    *arguments <<"--attach-file"<< this->generateInformationToXML();
+    QString xmlPath = this->generateInformationToXML();
+    if(xmlPath != "")
+        *arguments <<"--attach-file"<< xmlPath;
 
     qDebug() << "Merge command : " << *arguments;
     return arguments;
@@ -407,6 +415,8 @@ QDataStream &Model::operator <<(QDataStream &out, const Model::Project &valeur) 
     out << valeur.m_torrentSoftwarePath;
     out << valeur.m_userKey;
     out << valeur.m_xmlFilePath;
+    out << valeur.m_affiche;
+    out << valeur.m_capture;
 
     out << valeur.m_attachments->size();
     foreach (Attachment *a, *(valeur.m_attachments)) {
@@ -435,6 +445,8 @@ QDataStream &Model::operator >>(QDataStream &in, Model::Project &valeur) {
     in >> valeur.m_torrentSoftwarePath;
     in >> valeur.m_userKey;
     in >> valeur.m_xmlFilePath;
+    in >> valeur.m_affiche;
+    in >> valeur.m_capture;
 
     int sizeAttachments;
     in >> sizeAttachments;

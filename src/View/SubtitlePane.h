@@ -2,6 +2,8 @@
 #define SUBTITLEPANE_H
 
 #include <AVPlayer.h>
+#include <QtAV/private/PlayerSubtitle.h>
+#include <QtAV/Subtitle.h>
 #include <QStandardItemModel>
 #include <QStringListModel>
 #include <QWidget>
@@ -54,6 +56,7 @@ private:
     Model::Stream *m_stream;
     QtAV::AVPlayer *m_player;
     QStandardItemModel *m_model;
+    QtAV::PlayerSubtitle *m_pS;
     Controller::OCTDispatcher *m_dispatcher;
     void loadFile(QString filepath);
     void initPane();

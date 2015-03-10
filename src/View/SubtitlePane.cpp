@@ -5,8 +5,6 @@
 #include <QFile>
 #include <QMimeDatabase>
 
-
-
 SubtitlePane::SubtitlePane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SubtitlePane),
@@ -14,7 +12,8 @@ SubtitlePane::SubtitlePane(QWidget *parent) :
     m_stream(NULL),
     m_player(NULL),
     m_model(NULL),
-    m_dispatcher(NULL)
+    m_dispatcher(NULL),
+    m_pS(NULL)
 {
     ui->setupUi(this);
 
@@ -27,12 +26,20 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
     m_file(file),
     m_stream(stream),
     m_player(NULL),
-    m_model(NULL)
+    m_model(NULL),
+    m_pS(NULL)
 {
     ui->setupUi(this);
-
     m_player = new QtAV::AVPlayer;
     m_player->setRenderer(ui->videoWidget);
+
+    m_pS = new QtAV::PlayerSubtitle;
+
+    m_pS->setPlayer(m_player);
+    m_pS->setAutoLoad(true);
+
+
+
     //ui->videoWidget->show();
 
     ui->subtitleTableView->setAlternatingRowColors(true);
@@ -43,12 +50,7 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
     initLists();
     initPane();
 
-    /*
-     * TODO : file to load
-    this->loadFile(m_file->getFilePath());
-    this->m_streamId = stream->getUID().toInt();
-    player->setVideoStream(this->m_streamId);
-    */
+
 
 }
 
@@ -113,8 +115,9 @@ SubtitlePane::~SubtitlePane()
 
 void SubtitlePane::on_playButton_clicked()
 {
-
     if(!m_player->isPlaying()){
+        m_pS->setFile(m_file->getFilePath());
+
         m_player->play();
         if(m_player->isPlaying())
             ui->playButton->setIcon(QIcon(":/icons/resources/icons/icon_pause.png"));
@@ -142,7 +145,8 @@ void SubtitlePane::loadFile(QString filepath)
 {
     m_player->load(filepath,false);
     ui->timeSlider->setMaximum(m_player->duration());
-
+    if(m_player->isPlaying())
+        m_player->stop();
 
 }
 
@@ -215,6 +219,7 @@ void SubtitlePane::updateSlider()
     ui->timeSlider->setRange(0, int(m_player->duration()/1000LL));
     ui->timeSlider->setValue(int(m_player->position()/1000LL));
     ui->timeLabel->setText(QTime(0,0).addMSecs(m_player->position()).toString("hh:mm:ss"));
+    ui->subtitleTextLabel->setText(m_pS->subtitle()->getText());
 }
 
 void SubtitlePane::parseSubtitleFile(){
