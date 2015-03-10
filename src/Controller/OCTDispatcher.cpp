@@ -119,6 +119,7 @@ Controller::OCTDispatcher::OCTDispatcher() :m_currentProject(NULL) ,
         qApp->installTranslator(translator);
     }
 
+
     m_mainWindow = new View::MainWindow(0,this);
     m_mainWindow->show();
 
