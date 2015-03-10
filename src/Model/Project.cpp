@@ -271,6 +271,8 @@ void Model::Project::removeFile(QString filePath) {
 QString Model::Project::generateInformationToXML() {
     if(m_informations != NULL){
         this->m_xmlFilePath = QDir::toNativeSeparators(qApp->applicationDirPath() + "\\infos\\" + "infos.xml");
+        QDir d;
+        d.mkdir(QDir::toNativeSeparators(qApp->applicationDirPath() + "\\infos"));
         QFile file(this->m_xmlFilePath);
         if (!file.open(QIODevice::WriteOnly)){
             return "";
