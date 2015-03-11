@@ -134,7 +134,7 @@ QStringList* Model::Database::getMovieStruct() {
     QVariant statusCodeV = -1;
     QStringList *movieStructList = NULL;
 
-    QFile file(qApp->applicationDirPath() + QDir::separator() +"struct.json");
+    QFile file(qApp->applicationDirPath() + QDir::separator() + "infos" + QDir::separator()+"struct.json");
 
     if (reply->error() == QNetworkReply::NoError){
         statusCodeV = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
