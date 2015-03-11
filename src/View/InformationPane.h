@@ -26,6 +26,7 @@ public:
     void refresh();
     void generateStruct(QMap<QString, QString>* infos);
 
+    void generateEmptyStruct(QMap<QString, QString> *infos);
 public slots:
     void lineEditInformation_textChanged();
     void lineEditInformation_editingFinished();

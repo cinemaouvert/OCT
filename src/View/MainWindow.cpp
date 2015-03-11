@@ -256,11 +256,13 @@ void View::MainWindow::on_LoadProject(){
     QString loadPath = QFileDialog::getOpenFileName(this,tr("Choisir le fichier à ouvrir"),"",tr("OCT(*.oct)"));
     if(loadPath != ""){
         m_dispatcher->load(loadPath);
+         ui->tab_infos->generateStruct(this->m_dispatcher->getCurrentProject()->informations());
         this->getEncodePane()->refreshProjectPane();
     }
 }
 
 void View::MainWindow::on_NewProject(){
+    ui->tab_infos->generateEmptyStruct(NULL);
     m_dispatcher->addToQueue();
 }
 
@@ -268,7 +270,7 @@ void View::MainWindow::on_NewProject(){
 void View::MainWindow::infosFromBDD(QMap<QString, QString>* infos){
     if(infos != NULL){
         ui->tab_infos->generateStruct(infos);
-        QMessageBox::information(this,tr("Informations pré-remplie"),tr("Les informations pour ce film ont été récupéré"));
+        //QMessageBox::information(this,tr("Informations pré-remplie"),tr("Les informations pour ce film ont été récupéré"));
     }else{
         QMessageBox::warning(this,tr("Récupération information impossible"),tr("Impossible de trouver des informations pour ce film"));
     }

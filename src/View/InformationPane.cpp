@@ -144,17 +144,70 @@ void InformationPane::generateStruct(QMap<QString, QString>* infos){
 
                 QLineEdit *lineEdit = new QLineEdit;
 
+                if(infos != NULL && infos->size() > 0){
+                    QString valueMovie = "";
+                    valueMovie = infos->value(lineEditName);
+                    lineEdit->setText(valueMovie);
+                }
+
                 if(informationsProjetSave != NULL && informationsProjetSave->size() > 0){
                     QString valueMovie = "";
                     valueMovie = informationsProjetSave->value(lineEditName);
                     lineEdit->setText(valueMovie);
                 }
 
-                if(infos != NULL && infos->size() > 0){
-                    QString valueMovie = "";
-                    valueMovie = infos->value(lineEditName);
-                    lineEdit->setText(valueMovie);
-                }
+
+
+                lineEdit->setObjectName(lineEditName);
+                lineEdit->setSizePolicy(QSizePolicy::Minimum , QSizePolicy::Minimum );
+                lineEdit->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+                lineEdit->connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(lineEditInformation_textChanged()));
+                lineEdit->connect(lineEdit, SIGNAL(editingFinished()), this, SLOT(lineEditInformation_editingFinished()));
+
+                vLayoutLineEdit->addWidget(lineEdit);
+            }
+        }
+        hLayout->addItem(vLayoutLabel);
+        hLayout->addItem(vLayoutLineEdit);
+
+        widget->setLayout(hLayout);
+        m_scrollArea->setWidget(widget);
+        m_scrollArea->setWidgetResizable(true);
+
+        ui->verticalLayout_3->addWidget(m_scrollArea);
+    }
+
+}
+
+void InformationPane::generateEmptyStruct(QMap<QString, QString>* infos){
+    if(m_scrollArea != NULL){
+        QWidget *wd = m_scrollArea->takeWidget();
+        if(wd)
+            delete wd;
+        ui->verticalLayout_3->removeWidget(m_scrollArea);
+    }
+
+    m_scrollArea = new QScrollArea;
+    QHBoxLayout *hLayout = new QHBoxLayout;
+    QVBoxLayout *vLayoutLabel = new QVBoxLayout;
+    QVBoxLayout *vLayoutLineEdit = new QVBoxLayout;
+
+    if(this->m_dispatcher->informationMovieStruct() != NULL){
+        QWidget *widget = new QWidget;
+        QMap<QString, QString>* informationsProjetSave = this->m_dispatcher->getCurrentProject()->informations();
+        for(int i = 0; i < this->m_dispatcher->informationMovieStruct()->size(); i++){
+
+            QString labelName = this->m_dispatcher->informationMovieStruct()->at(i);
+            if(labelName.compare("affiche") != 0 && labelName.compare("capture") != 0){
+                QString lineEditName = labelName;
+
+                QLabel *label = new QLabel(labelName.replace("_", " "));
+                label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+                vLayoutLabel->addWidget(label);
+
+                QLineEdit *lineEdit = new QLineEdit;
+
+                lineEdit->setText("");
 
                 lineEdit->setObjectName(lineEditName);
                 lineEdit->setSizePolicy(QSizePolicy::Minimum , QSizePolicy::Minimum );
