@@ -356,6 +356,7 @@ void Controller::OCTDispatcher::initSettings() {
 void Controller::OCTDispatcher::setCurrentProjectIndex(int index) {
     m_currentProject = m_projects->at(index);
     m_mainWindow->refresh();
+    m_mainWindow->infosFromBDD(m_currentProject->informations());
 }
 
 void Controller::OCTDispatcher::duplicateProject(int index) {
