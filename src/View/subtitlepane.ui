@@ -273,7 +273,11 @@ background-color: rgb(0, 0, 0);
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="videoVisualisationComboBox"/>
+             <widget class="QComboBox" name="videoVisualisationComboBox">
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>

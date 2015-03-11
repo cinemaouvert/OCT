@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oct>
+	<video>
+		<codecs>
+			<value preConf="true" >h264</value>
+		</codecs>
+		<maxRate value="50000"/>
+		<resolutions>
+			<value preConf="true">1920x1080</value>
+			<value>1280x720</value>
+			<value>854x480</value>
+		</resolutions>
+	</video>
+	<audio>
+		<codecs>
+			<value  preConf="true">flac</value>
+		</codecs>
+		<chanels>
+			<value  preConf="true">stereo</value>
+			<value>mono</value>
+		</chanels>
+		<samplingRates>
+			<value  preConf="true">48000</value>
+			<value>96000</value>
+		</samplingRates>
+	</audio>
+	<subtitle>
+		<formats>
+			<value preConf="true">ass</value>
+			<value>srt</value>
+		</formats>
+		<encodings>
+			<value preConf="true">UTF-8</value>
+		</encodings>
+	</subtitle>
+</oct>
