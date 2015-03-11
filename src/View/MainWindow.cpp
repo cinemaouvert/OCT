@@ -263,6 +263,7 @@ void View::MainWindow::on_LoadProject(){
 
 void View::MainWindow::on_NewProject(){
     ui->tab_infos->generateEmptyStruct(NULL);
+    m_dispatcher->checkProjectValidation();
     m_dispatcher->addToQueue();
 }
 
