@@ -320,16 +320,17 @@ QStringList *Model::Project::getMergeCommandLine() {
     }
 
     qDebug() << " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "<<this->m_affiche;
+    QString path = qApp->applicationDirPath() + QDir::separator() + "infos" + QDir::separator();
     if(this->m_affiche != "")
-        QFile::copy(this->m_affiche,"affiche.png");
+        QFile::copy(this->m_affiche,path+"affiche.png");
     if(this->m_capture != "")
-        QFile::copy(this->m_capture,"capture.png");
+        QFile::copy(this->m_capture,path+"capture.png");
 
     foreach (Model::Attachment *a, *(attachments())){
         if(a->filepath().compare(this->m_affiche) == 0){
-            *arguments << "--attach-file" << "affiche.png";
+            *arguments << "--attach-file" << path+"affiche.png";
         }else if(a->filepath().compare(this->m_capture) == 0){
-            *arguments << "--attach-file" << "capture.png";
+            *arguments << "--attach-file" << path+"capture.png";
         }else
             *arguments << "--attach-file" << a->filepath();
     }

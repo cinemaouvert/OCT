@@ -33,6 +33,8 @@ using namespace std;
 #include "src/Controller/OCTDispatcher.h"
 #include "src/Model/Project.h"
 #include <QProcess>
+#include <QApplication>
+#include <QDir>
 
 // ========================================================================== //
 // == Constructor =========================================================== //
@@ -67,12 +69,13 @@ QString Controller::Merger::createMKVFile(Model::Project *project) {
     qDebug() << myProcess.readAllStandardOutput();
 
     QFile file(project->xmlFilePath());
+    QString path = qApp->applicationDirPath() + QDir::separator() + "infos" + QDir::separator();
     if(file.exists())
         file.remove();
-    QFile affiche("affiche.png");
+    QFile affiche(path+"affiche.png");
     if(affiche.exists())
         affiche.remove();
-    QFile capture("capture.png");
+    QFile capture(path+"capture.png");
     if(capture.exists())
         capture.remove();
     return "filepath";
