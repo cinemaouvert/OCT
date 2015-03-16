@@ -306,7 +306,7 @@ QStringList *Model::Project::getMergeCommandLine() {
                 *arguments << "--default-track" << sw->getRelevantStream()->getUID();
 
             if(sw->oldStream()->name() !=""){
-                *arguments << "--track-name" << sw->oldStream()->name();
+                *arguments << "--track-name" << sw->oldStream()->getUID()+":"+sw->oldStream()->name();
             }
             if(sw->oldStream()->delay() !=""){
                 QString a =sw->oldStream()->getUID();

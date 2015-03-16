@@ -341,6 +341,10 @@ void VideoPane::initPane()
         QString avgBitRate = p->value().remove("-b:v").remove("-bufsize").split(" ").at(1);
         ui->lineEdit_AverageBitrate->setText(avgBitRate);
     }
+
+    QString name = m_stream->name();
+    ui->lineEdit_TrackName->setText(name);
+
 }
 
 void VideoPane::applyReco()
