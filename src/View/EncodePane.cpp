@@ -56,6 +56,7 @@ EncodePane::EncodePane(QWidget *parent) :
     m_pause = false;
     LoggerSingleton * logger =LoggerSingleton::getInstance();
     logger->setTextEdit(ui->loggerLabel);
+    ui->loggerLabel->setTextInteractionFlags(Qt::TextSelectableByKeyboard | Qt::TextSelectableByMouse);
 }
 
 EncodePane::~EncodePane()
