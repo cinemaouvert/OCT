@@ -528,7 +528,12 @@ void Controller::OCTDispatcher::customMessageHandler(QtMsgType type, const QMess
         txt += QString("Other: %1").arg(msg);
     }
 
-    QFile outFile("debuglog.txt");
+    QString path = qApp->applicationDirPath();
+    QDir logDir(path+QDir::separator()+"log");
+    if(!logDir.exists()){
+        logDir.mkdir(path+QDir::separator()+"log");
+    }
+    QFile outFile(path+QDir::separator()+"log"+QDir::separator()+"log.txt");
     outFile.open(QIODevice::WriteOnly | QIODevice::Append);
     QTextStream ts(&outFile);
     ts << txt << endl;
