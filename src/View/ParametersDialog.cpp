@@ -28,9 +28,7 @@ void ParametersDialog::showWithRefresh(){
 
     ui->ffmpegTextEdit->setText(m_settings->value("ffmpeg").toString());
     ui->ffprobeTextEdit->setText(m_settings->value("ffprobe").toString());
-    ui->mkvtoolniksTextEdit->setText(m_settings->value("mkvToolnix").toString());
-    ui->magentLinkTextEdit->setText(m_settings->value("magnetLink").toString());
-    ui->mkTorrentTextEdit->setText(m_settings->value("mkTorrent").toString());
+    ui->mkvtoolniksTextEdit->setText(m_settings->value("mkvmerge").toString());
     ui->languageComboBox->setCurrentText(m_settings->value("language").toString());
     this->show();
 }
@@ -61,11 +59,9 @@ void ParametersDialog::on_mkvtoolniksButton_clicked()
 
 void ParametersDialog::on_buttonBox_accepted()
 {
-    m_settings->setValue("mkvToolnix",ui->mkvtoolniksTextEdit->text());
+    m_settings->setValue("mkvmerge",ui->mkvtoolniksTextEdit->text());
     m_settings->setValue("ffprobe",ui->ffprobeTextEdit->text());
     m_settings->setValue("ffmpeg",ui->ffmpegTextEdit->text());
-    m_settings->setValue("magnetLink",ui->magentLinkTextEdit->text());
-    m_settings->setValue("mkTorrent",ui->mkTorrentTextEdit->text());
     if(ui->languageComboBox->currentText() != ""){
         m_settings->setValue("language",ui->languageComboBox->currentText());
     }
@@ -73,15 +69,5 @@ void ParametersDialog::on_buttonBox_accepted()
 
 QString ParametersDialog::getExecutablePath(){
     return QFileDialog::getOpenFileName(this,tr("Open"));
-}
-
-void ParametersDialog::on_magentLinkButton_clicked()
-{
-    ui->magentLinkTextEdit->setText(getExecutablePath());
-}
-
-void ParametersDialog::on_mkTorrentButton_clicked()
-{
-    ui->mkTorrentTextEdit->setText(getExecutablePath());
 }
 

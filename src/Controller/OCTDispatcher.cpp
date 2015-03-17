@@ -348,7 +348,7 @@ void Controller::OCTDispatcher::initSettings() {
     #if defined(Q_OS_WIN)
         initSetting("ffmpeg",qApp->applicationDirPath() +"/ffmpeg-20150129-git-4155f2d-win64-static/bin/ffmpeg.exe");
         initSetting("ffprobe",qApp->applicationDirPath() +"/ffmpeg-20150129-git-4155f2d-win64-static/bin/ffprobe.exe");
-        initSetting("mkvToolnix",qApp->applicationDirPath() +"/mkvtoolnix/mkvinfo.exe");
+        initSetting("mkvmerge",qApp->applicationDirPath() +"/mkvtoolnix/mkvinfo.exe");
     #endif
 
 }
