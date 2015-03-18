@@ -108,10 +108,12 @@ void SubtitlePane::applyReco()
 SubtitlePane::~SubtitlePane()
 {
     if(m_player) m_player->disconnect();
+    if(m_pS) m_pS->disconnect();
     if(m_player) delete m_player;
 
     if(ui) delete ui;
     if(m_model) delete m_model;
+    if(m_pS) delete m_pS;
 }
 
 void SubtitlePane::on_playButton_clicked()

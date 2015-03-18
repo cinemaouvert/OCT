@@ -76,6 +76,7 @@ private slots:
 
 signals:
     void videoParameterChanged( Model::File *, Model::Stream *, QString, QString );
+    void deleteVideoParameter( Model::File *, Model::Stream *, QString);
 
 private:
     Ui::VideoPane *ui;

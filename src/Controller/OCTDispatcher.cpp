@@ -481,29 +481,22 @@ void Controller::OCTDispatcher::parameterChanged(Model::File *file,Model::Stream
     }
 }
 
-void Controller::OCTDispatcher::parameterChangedMKV(int p, Model::File *file, Model::Stream *stream, QString value) {
+void Controller::OCTDispatcher::deleteParameter(Model::File *file,Model::Stream *stream,QString parameterName) {
     foreach (Model::StreamWrapper *sW, *(file->getStreamWrappers())) {
         if(*(sW->oldStream()) == *stream){
-          /*  if(sW->newStream() == NULL){
-                switch(stream->getType()){
-                    case Model::Stream::VIDEO:
-                        sW->setNewStream(new Model::Video(*(Model::Video*)(sW->oldStream())));
-                    break;
-                    case Model::Stream::AUDIO:
-                        sW->setNewStream(new Model::Audio(*(Model::Audio*)(sW->oldStream())));
-                    break;
-                    case Model::Stream::SUBTITLE:
-                        sW->setNewStream(new Model::Subtitle(*(Model::Subtitle*)(sW->oldStream())));
-                    break;
-                }
-            }*/
-            if(p == 1){
-                sW->getRelevantStream()->setDelay(value);
-            }
-            else if (p == 2){
-                sW->getRelevantStream()->setName(value);
+            if(sW->newStream() != NULL){
+                sW->newStream()->getParameters()->remove(parameterName);
             }
         }
+    }
+}
+
+void Controller::OCTDispatcher::parameterChangedMKV(int p, Model::Stream *stream, QString value) {
+    if(p == Model::Stream::DELAY){
+        stream->setDelay(value);
+    }
+    else if (p == Model::Stream::NAME){
+        stream->setName(value);
     }
 }
 

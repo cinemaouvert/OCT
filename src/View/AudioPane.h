@@ -94,7 +94,7 @@ private slots:
 
 signals:
     void audioParameterChanged( Model::File *, Model::Stream *, QString, QString );
-    void audioMKVParameterChanged(int p, Model::File *, Model::Stream *, QString );
+    void audioMKVParameterChanged(int p, Model::Stream *, QString );
 };
 
 #endif // AUDIOPANE_H

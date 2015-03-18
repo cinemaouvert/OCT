@@ -11,6 +11,7 @@ VideoPane::VideoPane(QWidget *parent) :
     ui(new Ui::VideoPane),
     m_player(NULL),
     m_file(NULL),
+    m_stream(NULL),
     m_dispatcher(NULL)
 {
     ui->setupUi(this);
@@ -23,7 +24,8 @@ VideoPane::VideoPane(Model::File *file,Model::Stream *stream, QWidget *parent) :
     ui(new Ui::VideoPane),
     m_player(NULL),
     m_file(file),
-    m_stream(stream)
+    m_stream(stream),
+    m_dispatcher(NULL)
 {
     ui->setupUi(this);
     initVideoLists();
@@ -40,6 +42,7 @@ VideoPane::~VideoPane()
     if(ui) delete ui;
     if(m_player) m_player->disconnect();
     if(m_player) delete m_player;
+    if(m_dispatcher) delete m_dispatcher;
 }
 
 // ========================================================================== //
@@ -380,6 +383,8 @@ void VideoPane::connectInterface() {
 
     connect( this, SIGNAL( videoParameterChanged( Model::File *, Model::Stream *, QString, QString ) ),
              m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
+    connect( this, SIGNAL( deleteVideoParameter( Model::File *, Model::Stream *, QString ) ),
+             m_dispatcher, SLOT( deleteParameter( Model::File *, Model::Stream *, QString ) ) );
 }
 
 
@@ -460,8 +465,14 @@ void VideoPane::on_comboBox_Codec_activated( QString codec ) {
     // associated to the x264 codec.
     if ( m_codecMap.value(codec).compare("h264") == 0 ) {
         ui->groupBox_x264Settings->show();
+        emit videoParameterChanged(m_file, m_stream, Model::Stream::VIDEO_H264_QUALITY, QString::number(ui->spinBox_Quality->value()));
     } else {
         ui->groupBox_x264Settings->hide();
+        emit deleteVideoParameter(m_file,m_stream,Model::Stream::VIDEO_H264_QUALITY);
+        emit deleteVideoParameter(m_file,m_stream,Model::Stream::VIDEO_H264_BASELINE);
+        emit deleteVideoParameter(m_file,m_stream,Model::Stream::VIDEO_H264_LEVEL);
+        emit deleteVideoParameter(m_file,m_stream,Model::Stream::VIDEO_H264_PRESET);
+        emit deleteVideoParameter(m_file,m_stream,Model::Stream::VIDEO_H264_TUNE);
     }
     emit videoParameterChanged(m_file, m_stream, Model::Stream::CODEC_NAME, m_codecMap.value(codec));
 }

@@ -365,13 +365,20 @@ namespace Controller
 
             /**
              * @brief parameterChangedMKV Slot registering any MKV's parameter modification.
-             * @param p
+             * @param paramName a constant from stream identifying the parameter
              * @param file The file affected by the modification.
              * @param stream The stream affected by the modification.
              * @param value The new value associated with the parameter.
              */
-            void parameterChangedMKV(int p, Model::File *file,Model::Stream *stream, QString value);
+            void parameterChangedMKV(int paramName,Model::Stream *stream, QString value);
 
+            /**
+             * @brief Usedto delete a parameter.
+             * @param p
+             * @param file The file affected by the modification.
+             * @param stream The stream affected by the modification.
+             */
+            void deleteParameter(Model::File *file, Model::Stream *stream, QString parameterName);
     };
 }
 

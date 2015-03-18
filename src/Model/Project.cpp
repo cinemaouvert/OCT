@@ -302,10 +302,10 @@ QStringList *Model::Project::getMergeCommandLine() {
     *arguments << "-o" << m_name;
     foreach (Model::File *f, *(fileList())){
         foreach(Model::StreamWrapper *sw, *(f->getStreamWrappers())){
-            if(sw->getRelevantStream()->isDefault())
+            if(sw->getRelevantStream()->isDefault()){
                 *arguments << "--default-track" << sw->getRelevantStream()->getUID();
-
-            if(sw->oldStream()->name() !=""){
+            }
+            if(sw->oldStream()->name() != ""){
                 *arguments << "--track-name" << sw->oldStream()->getUID()+":"+sw->oldStream()->name();
             }
             if(sw->oldStream()->delay() !=""){

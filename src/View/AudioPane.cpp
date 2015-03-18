@@ -152,8 +152,8 @@ void AudioPane::connectInterface() {
     connect( this, SIGNAL( audioParameterChanged( Model::File *, Model::Stream *, QString, QString ) ),
              m_dispatcher, SLOT( parameterChanged( Model::File *, Model::Stream *, QString, QString ) ) );
 
-    connect( this, SIGNAL( audioMKVParameterChanged(int, Model::File *, Model::Stream *, QString ) ),
-             m_dispatcher, SLOT( parameterChangedMKV(int, Model::File *, Model::Stream *, QString ) ) );
+    connect( this, SIGNAL( audioMKVParameterChanged(int, Model::Stream *, QString ) ),
+             m_dispatcher, SLOT( parameterChangedMKV(int, Model::Stream *, QString ) ) );
 }
 
 void AudioPane::initPane()
@@ -247,12 +247,12 @@ void AudioPane::initPane()
 }
 
 void AudioPane::on_lineEdit_Name_textChanged( QString name ) {
-    emit audioMKVParameterChanged(2,m_file, m_stream, name);
+    this->m_stream->setName( name );
 }
 
 void AudioPane::on_lineEdit_Delay_textChanged(QString delay)
 {
-    emit audioMKVParameterChanged(1,m_file, m_stream, delay);
+    emit audioMKVParameterChanged(Model::Stream::DELAY, m_stream, delay);
 }
 
 void AudioPane::on_comboBox_AudioCodec_activated(const QString &arg) {

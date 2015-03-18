@@ -182,6 +182,8 @@ namespace Model
             static const QString VIDEO_H264_TUNE;
             static const QString VIDEO_SCALE;
             static const QString EXTRA_CMD;
+            static const int DELAY;
+            static const int NAME;
 
             /**
              * @brief Equals operator override.

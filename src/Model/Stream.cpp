@@ -61,6 +61,8 @@ const QString Model::Stream::VIDEO_H264_LEVEL = "h264_level";
 const QString Model::Stream::VIDEO_H264_TUNE = "h264_tune";
 const QString Model::Stream::VIDEO_SCALE = "scale";
 const QString Model::Stream::EXTRA_CMD = "extraCmd";
+const int Model::Stream::NAME = 1;
+const int Model::Stream::DELAY = 2;
 
 // ========================================================================== //
 // == Destructor ============================================================ //
@@ -154,7 +156,6 @@ QStringList *Model::Stream::getCommand() {
                 *myStringList << command.split(" ") ;
            }
        }
-
     }
     return myStringList;
 }
