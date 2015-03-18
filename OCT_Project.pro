@@ -52,7 +52,8 @@ SOURCES += src/main.cpp\
     src/View/QueueListView.cpp \
     src/View/MyDelegate.cpp \
     src/Model/OCPMValidation.cpp \
-    src/Controller/loggersingleton.cpp
+    src/Controller/loggersingleton.cpp \
+    src/Controller/CharsetDetector.cpp
 
 HEADERS  += \
     src/Controller/Exporter.h \
@@ -88,7 +89,8 @@ HEADERS  += \
     src/View/QueueListView.h \
     src/View/MyDelegate.h \
     src/Model/OCPMValidation.h \
-    src/Controller/loggersingleton.h
+    src/Controller/loggersingleton.h \
+    src/Controller/CharsetDetector.h
 
 FORMS    += \
     src/View/mainwindow.ui \

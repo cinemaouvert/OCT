@@ -253,10 +253,11 @@
             <property name="styleSheet">
              <string notr="true">font: 87 10pt &quot;Arial Black&quot;;
 qproperty-alignment: AlignCenter;
-</string>
+color: rgb(255, 255, 255);
+background:transparent;</string>
             </property>
             <property name="text">
-             <string>fsd</string>
+             <string/>
             </property>
            </widget>
           </item>

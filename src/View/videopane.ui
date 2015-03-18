@@ -1204,7 +1204,7 @@
          <widget class="QGroupBox" name="groupBox_Cropping">
           <property name="maximumSize">
            <size>
-            <width>400</width>
+            <width>16777215</width>
             <height>150</height>
            </size>
           </property>
@@ -1328,7 +1328,7 @@
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset>
+                    <iconset resource="../../images.qrc">
                      <normaloff>:/icons/resources/icons/icon_play.png</normaloff>:/icons/resources/icons/icon_play.png</iconset>
                    </property>
                   </widget>
@@ -1339,7 +1339,7 @@
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset>
+                    <iconset resource="../../images.qrc">
                      <normaloff>:/icons/resources/glyphicons/glyphicons_175_stop.png</normaloff>:/icons/resources/glyphicons/glyphicons_175_stop.png</iconset>
                    </property>
                   </widget>
@@ -1516,6 +1516,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../images.qrc"/>
+ </resources>
  <connections/>
 </ui>

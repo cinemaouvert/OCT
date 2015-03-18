@@ -4,6 +4,9 @@
 #include "VideoPane.h"
 #include <QFile>
 #include <QMimeDatabase>
+#include "src/Controller/CharsetDetector.h"
+#include <QtAV/QtAV.h>
+#include <QtAV/LibAVFilter.h>
 
 SubtitlePane::SubtitlePane(QWidget *parent) :
     QWidget(parent),
@@ -16,7 +19,6 @@ SubtitlePane::SubtitlePane(QWidget *parent) :
     m_pS(NULL)
 {
     ui->setupUi(this);
-
 
 }
 
@@ -33,10 +35,11 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
     m_player = new QtAV::AVPlayer;
     m_player->setRenderer(ui->videoWidget);
 
-    m_pS = new QtAV::PlayerSubtitle;
+    m_pS = new QtAV::SubtitleFilter;
 
     m_pS->setPlayer(m_player);
     m_pS->setAutoLoad(true);
+    m_pS->installTo(ui->videoWidget);
 
 
 
@@ -44,12 +47,11 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
 
     ui->subtitleTableView->setAlternatingRowColors(true);
     ui->subtitleTableView->horizontalHeader()->setStretchLastSection(true);
-
+    ui->subtitleTextLabel->setAttribute(Qt::WA_TranslucentBackground,true);
     ui->videoVisualisationComboBox->addItem("None");
     parseSubtitleFile();
     initLists();
     initPane();
-
 
 
 }
@@ -115,7 +117,12 @@ SubtitlePane::~SubtitlePane()
 
 void SubtitlePane::on_playButton_clicked()
 {
+
     if(!m_player->isPlaying()){
+        /*QString newName = videoPath +"_"+m_file->getName();
+        if(!QFile::exists(newName))
+            QFile::copy(m_file->getFilePath(),newName);
+        */
         m_pS->setFile(m_file->getFilePath());
 
         m_player->play();
@@ -143,11 +150,9 @@ void SubtitlePane::on_stopButton_clicked()
 
 void SubtitlePane::loadFile(QString filepath)
 {
+    videoPath = filepath;
     m_player->load(filepath,false);
     ui->timeSlider->setMaximum(m_player->duration());
-    if(m_player->isPlaying())
-        m_player->stop();
-
 }
 
 void SubtitlePane::initPane()
@@ -180,6 +185,14 @@ void SubtitlePane::initPane()
     }
     p = NULL;
     p = m_stream->getParameters()->value(Model::Stream::SUBTITLE_CHAR_ENCODE);  // TODO //
+    CharsetDetector charDet;
+    QFile subFile(m_file->getFilePath());
+    subFile.open(QFile::ReadOnly);
+
+    qDebug() <<"DETECT CHARDET : "<< charDet.detect(subFile.readAll());
+    subFile.close();
+
+
     if(p){
         QString encode = p->value();
         ixd = ui->comboBox_Encode->findText(m_encodingMap.key(encode),Qt::MatchExactly);
@@ -219,7 +232,7 @@ void SubtitlePane::updateSlider()
     ui->timeSlider->setRange(0, int(m_player->duration()/1000LL));
     ui->timeSlider->setValue(int(m_player->position()/1000LL));
     ui->timeLabel->setText(QTime(0,0).addMSecs(m_player->position()).toString("hh:mm:ss"));
-    ui->subtitleTextLabel->setText(m_pS->subtitle()->getText());
+   // ui->subtitleTextLabel->setText(m_pS->subtitle()->getText());
 }
 
 void SubtitlePane::parseSubtitleFile(){
@@ -319,7 +332,8 @@ void SubtitlePane::on_videoVisualisationComboBox_currentIndexChanged(const QStri
 {
     QStringList list = arg1.split(" stream -> ");
     if(list.size()==2){
-        m_player->stop();
+        if(m_player->isPlaying())
+            m_player->stop();
         loadFile(list.at(0));
         m_player->setVideoStream(list.at(1).toInt(),true);
     }
