@@ -4,7 +4,6 @@
 #include "VideoPane.h"
 #include <QFile>
 #include <QMimeDatabase>
-#include "src/Controller/CharsetDetector.h"
 #include <QtAV/QtAV.h>
 #include <QtAV/LibAVFilter.h>
 
@@ -185,12 +184,6 @@ void SubtitlePane::initPane()
     }
     p = NULL;
     p = m_stream->getParameters()->value(Model::Stream::SUBTITLE_CHAR_ENCODE);  // TODO //
-    CharsetDetector charDet;
-    QFile subFile(m_file->getFilePath());
-    subFile.open(QFile::ReadOnly);
-
-    qDebug() <<"DETECT CHARDET : "<< charDet.detect(subFile.readAll());
-    subFile.close();
 
 
     if(p){

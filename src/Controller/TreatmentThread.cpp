@@ -151,3 +151,16 @@ void Controller::TreatmentThread::restartTreatment(){
     this->m_pause = false;
     this->startTreatment();
 }
+
+Controller::TreatmentThread::~TreatmentThread() {
+    if(this->m_exporter != NULL)
+        delete this->m_exporter;
+    if(this->m_merger != NULL)
+        delete this->m_merger;
+    if(this->m_projects != NULL)
+        delete this->m_projects;
+    if(this->m_projectsOriginal != NULL)
+        delete this->m_projectsOriginal;
+    if(this->m_transcoder != NULL)
+        delete this->m_transcoder;
+}

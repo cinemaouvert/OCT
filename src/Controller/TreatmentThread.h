@@ -66,30 +66,6 @@ namespace Controller
 	{
         Q_OBJECT
         public:
-            /**
-             * @brief The associated transcoder controller.
-             */
-            Controller::Transcoder      *m_transcoder;
-
-            /**
-             * @brief The associated merger controller.
-             */
-            Controller::Merger          *m_merger;
-
-            /**
-             * @brief The associated exporter controller.
-             */
-            Controller::Exporter        *m_exporter;
-
-            /**
-             * @brief The associated projects.
-             */
-            QList<Model::Project*>      *m_projects;
-
-            /**
-             * @brief The associated original projects.
-             */
-            QList<Model::Project*>      *m_projectsOriginal;
 
             /**
              * @brief Constructor.
@@ -104,6 +80,8 @@ namespace Controller
              * @brief This method init the treatment process.
              */
             void initTreatment();
+
+            virtual ~TreatmentThread();
 
     private:
             /**
@@ -133,6 +111,32 @@ namespace Controller
              * queue.
              */
             QStringList m_listToDelete;
+
+            /**
+             * @brief The associated transcoder controller.
+             */
+            Controller::Transcoder      *m_transcoder;
+
+            /**
+             * @brief The associated merger controller.
+             */
+            Controller::Merger          *m_merger;
+
+            /**
+             * @brief The associated exporter controller.
+             */
+            Controller::Exporter        *m_exporter;
+
+            /**
+             * @brief The associated projects.
+             */
+            QList<Model::Project*>      *m_projects;
+
+            /**
+             * @brief The associated original projects.
+             */
+            QList<Model::Project*>      *m_projectsOriginal;
+
     signals:
             /**
              * @brief Signals when the treatment queue has been finished to be processed
