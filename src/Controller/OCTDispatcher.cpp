@@ -283,7 +283,7 @@ void Controller::OCTDispatcher::load(QString path) {
     this->m_mainWindow->refresh();
     file.close();
     //Refresh Information Struct
-    this->m_mainWindow->infosFromBDD(NULL);
+    this->m_mainWindow->infosFromBDD();
 }
 
 void Controller::OCTDispatcher::startTreatment() {

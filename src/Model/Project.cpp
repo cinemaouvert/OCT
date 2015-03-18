@@ -440,7 +440,7 @@ QDataStream &Model::operator <<(QDataStream &out, const Model::Project &valeur) 
 }
 
 QDataStream &Model::operator >>(QDataStream &in, Model::Project &valeur) {
-    int octVersion;
+    QString octVersion;
     in >> octVersion;
     in >> valeur.m_depot;
     in >> valeur.m_createMagnet;

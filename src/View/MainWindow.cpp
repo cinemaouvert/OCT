@@ -277,6 +277,10 @@ void View::MainWindow::infosFromBDD(QMap<QString, QString>* infos){
     }
 }
 
+void View::MainWindow::infosFromBDD(){
+   ui->tab_infos->generateStruct(NULL);
+}
+
 void View::MainWindow::on_viewTorrent(){
     QDesktopServices::openUrl("file:///"+qApp->applicationDirPath()+ "/torrent");
 }

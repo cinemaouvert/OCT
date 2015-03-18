@@ -122,6 +122,8 @@ void InformationPane::generateStruct(QMap<QString, QString>* infos){
         if(wd)
             delete wd;
         ui->verticalLayout_3->removeWidget(m_scrollArea);
+        m_scrollArea->hide();
+        delete m_scrollArea;
     }
 
     m_scrollArea = new QScrollArea;
