@@ -51,12 +51,12 @@ EncodePane::EncodePane(QWidget *parent) :
     ui->listViewExport->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->listViewExport->setFocusPolicy(Qt::NoFocus);
     ui->listViewExport->setSelectionMode(QAbstractItemView::NoSelection);
-
+    //ui->loggerLabel->setTextInteractionFlags(Qt::TextSelectableByKeyboard | Qt::TextSelectableByMouse);
     m_currentSteps = 0;
     m_pause = false;
     LoggerSingleton * logger =LoggerSingleton::getInstance();
     logger->setTextEdit(ui->loggerLabel);
-    ui->loggerLabel->setTextInteractionFlags(Qt::TextSelectableByKeyboard | Qt::TextSelectableByMouse);
+
 }
 
 EncodePane::~EncodePane()
