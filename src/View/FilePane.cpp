@@ -43,6 +43,8 @@ FilePane::FilePane(QWidget *parent) :
     sizes.append(200);
     sizes.append(800);
     ui->splitter->setSizes(sizes);
+
+
 }
 
 FilePane::~FilePane()
@@ -221,15 +223,16 @@ void FilePane::refresh() {
             }
 
         }
-        ui->tableViewImportFile->resizeColumnsToContents();
-        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
-        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(1,QHeaderView::ResizeToContents);
-        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(2,QHeaderView::ResizeToContents);
-        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(3,QHeaderView::ResizeToContents);
-        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(4,QHeaderView::ResizeToContents);
-        ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(5,QHeaderView::ResizeToContents);
 
     }
+    ui->tableViewImportFile->resizeColumnsToContents();
+    ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
+    ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(1,QHeaderView::ResizeToContents);
+    ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(2,QHeaderView::ResizeToContents);
+    ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(3,QHeaderView::ResizeToContents);
+    ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(4,QHeaderView::ResizeToContents);
+    ui->tableViewImportFile->horizontalHeader()->setSectionResizeMode(5,QHeaderView::ResizeToContents);
+
 
     /*
     foreach(Model::Attachment *a , *(this->m_dispatcher->getCurrentProject()->attachments())){
