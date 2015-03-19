@@ -46,7 +46,6 @@ SubtitlePane::SubtitlePane(Model::File *file,Model::Stream *stream,QWidget *pare
 
     ui->subtitleTableView->setAlternatingRowColors(true);
     ui->subtitleTableView->horizontalHeader()->setStretchLastSection(true);
-    ui->subtitleTextLabel->setAttribute(Qt::WA_TranslucentBackground,true);
     ui->videoVisualisationComboBox->addItem("None");
     parseSubtitleFile();
     initLists();

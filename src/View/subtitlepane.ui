@@ -243,25 +243,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="subtitleTextLabel">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">font: 87 10pt &quot;Arial Black&quot;;
-qproperty-alignment: AlignCenter;
-color: rgb(255, 255, 255);
-background:transparent;</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
              <widget class="QLabel" name="label">
