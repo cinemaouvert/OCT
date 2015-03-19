@@ -2,7 +2,7 @@
 #define INFORMATIONPANE_H
 
 #include <QGraphicsView>
-#include <QStringlistModel>
+#include <QStringListModel>
 #include <QWidget>
 namespace Ui {
 class InformationPane;
